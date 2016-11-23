@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+		<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+		<link rel="stylesheet" href="https://cartodb-libs.global.ssl.fastly.net/cartodb.js/v3/3.15/themes/css/cartodb.css"></link>
+		<script src="https://cartodb-libs.global.ssl.fastly.net/cartodb.js/v3/3.15/cartodb.js"></script>
+		<script src="https://leaflet.github.io/Leaflet.label/leaflet.label.js"></script> <!-- files necessary for labels in leaflet -->
+		<script type="text/javascript" src="https://stamen-maps.a.ssl.fastly.net/js/tile.stamen.js"></script><!--Include Stamen JavaScript to get basemap tiles-->
+		
+		<!-- Include the include files: global vars and display text -->
+		<script src="global.js" type="text/javascript" /></script>
+		<script src="display_English.js" type="text/javascript"></script>
+		
+		<!-- Include the CSS styling -->
+		<link rel="stylesheet" type="text/css" href="map_styles.css"></link>
+		
+		<!-- Include both libraries for plotting stamen basemaps --> 
+		<script type="text/javascript" src="https://stamen-maps.a.ssl.fastly.net/js/tile.stamen.js"></script><!--Include Stamen JavaScript to get basemap tiles-->
+		
+		<!-- Include stuff required for easy full-screen option --> 
+		<script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/Leaflet.fullscreen.min.js'></script>
+		<link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/leaflet.fullscreen.css' rel='stylesheet' />
+		
+	</head>
+	
+	<body onload="init();"> 	<!-- what to do when the page loads -->
+		<div id='WaterMap'> 	<!-- creates the div element that holds the map -->
+			<a href="http://www.caminosdeagua.org" target='_blank'> <!-- Link the caminos logo to the caminos website -->
+				<img class="caminos_logo" src="https://dl.dropboxusercontent.com/s/ligsjij2ka26gi0/caminos_logo_circle.png" ></img> <!-- creates the caminos de agua logo -->
+			</a>
+		</div>
+
+		<script>
+		
+			////////////////////////////////////////////////////////////////////////////////
+			////					 DEFINE GLOBAL VARIABLES 						  	////
+			////																		////
+			////	IF YOU'RE TRYING TO CHANGE THE FORMATTING / COLORS / STYLES /		////
+			////		DATASET IN THE EXISTING MAP, YOU SHOULD ONLY NEED TO CHANGE 	////
+			////		STUFF IN THIS SECTION. DON'T CHANGE ANYTHING ELSE IF YOU'RE		////
+			////		NOT SURE WHAT IT DOES!!!										////
+			////																		////
+			////	IF YOU WANT TO CHANGE SOMETHING FUNDAMENTAL, LIKE WHICH VARIABLES 	////
+			////		CAN BE PLOTTED WITH THR DROPDOWN MENU, PLEASE REFFER TO THE 	////
+			////		TUTORIAL VIDEO POSTED ON TRELLO BEFORE PROCEEDING. 				////
+			////																		////
+			////////////////////////////////////////////////////////////////////////////////
+			
+			
+			
+			//for (k=0; k<BASE_URLS.length; k++) {  	// Grab all the icons with correct size. 
+			//	BASE_ICONS[k] = L.icon({ 			// 	to be used when displaying the base markers
+			//		iconUrl: BASE_URLS[k],
+			//		iconSize: SMALL_ICON_SIZE
+			//	});
+			//	SPIDER_ICONS[k] = L.icon({ 			//	and the spidered markers
+			//		iconUrl: SPIDER_URLS[k],
+			//		iconSize: SMALL_ICON_SIZE
+			//	});
+			//	BASE_SPIDER_ICONS[k] = L.icon({		// 	and the markers at the base of the spider. 
+			//		iconUrl: SPIDER_URLS[k],
+			//		iconSize: LARGE_ICON_SIZE
+			//	});
+			//};
+			//
+			//var X_ICON = L.icon({ 					// define an icon that can be clicked to close the spider
+			//	iconUrl: X_URL,
+			//	iconSize: SMALL_ICON_SIZE
+			//});
+			
+
+			
+
+			
+
+			
+			
+
+			
+			
+			
+			
+			////////////////////////////////////////////////////////////////////////////////
+			////					 INITIALIZATION FUNCTION 						  	////
+			//////////////////////////////////////////////////////////////////////////////// 
+
+			function init() {
+				
+				initMap(); 					// Initialize and display the map object
+				applyBaseMap(); 			// Apply the base tiles to the map
+				loadAndPlotData(); 	// Load the data for Fluoride (the default contaminant) 
+			}								// 	then plot the base markers on the map.	
+			
+			////////////////////////////////////////////////////////////////////////////////
+			////					  	initMap FUNCTION	 						  	////
+			//// 			This function initializes the global map object.			////
+			////////////////////////////////////////////////////////////////////////////////
+			
+			function initMap() {
+				map = new L.map('WaterMap', { //First, initialize the map
+					center: MAP_CENTER,
+					zoom: MAP_INIT_ZOOM,
+					minZoom: MAP_MIN_ZOOM,
+					maxZoom: MAP_MAX_ZOOM,
+					attributionControl: true,
+					fullscreenControl:true
+				});	
+				map.attributionControl.setPrefix(CARTO_ATTRIBUTION);
+			}
+			
+			////////////////////////////////////////////////////////////////////////////////
+			////					  	applyBaseMap FUNCTION 						  	////
+			//// 	This function grabs a set of Stamen or Mapzen base tiles and 		////
+			//// 	applies them to the map. 											////
+			////////////////////////////////////////////////////////////////////////////////
+			
+			
+			function applyBaseMap() {
+				map.addLayer(new L.StamenTileLayer(STAMEN_MAP_TYPE), {});
+				
+			}
+			
+			////////////////////////////////////////////////////////////////////////////////
+			////					 	loadAndPlotData FUNCTION 					  	////
+			//// 	This function grabs data from carto.com and stores it in a local 	////
+			//// 	variable array. It also stores a copy of the data in the global 	////
+			////	array data for other functions to access. After storing the 		////
+			////	data, it calls functions to plot them. 								////
+			////////////////////////////////////////////////////////////////////////////////
+			
+			function loadAndPlotData() {
+				var icon = L.icon({ 			// 	to be used when displaying the base markers
+						iconUrl: ICON_URL,
+						iconSize: SMALL_ICON_SIZE
+					})
+				base.Markers = [];
+				base.Popups = [];
+				
+				$.getJSON(DATA_URL) 		// This grabs the JSON data file. MAKE SURE THE FILE IS SORTED BY 
+											//	DATE IN DECREASING ORDER!!!! <--- Super important for spidering to work correctly...
+				.done(function(data) {
+						// Uncomment the next line to see the full dataset in the console, super useful for debugging!
+					console.log("Data acquired! "+JSON.stringify(data)); 	// log the data in the console for debugging...
+					
+					for (var i=0; i<data.length; i++) { // Loop through all the rows of the data
+						if (data[i][DATA_NAMES.date] == null | data[i][DATA_NAMES.date] == "" |	// if there's no date or latLng info, 
+							data[i][DATA_NAMES.lat] == null | data[i][DATA_NAMES.lat] == "" |	//	ignore the point!
+							data[i][DATA_NAMES.lng] == null | data[i][DATA_NAMES.lng] == "" ) {	
+						} else {
+							var latLng = L.latLng([data[i][DATA_NAMES.lat], data[i][DATA_NAMES.lng]]); // Grab the latLng of the point
+							base.Markers.push( 										// Save the appropriate marker
+								L.marker(latLng, {
+								icon: icon,
+								riseOnHover: true,
+								zIndexOffset: BASE_Z_OFFSET
+								})
+							);
+							base.Markers[base.Markers.length-1].bindLabel(getLabel(data, "community", i), {
+								noHide: false,										// attach labels to all the base points 
+								className: "ourLabel"								//	that activate during mouseover
+							});
+							var popupText = getBasePopup(data, i);// Grab the text for the popup at data index i
+							base.Popups.push(L.popup({		// Define the popup for each marker
+								offset: POPUP_OFFSET})
+								.setLatLng(latLng)
+								.setContent(popupText)
+							);
+							base.Markers[base.Markers.length-1].addTo(map); // And finally, actually add the markers to the map!
+						};
+					};
+					
+				})
+			
+				
+			}
+	
+			
+			////////////////////////////////////////////////////////////////////////////////
+			////					 	window.onclik FUNCTION 						  	////
+			//// 	When the user clicks in the window, this function executes. It is  	////
+			//// 	used to toggle the state (show/hide) of the dropdown menu. You 		////
+			////	almost definitely don't need to mess with this, unless you want 	////
+			////	something new to happen anytime the user clicks in the window...	////
+			////////////////////////////////////////////////////////////////////////////////
+			
+			window.onclick = function(event) {
+				if (!event.target.matches('.dropbtn')) { 				// if the user's clikced the dropdown button
+					var dropdowns = document.getElementsByClassName("dropdown-content");
+					for (var i=0; i<dropdowns.length; i++) { 		// loop through dropdown menu
+						var openDropdown = dropdowns[i]; 				// if the dropdown menu is showing
+						if (openDropdown.classList.contains('show')) { 	// remove show (so that it hides)
+							openDropdown.classList.remove('show');
+						};
+					};
+				};
+			}
+			
+			////////////////////////////////////////////////////////////////////////////////
+			////					 	getBasePopup FUNCTION 					  		////
+			//// 	Takes in an index and returns the base popup text format used.		////
+			////////////////////////////////////////////////////////////////////////////////
+			
+			function getBasePopup(data, i) {
+				var date = String(data[i][DATA_NAMES.date]).split("/", 3);
+			
+				var day = String(date[0]);
+				var month = MONTHS[Number(date[1])];
+				var year = String(date[2]);
+
+				var docPath = data[i][DATA_NAMES.docs];
+				var docLink;
+				if(docPath) {
+					docLink = "<a href="+ docPath +" target='_blank'>"+SEE_MORE+"</a>";
+				} else {
+					docLink = ""
+				}
+				
+				if (!data[i][DATA_NAMES.f] | data[i][DATA_NAMES.f] == "") {
+					f_numb = NO_DATA_MSG;
+				} else {
+					f_numb = data[i][DATA_NAMES.f];
+				};
+				
+				if (!data[i][DATA_NAMES.as] | data[i][DATA_NAMES.as] == "") {
+					as_numb = NO_DATA_MSG;
+				} else {
+					as_numb = data[i][DATA_NAMES.as];
+				};
+				
+		//		var pop = "<dl><h2>" + data[i][DATA_NAMES.name] + "</h2>"	// This text will be displayed
+		//			+ "<b>"+DATE+"</b>"												//	in the popup for this point.
+		//			+ "<dt>" + day + "-" + month + "-" + year + "</dd>"
+		//			+ "<br><br>"
+		//			+ "<b>"+CONTAMINANTS[0]+" (mg/L)</b>"
+		//			+ "<dt>" + f_numb + "</dd>"
+		//			+ "<br><br>"
+		//			+ "<b>"+CONTAMINANTS[1]+" (&mu;g/L)</b>"
+		//			+ "<dt>" + as_numb + "</dd>"
+		//			+ "<br><br>"
+		//			+ docLink
+				var pop = "OH WASSUP?!?!"
+				return pop;
+			}
+			
+			
+			////////////////////////////////////////////////////////////////////////////////
+			////					 	getLabel FUNCTION 							  	////
+			//// 	Takes in the type of label to plot (string) and the index of the 	////
+			////	marker's data in the global data array, data. Returns the string ////
+			////	that will be contained in the label. 								////
+			////////////////////////////////////////////////////////////////////////////////
+	
+			function getLabel(data, type, i) {
+				if (type == "year") {
+					return "\xa0"+String(data[i][DATA_NAMES.date].split('/',3)[2]);		
+				} else if (type == "community") {
+					str = String(data[i][DATA_NAMES.name]);
+					str = str.split(" ")
+					var newStr = "";
+					var lineCount = 1;
+					for (var i=0; i<str.length; i++) {
+						tempNewStr = newStr+"\xa0"+str[i]
+						if(tempNewStr.length>MAX_LABEL_LINE_CHARS*lineCount & i!=0) {	
+							newStr = newStr+"\xa0\n\xa0"+str[i];
+						} else {
+						newStr = tempNewStr;
+						}
+					};
+					return "\xa0"+newStr+"\xa0";
+				} else if (type == 'hist') {
+					return OLD_DATA_MSG;
+				};
+			}
+			
+			
+			////////////////////////////////////////////////////////////////////////////////
+			////					 	removePoint FUNCTION 						  	////
+			//// 			Removes the point stored at the index i.					////
+			////////////////////////////////////////////////////////////////////////////////
+			
+			function removePoint(i) {
+				map.removeLayer(base.Markers[i]); 
+			}
+	
+			
+		</script>
+		
+	</body>
+</html>
+			
