@@ -37,6 +37,7 @@
 			<div class="info_text" id="municipality">.</div>
 			<div class="info_text" id="community_name">.</div>
 			<div class="info_text" id="project_type">.</div>
+			<div class="info_text" id="site_location">.</div>
 			<div class="info_text" id="dates">.</div>
 			<div class="info_text" id="people_served">.</div>
 			<div class="info_text" id="workshops">.</div>
@@ -144,23 +145,14 @@
 									}
 								})
 							);
-							base.Markers[base.Markers.length-1].bindLabel(getLabel(data, "community", i), {
+							base.Markers[base.Markers.length-1].bindLabel(getLabel(data, i), {
 								noHide: false,										// attach labels to all the base points 
 								className: "ourLabel"								//	that activate during mouseover
 							});
-							var popupText = getBasePopup(data, i);// Grab the text for the popup at data index i
-							base.Popups.push(L.popup({		// Define the popup for each marker
-								offset: POPUP_OFFSET})
-								.setLatLng(latLng)
-								.setContent(popupText)
-							);
 							base.Markers[base.Markers.length-1].addTo(map); // And finally, actually add the markers to the map!
 						};
 					};
-					
 				})
-			
-				
 			}
 			
 			function openInfoPanel() {
@@ -178,80 +170,26 @@
 			}
 			
 			////////////////////////////////////////////////////////////////////////////////
-			////					 	getBasePopup FUNCTION 					  		////
-			//// 	Takes in an index and returns the base popup text format used.		////
-			////////////////////////////////////////////////////////////////////////////////
-			
-			function getBasePopup(data, i) {
-				var date = String(data[i][DATA_NAMES.date]).split("/", 3);
-			
-				var day = String(date[0]);
-				var month = MONTHS[Number(date[1])];
-				var year = String(date[2]);
-
-				var docPath = data[i][DATA_NAMES.docs];
-				var docLink;
-				if(docPath) {
-					docLink = "<a href="+ docPath +" target='_blank'>"+SEE_MORE+"</a>";
-				} else {
-					docLink = ""
-				}
-				
-				if (!data[i][DATA_NAMES.f] | data[i][DATA_NAMES.f] == "") {
-					f_numb = NO_DATA_MSG;
-				} else {
-					f_numb = data[i][DATA_NAMES.f];
-				};
-				
-				if (!data[i][DATA_NAMES.as] | data[i][DATA_NAMES.as] == "") {
-					as_numb = NO_DATA_MSG;
-				} else {
-					as_numb = data[i][DATA_NAMES.as];
-				};
-				
-		//		var pop = "<dl><h2>" + data[i][DATA_NAMES.name] + "</h2>"	// This text will be displayed
-		//			+ "<b>"+DATE+"</b>"												//	in the popup for this point.
-		//			+ "<dt>" + day + "-" + month + "-" + year + "</dd>"
-		//			+ "<br><br>"
-		//			+ "<b>"+CONTAMINANTS[0]+" (mg/L)</b>"
-		//			+ "<dt>" + f_numb + "</dd>"
-		//			+ "<br><br>"
-		//			+ "<b>"+CONTAMINANTS[1]+" (&mu;g/L)</b>"
-		//			+ "<dt>" + as_numb + "</dd>"
-		//			+ "<br><br>"
-		//			+ docLink
-				var pop = "OH WASSUP?!?!"
-				return pop;
-			}
-			
-			
-			////////////////////////////////////////////////////////////////////////////////
 			////					 	getLabel FUNCTION 							  	////
 			//// 	Takes in the type of label to plot (string) and the index of the 	////
 			////	marker's data in the global data array, data. Returns the string ////
 			////	that will be contained in the label. 								////
 			////////////////////////////////////////////////////////////////////////////////
 	
-			function getLabel(data, type, i) {
-				if (type == "year") {
-					return "\xa0"+String(data[i][DATA_NAMES.date].split('/',3)[2]);		
-				} else if (type == "community") {
-					str = String(data[i][DATA_NAMES.name]);
-					str = str.split(" ")
-					var newStr = "";
-					var lineCount = 1;
-					for (var i=0; i<str.length; i++) {
-						tempNewStr = newStr+"\xa0"+str[i]
-						if(tempNewStr.length>MAX_LABEL_LINE_CHARS*lineCount & i!=0) {	
-							newStr = newStr+"\xa0\n\xa0"+str[i];
-						} else {
-						newStr = tempNewStr;
-						}
-					};
-					return "\xa0"+newStr+"\xa0";
-				} else if (type == 'hist') {
-					return OLD_DATA_MSG;
+			function getLabel(data, i) {
+				str = String(data[i][DATA_NAMES.name]);
+				str = str.split(" ")
+				var newStr = "";
+				var lineCount = 1;
+				for (var i=0; i<str.length; i++) {
+					tempNewStr = newStr+"\xa0"+str[i]
+					if(tempNewStr.length>MAX_LABEL_LINE_CHARS*lineCount & i!=0) {	
+						newStr = newStr+"\xa0\n\xa0"+str[i];
+					} else {
+					newStr = tempNewStr;
+					}
 				};
+				return "\xa0"+newStr+"\xa0";	
 			}
 			
 			
