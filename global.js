@@ -2,16 +2,35 @@
 
 var map;								// initialize the variable to hold the map
 
-var DATA_URL = "https://dl.dropboxusercontent.com/s/eb80ajfv59csvo3/ask_test_dataset.JSON";
+var DATA_URL = "https://dl.dropboxusercontent.com/s/pe8xnz2h74a3q9x/project_map_dataset.json";
 											// ^--- The URL where the data lives in JSON form.
-var DATA_NAMES = {							// And store the titles of the columns 
-	date: "date",							//	(get from carto.com once you import the dataset.)
-	name: "community_name",	
-	f: "fluoride",
-	as: "arsenic",
-	lat: "latitude",
-	lng: "longitude",
-	docs: "documents"
+var DATA_NAMES = {							// And store the titles of the columns 							//	(get from carto.com once you import the dataset.)
+	name: "Community",	
+	lat: "Latitude",
+	lng: "Longitude",
+	proj_name: "Project Name",
+	proj_type: "Project Type",
+	muni: "Municipality",
+	site: "Site Location",
+	partner: "Partner Organization",
+	start_date: "Start Date",
+	end_date: "End Date",
+	people: "Total # of People Served",
+	big_train: "Weeklong Capacity Training",
+	small_train: "Small Scale Capacity Training",
+	no_filters: "# of Ceramic Filter Systems",
+	no_biochar: "Biochar Treatment System (300L/day)",
+	no_ferro: "Ferrocement RWH Systems (12,000L)",
+	no_roto_small: "Rotoplas Cistern (2,500L)",
+	no_roto_big: "Rotoplas Cistern (10,000)",
+	no_geomembrane: "Large Geomembrane (30,000L)",
+	no_underground: "Large Underground (80,000L+)",
+	contact: "Contact",
+	phone: "Phone Number",
+	email: "Email",
+	docs: "Document",
+	notes: "Notes",
+	photo: "Image Link"
 };
 
 var EPS = 0.0001; 						// This epsilon is the acceptable difference in lat or lng 										

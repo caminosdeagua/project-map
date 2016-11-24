@@ -119,10 +119,11 @@
 					// (Un)comment the next line to (see) hide the full dataset (in) from the console, super useful for debugging!
 					console.log("Data acquired! "+JSON.stringify(data)); 	// log the data in the console for debugging...
 					for (var i=0; i<data.length; i++) { // Loop through all the rows of the data
-						if (data[i][DATA_NAMES.date] == null | data[i][DATA_NAMES.date] == "" |	// if there's no date or latLng info, 
+						if (data[i][DATA_NAMES.name] == null | data[i][DATA_NAMES.name] == "" |	// if there's no date or latLng info, 
 							data[i][DATA_NAMES.lat] == null | data[i][DATA_NAMES.lat] == "" |	//	ignore the point!
 							data[i][DATA_NAMES.lng] == null | data[i][DATA_NAMES.lng] == "" ) {	
 						} else {
+							alert(data[i][DATA_NAMES.name])
 							var latLng = L.latLng([data[i][DATA_NAMES.lat], data[i][DATA_NAMES.lng]]); // Grab the latLng of the point
 							base.Markers.push( 										// Save the appropriate marker
 								L.marker(latLng, {
