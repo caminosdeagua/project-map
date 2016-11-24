@@ -73,3 +73,11 @@ img.caminos_logo {
 	width: 25px;
 	cursor: pointer;
 }
+
+.info_text {
+	margin: 5px;
+	padding: 5px;
+	border: 2px solid #eeeeee;
+	border-radius: 6px;
+	
+}

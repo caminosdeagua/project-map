@@ -32,74 +32,29 @@
 		</div>
 		<div id='info_panel'>
 			<img id="x-butt" onclick="closeInfoPanel();" src='https://dl.dropboxusercontent.com/s/vbfkb0s3tvf2q50/bigX.png'></img>
-			<br>.
-			<br>.
-			<br>.
-			<br>.
-			<br>.
-			<br>.
-			<br>.
-			<br>.
-			<br>.
-			<br>.
-			<br>.
-			<br>.
-			<br>.
-			<br>.
-			<br>.
-			<br>.
-			<br>.
-			<br>.
-			<br>.
-			<br>.
-			<br>.
-			<br>.
-			<br>.
-			<br>.
-			<br>.
-			<br>.
-			<br>.
-			<br>.
-			<br>.
-			<br>.
-			<br>.
-			<br>.
-			<br>.
-			<br>.
-			<br>.
-			<br>.
-			<br>.
-			<br>.
-			<br>.
-			<br>.
-			<br>.
-			<br>.
-			<br>.
-			<br>.
-			<br>.
-			<br>.
-			<br>.
-			<br>.
-			<br>.
-			<br>.
+			<div class="info_text" id="project_name">.</div>
+			<div class="info_text" id="photograph">.</div>
+			<div class="info_text" id="municipality">.</div>
+			<div class="info_text" id="community_name">.</div>
+			<div class="info_text" id="project_type">.</div>
+			<div class="info_text" id="dates">.</div>
+			<div class="info_text" id="people_served">.</div>
+			<div class="info_text" id="workshops">.</div>
+			<div class="info_text" id="ceramic_filters">.</div>
+			<div class="info_text" id="biochar_sytems">.</div>
+			<div class="info_text" id="ferrocement_cisterms">.</div>
+			<div class="info_text" id="rotoplas_small">.</div>
+			<div class="info_text" id="rotoplas_large">.</div>
+			<div class="info_text" id="geomenbrane_cistern">.</div>
+			<div class="info_text" id="underground_cistern">.</div>
+			<div class="info_text" id="partner_organization">.</div>
+			<div class="info_text" id="contact_info">.</div>
+			<div class="info_text" id="more_info">.</div>
+			<div class="info_text" id="notes"><br>.<br>.<br>.<br>.<br>.</div>
 		</div>
 
 		<script>
 		
-			////////////////////////////////////////////////////////////////////////////////
-			////					 DEFINE GLOBAL VARIABLES 						  	////
-			////																		////
-			////	IF YOU'RE TRYING TO CHANGE THE FORMATTING / COLORS / STYLES /		////
-			////		DATASET IN THE EXISTING MAP, YOU SHOULD ONLY NEED TO CHANGE 	////
-			////		STUFF IN THIS SECTION. DON'T CHANGE ANYTHING ELSE IF YOU'RE		////
-			////		NOT SURE WHAT IT DOES!!!										////
-			////																		////
-			////	IF YOU WANT TO CHANGE SOMETHING FUNDAMENTAL, LIKE WHICH VARIABLES 	////
-			////		CAN BE PLOTTED WITH THR DROPDOWN MENU, PLEASE REFFER TO THE 	////
-			////		TUTORIAL VIDEO POSTED ON TRELLO BEFORE PROCEEDING. 				////
-			////																		////
-			////////////////////////////////////////////////////////////////////////////////
-			
 			////////////////////////////////////////////////////////////////////////////////
 			////					 INITIALIZATION FUNCTION 						  	////
 			//////////////////////////////////////////////////////////////////////////////// 
@@ -160,7 +115,7 @@
 											//	DATE IN DECREASING ORDER!!!! <--- Super important for spidering to work correctly...
 				.done(function(data) {
 					AllData = data; 		// store data as global for later access.
-					// Uncomment the next line to see the full dataset in the console, super useful for debugging!
+					// (Un)comment the next line to (see) hide the full dataset (in) from the console, super useful for debugging!
 					console.log("Data acquired! "+JSON.stringify(data)); 	// log the data in the console for debugging...
 					for (var i=0; i<data.length; i++) { // Loop through all the rows of the data
 						if (data[i][DATA_NAMES.date] == null | data[i][DATA_NAMES.date] == "" |	// if there's no date or latLng info, 
@@ -181,7 +136,6 @@
 																			// this confusing line gets the index in base.Popups
 																			//	of the point with the same latitude as the clicked point
 																			// 	we'll use that index to access the marker, popup, and label soon.
-									map.openPopup(base.Popups[j]); 	// then open the popup for the clicked point.
 									if (!info_panel_open) {
 										showInfo(j);
 										openInfoPanel();
@@ -222,27 +176,6 @@
 			
 			function showInfo(i) {
 			}
-	
-			
-			////////////////////////////////////////////////////////////////////////////////
-			////					 	window.onclik FUNCTION 						  	////
-			//// 	When the user clicks in the window, this function executes. It is  	////
-			//// 	used to toggle the state (show/hide) of the dropdown menu. You 		////
-			////	almost definitely don't need to mess with this, unless you want 	////
-			////	something new to happen anytime the user clicks in the window...	////
-			////////////////////////////////////////////////////////////////////////////////
-			
-			//window.onclick = function(event) {
-			//	if (!event.target.matches('.dropbtn')) { 				// if the user's clikced the dropdown button
-			//		var dropdowns = document.getElementsByClassName("dropdown-content");
-			//		for (var i=0; i<dropdowns.length; i++) { 		// loop through dropdown menu
-			//			var openDropdown = dropdowns[i]; 				// if the dropdown menu is showing
-			//			if (openDropdown.classList.contains('show')) { 	// remove show (so that it hides)
-			//				openDropdown.classList.remove('show');
-			//			};
-			//		};
-			//	};
-			//}
 			
 			////////////////////////////////////////////////////////////////////////////////
 			////					 	getBasePopup FUNCTION 					  		////
