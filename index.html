@@ -31,6 +31,57 @@
 			</a>
 		</div>
 		<div id='info_panel'>
+			<img id="x-butt" onclick="closeInfoPanel();" src='https://dl.dropboxusercontent.com/s/vbfkb0s3tvf2q50/bigX.png'></img>
+			<br>.
+			<br>.
+			<br>.
+			<br>.
+			<br>.
+			<br>.
+			<br>.
+			<br>.
+			<br>.
+			<br>.
+			<br>.
+			<br>.
+			<br>.
+			<br>.
+			<br>.
+			<br>.
+			<br>.
+			<br>.
+			<br>.
+			<br>.
+			<br>.
+			<br>.
+			<br>.
+			<br>.
+			<br>.
+			<br>.
+			<br>.
+			<br>.
+			<br>.
+			<br>.
+			<br>.
+			<br>.
+			<br>.
+			<br>.
+			<br>.
+			<br>.
+			<br>.
+			<br>.
+			<br>.
+			<br>.
+			<br>.
+			<br>.
+			<br>.
+			<br>.
+			<br>.
+			<br>.
+			<br>.
+			<br>.
+			<br>.
+			<br>.
 		</div>
 
 		<script>
@@ -72,7 +123,7 @@
 					minZoom: MAP_MIN_ZOOM,
 					maxZoom: MAP_MAX_ZOOM,
 					attributionControl: true,
-					fullscreenControl:true
+					fullscreenControl: false
 				});	
 				map.attributionControl.setPrefix(ATTRIBUTION);
 			}
@@ -108,9 +159,9 @@
 				$.getJSON(DATA_URL) 		// This grabs the JSON data file. MAKE SURE THE FILE IS SORTED BY 
 											//	DATE IN DECREASING ORDER!!!! <--- Super important for spidering to work correctly...
 				.done(function(data) {
-						// Uncomment the next line to see the full dataset in the console, super useful for debugging!
+					AllData = data; 		// store data as global for later access.
+					// Uncomment the next line to see the full dataset in the console, super useful for debugging!
 					console.log("Data acquired! "+JSON.stringify(data)); 	// log the data in the console for debugging...
-					
 					for (var i=0; i<data.length; i++) { // Loop through all the rows of the data
 						if (data[i][DATA_NAMES.date] == null | data[i][DATA_NAMES.date] == "" |	// if there's no date or latLng info, 
 							data[i][DATA_NAMES.lat] == null | data[i][DATA_NAMES.lat] == "" |	//	ignore the point!
@@ -131,7 +182,12 @@
 																			//	of the point with the same latitude as the clicked point
 																			// 	we'll use that index to access the marker, popup, and label soon.
 									map.openPopup(base.Popups[j]); 	// then open the popup for the clicked point.
-									
+									if (!info_panel_open) {
+										showInfo(j);
+										openInfoPanel();
+									} else if (info_panel_open & info_being_displayed != j) {
+										showInfo(j);
+									}
 								})
 							);
 							base.Markers[base.Markers.length-1].bindLabel(getLabel(data, "community", i), {
@@ -151,6 +207,20 @@
 				})
 			
 				
+			}
+			
+			function openInfoPanel() {
+				var el = document.getElementById("info_panel");
+				fadeIn(el)
+				info_panel_open = true;
+			}
+			function closeInfoPanel() {
+				var el = document.getElementById("info_panel");
+				fadeOut(el)
+				info_panel_open = false;
+			}
+			
+			function showInfo(i) {
 			}
 	
 			
@@ -260,6 +330,49 @@
 			function removePoint(i) {
 				map.removeLayer(base.Markers[i]); 
 			}
+			
+			
+			
+			////////////////////////////////////////////////////////////////////
+			////				functions fadeIn(el), fadeOut(el) 			////
+			//// 															////
+			////	Fades in or out the passed element by adjusting the 	////
+			////	the div element's opacity in steps. Many thanks to:		////////////////////
+			////	http://www.chrisbuttery.com/articles/fade-in-fade-out-with-javascript/ 	////	
+			////	for this simple and lovely bit of js. Cheers! 							////
+			////	If the div is visible, fadeIn does nothing. If it's not, fade out 		////	
+			////	does nothing. 															////
+			////////////////////////////////////////////////////////////////////////////////////
+			
+			function fadeOut(el){ 
+				
+				(function fade() {
+					if ((el.style.opacity -= .09) < 0) {
+					el.style.opacity = 0;
+					} else {
+					requestAnimationFrame(fade);
+					}
+				})();
+				
+				el.style.display = 'none';
+			}
+			
+			function fadeIn(el){
+				alert()
+				el.style.opacity = 0;
+				el.style.display = 'block'; 
+				
+				(function fade() {
+					var val = parseFloat(el.style.opacity);
+					if (!((val += .075) > 1)) {
+					el.style.opacity = val;
+					requestAnimationFrame(fade);
+					}
+				})();
+				
+			}
+			
+			
 	
 			
 		</script>
