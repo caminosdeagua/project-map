@@ -13,7 +13,7 @@ var MONTHS = ["Jan", "Feb", "Mar", 		// Array of names of months for displaying
 
 var DATE = "Date";
 
-var CARTO_ATTRIBUTION = 'Data hosting on <a href="http://www.dropbox.com">Dropbox</a> legends by <a href="http://www.carto.com">Carto</a>';
+var ATTRIBUTION = 'Data hosting on <a href="http://www.dropbox.com">Dropbox</a> legends by <a href="http://www.carto.com">Carto</a>';
 
 var SEE_MORE = "More info here!"
 

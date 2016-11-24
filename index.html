@@ -30,6 +30,8 @@
 				<img class="caminos_logo" src="https://dl.dropboxusercontent.com/s/ligsjij2ka26gi0/caminos_logo_circle.png" ></img> <!-- creates the caminos de agua logo -->
 			</a>
 		</div>
+		<div id='info_panel'>
+		</div>
 
 		<script>
 		
@@ -46,40 +48,6 @@
 			////		TUTORIAL VIDEO POSTED ON TRELLO BEFORE PROCEEDING. 				////
 			////																		////
 			////////////////////////////////////////////////////////////////////////////////
-			
-			
-			
-			//for (k=0; k<BASE_URLS.length; k++) {  	// Grab all the icons with correct size. 
-			//	BASE_ICONS[k] = L.icon({ 			// 	to be used when displaying the base markers
-			//		iconUrl: BASE_URLS[k],
-			//		iconSize: SMALL_ICON_SIZE
-			//	});
-			//	SPIDER_ICONS[k] = L.icon({ 			//	and the spidered markers
-			//		iconUrl: SPIDER_URLS[k],
-			//		iconSize: SMALL_ICON_SIZE
-			//	});
-			//	BASE_SPIDER_ICONS[k] = L.icon({		// 	and the markers at the base of the spider. 
-			//		iconUrl: SPIDER_URLS[k],
-			//		iconSize: LARGE_ICON_SIZE
-			//	});
-			//};
-			//
-			//var X_ICON = L.icon({ 					// define an icon that can be clicked to close the spider
-			//	iconUrl: X_URL,
-			//	iconSize: SMALL_ICON_SIZE
-			//});
-			
-
-			
-
-			
-
-			
-			
-
-			
-			
-			
 			
 			////////////////////////////////////////////////////////////////////////////////
 			////					 INITIALIZATION FUNCTION 						  	////
@@ -106,7 +74,7 @@
 					attributionControl: true,
 					fullscreenControl:true
 				});	
-				map.attributionControl.setPrefix(CARTO_ATTRIBUTION);
+				map.attributionControl.setPrefix(ATTRIBUTION);
 			}
 			
 			////////////////////////////////////////////////////////////////////////////////
@@ -151,9 +119,19 @@
 							var latLng = L.latLng([data[i][DATA_NAMES.lat], data[i][DATA_NAMES.lng]]); // Grab the latLng of the point
 							base.Markers.push( 										// Save the appropriate marker
 								L.marker(latLng, {
-								icon: icon,
-								riseOnHover: true,
-								zIndexOffset: BASE_Z_OFFSET
+									icon: icon,
+									riseOnHover: true,
+									zIndexOffset: BASE_Z_OFFSET
+								})
+								.on('click', function(event) {
+									click_lat = event.latlng.lat; 					// Grab the latLng of the cliked point 
+																			// 	(returns value of marker's center, regardless of where is clicked...)
+									var j = base.Popups.map(function(a) {return a._latlng.lat}).indexOf(click_lat);
+																			// this confusing line gets the index in base.Popups
+																			//	of the point with the same latitude as the clicked point
+																			// 	we'll use that index to access the marker, popup, and label soon.
+									map.openPopup(base.Popups[j]); 	// then open the popup for the clicked point.
+									
 								})
 							);
 							base.Markers[base.Markers.length-1].bindLabel(getLabel(data, "community", i), {
@@ -184,17 +162,17 @@
 			////	something new to happen anytime the user clicks in the window...	////
 			////////////////////////////////////////////////////////////////////////////////
 			
-			window.onclick = function(event) {
-				if (!event.target.matches('.dropbtn')) { 				// if the user's clikced the dropdown button
-					var dropdowns = document.getElementsByClassName("dropdown-content");
-					for (var i=0; i<dropdowns.length; i++) { 		// loop through dropdown menu
-						var openDropdown = dropdowns[i]; 				// if the dropdown menu is showing
-						if (openDropdown.classList.contains('show')) { 	// remove show (so that it hides)
-							openDropdown.classList.remove('show');
-						};
-					};
-				};
-			}
+			//window.onclick = function(event) {
+			//	if (!event.target.matches('.dropbtn')) { 				// if the user's clikced the dropdown button
+			//		var dropdowns = document.getElementsByClassName("dropdown-content");
+			//		for (var i=0; i<dropdowns.length; i++) { 		// loop through dropdown menu
+			//			var openDropdown = dropdowns[i]; 				// if the dropdown menu is showing
+			//			if (openDropdown.classList.contains('show')) { 	// remove show (so that it hides)
+			//				openDropdown.classList.remove('show');
+			//			};
+			//		};
+			//	};
+			//}
 			
 			////////////////////////////////////////////////////////////////////////////////
 			////					 	getBasePopup FUNCTION 					  		////
