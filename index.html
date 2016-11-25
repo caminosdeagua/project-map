@@ -147,10 +147,7 @@
 			////////////////////////////////////////////////////////////////////////////////
 			
 			function loadAndPlotData() {
-				var icon = L.icon({ 			// 	to be used when displaying the base markers
-						iconUrl: SELECTED_URL,
-						iconSize: SMALL_ICON_SIZE
-					})
+
 				base.Markers = [];
 				base.Popups = [];
 				
@@ -161,11 +158,18 @@
 					// (Un)comment the next line to (see) hide the full dataset (in) from the console, super useful for debugging!
 					console.log("Data acquired! "+JSON.stringify(data)); 	// log the data in the console for debugging...
 					for (var i=0; i<data.length; i++) { // Loop through all the rows of the data
+						var bin = getBin(data, i)
 						if (data[i][DATA_NAMES.name] == null | data[i][DATA_NAMES.name] == "" |	// if there's no date or latLng info, 
 							data[i][DATA_NAMES.lat] == null | data[i][DATA_NAMES.lat] == "" |	//	ignore the point!
-							data[i][DATA_NAMES.lng] == null | data[i][DATA_NAMES.lng] == "" ) {	
+							data[i][DATA_NAMES.lng] == null | data[i][DATA_NAMES.lng] == "" |
+							bin == -1) {	
 						} else {
-							var latLng = L.latLng([data[i][DATA_NAMES.lat], data[i][DATA_NAMES.lng]]); // Grab the latLng of the point
+							
+							var icon = L.icon({ 			// 	to be used when displaying the base markers
+								iconUrl: ICON_URLS[bin],
+								iconSize: SMALL_ICON_SIZE
+							})
+							var latLng = L.latLng([data[i][DATA_NAMES.lat], data[i][DATA_NAMES.lng]]); // Grab the latLng of the point			
 							base.Markers.push( 										// Save the appropriate marker
 								L.marker(latLng, {
 									icon: icon,
@@ -197,6 +201,21 @@
 						};
 					};
 				})
+			}
+			
+			function getBin(data, i) {
+				var bin = -1;
+				if (data[i][DATA_NAMES.no_underground] | 
+				data[i][DATA_NAMES.no_geomembrane] |
+				data[i][DATA_NAMES.no_roto_big]) {
+					bin = BIG_CISTERN_BIN;
+				} else {
+				bin=2}
+				
+				
+				
+				
+				return bin
 			}
 			
 			function openInfoPanel() {
