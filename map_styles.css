@@ -46,14 +46,27 @@ img.caminos_logo {
 	z-index: 3;
 	position: absolute;
 	left: 15px;
-	bottom: 15px;
+	top: 60px;
 	width: 120px;
 	height: 120px;
 	opacity: 1;
 }
 
 div.cartodb-legend {
-	width: 285px;		
+	width: 290px;	
+	position: absolute;
+	bottom: 15px;
+	left: 15px;
+	font-size: 14px;
+	
+}
+
+.legend-title {
+	font-size: 14px;
+	
+}
+.bullet {
+	font-size: 11px;
 }
 
 /* formatting for the info panel */

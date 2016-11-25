@@ -33,8 +33,8 @@
 				<img class="caminos_logo" src="https://dl.dropboxusercontent.com/s/ligsjij2ka26gi0/caminos_logo_circle.png" ></img> <!-- creates the caminos de agua logo -->
 			</a>
 			<!-- This next div is the legend -->
-			<div class='cartodb-legend custom' id='legend' style="display: block; position: absolute; bottom: 15px; left: 15px;">	
-				<div class="legend-title", id="legend_title" style="text-transform:none"></div>
+			<div class='cartodb-legend custom' id='legend' style="display: block;">	
+				<div class="legend-title", id="legend_title" style="font-size:14px;"></div>
 				<ul>
 					<li>
 						<div class="bullet" style="background:#24de17; text-transform:none" name="project_type"></div> 
@@ -42,6 +42,7 @@
 					<li>
 						<div class="bullet" style="background:#2eb7ff; text-transform:none" name="project_type"></div>
 					</li>
+					<br>
 					<li>
 						<div class="bullet" style="background:#b700ff; text-transform:none" name="project_type"></div>
 					</li>
@@ -147,7 +148,7 @@
 			
 			function loadAndPlotData() {
 				var icon = L.icon({ 			// 	to be used when displaying the base markers
-						iconUrl: ICON_URL,
+						iconUrl: SELECTED_URL,
 						iconSize: SMALL_ICON_SIZE
 					})
 				base.Markers = [];
