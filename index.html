@@ -203,20 +203,51 @@
 				})
 			}
 			
+			////////////////////////////////////////////////////////////////////////////////
+			////					 	getBin FUNCTION 					  			////
+			//// 	Gets the correct bin of the point. Does so with the 				////
+			////	following algorithm:												////
+			////		Bin 0: Has a geomembrane, underground, or large rotoplas cistern////
+			////		Bin 1: Not bin 0 and has a small cistern.						////
+			////		Bin 4: Not bin 0,1 and has a biochar systems					////
+			////		Bin 2: Not bins 0,1,4 and has ceramic filter systems			////
+			////		Bin 3: Not bins 0,1,4, 2 and has ceramic filters (but not 		////
+			////			systems).													////
+			////		Bin 5: Not bins 0,1,4,2,3 and has had a training (no install).	////
+			////////////////////////////////////////////////////////////////////////////////
+			
 			function getBin(data, i) {
 				var bin = -1;
-				if (data[i][DATA_NAMES.no_underground] | 
+				if (
+				data[i][DATA_NAMES.no_underground] | 
 				data[i][DATA_NAMES.no_geomembrane] |
 				data[i][DATA_NAMES.no_roto_big]) {
 					bin = BIG_CISTERN_BIN;
-				} else {
-				bin=2}
-				
-				
-				
-				
+				} else if (
+				data[i][DATA_NAMES.no_roto_small] | 
+				data[i][DATA_NAMES.no_ferro] ) {
+					bin = SMALL_CISTERN_BIN;
+				} else if (
+				data[i][DATA_NAMES.no_biochar] ) {
+					bin = BIOCHAR_BIN;			
+				} else if (
+				data[i][DATA_NAMES.no_ceramic_filters] ) {
+					bin = CERAMIC_FILTER_BIN;
+				} else if (
+				data[i][DATA_NAMES.no_ceramic_systems] ) {
+					bin = CERAMIC_SYSTEM_BIN;
+				} else if (
+				data[i][DATA_NAMES.big_train] | 
+				data[i][DATA_NAMES.small_train] ) {
+					bin = TRAINING_BIN;
+				} 
 				return bin
 			}
+			
+			////////////////////////////////////////////////////////////////////////////////
+			////			openInfoPanel & closeInfoPanel FUNCTIONs		  			////
+			//// 	Opens and closes the info panel respectivel. Duh.					////
+			////////////////////////////////////////////////////////////////////////////////
 			
 			function openInfoPanel() {
 				var el = document.getElementById("info_panel");
@@ -232,8 +263,14 @@
 				info_panel_open = false;			// Then reset the global to show it's hidden. 
 			}
 			
+			////////////////////////////////////////////////////////////////////////////////
+			////						showInfo FUNCTION					  			////
+			//// 	Gets the correct information from the global dataset, then pushes	////
+			////	it into the correct places in the info panel. 						////
+			////////////////////////////////////////////////////////////////////////////////
+			
 			function showInfo(i) {
-				$("#info_panel").animate({scrollTop: 0}, SCROLL_TIME);
+				$("#info_panel").animate({scrollTop: 0}, SCROLL_TIME);	// First, scroll the info window back to the top.
 			}
 			
 			////////////////////////////////////////////////////////////////////////////////
