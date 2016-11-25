@@ -26,7 +26,7 @@ var DATA_NAMES = {							// And store the titles of the columns 							//	(get f
 	no_roto_big: "Rotoplas Cistern (10,000L)",
 	no_geomembrane: "Large Geomembrane (30,000L)",
 	no_underground: "Large Underground (80,000L+)",
-	contact: "Contact",
+	primary_contact: "Contact",
 	phone: "Phone Number",
 	email: "Email",
 	docs: "Document",

@@ -60,26 +60,28 @@
 		</div>
 		<div id='info_panel'>
 			<img id="x-butt" onclick="closeInfoPanel();" src='https://dl.dropboxusercontent.com/s/vbfkb0s3tvf2q50/bigX.png'></img>
-			<div class="info_text" id="project_name">.</div>
-			<div class="info_text" id="photograph">.</div>
-			<div class="info_text" id="municipality">.</div>
-			<div class="info_text" id="community_name">.</div>
-			<div class="info_text" id="project_type">.</div>
-			<div class="info_text" id="site_location">.</div>
-			<div class="info_text" id="dates">.</div>
-			<div class="info_text" id="people_served">.</div>
-			<div class="info_text" id="workshops">.</div>
-			<div class="info_text" id="ceramic_filters">.</div>
-			<div class="info_text" id="biochar_sytems">.</div>
-			<div class="info_text" id="ferrocement_cisterms">.</div>
-			<div class="info_text" id="rotoplas_small">.</div>
-			<div class="info_text" id="rotoplas_large">.</div>
-			<div class="info_text" id="geomenbrane_cistern">.</div>
-			<div class="info_text" id="underground_cistern">.</div>
-			<div class="info_text" id="partner_organization">.</div>
-			<div class="info_text" id="contact_info">.</div>
-			<div class="info_text" id="more_info">.</div>
-			<div class="info_text" id="notes"><br>.<br>.<br>.<br>.<br>.</div>
+			<div class="info_text" id="proj_name"></div>
+			<div class="info_text" id="photo"></div>
+			<div class="info_text" id="name"></div>
+			<div class="info_text" id="muni"></div>
+			<div class="info_text" id="proj_type"></div>
+			<div class="info_text" id="site"></div>
+			<div class="info_text" id="dates"></div>
+			<div class="info_text" id="people"></div>
+			<div class="info_text" id="workshops"></div>
+			<div class="info_text" id="no_ceramic_systems"></div>
+			<div class="info_text" id="no_ceramic_filters"></div>
+			<div class="info_text" id="no_biochar"></div>
+			<div class="info_text" id="no_ferro"></div>
+			<div class="info_text" id="no_roto_small"></div>
+			<div class="info_text" id="no_roto_large"></div>
+			<div class="info_text" id="no_geomembrane"></div>
+			<div class="info_text" id="no_underground"></div>
+			<div class="info_text" id="partner"></div>
+			<div class="info_text" id="primary_contact"></div>
+			<div class="info_text" id="contact_info"></div>
+			<div class="info_text" id="docs"></div>
+			<div class="info_text" id="notes"></div>
 		</div>
 
 		<script>
@@ -271,8 +273,21 @@
 			
 			function showInfo(i) {
 				var els = document.getElementsByClassName("info_text");
-				for(var i=0; i<els.length; i++) {
-					els[i].innerHTML = i;
+				for(var i=0; i<els.length; i++) { 		// Loop through all the elements to fill
+					var id = els[i].id;					// Grab the id of the current element
+					els[i].innerHTML = id;									
+					// A few ids have special cases: 
+					//	photo, 
+					//	dates, 
+					//	workshops, 
+					// 	and contact_info.
+					if (id == "dates") {
+					} else if (id == "photo") {
+					} else if (id == "workshops") {
+					} else if (id == "contact_info") {
+					} else {
+							
+					}
 				}
 				
 				
