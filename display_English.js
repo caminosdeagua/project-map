@@ -27,3 +27,31 @@ var LEGEND3 = "\xa0\xa0\xa0Ceramic\xa0filters\xa0(system\xa0not\xa0included)";
 var LEGEND4 = "\xa0\xa0\xa0Biochar\xa0systems";
 var LEGEND5 = "\xa0\xa0\xa0Trainings\xa0with\xa0no\xa0installation";
 var LEGEND_TEXT = [LEGEND0, LEGEND1, LEGEND2, LEGEND3, LEGEND4, LEGEND5];
+
+//// The labels for the info windows. 
+//// Make sure the handles match the ids for 
+////	their divs in index.html!!!! <<--- Super important!!!
+var LBL = {
+	proj_name: "Project name",
+	photo: "",
+	name: "Community",
+	muni: "Municipality",
+	proj_type: "Project type",
+	site: "Site",
+	dates: "Dates",
+	people: "Number of people served",
+	workshops: "Workshops",
+	no_ceramic_systems: "Ceramic filtration systems",
+	no_ceramic_filters: "Ceramic filter cartridges",
+	no_biochar: "Biochar systems built",
+	no_ferro: "Ferro cement cisterns built",
+	no_roto_small: "Small plastic cisterns (2,500L) installed",
+	no_roto_large: "Large plastic cisterns (10,000L) installed",
+	no_geomembrane: "Large geomembranes installed",
+	no_underground: "Underground cisterns installed",
+	partner: "Partner(s)",
+	primary_contact: "Primary contact(s)",
+	contact_info: "Contact info",
+	docs: "More information",
+	notes: "Notes"
+};

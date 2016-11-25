@@ -80,8 +80,8 @@
 			<div class="info_text" id="partner"></div>
 			<div class="info_text" id="primary_contact"></div>
 			<div class="info_text" id="contact_info"></div>
-			<div class="info_text" id="docs"></div>
 			<div class="info_text" id="notes"></div>
+			<div class="info_text" id="docs"></div>
 		</div>
 
 		<script>
@@ -275,7 +275,7 @@
 				var els = document.getElementsByClassName("info_text");
 				for(var i=0; i<els.length; i++) { 		// Loop through all the elements to fill
 					var id = els[i].id;					// Grab the id of the current element
-					els[i].innerHTML = id;									
+														
 					// A few ids have special cases: 
 					//	photo, 
 					//	dates, 
@@ -286,7 +286,7 @@
 					} else if (id == "workshops") {
 					} else if (id == "contact_info") {
 					} else {
-							
+						els[i].innerHTML = LBL[id]+":<br>\xa0\xa0\xa0aaa";	
 					}
 				}
 				
