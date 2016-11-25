@@ -63,6 +63,7 @@ img.caminos_logo {
 	display: none;
 	overflow-y: scroll;
 	overflow-x: hidden;
+	height: auto;
 }
 /* formatting for the x-button to close the info panel */
 #x-butt{

@@ -8,6 +8,9 @@
 		<script src="https://leaflet.github.io/Leaflet.label/leaflet.label.js"></script> <!-- files necessary for labels in leaflet -->
 		<script type="text/javascript" src="https://stamen-maps.a.ssl.fastly.net/js/tile.stamen.js"></script><!--Include Stamen JavaScript to get basemap tiles-->
 		
+		<!-- Include jquery -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+		
 		<!-- Include the include files: global vars and display text -->
 		<script src="global.js" type="text/javascript" /></script>
 		<script src="display_English.js" type="text/javascript"></script>
@@ -123,7 +126,6 @@
 							data[i][DATA_NAMES.lat] == null | data[i][DATA_NAMES.lat] == "" |	//	ignore the point!
 							data[i][DATA_NAMES.lng] == null | data[i][DATA_NAMES.lng] == "" ) {	
 						} else {
-							alert(data[i][DATA_NAMES.name])
 							var latLng = L.latLng([data[i][DATA_NAMES.lat], data[i][DATA_NAMES.lng]]); // Grab the latLng of the point
 							base.Markers.push( 										// Save the appropriate marker
 								L.marker(latLng, {
@@ -134,14 +136,16 @@
 								.on('click', function(event) {
 									click_lat = event.latlng.lat; 					// Grab the latLng of the cliked point 
 																			// 	(returns value of marker's center, regardless of where is clicked...)
-									var j = base.Popups.map(function(a) {return a._latlng.lat}).indexOf(click_lat);
+									var j = base.Markers.map(function(a) {return a._latlng.lat}).indexOf(click_lat);
 																			// this confusing line gets the index in base.Popups
 																			//	of the point with the same latitude as the clicked point
 																			// 	we'll use that index to access the marker, popup, and label soon.
 									if (!info_panel_open) {
+										info_being_displayed = j;
 										showInfo(j);
 										openInfoPanel();
-									} else if (info_panel_open & info_being_displayed != j) {
+									} else if (info_panel_open && info_being_displayed != j) {
+										info_being_displayed = j;
 										showInfo(j);
 									}
 								})
@@ -158,6 +162,7 @@
 			
 			function openInfoPanel() {
 				var el = document.getElementById("info_panel");
+				$("#info_panel").scrollTop($("#info_panel")[0].scrollHeight);
 				fadeIn(el)
 				info_panel_open = true;
 			}
@@ -168,6 +173,8 @@
 			}
 			
 			function showInfo(i) {
+				alert()
+				$("#info_panel").scrollTop($("#info_panel")[0].scrollHeight);
 			}
 			
 			////////////////////////////////////////////////////////////////////////////////
