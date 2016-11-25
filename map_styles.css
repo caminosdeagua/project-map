@@ -51,6 +51,11 @@ img.caminos_logo {
 	height: 120px;
 	opacity: 1;
 }
+
+div.cartodb-legend {
+	width: 285px;		
+}
+
 /* formatting for the info panel */
 #info_panel {
 	position: absolute;

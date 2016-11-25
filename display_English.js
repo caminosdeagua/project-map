@@ -18,3 +18,12 @@ var ATTRIBUTION = 'Data hosting on <a href="http://www.dropbox.com">Dropbox</a> 
 var SEE_MORE = "More info here!"
 
 var NO_DATA_MSG = "NO DATA HERE, PISS OFF, MOFO!"
+
+var LEGEND_TITLE = "Types of projects"
+var LEGEND0 = "Large\xa0Cisterns\xa0(10,000\xa0liters\xa0or\xa0more)";
+var LEGEND1 = "Small\xa0cisterns\xa0(less\xa0than\xa010,000\xa0liters)\xa0with\xa0ceramic\xa0treatment\xa0systems";
+var LEGEND2 = "Ceramic\xa0treatment\xa0systems";
+var LEGEND3 = "Ceramic\xa0filters\xa0(system\xa0not\xa0included)";
+var LEGEND4 = "Biochar\xa0systems";
+var LEGEND5 = "Trainings\xa0with\xa0no\xa0installation";
+var LEGEND_TEXT = [LEGEND0, LEGEND1, LEGEND2, LEGEND3, LEGEND4, LEGEND5];

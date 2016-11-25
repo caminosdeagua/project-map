@@ -32,6 +32,30 @@
 			<a href="http://www.caminosdeagua.org" target='_blank'> <!-- Link the caminos logo to the caminos website -->
 				<img class="caminos_logo" src="https://dl.dropboxusercontent.com/s/ligsjij2ka26gi0/caminos_logo_circle.png" ></img> <!-- creates the caminos de agua logo -->
 			</a>
+			<!-- This next div is the legend -->
+			<div class='cartodb-legend custom' id='legend' style="display: block; position: absolute; bottom: 15px; left: 15px;">	
+				<div class="legend-title", id="legend_title" style="text-transform:none"></div>
+				<ul>
+					<li>
+						<div class="bullet" style="background:#24de17; text-transform:none" name="project_type"></div> 
+					</li>
+					<li>
+						<div class="bullet" style="background:#2eb7ff; text-transform:none" name="project_type"></div>
+					</li>
+					<li>
+						<div class="bullet" style="background:#b700ff; text-transform:none" name="project_type"></div>
+					</li>
+					<li>
+						<div class="bullet" style="background:#ff00ab; text-transform:none" name="project_type"></div>
+					</li>
+					<li>
+						<div class="bullet" style="background:#f71c23; text-transform:none" name="project_type"></div>
+					</li>
+					<li>
+						<div class="bullet" style="background:#ff6b12; text-transform:none" name="project_type"></div>
+					</li>
+				</ul>
+			</div>
 		</div>
 		<div id='info_panel'>
 			<img id="x-butt" onclick="closeInfoPanel();" src='https://dl.dropboxusercontent.com/s/vbfkb0s3tvf2q50/bigX.png'></img>
@@ -64,11 +88,25 @@
 			//////////////////////////////////////////////////////////////////////////////// 
 
 			function init() {
-				
+				fillText();
 				initMap(); 					// Initialize and display the map object
 				applyBaseMap(); 			// Apply the base tiles to the map
 				loadAndPlotData(); 	// Load the data for Fluoride (the default contaminant) 
 			}								// 	then plot the base markers on the map.	
+			
+			////////////////////////////////////////////////////////////////////////////////
+			////					  	fillText FUNCTION	 						  	////
+			//// 			Fills out all text from appropriate language .js file.		////
+			////////////////////////////////////////////////////////////////////////////////
+			
+			function fillText() {
+				document.getElementById("legend_title").innerHTML = LEGEND_TITLE;
+				els = document.getElementsByName("project_type");
+				for(var i=0; i<els.length; i++){
+					els[i].innerHTML = LEGEND_TEXT[i];
+				}
+			}
+			
 			
 			////////////////////////////////////////////////////////////////////////////////
 			////					  	initMap FUNCTION	 						  	////
@@ -162,19 +200,20 @@
 			
 			function openInfoPanel() {
 				var el = document.getElementById("info_panel");
-				$("#info_panel").scrollTop($("#info_panel")[0].scrollHeight);
-				fadeIn(el)
-				info_panel_open = true;
+				el.style.opacity = 0; 				// Since the info panel isn't open, make sure opacity is 0
+				el.style.display = "block";			//	but the panel isn't hidden, so it can be scrolled. 
+				$("#info_panel").scrollTop(0);		// Since we're opening a new point, scroll to top of info window
+				fadeIn(el)							// Once it's scrolled, fade the info window in.
+				info_panel_open = true;				// And set the global to show that it's being displayed.
 			}
-			function closeInfoPanel() {
+			function closeInfoPanel() { 			// To close the panel:
 				var el = document.getElementById("info_panel");
-				fadeOut(el)
-				info_panel_open = false;
+				fadeOut(el)							// Just fade it out.
+				info_panel_open = false;			// Then reset the global to show it's hidden. 
 			}
 			
 			function showInfo(i) {
-				alert()
-				$("#info_panel").scrollTop($("#info_panel")[0].scrollHeight);
+				$("#info_panel").animate({scrollTop: 0}, SCROLL_TIME);
 			}
 			
 			////////////////////////////////////////////////////////////////////////////////
