@@ -270,6 +270,18 @@
 			////////////////////////////////////////////////////////////////////////////////
 			
 			function showInfo(i) {
+				var els = document.getElementsByClassName("info_text");
+				for(var i=0; i<els.length; i++) {
+					els[i].innerHTML = i;
+				}
+				
+				
+				
+				
+				
+				
+				
+				
 				$("#info_panel").animate({scrollTop: 0}, SCROLL_TIME);	// First, scroll the info window back to the top.
 			}
 			
@@ -323,9 +335,9 @@
 				
 				(function fade() {
 					if ((el.style.opacity -= .09) < 0) {
-					el.style.opacity = 0;
+						el.style.opacity = 0;
 					} else {
-					requestAnimationFrame(fade);
+						requestAnimationFrame(fade);
 					}
 				})();
 				
@@ -347,7 +359,11 @@
 				
 			}
 			
-			
+			$(document).bind('keypress', function (event) {
+				if(String(event.originalEvent.key) == "Escape" && info_panel_open) {
+					closeInfoPanel();
+				}
+			})
 	
 			
 		</script>
