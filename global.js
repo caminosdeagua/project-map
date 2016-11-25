@@ -39,6 +39,7 @@ var EPS = 0.0001; 						// This epsilon is the acceptable difference in lat or l
 
 var base = {Markers: [], Popups: []};	 							// Store all info relevant to base points		
 
+var used_indices = []; 					// stores the indices of the data
 var AllData;							// Global var to hold all data.
 
 var info_panel_open = false;			// indicates whether the info window is open`

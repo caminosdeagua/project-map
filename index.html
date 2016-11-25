@@ -164,7 +164,7 @@
 						if (data[i][DATA_NAMES.name] == null | data[i][DATA_NAMES.name] == "" |	// if there's no date or latLng info, 
 							data[i][DATA_NAMES.lat] == null | data[i][DATA_NAMES.lat] == "" |	//	ignore the point!
 							data[i][DATA_NAMES.lng] == null | data[i][DATA_NAMES.lng] == "" |
-							bin == -1) {	
+							bin == -1) {
 						} else {
 							
 							var icon = L.icon({ 			// 	to be used when displaying the base markers
@@ -172,26 +172,32 @@
 								iconSize: SMALL_ICON_SIZE
 							})
 							var latLng = L.latLng([data[i][DATA_NAMES.lat], data[i][DATA_NAMES.lng]]); // Grab the latLng of the point			
+							used_indices.push(i);
 							base.Markers.push( 										// Save the appropriate marker
 								L.marker(latLng, {
 									icon: icon,
 									riseOnHover: true,
-									zIndexOffset: BASE_Z_OFFSET
+									zIndexOffset: BASE_Z_OFFSET,
+									alt: String(i)
 								})
 								.on('click', function(event) {
 									click_lat = event.latlng.lat; 					// Grab the latLng of the cliked point 
 																			// 	(returns value of marker's center, regardless of where is clicked...)
+									
+									
 									var j = base.Markers.map(function(a) {return a._latlng.lat}).indexOf(click_lat);
-																			// this confusing line gets the index in base.Popups
+																			// this confusing line gets the index in base.Markers
 																			//	of the point with the same latitude as the clicked point
-																			// 	we'll use that index to access the marker, popup, and label soon.
+																			// 	we'll use that index to access the marker, label, and data.
+									var z = used_indices[j];
+									
 									if (!info_panel_open) {
-										info_being_displayed = j;
-										showInfo(j);
+										info_being_displayed = z;
+										showInfo(z);
 										openInfoPanel();
-									} else if (info_panel_open && info_being_displayed != j) {
-										info_being_displayed = j;
-										showInfo(j);
+									} else if (info_panel_open && info_being_displayed != z) {
+										info_being_displayed = z;
+										showInfo(z);
 									}
 								})
 							);
@@ -271,7 +277,8 @@
 			////	it into the correct places in the info panel. 						////
 			////////////////////////////////////////////////////////////////////////////////
 			
-			function showInfo(i) {
+			function showInfo(z) {
+				
 				var els = document.getElementsByClassName("info_text");
 				for(var i=0; i<els.length; i++) { 		// Loop through all the elements to fill
 					var id = els[i].id;					// Grab the id of the current element
@@ -280,13 +287,20 @@
 					//	photo, 
 					//	dates, 
 					//	workshops, 
-					// 	and contact_info.
+					// 	contact_info
+					//	and docs.
 					if (id == "dates") {
 					} else if (id == "photo") {
 					} else if (id == "workshops") {
 					} else if (id == "contact_info") {
-					} else {
-						els[i].innerHTML = LBL[id]+":<br>\xa0\xa0\xa0aaa";	
+					} else if (id == "docs") {
+					} else {					// The rest are just text that need to be displayed with a label:
+						if (AllData[z][DATA_NAMES[id]] == null | AllData[z][DATA_NAMES[id]] == "" ) {
+							els[i].style.display = "none";
+						} else {
+							els[i].style.display = "block";
+							els[i].innerHTML = LBL[id]+":<br>\xa0\xa0\xa0"+AllData[z][DATA_NAMES[id]];	
+						}
 					}
 				}
 				
