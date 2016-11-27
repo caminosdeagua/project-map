@@ -304,7 +304,14 @@
 							(AllData[z][DATA_NAMES.email] == null | AllData[z][DATA_NAMES.email] == "")) {
 						} else {
 							toDisplay = true;
-							els[i].innerHTML = LBL[id]+END_OF_HEADER+AllData[z][DATA_NAMES.phone];
+							if (AllData[z][DATA_NAMES.phone] == null | AllData[z][DATA_NAMES.phone] == "") {
+								els[i].innerHTML = LBL[id]+END_OF_HEADER+AllData[z][DATA_NAMES.email];	
+							} else if (AllData[z][DATA_NAMES.email] == null | AllData[z][DATA_NAMES.email] == "") {
+								els[i].innerHTML = LBL[id]+END_OF_HEADER+AllData[z][DATA_NAMES.phone];
+							} else {
+								els[i].innerHTML = LBL[id]+END_OF_HEADER+AllData[z][DATA_NAMES.phone]+", "+AllData[z][DATA_NAMES.email];
+							
+							}
 							
 						}
 					
