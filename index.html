@@ -61,7 +61,7 @@
 		<div id='info_panel'>
 			<img id="x-butt" onclick="closeInfoPanel();" src='https://dl.dropboxusercontent.com/s/vbfkb0s3tvf2q50/bigX.png'></img>
 			<div class="info_text" id="proj_name"></div>
-			<div class="info_text" id="photo"></div>
+			<div class="info_text" id="photo"><img id="photo_box"></img></div>
 			<div class="info_text" id="name"></div>
 			<div class="info_text" id="muni"></div>
 			<div class="info_text" id="proj_type"></div>
@@ -177,8 +177,7 @@
 								L.marker(latLng, {
 									icon: icon,
 									riseOnHover: true,
-									zIndexOffset: BASE_Z_OFFSET,
-									alt: String(i)
+									zIndexOffset: BASE_Z_OFFSET
 								})
 								.on('click', function(event) {
 									click_lat = event.latlng.lat; 					// Grab the latLng of the cliked point 
@@ -278,11 +277,13 @@
 			////////////////////////////////////////////////////////////////////////////////
 			
 			function showInfo(z) {
-				
+				var currentElement = 0;
+				var elementsBeingDisplayed = 0;
 				var els = document.getElementsByClassName("info_text");
 				for(var i=0; i<els.length; i++) { 		// Loop through all the elements to fill
+					var toDisplay = false;
 					var id = els[i].id;					// Grab the id of the current element
-														
+					els[i].style.margin = "5px";		// Reset the margin property to the default values									
 					// A few ids have special cases: 
 					//	photo, 
 					//	dates, 
@@ -291,18 +292,41 @@
 					//	and docs.
 					if (id == "dates") {
 					} else if (id == "photo") {
+						if (AllData[z][DATA_NAMES[id]] == null | AllData[z][DATA_NAMES[id]] == "" ) {}
+						else {
+							toDisplay = true;
+							document.getElementById("photo_box").src = AllData[z][DATA_NAMES[id]]
+							document.getElementById("photo_box").href = AllData[z][DATA_NAMES[id]]
+						}
 					} else if (id == "workshops") {
 					} else if (id == "contact_info") {
 					} else if (id == "docs") {
 					} else {					// The rest are just text that need to be displayed with a label:
 						if (AllData[z][DATA_NAMES[id]] == null | AllData[z][DATA_NAMES[id]] == "" ) {
-							els[i].style.display = "none";
+					
 						} else {
-							els[i].style.display = "block";
-							els[i].innerHTML = LBL[id]+":<br>\xa0\xa0\xa0"+AllData[z][DATA_NAMES[id]];	
+							toDisplay = true;
+							if (LBL[id] != "") {
+								els[i].innerHTML = LBL[id]+":<br>\xa0\xa0\xa0"+AllData[z][DATA_NAMES[id]];	
+							} else {
+								els[i].innerHTML = "<big><b>"+AllData[z][DATA_NAMES[id]]+"</big></b>";
+							}
 						}
 					}
+					if (toDisplay) {
+						currentElement = i;
+						if(elementsBeingDisplayed%2) {
+							els[i].style.backgroundColor = "rgba(46, 183, 255, 0.4)";
+						} else {
+							els[i].style.backgroundColor = "rgba(255, 148, 0, 0.4)"
+						}
+						els[i].style.display = "block";
+						elementsBeingDisplayed++;
+					} else {
+						els[i].style.display = "none";
+					}				
 				}
+				els[currentElement].style.marginBottom = "25px";
 				
 				
 				

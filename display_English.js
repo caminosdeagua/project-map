@@ -32,7 +32,7 @@ var LEGEND_TEXT = [LEGEND0, LEGEND1, LEGEND2, LEGEND3, LEGEND4, LEGEND5];
 //// Make sure the handles match the ids for 
 ////	their divs in index.html!!!! <<--- Super important!!!
 var LBL = {
-	proj_name: "Project name",
+	proj_name: "",
 	photo: "",
 	name: "Community",
 	muni: "Municipality",

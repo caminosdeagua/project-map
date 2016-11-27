@@ -45,8 +45,8 @@ img.caminos_logo {
 	display: inline-block;
 	z-index: 3;
 	position: absolute;
-	left: 15px;
-	top: 60px;
+	left: 6px;
+	top: 66px;
 	width: 120px;
 	height: 120px;
 	opacity: 1;
@@ -101,9 +101,12 @@ div.cartodb-legend {
 	color: #eeeeee;
 }
 
+#photo_box {
+	width: 96%;
+	margin: 2%;
+	
+}
+
 #project_name{
 	margin-top:35px;
-}
-#docs{
-	margin-bottom:25px;
 }

@@ -44,7 +44,7 @@ var AllData;							// Global var to hold all data.
 
 var info_panel_open = false;			// indicates whether the info window is open`
 var info_being_displayed = -1;			// global to store the current point being displayed
-
+		
 var SCROLL_TIME = 500;					// Time of auto-scroll animation.
 
 var POPUP_OFFSET = [88, 6]; 			// offset of the popup from the point
