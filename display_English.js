@@ -55,3 +55,5 @@ var LBL = {
 	docs: "More information",
 	notes: "Notes"
 };
+
+var END_OF_HEADER = ":<br>\xa0\xa0\xa0";

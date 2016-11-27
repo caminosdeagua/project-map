@@ -290,24 +290,34 @@
 					//	workshops, 
 					// 	contact_info
 					//	and docs.
-					if (id == "dates") {
-					} else if (id == "photo") {
+					if (id == "dates") {				// If there are dates, include them here:
+					} else if (id == "photo") {			// If there's a photo, deal with it:
 						if (AllData[z][DATA_NAMES[id]] == null | AllData[z][DATA_NAMES[id]] == "" ) {}
 						else {
 							toDisplay = true;
 							document.getElementById("photo_box").src = AllData[z][DATA_NAMES[id]]
 							document.getElementById("photo_box").href = AllData[z][DATA_NAMES[id]]
 						}
-					} else if (id == "workshops") {
-					} else if (id == "contact_info") {
-					} else if (id == "docs") {
-					} else {					// The rest are just text that need to be displayed with a label:
+					} else if (id == "workshops") {		// If there were workshops, include them here:
+					} else if (id == "contact_info") { 	// If there's contact info, include it here:
+						if ((AllData[z][DATA_NAMES.phone] == null | AllData[z][DATA_NAMES.phone] == "") &&
+							(AllData[z][DATA_NAMES.email] == null | AllData[z][DATA_NAMES.email] == "")) {
+						} else {
+							toDisplay = true;
+							els[i].innerHTML = LBL[id]+END_OF_HEADER+AllData[z][DATA_NAMES.phone];
+							
+						}
+					
+					
+					
+					} else if (id == "docs") {			// If there's a link to a document, include it here: 
+					} else {							// The rest are just text that need to be displayed with a label:
 						if (AllData[z][DATA_NAMES[id]] == null | AllData[z][DATA_NAMES[id]] == "" ) {
 					
 						} else {
 							toDisplay = true;
 							if (LBL[id] != "") {
-								els[i].innerHTML = LBL[id]+":<br>\xa0\xa0\xa0"+AllData[z][DATA_NAMES[id]];	
+								els[i].innerHTML = LBL[id]+END_OF_HEADER+AllData[z][DATA_NAMES[id]];	
 							} else {
 								els[i].innerHTML = "<big><b>"+AllData[z][DATA_NAMES[id]]+"</big></b>";
 							}
