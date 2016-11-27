@@ -293,7 +293,7 @@
 				var elementsBeingDisplayed = 0;
 				var els = document.getElementsByClassName("info_text");
 				for(var i=0; i<els.length; i++) { 		// Loop through all the elements to fill
-					var toDisplay = false;
+					var toDisplay = false;				// Initialize each element to not display in case there's no content. 
 					var id = els[i].id;					// Grab the id of the current element
 					els[i].style.margin = "5px";		// Reset the margin property to the default values									
 					// A few ids have special cases: 
@@ -309,11 +309,8 @@
 							toDisplay = true;
 							var start_date = AllData[z][DATA_NAMES.start_date];
 							var end_date = AllData[z][DATA_NAMES.end_date];
-							var formattedDate = formatDate(start_date, end_date);
-							els[i].innerHTML = LBL[id]+END_OF_HEADER+formattedDate;
-							
-						
-						
+							var formattedDate = formatDate(start_date, end_date);	// get the date to display, formatted as a string.
+							els[i].innerHTML = "<b>"+LBL[id]+"</b>"+END_OF_HEADER+formattedDate;
 						}
 					} else if (id == "photo") {			// If there's a photo, deal with it:
 						if (AllData[z][DATA_NAMES[id]] == null | AllData[z][DATA_NAMES[id]] == "" ) {}
@@ -323,22 +320,41 @@
 							document.getElementById("photo_box").href = AllData[z][DATA_NAMES[id]]
 						}
 					} else if (id == "workshops") {		// If there were workshops, include them here:
+						if ((AllData[z][DATA_NAMES.big_train] == null | AllData[z][DATA_NAMES.big_train] == "") &&
+							(AllData[z][DATA_NAMES.small_train] == null | AllData[z][DATA_NAMES.small_train] == "")) {}
+						else {
+							toDisplay = true;
+							if (AllData[z][DATA_NAMES.big_train] == null | AllData[z][DATA_NAMES.big_train] == "") {
+								els[i].innerHTML = "<b>"+LBL.small_train+"</b>"+END_OF_HEADER+AllData[z][DATA_NAMES.small_train];	
+							} else if (AllData[z][DATA_NAMES.small_train] == null | AllData[z][DATA_NAMES.small_train] == "") {
+								alert()
+								els[i].innerHTML = "<b>"+LBL.big_train+"</b>"+END_OF_HEADER+AllData[z][DATA_NAMES.big_train];
+							} else {
+								els[i].innerHTML = "<b>"+LBL[id]+"</b>"+":<br>"+
+								LBL.small_train+END_OF_HEADER+AllData[z][DATA_NAMES.small_train]+"<br>"+
+								LBL.big_train+END_OF_HEADER+AllData[z][DATA_NAMES.big_train];
+							}
+						}
+					
+					
+					
+					
+					
+					
+					
 					} else if (id == "contact_info") { 	// If there's contact info, include it here:
 						if ((AllData[z][DATA_NAMES.phone] == null | AllData[z][DATA_NAMES.phone] == "") &&
 							(AllData[z][DATA_NAMES.email] == null | AllData[z][DATA_NAMES.email] == "")) {
 						} else {
 							toDisplay = true;
 							if (AllData[z][DATA_NAMES.phone] == null | AllData[z][DATA_NAMES.phone] == "") {
-								els[i].innerHTML = LBL[id]+END_OF_HEADER+AllData[z][DATA_NAMES.email];	
+								els[i].innerHTML = "<b>"+LBL[id]+"</b>"+END_OF_HEADER+AllData[z][DATA_NAMES.email];	
 							} else if (AllData[z][DATA_NAMES.email] == null | AllData[z][DATA_NAMES.email] == "") {
-								els[i].innerHTML = LBL[id]+END_OF_HEADER+AllData[z][DATA_NAMES.phone];
+								els[i].innerHTML = "<b>"+LBL[id]+"</b>"+END_OF_HEADER+AllData[z][DATA_NAMES.phone];
 							} else {
-								els[i].innerHTML = LBL[id]+END_OF_HEADER+AllData[z][DATA_NAMES.phone]+", "+AllData[z][DATA_NAMES.email];
+								els[i].innerHTML = "<b>"+LBL[id]+"</b>"+END_OF_HEADER+AllData[z][DATA_NAMES.phone]+", "+AllData[z][DATA_NAMES.email];
 							}	
 						}
-					
-					
-					
 					} else if (id == "docs") {			// If there's a link to a document, include it here: 
 					} else {							// The rest are just text that need to be displayed with a label:
 						if (AllData[z][DATA_NAMES[id]] == null | AllData[z][DATA_NAMES[id]] == "" ) {
@@ -346,7 +362,7 @@
 						} else {
 							toDisplay = true;
 							if (LBL[id] != "") {
-								els[i].innerHTML = LBL[id]+END_OF_HEADER+AllData[z][DATA_NAMES[id]];	
+								els[i].innerHTML = "<b>"+LBL[id]+"</b>"+END_OF_HEADER+AllData[z][DATA_NAMES[id]];	
 							} else {
 								els[i].innerHTML = "<big><b>"+AllData[z][DATA_NAMES[id]]+"</big></b>";
 							}

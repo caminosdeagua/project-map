@@ -41,6 +41,8 @@ var LBL = {
 	dates: "Date(s)",
 	people: "Number of people served",
 	workshops: "Workshops",
+	big_train: "Weeklong capacity trainings",
+	small_train: "Small-scale capacity trainings",
 	no_ceramic_systems: "Ceramic filtration systems",
 	no_ceramic_filters: "Ceramic filter cartridges",
 	no_biochar: "Biochar systems built",
@@ -55,5 +57,7 @@ var LBL = {
 	docs: "More information",
 	notes: "Notes"
 };
+
+
 
 var END_OF_HEADER = ":<br>\xa0\xa0\xa0";
