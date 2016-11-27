@@ -292,7 +292,8 @@
 				var currentElement = 0;
 				var elementsBeingDisplayed = 0;
 				var els = document.getElementsByClassName("info_text");
-				for(var i=0; i<els.length; i++) { 		// Loop through all the elements to fill
+				var i=0;
+				for(i; i<els.length; i++) { 		// Loop through all the elements to fill
 					var toDisplay = false;				// Initialize each element to not display in case there's no content. 
 					var id = els[i].id;					// Grab the id of the current element
 					els[i].style.margin = "5px";		// Reset the margin property to the default values									
@@ -327,7 +328,6 @@
 							if (AllData[z][DATA_NAMES.big_train] == null | AllData[z][DATA_NAMES.big_train] == "") {
 								els[i].innerHTML = "<b>"+LBL.small_train+"</b>"+END_OF_HEADER+AllData[z][DATA_NAMES.small_train];	
 							} else if (AllData[z][DATA_NAMES.small_train] == null | AllData[z][DATA_NAMES.small_train] == "") {
-								alert()
 								els[i].innerHTML = "<b>"+LBL.big_train+"</b>"+END_OF_HEADER+AllData[z][DATA_NAMES.big_train];
 							} else {
 								els[i].innerHTML = "<b>"+LBL[id]+"</b>"+":<br>"+
@@ -335,13 +335,6 @@
 								LBL.big_train+END_OF_HEADER+AllData[z][DATA_NAMES.big_train];
 							}
 						}
-					
-					
-					
-					
-					
-					
-					
 					} else if (id == "contact_info") { 	// If there's contact info, include it here:
 						if ((AllData[z][DATA_NAMES.phone] == null | AllData[z][DATA_NAMES.phone] == "") &&
 							(AllData[z][DATA_NAMES.email] == null | AllData[z][DATA_NAMES.email] == "")) {
@@ -355,11 +348,16 @@
 								els[i].innerHTML = "<b>"+LBL[id]+"</b>"+END_OF_HEADER+AllData[z][DATA_NAMES.phone]+", "+AllData[z][DATA_NAMES.email];
 							}	
 						}
-					} else if (id == "docs") {			// If there's a link to a document, include it here: 
+					} else if (id == "docs") {			// If there's a link to a document, include it here:
+						if (AllData[z][DATA_NAMES[id]] == null | AllData[z][DATA_NAMES[id]] == "" ) {}
+						else {
+							toDisplay = true;
+							els[i].innerHTML = "<a href='"+AllData[z][DATA_NAMES[id]]+"' target='_blank'>"+SEE_MORE+"</a>";
+							els[i].style.textAlign = "center";
+						}
 					} else {							// The rest are just text that need to be displayed with a label:
-						if (AllData[z][DATA_NAMES[id]] == null | AllData[z][DATA_NAMES[id]] == "" ) {
-					
-						} else {
+						if (AllData[z][DATA_NAMES[id]] == null | AllData[z][DATA_NAMES[id]] == "" ) {}
+						else {
 							toDisplay = true;
 							if (LBL[id] != "") {
 								els[i].innerHTML = "<b>"+LBL[id]+"</b>"+END_OF_HEADER+AllData[z][DATA_NAMES[id]];	
@@ -381,7 +379,8 @@
 						els[i].style.display = "none";
 					}				
 				}
-				els[currentElement].style.marginBottom = "25px";
+				els[i-1].style.backgroundColor = "rgba(255, 255, 255, 0.8)" 	// adjust the color of the more info box
+				els[currentElement].style.marginBottom = "25px";				// adjust the margin on the last element for clearance
 				
 				
 				
