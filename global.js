@@ -43,7 +43,10 @@ var used_indices = []; 					// stores the indices of the data
 var AllData;							// Global var to hold all data.
 
 var info_panel_open = false;			// indicates whether the info window is open`
-var info_being_displayed = -1;			// global to store the current point being displayed
+var NO_INFO = -1;						// indicates there's no info currently being displayed
+var info_being_displayed = NO_INFO;		// global to store the current point being displayed
+var activeMarker;						// global to hold the active marker
+var selectedIcon;						// global to hold selected icon image
 		
 var SCROLL_TIME = 500;					// Time of auto-scroll animation.
 
@@ -69,13 +72,13 @@ var ICON_URLS = ["https://dl.dropboxusercontent.com/s/hnluhcbhwhwlynp/projectpoi
 "https://dl.dropboxusercontent.com/s/zddax2pmvkg0mgf/projectpoint4.png",
 "https://dl.dropboxusercontent.com/s/vrephtwq9ohac9z/projectpoint5.png"];
 
-BIG_CISTERN_BIN = 0;
-SMALL_CISTERN_BIN = 1;
-CERAMIC_SYSTEM_BIN = 2;
-CERAMIC_FILTER_BIN = 3;
-BIOCHAR_BIN = 4;
-TRAINING_BIN = 5;
+var BIG_CISTERN_BIN = 0;
+var SMALL_CISTERN_BIN = 1;
+var CERAMIC_SYSTEM_BIN = 2;
+var CERAMIC_FILTER_BIN = 3;
+var BIOCHAR_BIN = 4;
+var TRAINING_BIN = 5;
 var SMALL_ICON_SIZE = [16,16]; 			// The pixel x and y that the final marker icon image is scaled to. 
-
+var LARGE_ICON_SIZE = [40, 40];
 
 
