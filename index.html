@@ -61,7 +61,7 @@
 		<div id='info_panel'>
 			<img id="x-butt" onclick="closeInfoPanel();" src='https://dl.dropboxusercontent.com/s/vbfkb0s3tvf2q50/bigX.png'></img>
 			<div class="info_text" id="proj_name"></div>
-			<div class="info_text" id="photo"><img id="photo_box"></img></div>
+			<div class="info_text" id="photo" style="text-align: center;"><img id="photo_box"></img><a id="photo_link" target="_blank"></a></div>
 			<div class="info_text" id="name"></div>
 			<div class="info_text" id="muni"></div>
 			<div class="info_text" id="proj_type"></div>
@@ -322,11 +322,30 @@
 							els[i].innerHTML = "<b>"+LBL[id]+"</b>"+END_OF_HEADER+formattedDate;
 						}
 					} else if (id == "photo") {			// If there's a photo, deal with it:
-						if (AllData[z][DATA_NAMES[id]] == null | AllData[z][DATA_NAMES[id]] == "" ) {}
+						if ((AllData[z][DATA_NAMES[id]] == null | AllData[z][DATA_NAMES[id]] == "") &&
+						(AllData[z][DATA_NAMES.photo_folder] == null | AllData[z][DATA_NAMES.photo_folder] == "" )) {}
 						else {
 							toDisplay = true;
-							document.getElementById("photo_box").src = AllData[z][DATA_NAMES[id]]
-							document.getElementById("photo_box").href = AllData[z][DATA_NAMES[id]]
+							var photoEl = document.getElementById("photo_box");
+							var linkEl = document.getElementById("photo_link");
+							if (AllData[z][DATA_NAMES.photo_folder] == null | AllData[z][DATA_NAMES.photo_folder] == "" ) { 	// if there's a photo but no link
+								photoEl.src = AllData[z][DATA_NAMES[id]]
+								photoEl.href = AllData[z][DATA_NAMES[id]]
+								linkEl.style.display = "none";
+							} else if (AllData[z][DATA_NAMES[id]] == null | AllData[z][DATA_NAMES[id]] == "") {					// if there's a link but no photos
+								linkEl.href = AllData[z][DATA_NAMES.photo_folder];
+								linkEl.innerHTML = LBL.photo_folder;
+								photoEl.style.display = "none"
+							
+							} else {																							// if there's a photo and a link
+								photoEl.src = AllData[z][DATA_NAMES[id]];
+								photoEl.href = AllData[z][DATA_NAMES[id]];
+								photoEl.style.display = "block";
+								linkEl.href = AllData[z][DATA_NAMES.photo_folder];
+								linkEl.innerHTML = LBL.photo_folder;
+								linkEl.style.display = "block";
+							
+							}
 						}
 					} else if (id == "workshops") {		// If there were workshops, include them here:
 						if ((AllData[z][DATA_NAMES.big_train] == null | AllData[z][DATA_NAMES.big_train] == "") &&
@@ -376,7 +395,9 @@
 					}
 					if (toDisplay) {
 						currentElement = i;
-						if(elementsBeingDisplayed%2) {
+						if (els[i].id == "photo") {
+							els[i].style.backgroundColor = "rgba(255, 255, 255, 0.8)";
+						} else if(elementsBeingDisplayed%2) {
 							els[i].style.backgroundColor = "rgba(46, 183, 255, 0.4)";
 						} else {
 							els[i].style.backgroundColor = "rgba(255, 148, 0, 0.4)"

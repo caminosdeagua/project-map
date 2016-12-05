@@ -102,6 +102,8 @@ div.cartodb-legend {
 #photo_box {
 	width: 96%;
 	margin: 2%;
+	border: 0px solid black;
+	border-radius: 5px;
 	
 }
 

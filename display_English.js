@@ -34,6 +34,7 @@ var LEGEND_TEXT = [LEGEND0, LEGEND1, LEGEND2, LEGEND3, LEGEND4, LEGEND5];
 var LBL = {
 	proj_name: "",
 	photo: "",
+	photo_folder: "View more photos",
 	name: "Community",
 	muni: "Municipality",
 	proj_type: "Project type",

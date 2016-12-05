@@ -31,7 +31,8 @@ var DATA_NAMES = {							// And store the titles of the columns 							//	(get f
 	email: "Email",
 	docs: "Document",
 	notes: "Notes",
-	photo: "Image Link"
+	photo: "Image Link",
+	photo_folder: "Images Folder"
 };
 
 var EPS = 0.0001; 						// This epsilon is the acceptable difference in lat or lng 										
