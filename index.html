@@ -317,7 +317,11 @@
 							} else if (end_date == null | end_date == "") {
 								formattedDate = String(start_date);
 							} else {
-								formattedDate = String(start_date+" - "+end_date);
+								if(end_date == start_date) {
+									formattedDate = String(start_date);
+								} else {
+									formattedDate = String(start_date+BETWEEN_DATES+end_date);
+								}
 							}
 							els[i].innerHTML = "<b>"+LBL[id]+"</b>"+END_OF_HEADER+formattedDate;
 						}

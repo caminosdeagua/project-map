@@ -59,6 +59,7 @@ var LBL = {
 	notes: "Notes"
 };
 
+var BETWEEN_DATES = " - ";
 
 
 var END_OF_HEADER = ":<br>\xa0\xa0\xa0";
