@@ -279,6 +279,7 @@
 				fadeOut(el)							// Just fade it out.
 				info_panel_open = false;			// Then reset the global to show it's hidden. 
 				info_being_displayed = NO_INFO;
+				
 			}
 			
 			////////////////////////////////////////////////////////////////////////////////
@@ -310,7 +311,14 @@
 							toDisplay = true;
 							var start_date = AllData[z][DATA_NAMES.start_date];
 							var end_date = AllData[z][DATA_NAMES.end_date];
-							var formattedDate = formatDate(start_date, end_date);	// get the date to display, formatted as a string.
+							var formattedDate;
+							if (start_date == null | start_date == "") {
+								formattedDate = String(end_date);
+							} else if (end_date == null | end_date == "") {
+								formattedDate = String(start_date);
+							} else {
+								formattedDate = String(start_date+" - "+end_date);
+							}
 							els[i].innerHTML = "<b>"+LBL[id]+"</b>"+END_OF_HEADER+formattedDate;
 						}
 					} else if (id == "photo") {			// If there's a photo, deal with it:
