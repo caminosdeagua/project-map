@@ -94,9 +94,7 @@ div.cartodb-legend {
 .info_text {
 	padding: 5px;
 	border: 0px solid #eeeeee;
-	/*border-radius: 6px;
-	*/color: black;
-}
+	}
 
 #photo_box {
 	width: 96%;
