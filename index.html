@@ -360,6 +360,31 @@
 							els[i].innerHTML = "<a href='"+AllData[z][DATA_NAMES[id]]+"' target='_blank'>"+SEE_MORE+"</a>";
 							els[i].style.textAlign = "center";
 						}
+					} else if (id == "notes1"){
+						
+						if (AllData[z][DATA_NAMES[id]] == null | AllData[z][DATA_NAMES[id]] == "" ) {}
+						else if (AllData[z][DATA_NAMES.notes2] == null | AllData[z][DATA_NAMES.notes2] == "" ) {
+							toDisplay = true;
+							els[i].innerHTML = "<b>"+LBL[id]+"</b>"+END_OF_HEADER+AllData[z][DATA_NAMES.notes1];
+							
+						} else if (AllData[z][DATA_NAMES.notes3] == null | AllData[z][DATA_NAMES.notes3] == "" ) {
+							toDisplay = true;
+							els[i].innerHTML = "<b>"+LBL[id]+"</b>"+END_OF_HEADER+AllData[z][DATA_NAMES.notes1]+"\xa0"+AllData[z][DATA_NAMES.notes2];
+						}
+						else if (AllData[z][DATA_NAMES.notes4] == null | AllData[z][DATA_NAMES.notes4] == "" ) {
+							toDisplay = true;
+							els[i].innerHTML = "<b>"+LBL[id]+"</b>"+END_OF_HEADER+AllData[z][DATA_NAMES.notes1]+"\xa0"+AllData[z][DATA_NAMES.notes2]+"\xa0"+AllData[z][DATA_NAMES.notes3];
+						}
+						else if (AllData[z][DATA_NAMES.notes5] == null | AllData[z][DATA_NAMES.notes5] == "" ) {
+							toDisplay = true;
+							els[i].innerHTML = "<b>"+LBL[id]+"</b>"+END_OF_HEADER+AllData[z][DATA_NAMES.notes1]+"\xa0"+AllData[z][DATA_NAMES.notes2]+"\xa0"+AllData[z][DATA_NAMES.notes3]+"\xa0"+AllData[z][DATA_NAMES.notes4];
+						} else {
+							toDisplay = true;
+							els[i].innerHTML = "<b>"+LBL[id]+"</b>"+END_OF_HEADER+AllData[z][DATA_NAMES.notes1]+"\xa0"+AllData[z][DATA_NAMES.notes2]+"\xa0"+AllData[z][DATA_NAMES.notes3]+"\xa0"+AllData[z][DATA_NAMES.notes4]+"\xa0"+AllData[z][DATA_NAMES.notes5];
+						}
+					
+					
+					
 					} else {							// The rest are just text that need to be displayed with a label:
 						if (AllData[z][DATA_NAMES[id]] == null | AllData[z][DATA_NAMES[id]] == "" ) {}
 						else {
