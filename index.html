@@ -387,11 +387,11 @@
 					if (toDisplay) {
 						currentElement = i;
 						if (els[i].id == "photo") {
-							els[i].style.backgroundColor = "rgba(235, 235, 235, 1)";
+							els[i].style.backgroundColor = "rgba(235, 235, 235, 0)";
 						} else if(elementsBeingDisplayed%2) {
 							els[i].style.backgroundColor = "rgba(211, 233, 237, 1)";
 						} else {
-							els[i].style.backgroundColor = "rgba(252,228,212, 1)";
+							els[i].style.backgroundColor = "rgba(166, 211, 218, 1)";
 						}
 						els[i].style.display = "block";
 						elementsBeingDisplayed++;
@@ -399,7 +399,7 @@
 						els[i].style.display = "none";
 					}				
 				}
-				els[i-1].style.backgroundColor = "rgba(255, 255, 255, 0.8)" 	// adjust the color of the more info box
+				els[i-1].style.backgroundColor = "rgba(255, 255, 255, 0)" 	// adjust the color of the more info box
 				els[currentElement].style.marginBottom = "25px";				// adjust the margin on the last element for clearance
 				
 				
