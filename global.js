@@ -46,6 +46,7 @@ var base = {Markers: [], Popups: []};	 							// Store all info relevant to base
 
 var used_indices = []; 					// stores the indices of the data
 var AllData;							// Global var to hold all data.
+var photos = [];						// Global array for holding all photos for quick loading
 
 var info_panel_open = false;			// indicates whether the info window is open`
 var NO_INFO = -1;						// indicates there's no info currently being displayed

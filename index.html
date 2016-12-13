@@ -151,8 +151,9 @@
 											//	DATE IN DECREASING ORDER!!!! <--- Super important for spidering to work correctly...
 				.done(function(data) {
 					AllData = data; 		// store data as global for later access.
+					photos = Array.apply(null, Array(data.length)).map(Boolean.prototype.valueOf,false); 	// init an array full of "false"'s to later populate with images
 					// (Un)comment the next line to (see) hide the full dataset (in) from the console, super useful for debugging!
-					console.log("Data acquired! "+JSON.stringify(data)); 	// log the data in the console for debugging...
+					// console.log("Data acquired! "+JSON.stringify(data)); 	// log the data in the console for debugging...
 					for (var i=0; i<data.length; i++) { // Loop through all the rows of the data
 						var bin = getBin(data, i)
 						if (data[i][DATA_NAMES.name] == null | data[i][DATA_NAMES.name] == "" |	// if there's no date or latLng info, 
@@ -160,7 +161,11 @@
 							data[i][DATA_NAMES.lng] == null | data[i][DATA_NAMES.lng] == "" |
 							bin == -1) {
 						} else {
-							
+							if (data[i][DATA_NAMES.photo] == null | data[i][DATA_NAMES.photo] == "") { // if there's no photo, do nothing
+							} else { 							// if there's a photo, get it from the link and store it in the browser
+								photos[i] = new Image();
+								photos[i].src = data[i][DATA_NAMES.photo];
+							}
 							var icon = L.icon({ 			// 	to be used when displaying the base markers
 								iconUrl: ICON_URLS[bin],
 								iconSize: SMALL_ICON_SIZE
@@ -206,6 +211,7 @@
 							base.Markers[base.Markers.length-1].addTo(map); // And finally, actually add the markers to the map!
 						};
 					};
+					console.log(photos)
 				})
 			}
 			
@@ -307,8 +313,7 @@
 							var photoEl = document.getElementById("photo_box");
 							var linkEl = document.getElementById("photo_link");
 							if (AllData[z][DATA_NAMES.photo_folder] == null | AllData[z][DATA_NAMES.photo_folder] == "" ) { 	// if there's a photo but no link
-								photoEl.src = AllData[z][DATA_NAMES[id]]
-								photoEl.href = AllData[z][DATA_NAMES[id]]
+								photoEl.src = photos[z].src;
 								linkEl.style.display = "none";
 							} else if (AllData[z][DATA_NAMES[id]] == null | AllData[z][DATA_NAMES[id]] == "") {					// if there's a link but no photos
 								linkEl.href = AllData[z][DATA_NAMES.photo_folder];
@@ -316,8 +321,7 @@
 								photoEl.style.display = "none"
 							
 							} else {																							// if there's a photo and a link
-								photoEl.src = AllData[z][DATA_NAMES[id]];
-								photoEl.href = AllData[z][DATA_NAMES[id]];
+								photoEl.src = photos[z].src;
 								photoEl.style.display = "block";
 								linkEl.href = AllData[z][DATA_NAMES.photo_folder];
 								linkEl.innerHTML = LBL.photo_folder;
@@ -340,20 +344,22 @@
 								LBL.big_train+END_OF_HEADER+AllData[z][DATA_NAMES.big_train];
 							}
 						}
+					// DON'T SHOW CONTACT INFO! (if you want to show contact info, uncomment all the lines in the next "elseif" statement!)
 					} else if (id == "contact_info") { 	// If there's contact info, include it here:
-						if ((AllData[z][DATA_NAMES.phone] == null | AllData[z][DATA_NAMES.phone] == "") &&
-							(AllData[z][DATA_NAMES.email] == null | AllData[z][DATA_NAMES.email] == "")) {
-						} else {
-							toDisplay = true;
-							if (AllData[z][DATA_NAMES.phone] == null | AllData[z][DATA_NAMES.phone] == "") {
-								els[i].innerHTML = "<b>"+LBL[id]+"</b>"+END_OF_HEADER+AllData[z][DATA_NAMES.email];	
-							} else if (AllData[z][DATA_NAMES.email] == null | AllData[z][DATA_NAMES.email] == "") {
-								els[i].innerHTML = "<b>"+LBL[id]+"</b>"+END_OF_HEADER+AllData[z][DATA_NAMES.phone];
-							} else {
-								els[i].innerHTML = "<b>"+LBL[id]+"</b>"+END_OF_HEADER+AllData[z][DATA_NAMES.phone]+", "+AllData[z][DATA_NAMES.email];
-							}	
-						}
-					} else if (id == "docs") {			// If there's a link to a document, include it here:
+						//if ((AllData[z][DATA_NAMES.phone] == null | AllData[z][DATA_NAMES.phone] == "") &&
+						//	(AllData[z][DATA_NAMES.email] == null | AllData[z][DATA_NAMES.email] == "")) {
+						//} else {
+						//	toDisplay = true;
+						//	if (AllData[z][DATA_NAMES.phone] == null | AllData[z][DATA_NAMES.phone] == "") {
+						//		els[i].innerHTML = "<b>"+LBL[id]+"</b>"+END_OF_HEADER+AllData[z][DATA_NAMES.email];	
+						//	} else if (AllData[z][DATA_NAMES.email] == null | AllData[z][DATA_NAMES.email] == "") {
+						//		els[i].innerHTML = "<b>"+LBL[id]+"</b>"+END_OF_HEADER+AllData[z][DATA_NAMES.phone];
+						//	} else {
+						//		els[i].innerHTML = "<b>"+LBL[id]+"</b>"+END_OF_HEADER+AllData[z][DATA_NAMES.phone]+", "+AllData[z][DATA_NAMES.email];
+						//	}	
+						//}
+					} else if (id == "primary_contact") { 	// DON'T SHOW NAME OF PRIMARY CONTACT!!! (delete this elseif line if you want it)
+					}else if (id == "docs") {			// If there's a link to a document, include it here:
 						if (AllData[z][DATA_NAMES[id]] == null | AllData[z][DATA_NAMES[id]] == "" ) {}
 						else {
 							toDisplay = true;
