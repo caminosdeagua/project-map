@@ -69,7 +69,7 @@ var MAX_LABEL_LINE_CHARS = 20;			// the max number of characters on a line in th
 var STAMEN_MAP_TYPE = "terrain";		// Set which type of stamen map we want as a base layer.
 										// 	options include: "terrain", "watercolor", and "toner"	
 										
-var ICON_URL = "https://dl.dropboxusercontent.com/s/n3wh4pazt501ckn/xButton_blue.png";
+var ICON_URL = "https://dl.dropboxusercontent.com/s/3tyu7ewpaqi6nem/600x600-49158.png";
 var SELECTED_URL = "https://dl.dropboxusercontent.com/s/enbtx3fc6k5cwtd/projectpoint_selected.png" 
 var ICON_URLS = ["https://dl.dropboxusercontent.com/s/hnluhcbhwhwlynp/projectpoint0.png",
 "https://dl.dropboxusercontent.com/s/9slly25r0xtbk56/projectpoint1.png",
