@@ -56,16 +56,15 @@ div.cartodb-legend {
 	position: absolute;
 	bottom: 15px;
 	left: 15px;
-	font-size: 14px;
 	
 }
 
 .legend-title {
-	font-size: 14px;
+	font-size: 18px;
 	
 }
 .bullet {
-	font-size: 11px;
+	font-size: 12px;
 }
 
 /* formatting for the info panel */

@@ -53,7 +53,7 @@ var LBL = {
 	primary_contact: "Primary contact(s)",
 	contact_info: "Contact info",
 	docs: "More information",
-	notes: "Notes"
+	notes1: "Notes"
 };
 
 var BETWEEN_DATES = " - ";

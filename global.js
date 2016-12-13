@@ -30,7 +30,11 @@ var DATA_NAMES = {							// And store the titles of the columns 							//	(get f
 	phone: "Phone Number",
 	email: "Email",
 	docs: "Document",
-	notes: "Notes",
+	notes1: "Notes 1",
+	notes2: "Notes 2",
+	notes3: "Notes 3",
+	notes4: "Notes 4",
+	notes5: "Notes 5",
 	photo: "Image Link",
 	photo_folder: "Images Folder"
 };
@@ -54,7 +58,7 @@ var SCROLL_TIME = 500;					// Time of auto-scroll animation.
 var POPUP_OFFSET = [88, 6]; 			// offset of the popup from the point
 var BASE_Z_OFFSET = 10; 				//	and base points. 
 
-var MAP_CENTER = [21.05,-100.65];		// Set all map starting parameters
+var MAP_CENTER = [21.15,-100.55];		// Set all map starting parameters
 var MAP_MIN_ZOOM = 2;
 var MAP_MAX_ZOOM = 18;
 var MAP_INIT_ZOOM = 10;

@@ -70,7 +70,7 @@
 			<div class="info_text" id="partner"></div>
 			<div class="info_text" id="primary_contact"></div>
 			<div class="info_text" id="contact_info"></div>
-			<div class="info_text" id="notes"></div>
+			<div class="info_text" id="notes1"></div>
 			<div class="info_text" id="docs"></div>
 		</div>
 
@@ -224,29 +224,6 @@
 			
 			function getBin(data, i) {
 				var bin = -1;
-				//if (
-				//data[i][DATA_NAMES.no_underground] | 
-				//data[i][DATA_NAMES.no_geomembrane] |
-				//data[i][DATA_NAMES.no_roto_big]) {
-				//	bin = BIG_CISTERN_BIN;
-				//} else if (
-				//data[i][DATA_NAMES.no_roto_small] | 
-				//data[i][DATA_NAMES.no_ferro] ) {
-				//	bin = SMALL_CISTERN_BIN;
-				//} else if (
-				//data[i][DATA_NAMES.no_biochar] ) {
-				//	bin = BIOCHAR_BIN;			
-				//} else if (
-				//data[i][DATA_NAMES.no_ceramic_filters] ) {
-				//	bin = CERAMIC_FILTER_BIN;
-				//} else if (
-				//data[i][DATA_NAMES.no_ceramic_systems] ) {
-				//	bin = CERAMIC_SYSTEM_BIN;
-				//} else if (
-				//data[i][DATA_NAMES.big_train] | 
-				//data[i][DATA_NAMES.small_train] ) {
-				//	bin = TRAINING_BIN;
-				//}
 				if (data[i][DATA_NAMES.proj_type] == "Rainwater Harvesting") {
 					bin = RAINWATER;
 				} else if (data[i][DATA_NAMES.proj_type] == "Ceramic Water Filter") {
@@ -254,7 +231,6 @@
 				} else if (data[i][DATA_NAMES.proj_type] == "Biochar Treatment Systems (330L/d)") {
 					bin = BIOCHAR;
 				}
-				
 				return bin
 			}
 			
