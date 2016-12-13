@@ -15,7 +15,7 @@ var DATE = "Date";
 
 var ATTRIBUTION = 'Data hosting on <a href="http://www.dropbox.com">Dropbox</a> legends by <a href="http://www.carto.com">Carto</a>';
 
-var SEE_MORE = "More info here!"
+var SEE_MORE = "More info"
 
 var NO_DATA_MSG = "NO DATA HERE, PISS OFF, MOFO!"
 
