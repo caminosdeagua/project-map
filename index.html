@@ -49,7 +49,7 @@
 			</div>
 		</div>
 		<div id='info_panel'>
-			<img id="x-butt" onclick="closeInfoPanel();" src='https://dl.dropboxusercontent.com/s/jjdyb6rqgm3yu3w/whiteX.png'></img>
+			<img id="x-butt" onclick="closeInfoPanel();" src='https://dl.dropboxusercontent.com/s/937mp7xsg9xkhpe/greyX.png'></img>
 			<div class="info_text" id="proj_name"></div>
 			<div class="info_text" id="photo" style="text-align: center;"><img id="photo_box"></img><a id="photo_link" target="_blank"></a></div>
 			<div class="info_text" id="name"></div>
@@ -387,6 +387,8 @@
 					if (toDisplay) {
 						currentElement = i;
 						if (els[i].id == "photo") {
+							els[i].style.backgroundColor = "rgba(235, 235, 235, 0)";
+						} else if(els[i].id=="proj_name") {
 							els[i].style.backgroundColor = "rgba(235, 235, 235, 0)";
 						} else if(elementsBeingDisplayed%2) {
 							els[i].style.backgroundColor = "rgba(211, 233, 237, 1)";
