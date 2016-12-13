@@ -2,7 +2,7 @@
 
 var map;								// initialize the variable to hold the map
 
-var DATA_URL = "https://dl.dropboxusercontent.com/s/pe8xnz2h74a3q9x/project_map_dataset.json";
+var DATA_URL = "https://dl.dropboxusercontent.com/s/c4aheh7i1lidgck/project_map_dataset.json";
 											// ^--- The URL where the data lives in JSON form.
 var DATA_NAMES = {							// And store the titles of the columns 							//	(get from carto.com once you import the dataset.)
 	name: "Community",	
