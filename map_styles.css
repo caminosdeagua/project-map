@@ -94,7 +94,9 @@ div.cartodb-legend {
 .info_text {
 	padding: 5px;
 	border: 0px solid #eeeeee;
-	}
+	font-family: "Tahoma", Geneva, sans-serif;
+	font-size: 14px;
+}
 
 #photo_box {
 	width: 96%;
