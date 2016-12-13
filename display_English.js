@@ -46,7 +46,7 @@ var LBL = {
 	no_biochar: "Biochar systems built",
 	no_ferro: "Ferrocement cisterns built",
 	no_roto_small: "Small plastic cisterns (2,500L) installed",
-	no_roto_large: "Large plastic cisterns (10,000L) installed",
+	no_roto_big: "Large plastic cisterns (10,000L) installed",
 	no_geomembrane: "Large geomembranes installed",
 	no_underground: "Underground cisterns installed",
 	partner: "Partner(s)",
