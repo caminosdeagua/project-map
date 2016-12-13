@@ -70,7 +70,7 @@ var STAMEN_MAP_TYPE = "terrain";		// Set which type of stamen map we want as a b
 										// 	options include: "terrain", "watercolor", and "toner"	
 										
 var ICON_URL = "https://dl.dropboxusercontent.com/s/3tyu7ewpaqi6nem/600x600-49158.png";
-var SELECTED_URL = "https://dl.dropboxusercontent.com/s/enbtx3fc6k5cwtd/projectpoint_selected.png" 
+var SELECTED_URL = "https://dl.dropboxusercontent.com/s/jo10pqogp5o1jv5/whitePoint.png" 
 var ICON_URLS = ["https://dl.dropboxusercontent.com/s/hnluhcbhwhwlynp/projectpoint0.png",
 "https://dl.dropboxusercontent.com/s/9slly25r0xtbk56/projectpoint1.png",
 "https://dl.dropboxusercontent.com/s/zvjdf8h1pbyyyfi/projectpoint2.png",
@@ -84,6 +84,6 @@ var BIOCHAR = 2;
 
 
 var SMALL_ICON_SIZE = [16,16]; 			// The pixel x and y that the final marker icon image is scaled to. 
-var LARGE_ICON_SIZE = [40, 40];
+var LARGE_ICON_SIZE = [24, 24];
 
 
