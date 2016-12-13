@@ -42,18 +42,8 @@
 					<li>
 						<div class="bullet" style="background:#2eb7ff; text-transform:none" name="project_type"></div>
 					</li>
-					<br>
 					<li>
 						<div class="bullet" style="background:#b700ff; text-transform:none" name="project_type"></div>
-					</li>
-					<li>
-						<div class="bullet" style="background:#ff00ab; text-transform:none" name="project_type"></div>
-					</li>
-					<li>
-						<div class="bullet" style="background:#f71c23; text-transform:none" name="project_type"></div>
-					</li>
-					<li>
-						<div class="bullet" style="background:#ff6b12; text-transform:none" name="project_type"></div>
 					</li>
 				</ul>
 			</div>
@@ -234,29 +224,37 @@
 			
 			function getBin(data, i) {
 				var bin = -1;
-				if (
-				data[i][DATA_NAMES.no_underground] | 
-				data[i][DATA_NAMES.no_geomembrane] |
-				data[i][DATA_NAMES.no_roto_big]) {
-					bin = BIG_CISTERN_BIN;
-				} else if (
-				data[i][DATA_NAMES.no_roto_small] | 
-				data[i][DATA_NAMES.no_ferro] ) {
-					bin = SMALL_CISTERN_BIN;
-				} else if (
-				data[i][DATA_NAMES.no_biochar] ) {
-					bin = BIOCHAR_BIN;			
-				} else if (
-				data[i][DATA_NAMES.no_ceramic_filters] ) {
-					bin = CERAMIC_FILTER_BIN;
-				} else if (
-				data[i][DATA_NAMES.no_ceramic_systems] ) {
-					bin = CERAMIC_SYSTEM_BIN;
-				} else if (
-				data[i][DATA_NAMES.big_train] | 
-				data[i][DATA_NAMES.small_train] ) {
-					bin = TRAINING_BIN;
-				} 
+				//if (
+				//data[i][DATA_NAMES.no_underground] | 
+				//data[i][DATA_NAMES.no_geomembrane] |
+				//data[i][DATA_NAMES.no_roto_big]) {
+				//	bin = BIG_CISTERN_BIN;
+				//} else if (
+				//data[i][DATA_NAMES.no_roto_small] | 
+				//data[i][DATA_NAMES.no_ferro] ) {
+				//	bin = SMALL_CISTERN_BIN;
+				//} else if (
+				//data[i][DATA_NAMES.no_biochar] ) {
+				//	bin = BIOCHAR_BIN;			
+				//} else if (
+				//data[i][DATA_NAMES.no_ceramic_filters] ) {
+				//	bin = CERAMIC_FILTER_BIN;
+				//} else if (
+				//data[i][DATA_NAMES.no_ceramic_systems] ) {
+				//	bin = CERAMIC_SYSTEM_BIN;
+				//} else if (
+				//data[i][DATA_NAMES.big_train] | 
+				//data[i][DATA_NAMES.small_train] ) {
+				//	bin = TRAINING_BIN;
+				//}
+				if (data[i][DATA_NAMES.proj_type] == "Rainwater Harvesting") {
+					bin = RAINWATER;
+				} else if (data[i][DATA_NAMES.proj_type] == "Ceramic Water Filter") {
+					bin = CERAMIC;
+				} else if (data[i][DATA_NAMES.proj_type] == "Biochar Treatment Systems (330L/d)") {
+					bin = BIOCHAR;
+				}
+				
 				return bin
 			}
 			

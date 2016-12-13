@@ -73,12 +73,11 @@ var ICON_URLS = ["https://dl.dropboxusercontent.com/s/hnluhcbhwhwlynp/projectpoi
 "https://dl.dropboxusercontent.com/s/zddax2pmvkg0mgf/projectpoint4.png",
 "https://dl.dropboxusercontent.com/s/vrephtwq9ohac9z/projectpoint5.png"];
 
-var BIG_CISTERN_BIN = 0;
-var SMALL_CISTERN_BIN = 1;
-var CERAMIC_SYSTEM_BIN = 2;
-var CERAMIC_FILTER_BIN = 3;
-var BIOCHAR_BIN = 4;
-var TRAINING_BIN = 5;
+var RAINWATER = 0;
+var CERAMIC = 1;
+var BIOCHAR = 2;
+
+
 var SMALL_ICON_SIZE = [16,16]; 			// The pixel x and y that the final marker icon image is scaled to. 
 var LARGE_ICON_SIZE = [40, 40];
 
