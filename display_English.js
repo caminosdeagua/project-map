@@ -20,7 +20,7 @@ var SEE_MORE = "More info"
 var NO_DATA_MSG = "NO DATA HERE, PISS OFF, MOFO!"
 
 var LEGEND_TITLE = "Project types"
-var LEGEND0 = "\xa0\xa0\xa0Rainwater\xa0Harvesting\xa0Sytems";
+var LEGEND0 = "\xa0\xa0\xa0Rainwater\xa0Harvesting\xa0Systems";
 var LEGEND1 = "\xa0\xa0\xa0Ceramic\xa0Water\xa0Filters";
 var LEGEND2 = "\xa0\xa0\xa0Biochar\xa0Water\xa0Treatment";
 var LEGEND_TEXT = [LEGEND0, LEGEND1, LEGEND2];
