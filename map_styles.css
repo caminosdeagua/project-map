@@ -43,7 +43,7 @@ html, body {width:100%; height:100%; padding: 0; margin: 0;}
 img.caminos_logo {
 	display: inline-block;
 	z-index: 3;
-	position: absolute;
+	position: fixed;
 	left: 6px;
 	top: 66px;
 	width: 120px;
@@ -108,4 +108,15 @@ div.cartodb-legend {
 
 #project_name{
 	margin-top:35px;
+}
+
+.new_window_button {
+	display: inline-block;
+	z-index: 3;
+	position: fixed;
+	left: 46px;
+	top: 10px;
+	width: 40px;
+	height: 40px;
+	opacity: 1;
 }
