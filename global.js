@@ -59,10 +59,10 @@ var SCROLL_TIME = 500;					// Time of auto-scroll animation.
 var POPUP_OFFSET = [88, 6]; 			// offset of the popup from the point
 var BASE_Z_OFFSET = 10; 				//	and base points. 
 
-var MAP_CENTER = [21.15,-100.55];		// Set all map starting parameters
+var MAP_CENTER = [21.15,-85];		// Set all map starting parameters
 var MAP_MIN_ZOOM = 2;
 var MAP_MAX_ZOOM = 18;
-var MAP_INIT_ZOOM = 10;
+var MAP_INIT_ZOOM = 5;
 
 var MAX_LABEL_LINE_CHARS = 20;			// the max number of characters on a line in the floating labels
 
