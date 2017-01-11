@@ -284,7 +284,11 @@
 					//	workshops, 
 					// 	contact_info
 					//	and docs.
-					if (id == "dates") {				// If there are dates, include them here:
+					if (id == "proj_name") {
+						toDisplay = true;
+						els[i].innerHTML = AllData[z][DATA_NAMES.name]+": <i>"+AllData[z][DATA_NAMES.proj_type]+"</i>";
+					
+					} else if (id == "dates") {				// If there are dates, include them here:
 						if ((AllData[z][DATA_NAMES.start_date] == null | AllData[z][DATA_NAMES.start_date] == "") &&
 							(AllData[z][DATA_NAMES.end_date] == null | AllData[z][DATA_NAMES.end_date] == "")) {}
 						else {
@@ -391,10 +395,12 @@
 						currentElement = i;
 						if (els[i].id == "photo") {
 							els[i].style.backgroundColor = "rgba(235, 235, 235, 0)";
-						} else if(els[i].id=="proj_name") {
+						} else if(els[i].id=="proj_name") {	
+							els[i].style.fontSize = "20px";
 							els[i].style.backgroundColor = "rgba(235, 235, 235, 0)";
-							els[i].style.fontSize = "18px";
-							els[i].style.marginRight = "30px";
+							els[i].style.marginRight = "40px";
+							els[i].style.fontWeight = "600";
+							
 						} else if(elementsBeingDisplayed%2) {
 							els[i].style.backgroundColor = "rgba(211, 233, 237, 1)";
 						} else {

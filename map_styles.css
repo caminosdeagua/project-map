@@ -103,11 +103,6 @@ div.cartodb-legend {
 	margin: 2%;
 	border: 0px solid black;
 	border-radius: 5px;
-	
-}
-
-#project_name{
-	margin-top:35px;
 }
 
 .new_window_button {
@@ -125,3 +120,5 @@ div.cartodb-legend {
 	-moz-box-shadow: 2px 2px 2px 0px rgba(0,0,0,0.6);
 	box-shadow: 2px 2px 2px 0px rgba(0,0,0,0.6);
 }
+
+
