@@ -15,9 +15,7 @@ var DATE = "Date";
 
 var ATTRIBUTION = 'Data hosting on <a href="http://www.dropbox.com">Dropbox</a> legends by <a href="http://www.carto.com">Carto</a>';
 
-var SEE_MORE = "More info"
-
-var NO_DATA_MSG = "NO DATA HERE, PISS OFF, MOFO!"
+var SEE_MORE = "More info";
 
 var LEGEND_TITLE = "Project types"
 var LEGEND0 = "\xa0\xa0\xa0Rainwater\xa0Harvesting\xa0Systems";
