@@ -69,7 +69,6 @@ var MAX_LABEL_LINE_CHARS = 20;			// the max number of characters on a line in th
 var STAMEN_MAP_TYPE = "terrain";		// Set which type of stamen map we want as a base layer.
 										// 	options include: "terrain", "watercolor", and "toner"	
 										
-var ICON_URL = "https://caminosdeagua.github.io/project-map/img/x.png";
 var SELECTED_URL = "https://caminosdeagua.github.io/project-map/img/whitePoint.png"; 
 var ICON_URLS = ["https://caminosdeagua.github.io/project-map/img/projectpoint0.png",
 "https://caminosdeagua.github.io/project-map/img/projectpoint1.png",
@@ -86,7 +85,3 @@ var BIOCHAR = 2;
 
 var SMALL_ICON_SIZE = [16,16]; 			// The pixel x and y that the final marker icon image is scaled to. 
 var LARGE_ICON_SIZE = [24, 24];
-
-
-
-
