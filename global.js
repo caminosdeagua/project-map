@@ -2,7 +2,7 @@
 
 var map;								// initialize the variable to hold the map
 
-var DATA_URL = "https://dl.dropboxusercontent.com/s/c4aheh7i1lidgck/project_map_dataset.json";
+var DATA_URL = "https://caminosdeagua.github.io/project-map/data/project_map_dataset.json";
 											// ^--- The URL where the data lives in JSON form.
 var DATA_NAMES = {							// And store the titles of the columns 							//	(get from carto.com once you import the dataset.)
 	name: "Community",	
@@ -69,14 +69,15 @@ var MAX_LABEL_LINE_CHARS = 20;			// the max number of characters on a line in th
 var STAMEN_MAP_TYPE = "terrain";		// Set which type of stamen map we want as a base layer.
 										// 	options include: "terrain", "watercolor", and "toner"	
 										
-var ICON_URL = "https://dl.dropboxusercontent.com/s/3tyu7ewpaqi6nem/600x600-49158.png";
-var SELECTED_URL = "https://dl.dropboxusercontent.com/s/jo10pqogp5o1jv5/whitePoint.png" 
-var ICON_URLS = ["https://dl.dropboxusercontent.com/s/hnluhcbhwhwlynp/projectpoint0.png",
-"https://dl.dropboxusercontent.com/s/9slly25r0xtbk56/projectpoint1.png",
-"https://dl.dropboxusercontent.com/s/zvjdf8h1pbyyyfi/projectpoint2.png",
-"https://dl.dropboxusercontent.com/s/toumsb8ezqy8x99/projectpoint3.png",
-"https://dl.dropboxusercontent.com/s/zddax2pmvkg0mgf/projectpoint4.png",
-"https://dl.dropboxusercontent.com/s/vrephtwq9ohac9z/projectpoint5.png"];
+var ICON_URL = "https://caminosdeagua.github.io/project-map/img/x.png";
+var SELECTED_URL = "https://caminosdeagua.github.io/project-map/img/whitePoint.png"; 
+var ICON_URLS = ["https://caminosdeagua.github.io/project-map/img/projectpoint0.png",
+"https://caminosdeagua.github.io/project-map/img/projectpoint1.png",
+"https://caminosdeagua.github.io/project-map/img/projectpoint2.png",
+"https://caminosdeagua.github.io/project-map/img/projectpoint3.png",
+"https://caminosdeagua.github.io/project-map/img/projectpoint4.png",
+"https://caminosdeagua.github.io/project-map/img/projectpoint5.png"];
+
 
 var RAINWATER = 0;
 var CERAMIC = 1;
@@ -85,5 +86,7 @@ var BIOCHAR = 2;
 
 var SMALL_ICON_SIZE = [16,16]; 			// The pixel x and y that the final marker icon image is scaled to. 
 var LARGE_ICON_SIZE = [24, 24];
+
+
 
 
