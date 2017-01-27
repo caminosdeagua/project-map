@@ -4,7 +4,7 @@
 ////	any point on the map. It's stored in simple strings for ease of 	////
 ////	translation. Enjoy =)												////
 ////////////////////////////////////////////////////////////////////////////////
-
+var TITLE = "Proejct Map | Caminos de Agua";
 var MONTHS = ["Jan", "Feb", "Mar", 		// Array of names of months for displaying
 			"Apr", "May", "Jun", 		//	the date in an accessible, clear format,
 			"Jul", "Aug", "Sep", 		// 	even for silly US people who choose to put 
