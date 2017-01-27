@@ -1,9 +1,5 @@
-
-
 var map;								// initialize the variable to hold the map
 
-var DATA_URL = "https://caminosdeagua.github.io/project-map/data/project_map_dataset.json";
-											// ^--- The URL where the data lives in JSON form.
 var DATA_NAMES = {							// And store the titles of the columns 							//	(get from carto.com once you import the dataset.)
 	name: "Community",	
 	lat: "Latitude",
