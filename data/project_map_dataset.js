@@ -1,4 +1,4 @@
-﻿var PROJECT_MAP_DATA =
+var PROJECT_MAP_DATA =
 [
   {
     "Community": "Agust’n Gonz‡lez",
@@ -28,7 +28,7 @@
     "Contact": "School - Parents committee leader, Adriana; Clinic",
     "Phone Number": "4151082364; 5527212585",
     "Email": "",
-    "Image Link": "https://lh3.googleusercontent.com/Dwm-XQfNPMErf4Fh72cLmOouLadUukHZPrzFixQawz9DSvY1vFx0CA",
+    "Image Link": "https://caminosdeagua.github.io/project-map/img/photos/Agustin%20Gonzalez.jpg",
     "Images Folder": "",
     "Document": "",
     "Notes 1": "",
