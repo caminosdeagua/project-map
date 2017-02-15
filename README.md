@@ -18,5 +18,5 @@ Map of all Caminos de Agua projects
 14. Delete everything after the = sign. (all but the top line)
 15. Paste your validated JSON from step 11 after the equals sign.
 16. Save the file and commit and sync with github.
-17. CHECK caminosdeagua.github.io/project-map TO MAKE SURE YOUR CHANGES HAVE BEEN APPLIED!!!
+17. CHECK https://caminosdeagua.github.io/project-map TO MAKE SURE YOUR CHANGES HAVE BEEN APPLIED!!!
 18. Woohoo!!!
