@@ -1,40 +1,5 @@
 var map;								// initialize the variable to hold the map
 
-var DATA_NAMES = {							// And store the titles of the columns 							//	(get from carto.com once you import the dataset.)
-	name: "Community",	
-	lat: "Latitude",
-	lng: "Longitude",
-	proj_name: "Project Name",
-	proj_type: "Project Type",
-	muni: "Municipality",
-	site: "Site Location",
-	partner: "Partner Organization",
-	start_date: "Start Date",
-	end_date: "End Date",
-	people: "Total # of People Served",
-	big_train: "Weeklong Capacity Training",
-	small_train: "Small Scale Capacity Training",
-	no_ceramic_systems: "# of Ceramic Filter Systems",
-	no_ceramic_filters: "# of Ceramic Water Filters",
-	no_biochar: "Biochar Treatment System (300L/day)",
-	no_ferro: "Ferrocement RWH Systems (12,000L)",
-	no_roto_small: "Rotoplas Cistern (2,500L)",
-	no_roto_big: "Rotoplas Cistern (10,000L)",
-	no_geomembrane: "Large Geomembrane (30,000L)",
-	no_underground: "Large Underground (80,000L+)",
-	primary_contact: "Contact",
-	phone: "Phone Number",
-	email: "Email",
-	docs: "Document",
-	notes1: "Notes 1",
-	notes2: "Notes 2",
-	notes3: "Notes 3",
-	notes4: "Notes 4",
-	notes5: "Notes 5",
-	photo: "Image Link",
-	photo_folder: "Images Folder"
-};
-
 var EPS = 0.0001; 						// This epsilon is the acceptable difference in lat or lng 										
 										//	between 2 points to classify them as occupying the same location.	
 
