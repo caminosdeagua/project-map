@@ -10,6 +10,10 @@ var MONTHS = ["Jan", "Feb", "Mar", 		// Array of names of months for displaying
 			"Jul", "Aug", "Sep", 		// 	even for silly US people who choose to put 
 			"Oct", "Nov", "Dec"];		//	the month first. Ugh. 
 
+var MONTHS_LONG = ["January", "February", "March",
+				"April", "May", "June", "July",
+				"August", "September", "October",
+			"November", "December"];
 
 var DATE = "Date";
 
@@ -18,10 +22,20 @@ var ATTRIBUTION = 'Data hosting on <a href="http://www.dropbox.com">Dropbox</a> 
 var SEE_MORE = "More info";
 
 var LEGEND_TITLE = "Project types"
-var LEGEND0 = "\xa0\xa0\xa0Rainwater\xa0Harvesting\xa0Systems";
-var LEGEND1 = "\xa0\xa0\xa0Ceramic\xa0Water\xa0Filters";
-var LEGEND2 = "\xa0\xa0\xa0Biochar\xa0Water\xa0Treatment";
-var LEGEND_TEXT = [LEGEND0, LEGEND1, LEGEND2];
+var LEGEND0 = "\xa0\xa0\xa0Rainwater\xa0harvesting\xa0systems";
+var LEGEND1 = "\xa0\xa0\xa0Ceramic\xa0water\xa0filters";
+var LEGEND2 = "\xa0\xa0\xa0Biochar\xa0water\xa0treatment";
+var LEGEND3 = "\xa0\xa0\xa0Various\xa0project\xa0types";
+var LEGEND_TEXT = [LEGEND0, LEGEND1, LEGEND2, LEGEND3];
+
+var BACK_BUTTON_TXT = ["Back to all "," projects"];
+var LOBBY_MESSAGE = ["<b>Click on the following ", " projects for more information:</b>"]
+var SUMMARY_TITLE = "<b> community profile</b>";
+
+var PPL_SERVED_HDR = "People impacted";
+var CERAMIC_HDR = "Ceramic filters distributed";
+var RWH_HDR = "Liters of rainwater harvesting capacity installed";
+var SUMMARY_HEADERS = [PPL_SERVED_HDR, RWH_HDR, CERAMIC_HDR];
 
 //// The headers for the spreadsheet. Make sure the LHS
 //// 	matches those in var LBL below, and the RHS matches
@@ -94,6 +108,5 @@ var LBL = {
 };
 
 var BETWEEN_DATES = " - ";
-
 
 var END_OF_HEADER = ":<br>\xa0\xa0\xa0";

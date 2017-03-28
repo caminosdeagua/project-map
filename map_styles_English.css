@@ -68,7 +68,7 @@ div.cartodb-legend {
 }
 
 /* formatting for the info panel */
-#info_panel {
+.display_box {
 	position: absolute;
 	top: 0px;
 	right: 0px;
@@ -82,10 +82,10 @@ div.cartodb-legend {
 	height: auto;
 }
 /* formatting for the x-button to close the info panel */
-#x-butt{
+.x-butt{
 	position: fixed;
 	top: 10px;
-	right: 28px;
+	right: 10px;
 	height: 20px;
 	width: 20px;
 	cursor: pointer;
@@ -98,7 +98,14 @@ div.cartodb-legend {
 	font-size: 14px;
 }
 
-#photo_box {
+.lobby_text {
+	padding: 5px;
+	border: 0px solid #eeeeee;
+	font-family: "Tahoma", Geneva, sans-serif;
+	font-size: 14px;
+}
+
+.photo_box {
 	width: 96%;
 	margin: 2%;
 	border: 0px solid black;
@@ -121,4 +128,49 @@ div.cartodb-legend {
 	box-shadow: 2px 2px 2px 0px rgba(0,0,0,0.6);
 }
 
+.proj_box_even {
+	padding: 10px;
+	background-color: #ffde91;
+	margin: 0;
+	
+}
 
+.proj_box_odd {
+	padding: 10px;
+	background-color: #ffbc21;
+}
+
+.proj_box_even:hover, .proj_box_odd:hover {
+	background-color: #d19200;
+	color: white;
+	cursor: pointer;
+}
+
+#message_l {
+	
+}
+
+#back_button:hover {
+	cursor: pointer;
+}
+
+
+
+#summary_table {
+	width: 85%;
+	background-color: #666666;
+}
+
+.left_column {
+	background-color: #ffbc21;
+	width: 50%;
+	padding-top: 4px;
+	padding-bottom: 4px;
+}
+
+.right_column {
+	
+	background-color: #ffde91;
+	
+	
+}

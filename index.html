@@ -10,8 +10,8 @@
 		<!-- stamen js -->		<script type="text/javascript" src="https://stamen-maps.a.ssl.fastly.net/js/tile.stamen.js"></script><!--Include Stamen JavaScript to get basemap tiles-->
 		
 		<!-- jquery -->			<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-		<!-- global vars -->	<script src="https://caminosdeagua.github.io/project-map/global.js" type="text/javascript" /></script>
-		<!-- dataset!!! -->		<script src="https://caminosdeagua.github.io/project-map/data/project_map_dataset.js" type="text/javascript" /></script>
+		<!-- global vars -->	<script src="global.js" type="text/javascript" /></script>
+		<!-- dataset!!! -->		<script src="data\project_map_dataset.js" type="text/javascript" /></script>
 		
 		<!-- All language changes happen here!!!! -->
 		<!--------------------------------------------------------------------------------------------------->
@@ -50,13 +50,17 @@
 					<li>
 						<div class="bullet" style="background:#b700ff; text-transform:none" name="project_type"></div>
 					</li>
+					<li>
+						<div class="bullet" style="background:#df3099; text-transform:none" name="project_type"></div>
+					</li>
 				</ul>
 			</div>
 		</div>
-		<div id='info_panel'>
-			<img id="x-butt" onclick="closeInfoPanel();" src="https://caminosdeagua.github.io/project-map/img/greyX.png"></img>
+		<div id='info_panel' class='display_box'>
+			<img id="x-butt" class='x-butt' onclick="goBack('x');" src="https://caminosdeagua.github.io/project-map/img/greyX.png"></img>
+			<div class="info_text" id="back_button" onclick="goBack()"></div>
 			<div class="info_text" id="proj_name"></div>
-			<div class="info_text" id="photo" style="text-align: center;"><img id="photo_box"></img><a id="photo_link" target="_blank"></a></div>
+			<div class="info_text" id="photo" style="text-align: center;"><img id="photo_box" class="photo_box"></img><a id="photo_link" target="_blank"></a></div>
 			<div class="info_text" id="name"></div>
 			<div class="info_text" id="muni"></div>
 			<div class="info_text" id="proj_type"></div>
@@ -75,6 +79,35 @@
 			<div class="info_text" id="partner"></div>
 			<div class="info_text" id="notes1"></div>
 			<div class="info_text" id="docs"></div>
+		</div>
+		<div id='lobby', class='display_box'>
+			<img id="x-butt-l" class='x-butt' onclick="goBack('x');" src="https://caminosdeagua.github.io/project-map/img/greyX.png"></img>
+ 			<div class="lobby_text" id="proj_name_l"></div>
+			<div class="lobby_text" id="photo_l" style="text-align: center;"><img id="photo_box_l" class='photo_box'></img></div>
+			<div class="lobby_text" id="message_l"></div>
+			<div class="lobby_text" id="project_list"></div>
+			<div class="lobby_text" id="summary" align="center">
+				<p id="summary_header"></p>
+				<table id="summary_table"> 
+					<tr align="center">
+						<td class="left_column" id="ppl_served_title"></td>
+						<td class="right_column" id="ppl_served_value"></td>
+					</tr>
+					<tr align="center">
+						<td class="left_column" id="liters_title"></td>
+						<td class="right_column" id="liters_value"></td>
+					</tr>
+					<tr align="center">
+						<td class="left_column" id="ceramic_title"></td>
+						<td class="right_column" id="ceramic_value"></td>
+					</tr>	
+				</table>
+				
+				
+				
+				
+				
+			</div>
 		</div>
 
 		<script>
@@ -149,67 +182,118 @@
 					iconUrl: SELECTED_URL,
 					iconSize: LARGE_ICON_SIZE
 				});
-				
+				var duplicateCounter = 0;
 				var data = PROJECT_MAP_DATA;	// This grabs the JSON data file. 
 				AllData = data; 				// store data as global for later access.
 				photos = Array.apply(null, Array(data.length)).map(Boolean.prototype.valueOf,false); 	// init an array full of "false"'s to later populate with images
 				// (Un)comment the next line to (see) hide the full dataset (in) from the console, super useful for debugging!
 				// console.log("Data acquired! "+JSON.stringify(data)); 	// log the data in the console for debugging...
 				for (var i=0; i<data.length; i++) { // Loop through all the rows of the data
-					var bin = getBin(data, i)
+					var bin;
 					if (data[i][DATA_NAMES.name] == null | data[i][DATA_NAMES.name] == "" |	// if there's no date or latLng info, 
 						data[i][DATA_NAMES.lat] == null | data[i][DATA_NAMES.lat] == "" |	//	ignore the point!
 						data[i][DATA_NAMES.lng] == null | data[i][DATA_NAMES.lng] == "" |
 						bin == -1) {
 					} else {
-						if (data[i][DATA_NAMES.photo] == null | data[i][DATA_NAMES.photo] == "") { // if there's no photo, do nothing
-						} else { 							// if there's a photo, get it from the link and store it in the browser
-							photos[i] = new Image();
-							photos[i].src = data[i][DATA_NAMES.photo];
-						}
-						var icon = L.icon({ 			// 	to be used when displaying the base markers
-							iconUrl: ICON_URLS[bin],
-							iconSize: SMALL_ICON_SIZE
-						})
-						var latLng = L.latLng([data[i][DATA_NAMES.lat], data[i][DATA_NAMES.lng]]); // Grab the latLng of the point			
-						used_indices.push(i);
-						base.Markers.push( 										// Save the appropriate marker
-							L.marker(latLng, {
-								icon: icon,
-								riseOnHover: true,
-								zIndexOffset: BASE_Z_OFFSET
+						
+						
+						
+						if (i==0 || data[i][DATA_NAMES.name] != data[i-1][DATA_NAMES.name]) {			// if not a duplicate point (special case for 0th point, cause 0-1 does not exist)
+							duplicateCounter = 0;
+							AllData[i].duplicates = [i]; 		// create a new array in AllData called duplicates to hold indices of duplicates of this point
+							bin = getBin(data, i);
+							AllData[i].bin = bin;
+							if (data[i][DATA_NAMES.photo] == null | data[i][DATA_NAMES.photo] == "") { // if there's no photo, do nothing
+							} else { 							// if there's a photo, get it from the link and store it in the browser
+								photos[i] = new Image();
+								photos[i].src = data[i][DATA_NAMES.photo];
+							}
+							
+							
+							
+							var icon = L.icon({ 							// 	to be used when displaying the base markers
+								iconUrl: ICON_URLS[bin],
+								iconSize: SMALL_ICON_SIZE
 							})
-							.on('click', function(event) {
-								click_lat = event.latlng.lat; 					// Grab the latLng of the cliked point 
-																		// 	(returns value of marker's center, regardless of where is clicked...)
+							var latLng = L.latLng([data[i][DATA_NAMES.lat], data[i][DATA_NAMES.lng]]); // Grab the latLng of the point			
+							used_indices.push(i);
+							base.Markers.push( 								// Save the appropriate marker
+								L.marker(latLng, {
+									icon: icon,
+									riseOnHover: true,
+									zIndexOffset: BASE_Z_OFFSET
+								})
+								.on('click', function(event) {
+									
+									click_lat = event.latlng.lat; 			// Grab the latLng of the cliked point 
+																			// 	(returns value of marker's center, regardless of where is clicked...)
+									var j = base.Markers.map(function(a) {return a._latlng.lat}).indexOf(click_lat);
+																			// this confusing line gets the index in base.Markers
+																			//	of the point with the same latitude as the clicked point
+																			// 	we'll use that index to access the marker, label, and data.
+									var z = used_indices[j];				// Then get the index of the point in AllData.
+									
+									if (AllData[z].duplicates.length > 1) { // if the current point HAS duplicates:
+										if(!info_panel_open && !lobby_active) {		// and the info panel and lobby are both closed
+											info_being_displayed = z;		// set the info to display as this point
+											showLobby(z);					// show the lobby for this point, since it has multiple projects
+									
+											openPanel('lobby');				// open the info panel
+										} else if ((info_panel_open || lobby_active) && info_being_displayed != z ) {	// if the info panel or lobby are open and not displaying this point
+											info_being_displayed = z;		// change the info being displayed to this point
+											closePanel('info_panel');
+											showLobby(z);					// show the lobby since this point has multiple projects
+											openPanel('lobby');
+										}	 
+									} else {								// If the selected point DOESN'T have duplicates
+										if (!info_panel_open) {				// and the info panel is closed
+											info_being_displayed = z;		// set the info being displayed to this point
+																			// push the info for this community/project to the info panel
+											if (lobby_active) {
+												closePanel('lobby');			// close the lobby in case it's open
+											}
+											showInfo(z);
+											openPanel('info_panel');				// open the info panel
+										} else if (info_panel_open && info_being_displayed != z) {	// if the info panel is open, but showing a different point
+											info_being_displayed = z;		// change the info being displayed to this point
+											showInfo(z);					// push the current info to the info panel. 
+										}
+									}
+									
+								})
+							);
+							base.Markers[base.Markers.length-1].bindLabel(getLabel(data, i), {
+								noHide: false,										// attach labels to all the base points 
+								className: "ourLabel"								//	that activate during mouseover
+							});
+							base.Markers[base.Markers.length-1].addTo(map); 		// And finally, actually add the markers to the map!
+					
+					
+					
+						} else {													// if i is a duplicate
+							duplicateCounter = duplicateCounter + 1;				// increment the duplicate counter
+							AllData[i-duplicateCounter].duplicates.push(i);
+							AllData[i].isDuplicate = true;
+							AllData[i-1].isDuplicate = true;
+							bin = getBin(data, i);
+							AllData[i].bin = bin;
+							if (AllData[i-1].bin == VARIOUS) {
+								bin = VARIOUS;
+							} else if (bin != AllData[i-1].bin) {
+								bin = VARIOUS;
+								AllData[i-1].bin = VARIOUS;
 								
-								
-								var j = base.Markers.map(function(a) {return a._latlng.lat}).indexOf(click_lat);
-																		// this confusing line gets the index in base.Markers
-																		//	of the point with the same latitude as the clicked point
-																		// 	we'll use that index to access the marker, label, and data.
-								var z = used_indices[j];
-								
-								
-			
-								
-								if (!info_panel_open) {
-									hideSelectedMarker();
-									info_being_displayed = z;
-									showInfo(z);
-									openInfoPanel();
-								} else if (info_panel_open && info_being_displayed != z) {
-									hideSelectedMarker();
-									info_being_displayed = z;
-									showInfo(z);
-								}
-							})
-						);
-						base.Markers[base.Markers.length-1].bindLabel(getLabel(data, i), {
-							noHide: false,										// attach labels to all the base points 
-							className: "ourLabel"								//	that activate during mouseover
-						});
-						base.Markers[base.Markers.length-1].addTo(map); // And finally, actually add the markers to the map!
+								map.removeLayer(base.Markers[base.Markers.length-1]);
+								base.Markers[base.Markers.length-1].options.icon.options.iconUrl = ICON_URLS[VARIOUS];
+								base.Markers[base.Markers.length-1].addTo(map);
+							}
+							AllData[i].bin = bin;	
+							if (data[i][DATA_NAMES.photo] == null | data[i][DATA_NAMES.photo] == "") { // if there's no photo, do nothing
+							} else { 							// if there's a photo, get it from the link and store it in the browser
+								photos[i] = new Image();
+								photos[i].src = data[i][DATA_NAMES.photo];
+							}	
+						}	
 					};
 				};
 			}
@@ -218,13 +302,9 @@
 			////					 	getBin FUNCTION 					  			////
 			//// 	Gets the correct bin of the point. Does so with the 				////
 			////	following algorithm:												////
-			////		Bin 0: Has a geomembrane, underground, or large rotoplas cistern////
-			////		Bin 1: Not bin 0 and has a small cistern.						////
-			////		Bin 4: Not bin 0,1 and has a biochar systems					////
-			////		Bin 2: Not bins 0,1,4 and has ceramic filter systems			////
-			////		Bin 3: Not bins 0,1,4, 2 and has ceramic filters (but not 		////
-			////			systems).													////
-			////		Bin 5: Not bins 0,1,4,2,3 and has had a training (no install).	////
+			////		Bin 0: RWH														////
+			////		Bin 1: Ceramic water filter										////
+			////		Bin 2: Biochar system											////
 			////////////////////////////////////////////////////////////////////////////////
 			
 			function getBin(data, i) {
@@ -244,22 +324,30 @@
 			//// 	Opens and closes the info panel respectivel. Duh.					////
 			////////////////////////////////////////////////////////////////////////////////
 			
-			function openInfoPanel() {
-				var el = document.getElementById("info_panel");
+			function openPanel(id) {
+				var el = document.getElementById(id);
 				el.style.opacity = 0; 				// Since the info panel isn't open, make sure opacity is 0
 				el.style.display = "block";			//	but the panel isn't hidden, so it can be scrolled. 
-				$("#info_panel").scrollTop(0);		// Since we're opening a new point, scroll to top of info window
+				$("#"+id).scrollTop(0);		// Since we're opening a new point, scroll to top of info window
 				fadeIn(el)							// Once it's scrolled, fade the info window in.
-				info_panel_open = true;				// And set the global to show that it's being displayed.
-			}
-			function closeInfoPanel() { 			// To close the panel:
-				hideSelectedMarker();
-				var el = document.getElementById("info_panel");
-				fadeOut(el)							// Just fade it out.
-				info_panel_open = false;			// Then reset the global to show it's hidden. 
-				info_being_displayed = NO_INFO;
 				
+				if (id == 'info_panel') {
+					info_panel_open = true;				// And set the global to show that it's being displayed.
+				} else if (id == 'lobby') {
+					lobby_active = true;
+				}
 			}
+			function closePanel(id) { 			// To close the panel:
+				var el = document.getElementById(id);
+				fadeOut(el)							// Just fade it out.
+				
+				if (id=='info_panel') {
+					info_panel_open = false;			// Then reset the global to show it's hidden. 
+				} else if (id == 'lobby') {
+					lobby_active = false;
+				}
+			}
+			
 			
 			////////////////////////////////////////////////////////////////////////////////
 			////						showInfo FUNCTION					  			////
@@ -268,6 +356,7 @@
 			////////////////////////////////////////////////////////////////////////////////
 			
 			function showInfo(z) {
+				hideSelectedMarker();
 				showSelectedMarker();
 				var currentElement = 0;
 				var elementsBeingDisplayed = 0;
@@ -286,7 +375,9 @@
 					if (id == "proj_name") {
 						toDisplay = true;
 						els[i].innerHTML = AllData[z][DATA_NAMES.name]+": <i>"+AllData[z][DATA_NAMES.proj_type]+"</i>";
-					
+					} else if (id == 'back_button') {
+						els[i].innerHTML = BACK_BUTTON_TXT[0]+AllData[z][DATA_NAMES.name]+BACK_BUTTON_TXT[1];
+						if (AllData[z].isDuplicate) {toDisplay = true;}
 					} else if (id == "dates") {				// If there are dates, include them here:
 						if ((AllData[z][DATA_NAMES.start_date] == null | AllData[z][DATA_NAMES.start_date] == "") &&
 							(AllData[z][DATA_NAMES.end_date] == null | AllData[z][DATA_NAMES.end_date] == "")) {}
@@ -392,7 +483,19 @@
 					}
 					if (toDisplay) {
 						currentElement = i;
-						if (els[i].id == "photo") {
+						
+						if (els[i].id == 'back_button') {
+							els[i].style.backgroundColor = "rgba(235, 235, 235, 0)";
+							els[i].style.marginRight = "100px";
+							els[i].style.textDecoration = "underline";
+							els[i].onmouseenter = function(event) {
+								event.target.style.color = '#63aec1';
+							}
+							els[i].onmouseleave = function(event) {
+								event.target.style.color = 'black';
+							}
+							
+						} else if (els[i].id == "photo") {
 							els[i].style.backgroundColor = "rgba(235, 235, 235, 0)";
 						} else if(els[i].id=="proj_name") {	
 							els[i].style.fontSize = "20px";
@@ -422,6 +525,113 @@
 				
 				
 				$("#info_panel").animate({scrollTop: 0}, SCROLL_TIME);	// First, scroll the info window back to the top.
+			}
+			
+			function showLobby(z) {
+				hideSelectedMarker(); 
+				showSelectedMarker();
+				document.getElementById('message_l').innerHTML = LOBBY_MESSAGE[0]+AllData[z][DATA_NAMES.name]+LOBBY_MESSAGE[1];
+				var els = document.getElementsByClassName("lobby_text");
+				for (var i = 0; i<els.length; i++) {
+					var id = els[i].id;					// Grab the id of the current element
+					if (id == 'proj_name_l') {
+						els[i].innerHTML = AllData[z][DATA_NAMES.name]+": <i>"+LEGEND_TEXT[AllData[z].bin]+"</i>";
+						els[i].style.fontSize = "20px";
+						els[i].style.backgroundColor = "rgba(235, 235, 235, 0)";
+						els[i].style.marginRight = "40px";
+						els[i].style.fontWeight = "600";
+					} 
+					else if (id == 'photo_l') {
+						var photoCounter = 0;
+						for (var j = 0; j<AllData[z].duplicates.length; j++) {		// loop through duplicates
+							dup = AllData[z].duplicates[j];
+							if (photoCounter == 0) {								// grab and display 1st photo
+								if (AllData[dup][DATA_NAMES.photo] == null | AllData[dup][DATA_NAMES.photo] == "") {	
+									document.getElementById("photo_l").style.display = 'none';	
+								} else {
+									photoCounter = 1;
+									document.getElementById("photo_l").style.display = 'inline-block';
+									document.getElementById("photo_box_l").src = photos[dup].src;	
+									document.getElementById("photo_box_l").style.display = 'block';
+								}	
+							}
+						}	
+					}
+					else if (id == "project_list") {
+						for (var j = 0; j<AllData[z].duplicates.length; j++) {		// loop through duplicates
+							dup = AllData[z].duplicates[j];
+							rawDate = String(AllData[dup][DATA_NAMES.start_date]).split("-", 3);
+							
+							date = MONTHS_LONG[ENGLISH_MONTHS.indexOf(rawDate[1])]+", 20"+rawDate[2];
+							if (j==0) {
+								els[i].innerHTML = "<p class='proj_box_even' onclick='openFromLobby("+String(dup)+");'>"+AllData[dup][DATA_NAMES.proj_type]+": "+date+"</p>";
+							} else {
+								if (j%2==0) {
+									els[i].innerHTML = els[i].innerHTML+"<p class='proj_box_even' onclick='openFromLobby("+String(dup)+");'>"+AllData[dup][DATA_NAMES.proj_type]+": "+date+"</p>";
+								} else {
+									els[i].innerHTML = els[i].innerHTML+"<p class='proj_box_odd' onclick='openFromLobby("+String(dup)+");'>"+AllData[dup][DATA_NAMES.proj_type]+": "+date+"</p>";
+								}
+							}
+						}	
+					}
+					else if (id == "summary") {
+						document.getElementById("summary_header").innerHTML = "<b>"+AllData[z][DATA_NAMES.name]+"</b>"+SUMMARY_TITLE;
+						els = document.getElementsByClassName("left_column");
+						for (var i=0; i<els.length; i++) {
+							els[i].innerHTML = SUMMARY_HEADERS[i];
+						}
+						document.getElementById('ppl_served_value').innerHTML = peopleImpacted();
+						document.getElementById('liters_value').innerHTML = storageInstalled();
+						document.getElementById('ceramic_value').innerHTML = filtersDistributed();
+					}
+				}	
+			}
+			
+			function openFromLobby(z) {
+				
+				showInfo(z);
+				openPanel('info_panel');
+				closePanel('lobby');
+			}
+			
+			function peopleImpacted() {
+				var ppl = 0;
+				var dup;
+				for (var i=0; i<AllData[info_being_displayed].duplicates.length; i++) {
+					dup = AllData[info_being_displayed].duplicates[i];
+					ppl = ppl + AllData[dup][DATA_NAMES.people];
+				}
+				ppl = numberWithCommas(ppl);
+				if (ppl == '0') {
+					ppl = "unknown";
+				}
+				
+				return ppl
+				
+			}
+			
+			function storageInstalled() {
+				var storage = 0;
+				var dup;
+				for (var i=0; i<AllData[info_being_displayed].duplicates.length; i++) {
+					dup = AllData[info_being_displayed].duplicates[i];
+					storage = storage + 12000*AllData[dup][DATA_NAMES.no_ferro] + 2500*AllData[dup][DATA_NAMES.no_roto_small] + 10000*AllData[dup][DATA_NAMES.no_roto_big] + 30000*AllData[dup][DATA_NAMES.no_geomembrane] + 80000*AllData[dup][DATA_NAMES.no_underground];
+				}
+				storage = numberWithCommas(storage);
+				
+				return storage
+				
+			}
+			
+			function filtersDistributed() {
+				var filters = 0;
+				var dup;
+				for (var i=0; i<AllData[info_being_displayed].duplicates.length; i++) {
+					dup = AllData[info_being_displayed].duplicates[i];
+					filters = filters + Number(AllData[dup][DATA_NAMES.no_ceramic_systems]) + Number(AllData[dup][DATA_NAMES.no_ceramic_filters]);
+				}
+				filters = numberWithCommas(filters);
+				return filters
 			}
 			
 			////////////////////////////////////////////////////////////////////////////////
@@ -503,10 +713,28 @@
 			////////////////////////////////////////////////////////////////////////////////
 			
 			$(document).bind('keypress', function (event) {
-				if(String(event.originalEvent.key) == "Escape" && info_panel_open) {
-					closeInfoPanel();
+				if(String(event.originalEvent.key) == "Escape") {
+					goBack('esc');		
 				}
 			})
+			
+			function goBack(key) {
+				if (key == 'x') {
+					closePanel('lobby');
+					closePanel('info_panel');
+					hideSelectedMarker();
+				} else if (lobby_active) {
+					closePanel('lobby');
+					hideSelectedMarker();
+				} else if (info_panel_open && AllData[info_being_displayed].duplicates.length == 1) {
+					closePanel('info_panel');
+					hideSelectedMarker();
+				} else if (info_panel_open) {
+					showLobby(info_being_displayed);
+					openPanel('lobby')
+					closePanel('info_panel');
+				}			
+			}
 			
 			
 			////////////////////////////////////////////////////////////////////////////////
@@ -516,18 +744,24 @@
 			////////////////////////////////////////////////////////////////////////////////
 			
 			function showSelectedMarker() {
-				var latLng = L.latLng([AllData[info_being_displayed][DATA_NAMES.lat], AllData[info_being_displayed][DATA_NAMES.lng]]); // Grab the latLng of the point
-				activeMarker = L.marker(latLng, {
-									icon: selectedIcon,
-									riseOnHover: true,
-									zIndexOffset: BASE_Z_OFFSET
-								})
-				activeMarker.addTo(map);
+				if (!active_marker_on) {
+					var latLng = L.latLng([AllData[info_being_displayed][DATA_NAMES.lat], AllData[info_being_displayed][DATA_NAMES.lng]]); // Grab the latLng of the point
+					activeMarker = L.marker(latLng, {
+										icon: selectedIcon,
+										riseOnHover: true,
+										zIndexOffset: BASE_Z_OFFSET
+									})
+					activeMarker.addTo(map);
+					active_marker_on = true;
+				}
 			}
 			
 			function hideSelectedMarker() {
-				if (info_being_displayed != -1) {
-					map.removeLayer(activeMarker);
+				if (active_marker_on) {
+					if (info_being_displayed != -1) {
+						map.removeLayer(activeMarker);
+					}
+					active_marker_on = false;
 				}
 			}
 			
@@ -546,6 +780,18 @@
 					date = date_start+" - "+date_end;	
 				}	
 				return date
+			}
+			
+			////////////////////////////////////////////////////////////////////
+			////			function numberWithCommas		 				////
+			//// 															////
+			////	Adds commas between every 3rd digit for the standard 	////
+			////	US/Mexico numerical display format. Returns the number  ////
+			//// 	as a string.											////
+			////////////////////////////////////////////////////////////////////
+										
+			function numberWithCommas(x) {
+				return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 			}
 			
 		</script>

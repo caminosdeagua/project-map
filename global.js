@@ -9,11 +9,13 @@ var used_indices = []; 					// stores the indices of the data
 var AllData;							// Global var to hold all data.
 var photos = [];						// Global array for holding all photos for quick loading
 
+var lobby_active = false;				// indicates whether the current info on the info panel is the lobby
 var info_panel_open = false;			// indicates whether the info window is open`
 var NO_INFO = -1;						// indicates there's no info currently being displayed
 var info_being_displayed = NO_INFO;		// global to store the current point being displayed
 var activeMarker;						// global to hold the active marker
 var selectedIcon;						// global to hold selected icon image
+var active_marker_on = false;			// indicated whether the selected-point-marker is being displayed
 		
 var SCROLL_TIME = 500;					// Time of auto-scroll animation.
 
@@ -39,9 +41,12 @@ var ICON_URLS = ["https://caminosdeagua.github.io/project-map/img/projectpoint0.
 "https://caminosdeagua.github.io/project-map/img/projectpoint5.png"];
 
 
-var RAINWATER = 0;
+var RAINWATER = 0;						// Bins for determining point color
 var CERAMIC = 1;
 var BIOCHAR = 2;
+var VARIOUS = 3;
+
+var ENGLISH_MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];		
 
 
 var SMALL_ICON_SIZE = [16,16]; 			// The pixel x and y that the final marker icon image is scaled to. 
