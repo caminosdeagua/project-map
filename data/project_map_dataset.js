@@ -1,6 +1,5 @@
 var PROJECT_MAP_DATA =
-[
-  {
+[{
     "Community": "Agustín González",
     "Latitude": 20.860267,
     "Longitude": -100.853317,
