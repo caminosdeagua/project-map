@@ -45,7 +45,8 @@ var ICON_URLS = ["https://caminosdeagua.github.io/project-map/img/projectpoint0.
 var RAINWATER = 0;						// Bins for determining point color
 var CERAMIC = 1;
 var BIOCHAR = 2;
-var VARIOUS = 3;
+var OTHER = 3;
+var VARIOUS = 4;
 
 var ENGLISH_MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];		
 
