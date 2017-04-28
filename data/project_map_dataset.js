@@ -4,7 +4,7 @@
 	"Latitude": 20.860267,
 	"Longitude": -100.853317,
 	"Project Name": "EWB-UCL Cistern Projects",
-	"Project Type": "Rainwater Harvesting",
+	"Project Type": "Other",
 	"Municipality": "",
 	"Site Location": "Elementary School, Clinic",
 	"Partner Organization": "EWB-UCL",
