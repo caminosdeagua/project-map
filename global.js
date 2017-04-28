@@ -37,6 +37,7 @@ var ICON_URLS = ["https://caminosdeagua.github.io/project-map/img/projectpoint0.
 "https://caminosdeagua.github.io/project-map/img/projectpoint1.png",
 "https://caminosdeagua.github.io/project-map/img/projectpoint2.png",
 "https://caminosdeagua.github.io/project-map/img/projectpoint3.png",
+"https://caminosdeagua.github.io/project-map/img/opaqueWhitePoint.png",
 "https://caminosdeagua.github.io/project-map/img/projectpoint4.png",
 "https://caminosdeagua.github.io/project-map/img/projectpoint5.png"];
 
