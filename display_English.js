@@ -25,8 +25,9 @@ var LEGEND_TITLE = "Project types"
 var LEGEND0 = "\xa0\xa0\xa0Rainwater\xa0harvesting\xa0systems";
 var LEGEND1 = "\xa0\xa0\xa0Ceramic\xa0water\xa0filters";
 var LEGEND2 = "\xa0\xa0\xa0Biochar\xa0water\xa0treatment";
-var LEGEND3 = "\xa0\xa0\xa0Various\xa0project\xa0types";
-var LEGEND_TEXT = [LEGEND0, LEGEND1, LEGEND2, LEGEND3];
+var LEGEND3 = "\xa0\xa0\xa0Other\xa0projects"
+var LEGEND4 = "\xa0\xa0\xa0Multiple\xa0projects";
+var LEGEND_TEXT = [LEGEND0, LEGEND1, LEGEND2, LEGEND3, LEGEND4];
 
 var BACK_BUTTON_TXT = ["Back to all "," projects"];
 var LOBBY_MESSAGE = ["<b>Click on the following ", " projects for more information:</b>"]
