@@ -53,3 +53,5 @@ var ENGLISH_MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "S
 
 var SMALL_ICON_SIZE = [16,16]; 			// The pixel x and y that the final marker icon image is scaled to. 
 var LARGE_ICON_SIZE = [24, 24];
+
+var X_OFFSET_FROM_SCROLLBAR = 5; 		// the x-button to close the info panel/lobby is offset from the scrollbar by this many pixels

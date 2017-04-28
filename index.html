@@ -123,7 +123,8 @@
 				fillText();
 				initMap(); 					// Initialize and display the map object
 				applyBaseMap(); 			// Apply the base tiles to the map
-				loadAndPlotData(); 	// Load the data for Fluoride (the default contaminant) 
+				adjustXLocation();
+				loadAndPlotData(); 			// Load the data for Fluoride (the default contaminant) 
 			}								// 	then plot the base markers on the map.	
 			
 			////////////////////////////////////////////////////////////////////////////////
@@ -167,6 +168,17 @@
 			function applyBaseMap() {
 				map.addLayer(new L.StamenTileLayer(STAMEN_MAP_TYPE), {});
 				
+			}
+			
+			function adjustXLocation() {
+				var xButtons = document.getElementsByClassName("x-butt");
+				for (var i=0; i<xButtons.length; i++) {
+					console.log(xButtons[i]);
+					xButtons[i].style.right = String(getScrollBarWidth()+X_OFFSET_FROM_SCROLLBAR)+'px';
+				
+				
+				}
+			
 			}
 			
 			////////////////////////////////////////////////////////////////////////////////
@@ -798,6 +810,32 @@
 			function numberWithCommas(x) {
 				return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 			}
+			
+			function getScrollBarWidth () {
+				var inner = document.createElement('p');
+				inner.style.width = "100%";
+				inner.style.height = "200px";
+				
+				var outer = document.createElement('div');
+				outer.style.position = "absolute";
+				outer.style.top = "0px";
+				outer.style.left = "0px";
+				outer.style.visibility = "hidden";
+				outer.style.width = "200px";
+				outer.style.height = "150px";
+				outer.style.overflow = "hidden";
+				outer.appendChild (inner);
+				
+				document.body.appendChild (outer);
+				var w1 = inner.offsetWidth;
+				outer.style.overflow = 'scroll';
+				var w2 = inner.offsetWidth;
+				if (w1 == w2) w2 = outer.clientWidth;
+				
+				document.body.removeChild (outer);
+				
+				return (w1 - w2);
+			};
 			
 		</script>
 		
