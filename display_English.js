@@ -74,6 +74,7 @@ var DATA_NAMES = {
 	notes4: "Notes 4",
 	notes5: "Notes 5",
 	photo: "Image Link",
+	video: "Video Link",
 	photo_folder: "Images Folder"
 };
 
@@ -83,6 +84,7 @@ var DATA_NAMES = {
 var LBL = {
 	proj_name: "",
 	photo: "",
+	video: "",
 	photo_folder: "View more photos",
 	name: "Community",
 	muni: "Municipality",
