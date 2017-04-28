@@ -38,7 +38,7 @@
 				<img class="new_window_button" src="https://caminosdeagua.github.io/project-map/img/fullScreen.png" onmouseover="this.src='https://caminosdeagua.github.io/project-map/img/fullScreenHover.png'" onmouseleave="this.src='https://caminosdeagua.github.io/project-map/img/fullScreen.png'"</img>
 			</a>
 			<!-- This next div is the legend -->
-			<div class='cartodb-legend custom' id='legend' style="display: block; background-color: #eeeeee;">	
+			<div class='cartodb-legend custom' id='legend' style="display: block; background-color: #dddddd;">	
 				<div class="legend-title", id="legend_title" style="font-size:14px;"></div>
 				<ul>
 					<li>
@@ -170,15 +170,18 @@
 				
 			}
 			
+			////////////////////////////////////////////////////////////////////////////////
+			////					  adjustXLocation FUNCTION 						  	////
+			//// 	This function adjusts the location of the x-button that closes the	////
+			////	info panel, lobby, or other windows. It puts it a set pixel distance////
+			////	to the left of the scrollbar. 										////
+			////////////////////////////////////////////////////////////////////////////////
+			
 			function adjustXLocation() {
 				var xButtons = document.getElementsByClassName("x-butt");
 				for (var i=0; i<xButtons.length; i++) {
-					console.log(xButtons[i]);
 					xButtons[i].style.right = String(getScrollBarWidth()+X_OFFSET_FROM_SCROLLBAR)+'px';
-				
-				
 				}
-			
 			}
 			
 			////////////////////////////////////////////////////////////////////////////////
@@ -810,6 +813,13 @@
 			function numberWithCommas(x) {
 				return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 			}
+			
+			////////////////////////////////////////////////////////////////////
+			////			function getScrollBarWidth		 				////
+			//// 															////
+			////	gets the width of a vertical scrollbar by making some	////
+			////	invisible divs.											////
+			////////////////////////////////////////////////////////////////////
 			
 			function getScrollBarWidth () {
 				var inner = document.createElement('p');
