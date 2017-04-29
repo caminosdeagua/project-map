@@ -358,6 +358,7 @@
 					lobby_active = true;
 				}
 			}
+			
 			function closePanel(id) { 			// To close the panel:
 				var el = document.getElementById(id);
 				fadeOut(el)							// Just fade it out.
@@ -367,6 +368,9 @@
 				} else if (id == 'lobby') {
 					lobby_active = false;
 				}
+				
+				
+				$('#video_box').get(0).pause()
 			}
 			
 			
@@ -377,6 +381,7 @@
 			////////////////////////////////////////////////////////////////////////////////
 			
 			function showInfo(z) {
+				$('#video_box').get(0).pause()
 				hideSelectedMarker();
 				showSelectedMarker();
 				var isVideo = false; 				//initialize a var that will say whether or not this point has a video
@@ -433,7 +438,7 @@
 					} else if (id == "photo") {			// If there's a photo, deal with it:
 						if ((AllData[z][DATA_NAMES[id]] == null | AllData[z][DATA_NAMES[id]] == "") &&				
 						(AllData[z][DATA_NAMES.photo_folder] == null | AllData[z][DATA_NAMES.photo_folder] == "" )) {	// if there's no photo don't display the photo box
-						} else if (isVideo) {	alert()		// if there's a video, don't display the photo!					
+						} else if (isVideo) {	// if there's a video, don't display the photo!					
 						} else {
 							toDisplay = true;
 							var photoEl = document.getElementById("photo_box");
