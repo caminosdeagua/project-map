@@ -24,6 +24,8 @@
 		<!-- mapbox fullscrn-->	<script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/Leaflet.fullscreen.min.js'></script>
 		<!-- mapbox fullscrn-->	<link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/leaflet.fullscreen.css' rel='stylesheet' />
 		
+		<!--functional tiles--> <script src="functionaltilelayer.js"></script>
+		
 		<script>
 		document.title = TITLE;
 		</script>
@@ -148,13 +150,34 @@
 			////////////////////////////////////////////////////////////////////////////////
 			
 			function initMap() {
+			  //var funcLayer = new L.TileLayer.Functional(function (view) {
+				//var url = 'http://otile{s}.mqcdn.com/tiles/1.0.0/map/{z}/{y}/{x}.jpg'
+				//	.replace('{z}', view.zoom)	
+				//	.replace('{x}', view.tile.row)	
+				//	.replace('{y}', view.tile.column)
+				//	.replace('{s}', view.subdomain	);
+				//return url;	
+				//}, {	
+				//subdomains: '1234'	
+				//});	
+				//
+				//
+				
+				
+				
+				
+				
+				
+				
+				
 				map = new L.map('WaterMap', { //First, initialize the map
 					center: MAP_CENTER,
 					zoom: MAP_INIT_ZOOM,
 					minZoom: MAP_MIN_ZOOM,
 					maxZoom: MAP_MAX_ZOOM,
 					attributionControl: true,
-					fullscreenControl: false
+					fullscreenControl: false//,
+					//layers: [funcLayer]				// TO DELETE!!!
 				});	
 				map.attributionControl.setPrefix(ATTRIBUTION);
 			}
