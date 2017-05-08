@@ -8,6 +8,7 @@
 		<!-- cartodb js -->		<script src="https://cartodb-libs.global.ssl.fastly.net/cartodb.js/v3/3.15/cartodb.js"></script>
 		<!-- leaflet label -->	<script src="https://leaflet.github.io/Leaflet.label/leaflet.label.js"></script> <!-- files necessary for labels in leaflet -->
 		<!-- stamen js -->		<script type="text/javascript" src="https://stamen-maps.a.ssl.fastly.net/js/tile.stamen.js"></script><!--Include Stamen JavaScript to get basemap tiles-->
+		<!-- media player -->	<script src="mediaelement-and-player.min.js"></script>
 		
 		<!-- jquery -->			<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 		<!-- global vars -->	<script src="https://caminosdeagua.github.io/project-map/global.js" type="text/javascript" /></script>
@@ -36,9 +37,6 @@
 			<a href="http://www.caminosdeagua.org" target='_blank'> <!-- Link the caminos logo to the caminos website -->
 				<img class="caminos_logo" src="https://caminosdeagua.github.io/project-map/img/caminos_logo_circle.png"></img> <!-- creates the caminos de agua logo -->
 			</a>
-			<a href="https://caminosdeagua.github.io/project-map" target="_blank">
-				<img class="new_window_button" src="https://caminosdeagua.github.io/project-map/img/fullScreen.png" onmouseover="this.src='https://caminosdeagua.github.io/project-map/img/fullScreenHover.png'" onmouseleave="this.src='https://caminosdeagua.github.io/project-map/img/fullScreen.png'"</img>
-			</a>
 			<!-- This next div is the legend -->
 			<div class='cartodb-legend custom' id='legend' style="display: block; background-color: #dddddd;">	
 				<div class="legend-title", id="legend_title" style="font-size:14px;"></div>
@@ -60,61 +58,70 @@
 					</li>
 				</ul>
 			</div>
-		</div>
-		<div id='info_panel' class='display_box'>
-			<img id="x-butt" class='x-butt' onclick="goBack('x');" src="https://caminosdeagua.github.io/project-map/img/greyX.png"></img>
-			<div class="info_text" id="back_button" onclick="goBack()"></div>
-			<div class="info_text" id="proj_name"></div>
-			<div class="info_text" id="video" style="text-align: center;"><video id="video_box" class="video_box" controls style="background-color: rgba(235, 235, 235, 0);"></video></div>
-			<div class="info_text" id="photo" style="text-align: center;"><img id="photo_box" class="photo_box"></img><a id="photo_link" target="_blank"></a></div>
-			<div class="info_text" id="name"></div>
-			<div class="info_text" id="muni"></div>
-			<div class="info_text" id="proj_type"></div>
-			<div class="info_text" id="site"></div>
-			<div class="info_text" id="dates"></div>
-			<div class="info_text" id="people"></div>
-			<div class="info_text" id="workshops"></div>
-			<div class="info_text" id="no_ceramic_systems"></div>
-			<div class="info_text" id="no_ceramic_filters"></div>
-			<div class="info_text" id="no_biochar"></div>
-			<div class="info_text" id="no_ferro"></div>
-			<div class="info_text" id="no_roto_small"></div>
-			<div class="info_text" id="no_roto_big"></div>
-			<div class="info_text" id="no_geomembrane"></div>
-			<div class="info_text" id="no_underground"></div>
-			<div class="info_text" id="partner"></div>
-			<div class="info_text" id="notes1"></div>
-			<div class="info_text" id="docs"></div>
-		</div>
-		<div id='lobby', class='display_box'>
-			<img id="x-butt-l" class='x-butt' onclick="goBack('x');" src="https://caminosdeagua.github.io/project-map/img/greyX.png"></img>
- 			<div class="lobby_text" id="proj_name_l"></div>
-			<div class="lobby_text" id="photo_l" style="text-align: center;"><img id="photo_box_l" class='photo_box'></img></div>
-			<div class="lobby_text" id="message_l"></div>
-			<div class="lobby_text" id="project_list"></div>
-			<div class="lobby_text" id="summary" align="center">
-				<p id="summary_header"></p>
-				<table id="summary_table"> 
-					<tr align="center">
-						<td class="left_column" id="ppl_served_title"></td>
-						<td class="right_column" id="ppl_served_value"></td>
-					</tr>
-					<tr align="center">
-						<td class="left_column" id="liters_title"></td>
-						<td class="right_column" id="liters_value"></td>
-					</tr>
-					<tr align="center">
-						<td class="left_column" id="ceramic_title"></td>
-						<td class="right_column" id="ceramic_value"></td>
-					</tr>	
-				</table>
-				
-				
-				
-				
+			<div id='info_panel' class='display_box' onmouseenter="disableMapControls();" onmouseleave="enableMapControls();">
+				<img id="x-butt" class='x-butt' onclick="goBack('x');" src="https://caminosdeagua.github.io/project-map/img/greyX.png"></img>
+				<div class="info_text" id="back_button" onclick="goBack()"></div>
+				<div class="info_text" id="proj_name"></div>
+				<div class="info_text" id="video" style="text-align: center;">
+					<iframe id="video_box" class="vid_box" width="560px" height="315px" frameborder="0" allowfullscreen></iframe>
+				</div>
+				<div class="info_text" id="photo" style="text-align: center;"><img id="photo_box" class="photo_box"></img></div>
+				<div class="info_text" id="docs"></div>
+				<div class="info_text" id="name"></div>
+				<div class="info_text" id="muni"></div>
+				<div class="info_text" id="proj_type"></div>
+				<div class="info_text" id="site"></div>
+				<div class="info_text" id="dates"></div>
+				<div class="info_text" id="people"></div>
+				<div class="info_text" id="workshops"></div>
+				<div class="info_text" id="no_ceramic_systems"></div>
+				<div class="info_text" id="no_ceramic_filters"></div>
+				<div class="info_text" id="no_biochar"></div>
+				<div class="info_text" id="no_ferro"></div>
+				<div class="info_text" id="no_roto_small"></div>
+				<div class="info_text" id="no_roto_big"></div>
+				<div class="info_text" id="no_geomembrane"></div>
+				<div class="info_text" id="no_underground"></div>
+				<div class="info_text" id="partner"></div>
+				<div class="info_text" id="notes1"></div>
 				
 			</div>
+			<div id='lobby', class='display_box' onmouseenter="disableMapControls();" onmouseleave="enableMapControls();">
+				<img id="x-butt-l" class='x-butt' onclick="goBack('x');" src="https://caminosdeagua.github.io/project-map/img/greyX.png"></img>
+				<div class="lobby_text" id="proj_name_l"></div>
+				<div class="lobby_text" id="photo_l" style="text-align: center;">
+					<img id="photo_box_l" class='photo_box'></img>
+				</div>
+				<div class="lobby_text" id="video_l" style="text-align: center;">
+					<iframe id="video_box_l" class="vid_box" width="560px" height="315px" frameborder="0" allowfullscreen></iframe>
+				</div>
+				<div class="lobby_text" id="message_l" style="text-align: center;"></div>
+				<div class="lobby_text" id="project_list" align="center"></div>
+				<div class="lobby_text" id="summary" align="center">
+					<p id="summary_header"></p>
+					<table id="summary_table"> 
+						<tr align="center">
+							<td class="left_column" id="ppl_served_title"></td>
+							<td class="right_column" id="ppl_served_value"></td>
+						</tr>
+						<tr align="center">
+							<td class="left_column" id="liters_title"></td>
+							<td class="right_column" id="liters_value"></td>
+						</tr>
+						<tr align="center">
+							<td class="left_column" id="ceramic_title"></td>
+							<td class="right_column" id="ceramic_value"></td>
+						</tr>	
+					</table>
+					
+					
+					
+					
+					
+				</div>
+			</div>
 		</div>
+		
 
 		<script>
 		
@@ -150,34 +157,13 @@
 			////////////////////////////////////////////////////////////////////////////////
 			
 			function initMap() {
-			  //var funcLayer = new L.TileLayer.Functional(function (view) {
-				//var url = 'http://otile{s}.mqcdn.com/tiles/1.0.0/map/{z}/{y}/{x}.jpg'
-				//	.replace('{z}', view.zoom)	
-				//	.replace('{x}', view.tile.row)	
-				//	.replace('{y}', view.tile.column)
-				//	.replace('{s}', view.subdomain	);
-				//return url;	
-				//}, {	
-				//subdomains: '1234'	
-				//});	
-				//
-				//
-				
-				
-				
-				
-				
-				
-				
-				
 				map = new L.map('WaterMap', { //First, initialize the map
 					center: MAP_CENTER,
 					zoom: MAP_INIT_ZOOM,
 					minZoom: MAP_MIN_ZOOM,
 					maxZoom: MAP_MAX_ZOOM,
 					attributionControl: true,
-					fullscreenControl: false//,
-					//layers: [funcLayer]				// TO DELETE!!!
+					fullscreenControl: true
 				});	
 				map.attributionControl.setPrefix(ATTRIBUTION);
 			}
@@ -229,13 +215,16 @@
 				AllData = data; 				// store data as global for later access.
 				photos = Array.apply(null, Array(data.length)).map(Boolean.prototype.valueOf,false); 	// init an array full of "false"'s to later populate with images
 				// (Un)comment the next line to (see) hide the full dataset (in) from the console, super useful for debugging!
-				// console.log("Data acquired! "+JSON.stringify(data)); 	// log the data in the console for debugging...
+				//console.log("Data acquired! "+JSON.stringify(data)); 	// log the data in the console for debugging...
+				
 				for (var i=0; i<data.length; i++) { // Loop through all the rows of the data
 					var bin;
 					if (data[i][DATA_NAMES.name] == null | data[i][DATA_NAMES.name] == "" |	// if there's no date or latLng info, 
 						data[i][DATA_NAMES.lat] == null | data[i][DATA_NAMES.lat] == "" |	//	ignore the point!
 						data[i][DATA_NAMES.lng] == null | data[i][DATA_NAMES.lng] == "" |
 						bin == -1) {
+					
+						
 					} else {
 						
 						
@@ -250,6 +239,7 @@
 								photos[i] = new Image();
 								photos[i].src = data[i][DATA_NAMES.photo];
 							}
+							
 							
 							
 							
@@ -392,8 +382,11 @@
 					lobby_active = false;
 				}
 				
-				
-				$('#video_box').get(0).pause()
+														// This following chunk of code
+				$('.vid_box').each(function(){		//	resets the video's source
+					var el_src = $(this).attr("src");	//	which effectively resets the video,
+					$(this).attr("src",el_src);			//	pausing or stopping it. 
+				});
 			}
 			
 			
@@ -404,7 +397,6 @@
 			////////////////////////////////////////////////////////////////////////////////
 			
 			function showInfo(z) {
-				$('#video_box').get(0).pause()
 				hideSelectedMarker();
 				showSelectedMarker();
 				var isVideo = false; 				//initialize a var that will say whether or not this point has a video
@@ -465,21 +457,11 @@
 						} else {
 							toDisplay = true;
 							var photoEl = document.getElementById("photo_box");
-							var linkEl = document.getElementById("photo_link");
 							if (AllData[z][DATA_NAMES.photo_folder] == null | AllData[z][DATA_NAMES.photo_folder] == "" ) { 	// if there's a photo but no link
 								photoEl.src = photos[z].src;
-								linkEl.style.display = "none";
-							} else if (AllData[z][DATA_NAMES[id]] == null | AllData[z][DATA_NAMES[id]] == "") {					// if there's a link but no photos
-								linkEl.href = AllData[z][DATA_NAMES.photo_folder];
-								linkEl.innerHTML = LBL.photo_folder;
-								photoEl.style.display = "none"
-							
 							} else {																							// if there's a photo and a link
 								photoEl.src = photos[z].src;
 								photoEl.style.display = "block";
-								linkEl.href = AllData[z][DATA_NAMES.photo_folder];
-								linkEl.innerHTML = LBL.photo_folder;
-								linkEl.style.display = "block";
 							
 							}
 						}
@@ -544,7 +526,7 @@
 					if (toDisplay) {
 						currentElement = i;
 						
-						if (els[i].id == 'back_button') {
+						if (els[i].id == 'back_button') {								// display for back button
 							els[i].style.backgroundColor = "rgba(235, 235, 235, 0)";
 							els[i].style.marginRight = "100px";
 							els[i].style.textDecoration = "underline";
@@ -555,19 +537,23 @@
 								event.target.style.color = 'black';
 							}
 							
-						} else if (els[i].id == "photo") {
+						} else if (els[i].id == "photo") {								// display for photo frame
 							els[i].style.backgroundColor = "rgba(235, 235, 235, 0)";
-						} else if (els[i].id == "video") {
+						} else if (els[i].id == "video") {								// display for video frame
 							els[i].style.backgroundColor = "rgba(235, 235, 235, 0)";
-						} else if(els[i].id=="proj_name") {	
+						} else if(els[i].id=="proj_name") {								// display for project name
 							els[i].style.fontSize = "20px";
 							els[i].style.backgroundColor = "rgba(235, 235, 235, 0)";
 							els[i].style.marginRight = "40px";
 							els[i].style.fontWeight = "600";
 							
-						} else if(elementsBeingDisplayed%2) {
+						} else if (els[i].id=="docs") {									// display for links to more information/documentation
+							els[i].style.backgroundColor = "rgba(235, 235, 235, 0)";
+							els[i].style.fontSize = "18px";
+						
+						} else if(elementsBeingDisplayed%2) {							// display for every even element
 							els[i].style.backgroundColor = "rgba(211, 233, 237, 1)";
-						} else {
+						} else {														// display for every odd element
 							els[i].style.backgroundColor = "rgba(166, 211, 218, 1)";
 						}
 						els[i].style.display = "block";
@@ -576,7 +562,6 @@
 						els[i].style.display = "none";
 					}				
 				}
-				els[i-1].style.backgroundColor = "rgba(255, 255, 255, 0)" 	// adjust the color of the more info box
 				els[currentElement].style.marginBottom = "25px";				// adjust the margin on the last element for clearance
 				
 				
@@ -592,7 +577,7 @@
 			function showLobby(z) {
 				hideSelectedMarker(); 
 				showSelectedMarker();
-				document.getElementById('message_l').innerHTML = LOBBY_MESSAGE[0]+AllData[z][DATA_NAMES.name]+LOBBY_MESSAGE[1];
+				document.getElementById('message_l').innerHTML = LOBBY_MESSAGE[0];
 				var els = document.getElementsByClassName("lobby_text");
 				for (var i = 0; i<els.length; i++) {
 					var id = els[i].id;					// Grab the id of the current element
@@ -618,6 +603,22 @@
 								}	
 							}
 						}	
+					}
+					else if (id == "video_l") {
+						var videoCounter = 0;
+						for (var j = 0; j<AllData[z].duplicates.length; j++) {		// loop through duplicates
+							dup = AllData[z].duplicates[j];
+							if (videoCounter == 0) {	
+								if (AllData[dup][DATA_NAMES.video] == null | AllData[dup][DATA_NAMES.video] == "") {	
+									document.getElementById("video_l").style.display = 'none';
+								} else {
+									videoCounter = 1;
+									document.getElementById("video_l").style.display = 'inline-block';
+									document.getElementById("video_box_l").src = AllData[dup][DATA_NAMES.video];
+									document.getElementById("photo_l").style.display = "none";
+								}
+							}
+						}
 					}
 					else if (id == "project_list") {
 						for (var j = 0; j<AllData[z].duplicates.length; j++) {		// loop through duplicates
@@ -888,6 +889,36 @@
 				
 				return (w1 - w2);
 			};
+			
+			////////////////////////////////////////////////////////////////////
+			////			function enable/disableMapControls 				////
+			//// 															////
+			////	Disables and enables panning, zooming, and all keyboard	////
+			////	map controls when the cursor is and isn't over the map.	////
+			////////////////////////////////////////////////////////////////////
+			
+			
+			function disableMapControls() {
+				map.dragging.disable();
+				map.touchZoom.disable();
+				map.doubleClickZoom.disable();
+				map.scrollWheelZoom.disable();
+				map.boxZoom.disable();
+				map.keyboard.disable();
+				if (map.tap) map.tap.disable();
+				document.getElementById('WaterMap').style.cursor='default';
+			}
+			
+			function enableMapControls() {
+				map.dragging.enable();
+				map.touchZoom.enable();
+				map.doubleClickZoom.enable();
+				map.scrollWheelZoom.enable();
+				map.boxZoom.enable();
+				map.keyboard.enable();
+				if (map.tap) map.tap.enable();
+				document.getElementById('WaterMap').style.cursor='grab';
+			}
 			
 		</script>
 		

@@ -44,8 +44,8 @@ img.caminos_logo {
 	display: inline-block;
 	z-index: 3;
 	position: fixed;
-	left: 6px;
-	top: 66px;
+	left: 50px;
+	top: 5px;
 	width: 120px;
 	height: 120px;
 	opacity: 1;
@@ -80,6 +80,7 @@ div.cartodb-legend {
 	overflow-y: scroll;
 	overflow-x: hidden;
 	height: auto;
+	z-index: 5000;
 }
 /* formatting for the x-button to close the info panel */
 .x-butt{
@@ -130,19 +131,27 @@ div.cartodb-legend {
 
 .proj_box_even {
 	padding: 10px;
-	background-color: #ffde91;
+	background-color: #6366c1;
 	margin: 0;
+	color: white;
+	width: 80%;
+	border: 2px solid black;
+	border-radius: 10px;
 	
 }
 
 .proj_box_odd {
 	padding: 10px;
-	background-color: #ffbc21;
+	background-color: #6366c1;
+	color: white;
+	width: 80%;
+	border: 2px solid black;
+	border-radius: 10px;
 }
 
 .proj_box_even:hover, .proj_box_odd:hover {
-	background-color: #d19200;
-	color: white;
+	background-color: #9192bc;
+	color: black;
 	cursor: pointer;
 }
 
@@ -162,19 +171,31 @@ div.cartodb-legend {
 }
 
 .left_column {
-	background-color: #ffbc21;
+	background-color: rgba(166, 211, 218, 1);
 	width: 50%;
 	padding-top: 4px;
 	padding-bottom: 4px;
 }
 
 .right_column {
-	
-	background-color: #ffde91;
-	
-	
+	background-color: rgba(211, 233, 237, 1);
 }
 
-.video_box{
-	width: 96%;
+#video, #video_l {
+	max-width: 640px;
+	max-height: 360px;
+	width: 100%;
+	height:100%;
+	position: relative;
+	height: 0px;
+	padding-bottom: 56.25%;
 }
+
+.vid_box {
+	width: 96%;
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	left: 0; top: 0;
+}
+
