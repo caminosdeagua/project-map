@@ -30,8 +30,8 @@ var LEGEND4 = "\xa0\xa0\xa0Multiple\xa0projects";
 var LEGEND_TEXT = [LEGEND0, LEGEND1, LEGEND2, LEGEND3, LEGEND4];
 
 var BACK_BUTTON_TXT = ["Back to all "," projects"];
-var LOBBY_MESSAGE = ["<b>Click on a project for more information:<br></b>"]
-var SUMMARY_TITLE = "<b> community profile</b>";
+var LOBBY_MESSAGE = ["<b>Click on a project below for more information<br></b>"]
+var SUMMARY_TITLE = "<b>Community profile</b>";
 
 var PPL_SERVED_HDR = "People impacted";
 var CERAMIC_HDR = "Ceramic filters distributed";

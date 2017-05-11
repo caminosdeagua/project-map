@@ -95,8 +95,6 @@
 				<div class="lobby_text" id="video_l" style="text-align: center;">
 					<iframe id="video_box_l" class="vid_box" width="560px" height="315px" frameborder="0" allowfullscreen></iframe>
 				</div>
-				<div class="lobby_text" id="message_l" style="text-align: center;"></div>
-				<div class="lobby_text" id="project_list" align="center"></div>
 				<div class="lobby_text" id="summary" align="center">
 					<p id="summary_header"></p>
 					<table id="summary_table"> 
@@ -112,13 +110,11 @@
 							<td class="left_column" id="ceramic_title"></td>
 							<td class="right_column" id="ceramic_value"></td>
 						</tr>	
-					</table>
-					
-					
-					
-					
-					
+					</table>					
 				</div>
+				<div class="lobby_text" id="message_l" style="text-align: center;"></div>
+				<div class="lobby_text" id="project_list" align="center"></div>
+				
 			</div>
 		</div>
 		
@@ -579,6 +575,7 @@
 				showSelectedMarker();
 				document.getElementById('message_l').innerHTML = LOBBY_MESSAGE[0];
 				var els = document.getElementsByClassName("lobby_text");
+				
 				for (var i = 0; i<els.length; i++) {
 					var id = els[i].id;					// Grab the id of the current element
 					if (id == 'proj_name_l') {
@@ -620,7 +617,18 @@
 							}
 						}
 					}
+					else if (id == "summary") {
+						document.getElementById("summary_header").innerHTML = SUMMARY_TITLE;
+						var heads = document.getElementsByClassName("left_column");
+						for (var i=0; i<heads.length; i++) {
+							heads[i].innerHTML = SUMMARY_HEADERS[i];
+						}
+						document.getElementById('ppl_served_value').innerHTML = peopleImpacted();
+						document.getElementById('liters_value').innerHTML = storageInstalled();
+						document.getElementById('ceramic_value').innerHTML = filtersDistributed();
+					}
 					else if (id == "project_list") {
+						
 						for (var j = 0; j<AllData[z].duplicates.length; j++) {		// loop through duplicates
 							dup = AllData[z].duplicates[j];
 							rawDate = String(AllData[dup][DATA_NAMES.start_date]).split("-", 3);
@@ -637,16 +645,7 @@
 							}
 						}	
 					}
-					else if (id == "summary") {
-						document.getElementById("summary_header").innerHTML = "<b>"+AllData[z][DATA_NAMES.name]+"</b>"+SUMMARY_TITLE;
-						els = document.getElementsByClassName("left_column");
-						for (var i=0; i<els.length; i++) {
-							els[i].innerHTML = SUMMARY_HEADERS[i];
-						}
-						document.getElementById('ppl_served_value').innerHTML = peopleImpacted();
-						document.getElementById('liters_value').innerHTML = storageInstalled();
-						document.getElementById('ceramic_value').innerHTML = filtersDistributed();
-					}
+					
 				}	
 			}
 			
@@ -678,7 +677,7 @@
 				var dup;
 				for (var i=0; i<AllData[info_being_displayed].duplicates.length; i++) {
 					dup = AllData[info_being_displayed].duplicates[i];
-					storage = storage + 12000*AllData[dup][DATA_NAMES.no_ferro] + 2500*AllData[dup][DATA_NAMES.no_roto_small] + 10000*AllData[dup][DATA_NAMES.no_roto_big] + 30000*AllData[dup][DATA_NAMES.no_geomembrane] + 80000*AllData[dup][DATA_NAMES.no_underground] + 2000*AllData[dup][DATA_NAMES.no_rainjar];
+					storage = storage + 12000*AllData[dup][DATA_NAMES.no_ferro] + 2500*AllData[dup][DATA_NAMES.no_roto_small] + 10000*AllData[dup][DATA_NAMES.no_roto_big] + 30000*AllData[dup][DATA_NAMES.no_geomembrane] + 80000*AllData[dup][DATA_NAMES.no_underground]; //+ 2000*AllData[dup][DATA_NAMES.no_rainjar];
 				}
 				storage = numberWithCommas(storage);
 				
