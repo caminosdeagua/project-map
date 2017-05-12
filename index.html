@@ -190,8 +190,8 @@
 			////////////////////////////////////////////////////////////////////////////////
 			
 			function fillCounters() {
-				document.getElementById("stats_box").style.display = "inline-block";
-				document.getElementById("stats_projects_no").innerHTML = totalProjects();
+				document.getElementById("stats_box").style.display = "inline-block";		// show the stats menu
+				document.getElementById("stats_projects_no").innerHTML = totalProjects();	// fill it!
 				document.getElementById("stats_people_no").innerHTML = totalPeople();
 				document.getElementById("stats_capacity_no").innerHTML = totalCapacity();
 				document.getElementById("stats_ceramic_no").innerHTML = totalCeramic();
@@ -793,18 +793,18 @@
 			
 			function totalProjects() {
 				var total = 0
-				for (var i=0; i<used_indices.length; i++) {
-					total = total + projectsCompleted(used_indices[i]);
+				for (var i=0; i<used_indices.length; i++) {				// loop through all base points
+					total = total + projectsCompleted(used_indices[i]);	// add up all projects from all and their duplicates
 				}
 				return total;
 			}
 			
 			function totalPeople() {
 				var total = 0
-				for (var i=0; i<used_indices.length; i++) {
-					if (peopleImpacted(used_indices[i]) != 'unknown') {
-						total = total + numberWithoutCommas(peopleImpacted(used_indices[i]));
-					}
+				for (var i=0; i<used_indices.length; i++) {				// loop through all base points
+					if (peopleImpacted(used_indices[i]) != 'unknown') {	// if the number of people impacted is known (for it and all duplicates)
+						total = total + numberWithoutCommas(peopleImpacted(used_indices[i]));	// add them up, making sure to 
+					}													//	remove the commas from all numbers...
 				}
 				return total;			
 			}
