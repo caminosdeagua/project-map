@@ -25,7 +25,10 @@
 		<!-- mapbox fullscrn-->	<script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/Leaflet.fullscreen.min.js'></script>
 		<!-- mapbox fullscrn-->	<link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/leaflet.fullscreen.css' rel='stylesheet' />
 		
-		<!--functional tiles--> <script src="functionaltilelayer.js"></script>
+		<!--functional tiles--> <script type="text/javascript" src="functionaltilelayer.js"></script>
+		
+		<!--odometer css	-->	<link rel="stylesheet" href="counter/odometer-theme-default.css" />
+		<!--odometer js		-->	<script type="text/javascript" src="counter/odometer.js"></script>
 		
 		<script>
 		document.title = TITLE;
@@ -58,6 +61,27 @@
 					</li>
 				</ul>
 			</div>
+			
+			
+			<div id="stats_box">
+				<div class = "stats_tr">
+					<p class="stats_left"></p>
+					<p class="odometer" id="stats_projects_no"></p>
+				</div>
+				<div class = "stats_tr">
+					<p class="stats_left"></p>
+					<p class="odometer" id="stats_people_no"></p>
+				</div>
+				<div class = "stats_tr">
+					<p class="stats_left"></p>
+					<p class="odometer" id="stats_capacity_no"></p>
+				</div>
+				<div class = "stats_tr">
+					<p class="stats_left"></p>
+					<p class="odometer" id="stats_ceramic_no"></p>
+				</div>
+			</div>
+			
 			<div id='info_panel' class='display_box' onmouseenter="disableMapControls();" onmouseleave="enableMapControls();">
 				<img id="x-butt" class='x-butt' onclick="goBack('x');" src="https://caminosdeagua.github.io/project-map/img/greyX.png"></img>
 				<div class="info_text" id="back_button" onclick="goBack()"></div>
@@ -99,6 +123,10 @@
 					<p id="summary_header"></p>
 					<table id="summary_table"> 
 						<tr align="center">
+							<td class="left_column" id="no_projects_title"></td>
+							<td class="right_column" id="no_projects_value"></td>
+						</tr>
+						<tr align="center">
 							<td class="left_column" id="ppl_served_title"></td>
 							<td class="right_column" id="ppl_served_value"></td>
 						</tr>
@@ -112,6 +140,7 @@
 						</tr>	
 					</table>					
 				</div>
+				<br>
 				<div class="lobby_text" id="message_l" style="text-align: center;"></div>
 				<div class="lobby_text" id="project_list" align="center"></div>
 				
@@ -131,7 +160,9 @@
 				applyBaseMap(); 			// Apply the base tiles to the map
 				adjustXLocation();
 				loadAndPlotData(); 			// Load the data for Fluoride (the default contaminant) 
-			}								// 	then plot the base markers on the map.	
+											// 	then plot the base markers on the map.	
+				fillCounters();				// Read the data for the counters
+			}								
 			
 			////////////////////////////////////////////////////////////////////////////////
 			////					  	fillText FUNCTION	 						  	////
@@ -144,6 +175,25 @@
 				for(var i=0; i<els.length; i++){
 					els[i].innerHTML = LEGEND_TEXT[i];
 				}
+				
+				els = document.getElementsByClassName("stats_left");
+				for (var i=0; i<els.length; i++) {
+					els[i].innerHTML = SUMMARY_HEADERS[i];				
+				}
+				
+				
+			}
+			
+			////////////////////////////////////////////////////////////////////////////////
+			////					  	fillCounters FUNCTION	 					  	////
+			//// 			Fills out all counters by trolling through the dataset		////
+			////////////////////////////////////////////////////////////////////////////////
+			
+			function fillCounters() {
+				document.getElementById("stats_projects_no").innerHTML = totalProjects();
+				document.getElementById("stats_people_no").innerHTML = totalPeople();
+				document.getElementById("stats_capacity_no").innerHTML = totalCapacity();
+				document.getElementById("stats_ceramic_no").innerHTML = totalCeramic();
 			}
 			
 			
@@ -337,13 +387,13 @@
 			
 			function getBin(data, i) {
 				var bin = -1;
-				if (data[i][DATA_NAMES.proj_type] == "Rainwater Harvesting") {
+				if (data[i][DATA_NAMES.proj_type] == RAIN_PROJ) {
 					bin = RAINWATER;
-				} else if (data[i][DATA_NAMES.proj_type] == "Ceramic Water Filter") {
+				} else if (data[i][DATA_NAMES.proj_type] == CERAMIC_PROJ) {
 					bin = CERAMIC;
-				} else if (data[i][DATA_NAMES.proj_type] == "Biochar Treatment Systems (330L/d)") {
+				} else if (data[i][DATA_NAMES.proj_type] == BIOCHAR_PROJ) {
 					bin = BIOCHAR;
-				} else if (data[i][DATA_NAMES.proj_type] == "Other") {
+				} else if (data[i][DATA_NAMES.proj_type] == OTHER_PROJ) {
 					bin = OTHER;
 				}
 				return bin
@@ -558,17 +608,15 @@
 						els[i].style.display = "none";
 					}				
 				}
-				els[currentElement].style.marginBottom = "25px";				// adjust the margin on the last element for clearance
-				
-				
-				
-				
-				
-				
-				
-				
+				els[currentElement].style.marginBottom = "25px";				// adjust the margin on the last element for clearance				
 				$("#info_panel").animate({scrollTop: 0}, SCROLL_TIME);	// First, scroll the info window back to the top.
 			}
+			
+			////////////////////////////////////////////////////////////////////////////////
+			////						showLobby FUNCTION					  			////
+			//// 	Gets the correct information from the global dataset, then pushes	////
+			////	it into the correct places in the lobby.	 						////
+			////////////////////////////////////////////////////////////////////////////////
 			
 			function showLobby(z) {
 				hideSelectedMarker(); 
@@ -623,9 +671,11 @@
 						for (var i=0; i<heads.length; i++) {
 							heads[i].innerHTML = SUMMARY_HEADERS[i];
 						}
-						document.getElementById('ppl_served_value').innerHTML = peopleImpacted();
-						document.getElementById('liters_value').innerHTML = storageInstalled();
-						document.getElementById('ceramic_value').innerHTML = filtersDistributed();
+						document.getElementById('no_projects_value').innerHTML = projectsCompleted(z);
+						document.getElementById('ppl_served_value').innerHTML = peopleImpacted(z);
+						document.getElementById('liters_value').innerHTML = storageInstalled(z);
+						document.getElementById('ceramic_value').innerHTML = filtersDistributed(z);
+						
 					}
 					else if (id == "project_list") {
 						
@@ -649,6 +699,12 @@
 				}	
 			}
 			
+			////////////////////////////////////////////////////////////////////////////////
+			////						openFromLobby FUNCTION					  		////
+			//// 	When a project is clicked in the lobby, this function opens the 	////
+			////	info panel with the appropriate data called.						////
+			////////////////////////////////////////////////////////////////////////////////
+			
 			function openFromLobby(z) {
 				
 				showInfo(z);
@@ -656,11 +712,25 @@
 				closePanel('lobby');
 			}
 			
-			function peopleImpacted() {
+			////////////////////////////////////////////////////////////////////////////////
+			////						projectsCompleted 	FUNCTION					////
+			////						peopleImpacted 		FUNCTION					////
+			////						storageInstalled	FUNCTION					////
+			////						filetersDistributed	FUNCTION					////
+			//// 	These functions agregate information from all of the duplicate 		////
+			////	projects for the site at 'point' display a summary to the user. 	////
+			////////////////////////////////////////////////////////////////////////////////
+			
+			
+			function projectsCompleted(point) {
+				return AllData[point].duplicates.length
+			}
+			
+			function peopleImpacted(point) {
 				var ppl = 0;
 				var dup;
-				for (var i=0; i<AllData[info_being_displayed].duplicates.length; i++) {
-					dup = AllData[info_being_displayed].duplicates[i];
+				for (var i=0; i<AllData[point].duplicates.length; i++) {
+					dup = AllData[point].duplicates[i];
 					ppl = ppl + AllData[dup][DATA_NAMES.people];
 				}
 				ppl = numberWithCommas(ppl);
@@ -672,11 +742,11 @@
 				
 			}
 			
-			function storageInstalled() {
+			function storageInstalled(point) {
 				var storage = 0;
 				var dup;
-				for (var i=0; i<AllData[info_being_displayed].duplicates.length; i++) {
-					dup = AllData[info_being_displayed].duplicates[i];
+				for (var i=0; i<AllData[point].duplicates.length; i++) {
+					dup = AllData[point].duplicates[i];
 					storage = storage + 12000*AllData[dup][DATA_NAMES.no_ferro] + 2500*AllData[dup][DATA_NAMES.no_roto_small] + 10000*AllData[dup][DATA_NAMES.no_roto_big] + 30000*AllData[dup][DATA_NAMES.no_geomembrane] + 80000*AllData[dup][DATA_NAMES.no_underground]; //+ 2000*AllData[dup][DATA_NAMES.no_rainjar];
 				}
 				storage = numberWithCommas(storage);
@@ -685,11 +755,11 @@
 				
 			}
 			
-			function filtersDistributed() {
+			function filtersDistributed(point) {
 				var filters = 0;
 				var dup;
-				for (var i=0; i<AllData[info_being_displayed].duplicates.length; i++) {
-					dup = AllData[info_being_displayed].duplicates[i];
+				for (var i=0; i<AllData[point].duplicates.length; i++) {
+					dup = AllData[point].duplicates[i];
 					filters = filters + Number(AllData[dup][DATA_NAMES.no_ceramic_systems]) + Number(AllData[dup][DATA_NAMES.no_ceramic_filters]);
 				}
 				filters = numberWithCommas(filters);
@@ -697,9 +767,54 @@
 			}
 			
 			////////////////////////////////////////////////////////////////////////////////
+			////						totalProjects 	FUNCTION						////
+			////						totalPeople		FUNCTION						////
+			////						totalCapacity	FUNCTION						////
+			////						totalCeramic	FUNCTION						////
+			//// 	These functions agregate information from all of the duplicate 		////
+			////	projects over all of the sites. Can only be called once all the 	////
+			////	data has been loaded. Each one loops through all of the base points	////
+			////	aggregating the grouped data from all of the base points.			////
+			////	Returns: int														////
+			////////////////////////////////////////////////////////////////////////////////
+			
+			function totalProjects() {
+				var total = 0
+				for (var i=0; i<used_indices.length; i++) {
+					total = total + projectsCompleted(used_indices[i]);
+				}
+				return total;
+			}
+			
+			function totalPeople() {
+				var total = 0
+				for (var i=0; i<used_indices.length; i++) {
+					if (peopleImpacted(used_indices[i]) != 'unknown') {
+						total = total + numberWithoutCommas(peopleImpacted(used_indices[i]));
+					}
+				}
+				return total;			
+			}
+			
+			function totalCapacity() {
+				var total = 0
+				for (var i=0; i<used_indices.length; i++) {
+					total = total + numberWithoutCommas(storageInstalled(used_indices[i]));
+				}
+				return total;
+			}
+			
+			function totalCeramic() {
+				var total = 0
+				for (var i=0; i<used_indices.length; i++) {
+					total = total + numberWithoutCommas(filtersDistributed(used_indices[i]));
+				}
+				return total;
+			}
+			////////////////////////////////////////////////////////////////////////////////
 			////					 	getLabel FUNCTION 							  	////
 			//// 	Takes in the type of label to plot (string) and the index of the 	////
-			////	marker's data in the global data array, data. Returns the string ////
+			////	marker's data in the global data array, data. Returns the string 	////
 			////	that will be contained in the label. 								////
 			////////////////////////////////////////////////////////////////////////////////
 	
@@ -845,15 +960,22 @@
 			}
 			
 			////////////////////////////////////////////////////////////////////
-			////			function numberWithCommas		 				////
+			////			function numberWith(out)Commas		 			////
 			//// 															////
 			////	Adds commas between every 3rd digit for the standard 	////
 			////	US/Mexico numerical display format. Returns the number  ////
 			//// 	as a string.											////
+			////	The Without function does the reverse (takes in a 		////
+			////	string that could have commas, removes them, and returns////
+			////	a numerical value, either a float or an int).			////
 			////////////////////////////////////////////////////////////////////
 										
 			function numberWithCommas(x) {
 				return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+			}
+			
+			function numberWithoutCommas(x) {
+				return Number(x.replace(/,/g, ''));
 			}
 			
 			////////////////////////////////////////////////////////////////////

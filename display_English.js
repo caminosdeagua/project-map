@@ -33,10 +33,11 @@ var BACK_BUTTON_TXT = ["Back to all "," projects"];
 var LOBBY_MESSAGE = ["<b>Click on a project below for more information<br></b>"]
 var SUMMARY_TITLE = "<b>Community profile</b>";
 
+var NO_PROJECTS_HDR = "Projects";										// Headers for lobby summary chart
 var PPL_SERVED_HDR = "People impacted";
 var CERAMIC_HDR = "Ceramic filters distributed";
-var RWH_HDR = "Liters of rainwater harvesting capacity installed";
-var SUMMARY_HEADERS = [PPL_SERVED_HDR, RWH_HDR, CERAMIC_HDR];
+var RWH_HDR = "Liters of rainwater capacity installed";
+var SUMMARY_HEADERS = [NO_PROJECTS_HDR, PPL_SERVED_HDR, RWH_HDR, CERAMIC_HDR];
 
 //// The headers for the spreadsheet. Make sure the LHS
 //// 	matches those in var LBL below, and the RHS matches
@@ -113,3 +114,8 @@ var LBL = {
 var BETWEEN_DATES = " - ";
 
 var END_OF_HEADER = ":<br>\xa0\xa0\xa0";
+
+RAIN_PROJ = "Rainwater Harvesting";
+CERAMIC_PROJ = "Ceramic Water Filter";
+BIOCHAR_PROJ = "Biochar Treatment Systems (330L/d)";
+OTHER_PROJ = "Other";
