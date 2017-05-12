@@ -206,6 +206,7 @@ div.cartodb-legend {
 	top: 150px;
 	left: 12px;
 	width: 260px;
+	display: none;
 }
 
 .stats_tr {
