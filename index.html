@@ -110,9 +110,9 @@
 				<div class="info_text" id="notes1"></div>
 				
 			</div>
-			<div id='lobby', class='display_box' onmouseenter="disableMapControls();" onmouseleave="enableMapControls();">
+			<div id='lobby', class='display_box' onmouseenter="disableMapControls();" onmouseleave="enableMapControls();" >
 				<img id="x-butt-l" class='x-butt' onclick="goBack('x');" src="https://caminosdeagua.github.io/project-map/img/greyX.png"></img>
-				<div class="lobby_text" id="proj_name_l"></div>
+				<div class="lobby_text" id="proj_name_l" style="text-align: center;"></div>
 				<div class="lobby_text" id="photo_l" style="text-align: center;">
 					<img id="photo_box_l" class='photo_box'></img>
 				</div>
@@ -635,10 +635,9 @@
 				for (var i = 0; i<els.length; i++) {
 					var id = els[i].id;					// Grab the id of the current element
 					if (id == 'proj_name_l') {
-						els[i].innerHTML = AllData[z][DATA_NAMES.name]+":<br><i>"+LEGEND_TEXT[AllData[z].bin]+"</i>";
-						els[i].style.fontSize = "20px";
+						els[i].innerHTML = AllData[z][DATA_NAMES.name];
+						els[i].style.fontSize = "32px";
 						els[i].style.backgroundColor = "rgba(235, 235, 235, 0)";
-						els[i].style.marginRight = "40px";
 						els[i].style.fontWeight = "600";
 					} 
 					else if (id == 'photo_l') {
