@@ -203,8 +203,8 @@ div.cartodb-legend {
 #stats_box {
 	position: absolute;
 	z-index: 4;
-	top: 150px;
-	left: 12px;
+	top: 7px;
+	right: 12px;
 	width: 260px;
 	display: none;
 }
