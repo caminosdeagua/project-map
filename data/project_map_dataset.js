@@ -2540,7 +2540,7 @@
     "Total # of People Served": "",
     "Weeklong Capacity Training": "",
     "Small Scale Capacity Training": "",
-    "# of Ceramic Filter Systems": "",
+    "# of Ceramic Filter Systems": 150,
     "# of Ceramic Water Filters": "",
     "Biochar Treatment System (300L/day)": "",
     "Ferrocement RWH Systems (12,000L)": "",
