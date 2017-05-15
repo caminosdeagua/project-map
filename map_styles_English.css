@@ -113,22 +113,6 @@ div.cartodb-legend {
 	border-radius: 5px;
 }
 
-/*.new_window_button {
-	display: inline-block;
-	z-index: 3;
-	position: fixed;
-	left: 46px;
-	top: 10px;
-	width: 40px;
-	height: 40px;
-	opacity: 1;
-	border: 0px solid black;
-	border-radius: 7px;
-	-webkit-box-shadow: 2px 2px 2px 0px rgba(0,0,0,0.6);
-	-moz-box-shadow: 2px 2px 2px 0px rgba(0,0,0,0.6);
-	box-shadow: 2px 2px 2px 0px rgba(0,0,0,0.6);
-}*/
-
 .proj_box_even {
 	padding: 10px;
 	background-color: #6366c1;
@@ -155,15 +139,9 @@ div.cartodb-legend {
 	cursor: pointer;
 }
 
-#message_l {
-	
-}
-
 #back_button:hover {
 	cursor: pointer;
 }
-
-
 
 #summary_table {
 	width: 85%;
@@ -220,7 +198,6 @@ div.cartodb-legend {
 	*border: 2px solid #ffffff;
 	margin-top: 5px;
 }
-
 
 .stats_left {
 	min-height: 4em;
