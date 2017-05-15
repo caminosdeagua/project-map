@@ -106,6 +106,7 @@
 				<div class="info_text" id="no_roto_big"></div>
 				<div class="info_text" id="no_geomembrane"></div>
 				<div class="info_text" id="no_underground"></div>
+				<div class="info_text" id="no_rainjar"></div>
 				<div class="info_text" id="partner"></div>
 				<div class="info_text" id="notes1"></div>
 				
@@ -759,7 +760,7 @@
 				var dup;
 				for (var i=0; i<AllData[point].duplicates.length; i++) {
 					dup = AllData[point].duplicates[i];
-					storage = storage + 12000*AllData[dup][DATA_NAMES.no_ferro] + 2500*AllData[dup][DATA_NAMES.no_roto_small] + 10000*AllData[dup][DATA_NAMES.no_roto_big] + 30000*AllData[dup][DATA_NAMES.no_geomembrane] + 80000*AllData[dup][DATA_NAMES.no_underground]; //+ 2000*AllData[dup][DATA_NAMES.no_rainjar];
+					storage = storage + 12000*AllData[dup][DATA_NAMES.no_ferro] + 2500*AllData[dup][DATA_NAMES.no_roto_small] + 10000*AllData[dup][DATA_NAMES.no_roto_big] + 30000*AllData[dup][DATA_NAMES.no_geomembrane] + 80000*AllData[dup][DATA_NAMES.no_underground] + 2000*AllData[dup][DATA_NAMES.no_rainjar];
 				}
 				storage = numberWithCommas(storage);
 				
