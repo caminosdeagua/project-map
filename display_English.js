@@ -117,6 +117,7 @@ var BETWEEN_DATES = " - ";
 
 var END_OF_HEADER = ":<br>\xa0\xa0\xa0";
 
+// These need to match the project types in the database perfectly!
 RAIN_PROJ = "Rainwater Harvesting";
 CERAMIC_PROJ = "Ceramic Water Filter";
 BIOCHAR_PROJ = "Biochar Treatment Systems (330L/d)";
