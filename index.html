@@ -38,7 +38,7 @@
 				<img class="caminos_logo" src="https://caminosdeagua.github.io/project-map/img/caminos_logo_circle.png"></img> <!-- creates the caminos de agua logo -->
 			</a>
 			<!-- This next div is the legend -->
-			<div class='cartodb-legend custom' id='legend' style="display: block; background-color: #dddddd;">	
+			<div class='cartodb-legend custom' id='legend' style="display: block; background-color: #dddddd;" onmouseenter="disableMapControls();" onmouseleave="enableMapControls();">	
 				<div class="legend-title", id="legend_title" style="font-size:14px;"></div>
 				<ul>
 					<li>
@@ -54,7 +54,7 @@
 						<div class="bullet" style="background:#df3099; text-transform:none" name="project_type"></div>
 					</li>
 					<li>
-						<div class="bullet" style="background:#ffffff; text-transform:none" name="project_type"></div>
+						<div class="bullet" style="background:#ffffff; text-transform:none" name="project_type" onclick="openFullSummary();"></div>
 					</li>
 				</ul>
 			</div>
@@ -1050,6 +1050,48 @@
 				map.keyboard.enable();
 				if (map.tap) map.tap.enable();
 				document.getElementById('WaterMap').style.cursor='grab';
+			}
+			
+			////////////////////////////////////////////////////////////////////
+			////			function openFullSummary						////
+			//// 															////
+			////	Opens a new tab with the fulltext readout of:			////
+			////		- Liters of rainwater capacity installed			////
+			////		- # rainwater systems installed						////	
+			////		- # filter systems distributed						////
+			////		- # of filter cartridges distributed				////
+			////		- liters of ceramic filtration capability			////
+			////		- People impacted									////
+			////		- Total # of communities worked in					////
+			////		- List of partner organizations						////
+			////		- Total # of projects								////
+			////		- # of "Other" projects								////
+			////		- List of "Other" project names w/ community name	////
+			////		- # of projects in schools							////
+			////		- # of short workshops								////
+			////		- # of long workshops								////
+			////		- # of hours of community-volunteered labor			////
+			////////////////////////////////////////////////////////////////////
+			
+			function openFullSummary() {
+				var summary = {};
+				summary[EASTER_EGG_TXT.rainL] = totalCapacity();
+				summary[EASTER_EGG_TXT.rainSys] = 2
+				summary[EASTER_EGG_TXT.filterSys] = 3
+				summary[EASTER_EGG_TXT.filterCar] = 4
+				summary[EASTER_EGG_TXT.filterL] = 5
+				summary[EASTER_EGG_TXT.ppl] = totalPeople();
+				summary[EASTER_EGG_TXT.communities] = 7 
+				summary[EASTER_EGG_TXT.partners] = 8
+				summary[EASTER_EGG_TXT.projects] = totalProjects();
+				summary[EASTER_EGG_TXT.other] = 8
+				summary[EASTER_EGG_TXT.otherNames] = 7
+				summary[EASTER_EGG_TXT.schools] = 6
+				summary[EASTER_EGG_TXT.shortShops]= 5
+				summary[EASTER_EGG_TXT.longShops] = 4
+				summary[EASTER_EGG_TXT.laborHours] = "ahahhahhah!!!!"
+
+				console.log(summary)
 			}
 			
 		</script>

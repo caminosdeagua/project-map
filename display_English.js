@@ -122,3 +122,21 @@ RAIN_PROJ = "Rainwater Harvesting";
 CERAMIC_PROJ = "Ceramic Water Filter";
 BIOCHAR_PROJ = "Biochar Treatment Systems (330L/d)";
 OTHER_PROJ = "Other";
+
+var EASTER_EGG_TXT = {
+	rainL: "Liters of rainwater capacity installed",
+	rainSys: "Number of rainwater systems installed",
+	filterSys: "Number of ceramic filter systems distributed",
+	filterCar: "Number of ceramic filter cartridges distributed",
+	filterL: "Liters of ceramic filter capability distributed (5 years x 24 L / day per filter)",
+	ppl: "Total number of people impacted",
+	communities: "Total number of communities impacted",
+	partners: "List of partner organizations",
+	projects: "Total number of projects completed",
+	other: "Total number of 'Other' types of projects",
+	otherNames: "Names of 'Other' projects",
+	schools: "Number of projects in schools",
+	shortShops: "Number of short capacity building workshops completed",
+	longShops: "Number of long capacity building workshops completed",
+	laborHours: "Total number of person-hours of volunteer labor (8 hrs per person per day x 5 people over 5 days)"
+}
