@@ -722,105 +722,7 @@
 				closePanel('lobby');
 			}
 			
-			////////////////////////////////////////////////////////////////////////////////
-			////						projectsCompleted 	FUNCTION					////
-			////						peopleImpacted 		FUNCTION					////
-			////						storageInstalled	FUNCTION					////
-			////						filetersDistributed	FUNCTION					////
-			//// 	These functions agregate information from all of the duplicate 		////
-			////	projects for the site at 'point' display a summary to the user. 	////
-			////////////////////////////////////////////////////////////////////////////////
 			
-			
-			function projectsCompleted(point) {
-				return AllData[point].duplicates.length
-			}
-			
-			function peopleImpacted(point) {
-				var ppl = 0;
-				var dup;
-				for (var i=0; i<AllData[point].duplicates.length; i++) {
-					dup = AllData[point].duplicates[i];
-					ppl = ppl + AllData[dup][DATA_NAMES.people];
-				}
-				ppl = numberWithCommas(ppl);
-				if (ppl == '0') {
-					ppl = "unknown";
-				}
-				
-				return ppl
-				
-			}
-			
-			function storageInstalled(point) {
-				var storage = 0;
-				var dup;
-				for (var i=0; i<AllData[point].duplicates.length; i++) {
-					dup = AllData[point].duplicates[i];
-					storage = storage + 12000*AllData[dup][DATA_NAMES.no_ferro] + 2500*AllData[dup][DATA_NAMES.no_roto_small] + 10000*AllData[dup][DATA_NAMES.no_roto_big] + 30000*AllData[dup][DATA_NAMES.no_geomembrane] + 80000*AllData[dup][DATA_NAMES.no_underground] + 2000*AllData[dup][DATA_NAMES.no_rainjar];
-				}
-				storage = numberWithCommas(storage);
-				
-				return storage
-				
-			}
-			
-			function filtersDistributed(point) {
-				var filters = 0;
-				var dup;
-				for (var i=0; i<AllData[point].duplicates.length; i++) {
-					dup = AllData[point].duplicates[i];
-					filters = filters + Number(AllData[dup][DATA_NAMES.no_ceramic_systems]) + Number(AllData[dup][DATA_NAMES.no_ceramic_filters]);
-				}
-				filters = numberWithCommas(filters);
-				return filters
-			}
-			
-			////////////////////////////////////////////////////////////////////////////////
-			////						totalProjects 	FUNCTION						////
-			////						totalPeople		FUNCTION						////
-			////						totalCapacity	FUNCTION						////
-			////						totalCeramic	FUNCTION						////
-			//// 	These functions agregate information from all of the duplicate 		////
-			////	projects over all of the sites. Can only be called once all the 	////
-			////	data has been loaded. Each one loops through all of the base points	////
-			////	aggregating the grouped data from all of the base points.			////
-			////	Returns: int														////
-			////////////////////////////////////////////////////////////////////////////////
-			
-			function totalProjects() {
-				var total = 0
-				for (var i=0; i<used_indices.length; i++) {				// loop through all base points
-					total = total + projectsCompleted(used_indices[i]);	// add up all projects from all and their duplicates
-				}
-				return total;
-			}
-			
-			function totalPeople() {
-				var total = 0
-				for (var i=0; i<used_indices.length; i++) {				// loop through all base points
-					if (peopleImpacted(used_indices[i]) != 'unknown') {	// if the number of people impacted is known (for it and all duplicates)
-						total = total + numberWithoutCommas(peopleImpacted(used_indices[i]));	// add them up, making sure to 
-					}													//	remove the commas from all numbers...
-				}
-				return total;			
-			}
-			
-			function totalCapacity() {
-				var total = 0
-				for (var i=0; i<used_indices.length; i++) {
-					total = total + numberWithoutCommas(storageInstalled(used_indices[i]));
-				}
-				return total;
-			}
-			
-			function totalCeramic() {
-				var total = 0
-				for (var i=0; i<used_indices.length; i++) {
-					total = total + numberWithoutCommas(filtersDistributed(used_indices[i]));
-				}
-				return total;
-			}
 			////////////////////////////////////////////////////////////////////////////////
 			////					 	getLabel FUNCTION 							  	////
 			//// 	Takes in the type of label to plot (string) and the index of the 	////
@@ -1081,17 +983,143 @@
 				summary[EASTER_EGG_TXT.filterCar] = 4
 				summary[EASTER_EGG_TXT.filterL] = 5
 				summary[EASTER_EGG_TXT.ppl] = totalPeople();
-				summary[EASTER_EGG_TXT.communities] = 7 
+				summary[EASTER_EGG_TXT.communities] = totalCommunities(); 
 				summary[EASTER_EGG_TXT.partners] = 8
 				summary[EASTER_EGG_TXT.projects] = totalProjects();
-				summary[EASTER_EGG_TXT.other] = 8
-				summary[EASTER_EGG_TXT.otherNames] = 7
+				summary[EASTER_EGG_TXT.other] = totalOther()[0];
+				summary[EASTER_EGG_TXT.otherNames] = totalOther()[1];
 				summary[EASTER_EGG_TXT.schools] = 6
 				summary[EASTER_EGG_TXT.shortShops]= 5
 				summary[EASTER_EGG_TXT.longShops] = 4
 				summary[EASTER_EGG_TXT.laborHours] = "ahahhahhah!!!!"
 
 				console.log(summary)
+			}		
+			
+			////////////////////////////////////////////////////////////////////////////////
+			////						totalProjects 	FUNCTION						////
+			////						totalPeople		FUNCTION						////
+			////						totalCapacity	FUNCTION						////
+			////						totalCeramic	FUNCTION						////
+			////						totalCommunities	FUNCTION					////
+			////						
+			//// 	These functions agregate information from all of the duplicate 		////
+			////	projects over all of the sites. Can only be called once all the 	////
+			////	data has been loaded. Each one loops through all of the base points	////
+			////	aggregating the grouped data from all of the base points.			////
+			////	Returns: int														////
+			////////////////////////////////////////////////////////////////////////////////
+			
+			function totalProjects() {
+				var total = 0
+				for (var i=0; i<used_indices.length; i++) {				// loop through all base points
+					total = total + projectsCompleted(used_indices[i]);	// add up all projects from all and their duplicates
+				}
+				return total;
+			}
+			
+			function totalPeople() {
+				var total = 0
+				for (var i=0; i<used_indices.length; i++) {				// loop through all base points
+					if (peopleImpacted(used_indices[i]) != 'unknown') {	// if the number of people impacted is known (for it and all duplicates)
+						total = total + numberWithoutCommas(peopleImpacted(used_indices[i]));	// add them up, making sure to 
+					}													//	remove the commas from all numbers...
+				}
+				return total;			
+			}
+			
+			function totalCapacity() {
+				var total = 0
+				for (var i=0; i<used_indices.length; i++) {
+					total = total + numberWithoutCommas(storageInstalled(used_indices[i]));
+				}
+				return total;
+			}
+			
+			function totalCeramic() {
+				var total = 0
+				for (var i=0; i<used_indices.length; i++) {
+					total = total + numberWithoutCommas(filtersDistributed(used_indices[i]));
+				}
+				return total;
+			}
+			
+			function totalCommunities() {
+				return used_indices.length;
+			}
+			
+			function totalOther() {				// returns an array: [# of Other projects, [array of names of other projects]]
+				var total = 0;
+				var names = "";
+				for (var i=0; i<used_indices.length; i++) {
+					if (AllData[i].duplicates) {
+						for (var j=0; j<AllData[i].duplicates.length; j++) {	
+							index = AllData[i].duplicates[j];
+							if (AllData[index][DATA_NAMES.proj_type] == OTHER_PROJ) {		
+								total++;	// counts the number of "Other" projects
+								if (names == "") {								// for 1st project, don't precede with a comma
+									names = AllData[index][DATA_NAMES.proj_name];
+								} else {										// for the rest, create a list!
+									names = names + ", " + AllData[index][DATA_NAMES.proj_name];
+								}
+							}
+						}
+					}
+				}
+				return [total, names];
+			}
+			
+			////////////////////////////////////////////////////////////////////////////////
+			////						projectsCompleted 	FUNCTION					////
+			////						peopleImpacted 		FUNCTION					////
+			////						storageInstalled	FUNCTION					////
+			////						filetersDistributed	FUNCTION					////
+			//// 	These functions agregate information from all of the duplicate 		////
+			////	projects for the site at 'point' display a summary to the user. 	////
+			////////////////////////////////////////////////////////////////////////////////
+			
+			
+			function projectsCompleted(point) {
+				return AllData[point].duplicates.length
+			}
+			
+			function peopleImpacted(point) {
+				var ppl = 0;
+				var dup;
+				for (var i=0; i<AllData[point].duplicates.length; i++) {
+					dup = AllData[point].duplicates[i];
+					ppl = ppl + AllData[dup][DATA_NAMES.people];
+				}
+				ppl = numberWithCommas(ppl);
+				if (ppl == '0') {
+					ppl = "unknown";
+				}
+				
+				return ppl
+			}
+			
+			function storageInstalled(point) {
+				var storage = 0;
+				var dup;
+				for (var i=0; i<AllData[point].duplicates.length; i++) {
+					dup = AllData[point].duplicates[i];
+					storage = storage + 12000*AllData[dup][DATA_NAMES.no_ferro] + 2500*AllData[dup][DATA_NAMES.no_roto_small] + 10000*AllData[dup][DATA_NAMES.no_roto_big] + 30000*AllData[dup][DATA_NAMES.no_geomembrane] + 80000*AllData[dup][DATA_NAMES.no_underground] + 2000*AllData[dup][DATA_NAMES.no_rainjar];
+				}
+				storage = numberWithCommas(storage);
+				
+				return storage
+				
+			}
+			
+			function filtersDistributed(point) {
+				var filters = 0;
+				var dup;
+				for (var i=0; i<AllData[point].duplicates.length; i++) {
+					dup = AllData[point].duplicates[i];
+					filters = filters + Number(AllData[dup][DATA_NAMES.no_ceramic_systems]) + Number(AllData[dup][DATA_NAMES.no_ceramic_filters]);
+				}
+				filters = numberWithCommas(filters);
+				return filters
 			}
 			
 		</script>
