@@ -59,3 +59,7 @@ var X_OFFSET_FROM_SCROLLBAR = 5; 		// the x-button to close the info panel/lobby
 var LITERS_DAY = 24; 					// Data on ceramic filters, see totalCeramic() function
 var YEARS_OF_FILTER_LIFE = 5;
 var DAYS_YEAR = 365.25;
+
+var HRS_PER_DAY = 8;					// Assumptions on constructing a 12,000 L ferro cement cistern
+var DAYS_PER_CISTER = 5;
+var PPL_PER_CISTERN = 5;

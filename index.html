@@ -984,14 +984,15 @@
 				summary[EASTER_EGG_TXT.filterL] = totalCeramic()[2];
 				summary[EASTER_EGG_TXT.ppl] = totalPeople();
 				summary[EASTER_EGG_TXT.communities] = totalCommunities(); 
-				summary[EASTER_EGG_TXT.partners] = 8
+				summary[EASTER_EGG_TXT.partners] = totalPartners()[0];
+				summary[EASTER_EGG_TXT.partnerNames] = totalPartners()[1]
 				summary[EASTER_EGG_TXT.projects] = totalProjects();
 				summary[EASTER_EGG_TXT.other] = totalOther()[0];
 				summary[EASTER_EGG_TXT.otherNames] = totalOther()[1];
 				summary[EASTER_EGG_TXT.schools] = 6
-				summary[EASTER_EGG_TXT.shortShops]= 5
-				summary[EASTER_EGG_TXT.longShops] = 4
-				summary[EASTER_EGG_TXT.laborHours] = "ahahhahhah!!!!"
+				summary[EASTER_EGG_TXT.shortShops]= totalWorkshops()[0];
+				summary[EASTER_EGG_TXT.longShops] = totalWorkshops() [1];
+				summary[EASTER_EGG_TXT.laborHours] = totalHours();	
 
 				console.log(summary)
 			}		
@@ -1005,8 +1006,8 @@
 			////						totalOther		FUNCTION						////
 			////						totalRainSys	FUNCTION						////
 			////						totalCeramic	FUNCTION						////
-			////																		////
-			////																		////
+			////						totalPartners	FUNCTION						////
+			////						totalWorkshops	FUNCTION												////
 			////																		////
 			//// 	These functions agregate information from all of the duplicate 		////
 			////	projects over all of the sites. Can only be called once all the 	////
@@ -1074,7 +1075,7 @@
 				return [total, names];
 			}
 			
-			function totalRainSys() {
+			function totalRainSys() {						
 				var total = 0;
 				for (var i=0; i<used_indices.length; i++) {					// loop through all projects and duplicates
 					if (AllData[used_indices[i]].duplicates) {
@@ -1104,6 +1105,63 @@
 				return [car, sys, potential_liters]
 			}
 			
+			function totalPartners() {					// returns number of partners and list of partners as: [#, list as string]
+				var total = 0;
+				var names = "";
+				for (var i=0; i<used_indices.length; i++) {
+					if (AllData[used_indices[i]].duplicates) {
+						for (var j=0; j<AllData[used_indices[i]].duplicates.length; j++) {	
+							index = AllData[used_indices[i]].duplicates[j];
+							if (AllData[index][DATA_NAMES.partner] != "" && AllData[index][DATA_NAMES.partner] != null) {
+								total = total + (AllData[index][DATA_NAMES.partner].match(/;/g) || []).length + 1;
+								if (names == "") {
+									names = AllData[index][DATA_NAMES.partner];
+								} else {
+									var partners = AllData[index][DATA_NAMES.partner].split("; ");
+									for (var k=0; k<partners.length; k++) {
+										var re = new RegExp(partners[k], 'g');
+										if (names.match(re) == null || names.match(re) == 0 || names.match(re) == false) {
+											console.log(partners[k]);
+											names = names + "; " + partners[k];
+										}
+									}
+								}
+							
+							
+							}
+						}
+					}
+				}
+				return [total, names]
+			}
+			
+			function totalWorkshops() {
+				var shortShops = 0;
+				var longShops = 0;
+				for (var i=0; i<used_indices.length; i++) {
+					if (AllData[used_indices[i]].duplicates) {
+						for (var j=0; j<AllData[used_indices[i]].duplicates.length; j++) {	
+							index = AllData[used_indices[i]].duplicates[j];
+							shortShops = shortShops + Number(AllData[index][DATA_NAMES.small_train]);
+							longShops = longShops + Number(AllData[index][DATA_NAMES.big_train]);
+						}
+					}
+				}
+				return [shortShops, longShops];
+			}
+			
+			function totalHours() {		// total hours of volunteer labor put into cisterns
+				var totalFerro = 0;
+				for (var i=0; i<used_indices.length; i++) {
+					if (AllData[used_indices[i]].duplicates) {
+						for (var j=0; j<AllData[used_indices[i]].duplicates.length; j++) {	
+							index = AllData[used_indices[i]].duplicates[j];
+							totalFerro = totalFerro + Number(AllData[index][DATA_NAMES.no_ferro]);
+						}
+					}
+				}
+				return totalFerro * PPL_PER_CISTERN * DAYS_PER_CISTERN * HRS_PER_DAY;
+			}
 			////////////////////////////////////////////////////////////////////////////////
 			////						projectsCompleted 	FUNCTION					////
 			////						peopleImpacted 		FUNCTION					////
