@@ -61,5 +61,5 @@ var YEARS_OF_FILTER_LIFE = 5;
 var DAYS_YEAR = 365.25;
 
 var HRS_PER_DAY = 8;					// Assumptions on constructing a 12,000 L ferro cement cistern
-var DAYS_PER_CISTER = 5;
+var DAYS_PER_CISTERN = 5;
 var PPL_PER_CISTERN = 5;
