@@ -55,3 +55,7 @@ var SMALL_ICON_SIZE = [16,16]; 			// The pixel x and y that the final marker ico
 var LARGE_ICON_SIZE = [24, 24];
 
 var X_OFFSET_FROM_SCROLLBAR = 5; 		// the x-button to close the info panel/lobby is offset from the scrollbar by this many pixels
+
+var LITERS_DAY = 24; 					// Data on ceramic filters, see totalCeramic() function
+var YEARS_OF_FILTER_LIFE = 5;
+var DAYS_YEAR = 365.25;

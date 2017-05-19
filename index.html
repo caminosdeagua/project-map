@@ -978,10 +978,10 @@
 			function openFullSummary() {
 				var summary = {};
 				summary[EASTER_EGG_TXT.rainL] = totalCapacity();
-				summary[EASTER_EGG_TXT.rainSys] = 2
-				summary[EASTER_EGG_TXT.filterSys] = 3
-				summary[EASTER_EGG_TXT.filterCar] = 4
-				summary[EASTER_EGG_TXT.filterL] = 5
+				summary[EASTER_EGG_TXT.rainSys] = totalRainSys();
+				summary[EASTER_EGG_TXT.filterSys] = totalCeramic()[1]
+				summary[EASTER_EGG_TXT.filterCar] = totalCeramic()[0]
+				summary[EASTER_EGG_TXT.filterL] = totalCeramic()[2];
 				summary[EASTER_EGG_TXT.ppl] = totalPeople();
 				summary[EASTER_EGG_TXT.communities] = totalCommunities(); 
 				summary[EASTER_EGG_TXT.partners] = 8
@@ -1002,7 +1002,12 @@
 			////						totalCapacity	FUNCTION						////
 			////						totalCeramic	FUNCTION						////
 			////						totalCommunities	FUNCTION					////
-			////						
+			////						totalOther		FUNCTION						////
+			////						totalRainSys	FUNCTION						////
+			////						totalCeramic	FUNCTION						////
+			////																		////
+			////																		////
+			////																		////
 			//// 	These functions agregate information from all of the duplicate 		////
 			////	projects over all of the sites. Can only be called once all the 	////
 			////	data has been loaded. Each one loops through all of the base points	////
@@ -1067,6 +1072,36 @@
 					}
 				}
 				return [total, names];
+			}
+			
+			function totalRainSys() {
+				var total = 0;
+				for (var i=0; i<used_indices.length; i++) {					// loop through all projects and duplicates
+					if (AllData[used_indices[i]].duplicates) {
+						for (var j=0; j<AllData[used_indices[i]].duplicates.length; j++) {	
+							index = AllData[used_indices[i]].duplicates[j];
+							total = total + Number(AllData[index][DATA_NAMES.no_ferro]) + Number(AllData[index][DATA_NAMES.no_roto_small]) + Number(AllData[index][DATA_NAMES.no_roto_big]) + Number(AllData[index][DATA_NAMES.no_geomembrane]) + Number(AllData[index][DATA_NAMES.no_underground]) + Number(AllData[index][DATA_NAMES.no_rainjar]);
+						}
+					}
+				}
+				return total
+			}
+			
+			function totalCeramic() { 		// returns an array: [#cartridges, #systems, potentialLiters]
+				var car = 0;
+				var sys = 0;
+				for (var i=0; i<used_indices.length; i++) {					// loop through all projects and duplicates
+					if (AllData[used_indices[i]].duplicates) {
+						for (var j=0; j<AllData[used_indices[i]].duplicates.length; j++) {	
+							index = AllData[used_indices[i]].duplicates[j];
+							car = car + Number(AllData[index][DATA_NAMES.no_ceramic_filters]);
+							sys = sys + Number(AllData[index][DATA_NAMES.no_ceramic_systems]);
+						}
+					}
+				}
+				var total = car + sys;
+				var potential_liters = total*LITERS_DAY*YEARS_OF_FILTER_LIFE*DAYS_YEAR
+				return [car, sys, potential_liters]
 			}
 			
 			////////////////////////////////////////////////////////////////////////////////
