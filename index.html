@@ -1054,18 +1054,12 @@
 				for (var i=0; i<used_indices.length; i++) {
 					if (AllData[used_indices[i]].duplicates) {
 						for (var j=0; j<AllData[used_indices[i]].duplicates.length; j++) {	
-							
 							index = AllData[used_indices[i]].duplicates[j];
 							if (AllData[index][DATA_NAMES.proj_type] == OTHER_PROJ) {
-								alert('j: '+j)
-								alert('index: '+index);
 								total++;	// counts the number of "Other" projects
 								if (names == "") {								// for 1st project, don't precede with a comma
-									alert('1')
 									names = AllData[index][DATA_NAMES.proj_name];
-									alert(names)
 								} else {										// for the rest, create a list!
-									alert('2')
 									names = names + ", " + AllData[index][DATA_NAMES.proj_name];
 								}
 							}
