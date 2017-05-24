@@ -2908,7 +2908,7 @@
     "End Date": "",
     "Families Served": "",
     "Children Served": "",
-    "Total # of People Served": 105,
+    "Total # of People Served": "",
     "Weeklong Capacity Training": "",
     "Small Scale Capacity Training": "",
     "# of Ceramic Filter Systems": 21,
