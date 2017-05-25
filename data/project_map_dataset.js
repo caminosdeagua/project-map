@@ -1,4 +1,4 @@
-﻿var PROJECT_MAP_DATA =
+﻿var PROJECT_MAP_DATA =				//LALALALAL
 [
   {
     "Community": "Agustín González",
