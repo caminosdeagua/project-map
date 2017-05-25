@@ -192,7 +192,7 @@
 				document.getElementById("stats_projects_no").innerHTML = totalProjects();	// fill it!
 				document.getElementById("stats_people_no").innerHTML = totalPeople();
 				document.getElementById("stats_capacity_no").innerHTML = totalCapacity();
-				document.getElementById("stats_ceramic_no").innerHTML = totalCeramic();
+				document.getElementById("stats_ceramic_no").innerHTML = totalCartridgesAndSystems();
 			}
 			
 			
@@ -1001,7 +1001,7 @@
 			////						totalProjects 	FUNCTION						////
 			////						totalPeople		FUNCTION						////
 			////						totalCapacity	FUNCTION						////
-			////						totalCeramic	FUNCTION						////
+			////						totalCartridgesAndSystems	FUNCTION			////
 			////						totalCommunities	FUNCTION					////
 			////						totalOther		FUNCTION						////
 			////						totalRainSys	FUNCTION						////
@@ -1044,7 +1044,7 @@
 				return total;
 			}
 			
-			function totalCeramic() {
+			function totalCartridgesAndSystems() {
 				var total = 0
 				for (var i=0; i<used_indices.length; i++) {
 					total = total + numberWithoutCommas(filtersDistributed(used_indices[i]));
