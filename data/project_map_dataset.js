@@ -1,9 +1,5 @@
-<<<<<<< HEAD
-﻿[
-=======
-﻿var PROJECT_MAP_DATA =				//LALALALAL
+var PROJECT_MAP_DATA =
 [
->>>>>>> origin/master
   {
     "Community": "Agustín González",
     "Latitude": 20.860267,
@@ -50,7 +46,10 @@
     "Notas 2": "",
     "Notas 3": "",
     "Notas 4": "",
-    "Notas 5": ""
+    "Notas 5": "",
+    "Contact": "School - Parents committee leader, Adriana; Clinic",
+    "Phone Number": "4151082364; 5527212585",
+    "Email": ""
   },
   {
     "Community": "Apaseo Grande",
@@ -98,7 +97,10 @@
     "Notas 2": "",
     "Notas 3": "",
     "Notas 4": "",
-    "Notas 5": ""
+    "Notas 5": "",
+    "Contact": "",
+    "Phone Number": "",
+    "Email": ""
   },
   {
     "Community": "Arenal de Abajo",
@@ -146,7 +148,10 @@
     "Notas 2": "",
     "Notas 3": "",
     "Notas 4": "",
-    "Notas 5": ""
+    "Notas 5": "",
+    "Contact": "",
+    "Phone Number": "",
+    "Email": ""
   },
   {
     "Community": "Arenal de Abajo",
@@ -194,7 +199,10 @@
     "Notas 2": "",
     "Notas 3": "",
     "Notas 4": "",
-    "Notas 5": ""
+    "Notas 5": "",
+    "Contact": "",
+    "Phone Number": "",
+    "Email": ""
   },
   {
     "Community": "Arenal de Arriba",
@@ -242,7 +250,10 @@
     "Notas 2": "",
     "Notas 3": "",
     "Notas 4": "",
-    "Notas 5": ""
+    "Notas 5": "",
+    "Contact": "",
+    "Phone Number": "",
+    "Email": ""
   },
   {
     "Community": "Arenal de Arriba",
@@ -290,7 +301,10 @@
     "Notas 2": "",
     "Notas 3": "",
     "Notas 4": "",
-    "Notas 5": ""
+    "Notas 5": "",
+    "Contact": "",
+    "Phone Number": "",
+    "Email": ""
   },
   {
     "Community": "Atotonilco",
@@ -338,7 +352,10 @@
     "Notas 2": "",
     "Notas 3": "",
     "Notas 4": "",
-    "Notas 5": ""
+    "Notas 5": "",
+    "Contact": "Headmaster",
+    "Phone Number": 4151095066,
+    "Email": ""
   },
   {
     "Community": "Banda",
@@ -386,7 +403,10 @@
     "Notas 2": "",
     "Notas 3": "",
     "Notas 4": "",
-    "Notas 5": ""
+    "Notas 5": "",
+    "Contact": "",
+    "Phone Number": "",
+    "Email": ""
   },
   {
     "Community": "Boca de la Cañada",
@@ -434,7 +454,10 @@
     "Notas 2": "",
     "Notas 3": "",
     "Notas 4": "",
-    "Notas 5": ""
+    "Notas 5": "",
+    "Contact": "Head Master, Lucia",
+    "Phone Number": 4155664524,
+    "Email": ""
   },
   {
     "Community": "Cañajo",
@@ -533,7 +556,10 @@
     "Notas 2": "",
     "Notas 3": "",
     "Notas 4": "",
-    "Notas 5": ""
+    "Notas 5": "",
+    "Contact": "",
+    "Phone Number": "",
+    "Email": ""
   },
   {
     "Community": "CBTis #60",
@@ -581,7 +607,10 @@
     "Notas 2": "",
     "Notas 3": "",
     "Notas 4": "",
-    "Notas 5": ""
+    "Notas 5": "",
+    "Contact": "",
+    "Phone Number": "",
+    "Email": ""
   },
   {
     "Community": "Centro de Caminos de Agua",
@@ -629,7 +658,10 @@
     "Notas 2": "",
     "Notas 3": "",
     "Notas 4": "",
-    "Notas 5": ""
+    "Notas 5": "",
+    "Contact": "",
+    "Phone Number": "",
+    "Email": ""
   },
   {
     "Community": "Centro de Caminos de Agua",
@@ -677,7 +709,10 @@
     "Notas 2": "",
     "Notas 3": "",
     "Notas 4": "",
-    "Notas 5": ""
+    "Notas 5": "",
+    "Contact": "",
+    "Phone Number": "",
+    "Email": ""
   },
   {
     "Community": "Centro de Caminos de Agua",
@@ -776,7 +811,10 @@
     "Notas 2": "",
     "Notas 3": "",
     "Notas 4": "",
-    "Notas 5": ""
+    "Notas 5": "",
+    "Contact": "",
+    "Phone Number": "",
+    "Email": ""
   },
   {
     "Community": "Cerritos",
@@ -926,7 +964,10 @@
     "Notas 2": "",
     "Notas 3": "",
     "Notas 4": "",
-    "Notas 5": ""
+    "Notas 5": "",
+    "Contact": "",
+    "Phone Number": "",
+    "Email": ""
   },
   {
     "Community": "Chiapas, Mexico",
@@ -974,7 +1015,10 @@
     "Notas 2": "",
     "Notas 3": "",
     "Notas 4": "",
-    "Notas 5": ""
+    "Notas 5": "",
+    "Contact": "",
+    "Phone Number": "",
+    "Email": ""
   },
   {
     "Community": "Chiapas, Mexico",
@@ -1022,7 +1066,10 @@
     "Notas 2": "",
     "Notas 3": "",
     "Notas 4": "",
-    "Notas 5": ""
+    "Notas 5": "",
+    "Contact": "",
+    "Phone Number": "",
+    "Email": ""
   },
   {
     "Community": "CODECIN",
@@ -1070,7 +1117,10 @@
     "Notas 2": "",
     "Notas 3": "",
     "Notas 4": "",
-    "Notas 5": ""
+    "Notas 5": "",
+    "Contact": "",
+    "Phone Number": "",
+    "Email": ""
   },
   {
     "Community": "Cruz del Palmar",
@@ -1118,7 +1168,10 @@
     "Notas 2": "",
     "Notas 3": "",
     "Notas 4": "",
-    "Notas 5": ""
+    "Notas 5": "",
+    "Contact": "Edgar (headmaster)",
+    "Phone Number": 4737567966,
+    "Email": ""
   },
   {
     "Community": "Don Juan",
@@ -1166,7 +1219,10 @@
     "Notas 2": "",
     "Notas 3": "",
     "Notas 4": "",
-    "Notas 5": ""
+    "Notas 5": "",
+    "Contact": "Mother, Remedios",
+    "Phone Number": 4151022185,
+    "Email": ""
   },
   {
     "Community": "El Capaderillo",
@@ -1214,7 +1270,10 @@
     "Notas 2": "",
     "Notas 3": "",
     "Notas 4": "",
-    "Notas 5": ""
+    "Notas 5": "",
+    "Contact": "",
+    "Phone Number": "",
+    "Email": ""
   },
   {
     "Community": "El Salitre",
@@ -1262,7 +1321,10 @@
     "Notas 2": "",
     "Notas 3": "",
     "Notas 4": "",
-    "Notas 5": ""
+    "Notas 5": "",
+    "Contact": "Head Master, Anselmo",
+    "Phone Number": 1218487,
+    "Email": ""
   },
   {
     "Community": "Escuela de Educación Especial de San Miguel de Allende, A.C. & Casa de Voluntarios",
@@ -1310,7 +1372,10 @@
     "Notas 2": "",
     "Notas 3": "",
     "Notas 4": "",
-    "Notas 5": ""
+    "Notas 5": "",
+    "Contact": "",
+    "Phone Number": "",
+    "Email": ""
   },
   {
     "Community": "General Filter Sales",
@@ -1358,7 +1423,10 @@
     "Notas 2": "",
     "Notas 3": "",
     "Notas 4": "",
-    "Notas 5": ""
+    "Notas 5": "",
+    "Contact": "",
+    "Phone Number": "",
+    "Email": ""
   },
   {
     "Community": "Haiti",
@@ -1406,7 +1474,10 @@
     "Notas 2": "",
     "Notas 3": "",
     "Notas 4": "",
-    "Notas 5": ""
+    "Notas 5": "",
+    "Contact": "",
+    "Phone Number": "",
+    "Email": ""
   },
   {
     "Community": "Isla Urbana",
@@ -1454,7 +1525,10 @@
     "Notas 2": "",
     "Notas 3": "",
     "Notas 4": "",
-    "Notas 5": ""
+    "Notas 5": "",
+    "Contact": "",
+    "Phone Number": "",
+    "Email": ""
   },
   {
     "Community": "Juan González",
@@ -1502,7 +1576,10 @@
     "Notas 2": "",
     "Notas 3": "",
     "Notas 4": "",
-    "Notas 5": ""
+    "Notas 5": "",
+    "Contact": "",
+    "Phone Number": "",
+    "Email": ""
   },
   {
     "Community": "La Aurora",
@@ -1550,7 +1627,10 @@
     "Notas 2": "",
     "Notas 3": "",
     "Notas 4": "",
-    "Notas 5": ""
+    "Notas 5": "",
+    "Contact": "Mother, Alejandra",
+    "Phone Number": 4151039173,
+    "Email": ""
   },
   {
     "Community": "La Cienega",
@@ -1598,7 +1678,10 @@
     "Notas 2": "",
     "Notas 3": "",
     "Notas 4": "",
-    "Notas 5": ""
+    "Notas 5": "",
+    "Contact": "",
+    "Phone Number": "",
+    "Email": ""
   },
   {
     "Community": "La Colorada",
@@ -1646,7 +1729,10 @@
     "Notas 2": "",
     "Notas 3": "",
     "Notas 4": "",
-    "Notas 5": ""
+    "Notas 5": "",
+    "Contact": "Aucencio Domenzain",
+    "Phone Number": "",
+    "Email": "aucencio@thelavenderproject.com"
   },
   {
     "Community": "La Escoba",
@@ -1694,7 +1780,10 @@
     "Notas 2": "",
     "Notas 3": "",
     "Notas 4": "",
-    "Notas 5": ""
+    "Notas 5": "",
+    "Contact": "",
+    "Phone Number": "",
+    "Email": ""
   },
   {
     "Community": "La Escoba",
@@ -1742,7 +1831,10 @@
     "Notas 2": "",
     "Notas 3": "",
     "Notas 4": "",
-    "Notas 5": ""
+    "Notas 5": "",
+    "Contact": "",
+    "Phone Number": "",
+    "Email": ""
   },
   {
     "Community": "La Laguna Escondida",
@@ -1841,7 +1933,10 @@
     "Notas 2": "",
     "Notas 3": "",
     "Notas 4": "",
-    "Notas 5": ""
+    "Notas 5": "",
+    "Contact": "",
+    "Phone Number": "",
+    "Email": ""
   },
   {
     "Community": "La Onza",
@@ -1889,7 +1984,10 @@
     "Notas 2": "",
     "Notas 3": "",
     "Notas 4": "",
-    "Notas 5": ""
+    "Notas 5": "",
+    "Contact": "",
+    "Phone Number": "",
+    "Email": ""
   },
   {
     "Community": "La Onza",
@@ -1937,7 +2035,10 @@
     "Notas 2": "",
     "Notas 3": "",
     "Notas 4": "",
-    "Notas 5": ""
+    "Notas 5": "",
+    "Contact": "",
+    "Phone Number": "",
+    "Email": ""
   },
   {
     "Community": "Las Adjuntas de San José/Los Cuates",
@@ -1985,7 +2086,10 @@
     "Notas 2": "",
     "Notas 3": "",
     "Notas 4": "",
-    "Notas 5": ""
+    "Notas 5": "",
+    "Contact": "",
+    "Phone Number": "",
+    "Email": ""
   },
   {
     "Community": "Las Adjuntas del Monte",
@@ -2033,7 +2137,10 @@
     "Notas 2": "",
     "Notas 3": "",
     "Notas 4": "",
-    "Notas 5": ""
+    "Notas 5": "",
+    "Contact": "",
+    "Phone Number": "",
+    "Email": ""
   },
   {
     "Community": "Las Liebres",
@@ -2081,7 +2188,10 @@
     "Notas 2": "",
     "Notas 3": "",
     "Notas 4": "",
-    "Notas 5": ""
+    "Notas 5": "",
+    "Contact": "",
+    "Phone Number": "",
+    "Email": ""
   },
   {
     "Community": "Santas Marías",
@@ -2231,7 +2341,10 @@
     "Notas 2": "",
     "Notas 3": "",
     "Notas 4": "",
-    "Notas 5": ""
+    "Notas 5": "",
+    "Contact": "",
+    "Phone Number": "",
+    "Email": ""
   },
   {
     "Community": "Las Yerbas",
@@ -2279,7 +2392,10 @@
     "Notas 2": "",
     "Notas 3": "",
     "Notas 4": "",
-    "Notas 5": ""
+    "Notas 5": "",
+    "Contact": "",
+    "Phone Number": "",
+    "Email": ""
   },
   {
     "Community": "Llano Verde",
@@ -2327,7 +2443,10 @@
     "Notas 2": "",
     "Notas 3": "",
     "Notas 4": "",
-    "Notas 5": ""
+    "Notas 5": "",
+    "Contact": "",
+    "Phone Number": "",
+    "Email": ""
   },
   {
     "Community": "Llano Verde",
@@ -2375,7 +2494,10 @@
     "Notas 2": "",
     "Notas 3": "",
     "Notas 4": "",
-    "Notas 5": ""
+    "Notas 5": "",
+    "Contact": "",
+    "Phone Number": "",
+    "Email": ""
   },
   {
     "Community": "Los Lopez",
@@ -2423,7 +2545,10 @@
     "Notas 2": "",
     "Notas 3": "",
     "Notas 4": "",
-    "Notas 5": ""
+    "Notas 5": "",
+    "Contact": "",
+    "Phone Number": "",
+    "Email": ""
   },
   {
     "Community": "Los Platanos",
@@ -2471,7 +2596,10 @@
     "Notas 2": "",
     "Notas 3": "",
     "Notas 4": "",
-    "Notas 5": ""
+    "Notas 5": "",
+    "Contact": "",
+    "Phone Number": "",
+    "Email": ""
   },
   {
     "Community": "Los Platanos",
@@ -2621,7 +2749,10 @@
     "Notas 2": "",
     "Notas 3": "",
     "Notas 4": "",
-    "Notas 5": ""
+    "Notas 5": "",
+    "Contact": "Headmaster",
+    "Phone Number": 4181813375,
+    "Email": ""
   },
   {
     "Community": "Palomas, Chihuahua - Compañeros de la Frontera",
@@ -2720,7 +2851,10 @@
     "Notas 2": "",
     "Notas 3": "",
     "Notas 4": "",
-    "Notas 5": ""
+    "Notas 5": "",
+    "Contact": "",
+    "Phone Number": "",
+    "Email": ""
   },
   {
     "Community": "Pozo Ademado",
@@ -2768,7 +2902,10 @@
     "Notas 2": "",
     "Notas 3": "",
     "Notas 4": "",
-    "Notas 5": ""
+    "Notas 5": "",
+    "Contact": "",
+    "Phone Number": "",
+    "Email": ""
   },
   {
     "Community": "Pozo Ademado",
@@ -2816,7 +2953,10 @@
     "Notas 2": "",
     "Notas 3": "",
     "Notas 4": "",
-    "Notas 5": ""
+    "Notas 5": "",
+    "Contact": "",
+    "Phone Number": "",
+    "Email": ""
   },
   {
     "Community": "Pozo Hondo",
@@ -2966,7 +3106,10 @@
     "Notas 2": "",
     "Notas 3": "",
     "Notas 4": "",
-    "Notas 5": ""
+    "Notas 5": "",
+    "Contact": "",
+    "Phone Number": "",
+    "Email": ""
   },
   {
     "Community": "Rancho Nuevo",
@@ -3065,7 +3208,10 @@
     "Notas 2": "",
     "Notas 3": "",
     "Notas 4": "",
-    "Notas 5": ""
+    "Notas 5": "",
+    "Contact": "Head Master",
+    "Phone Number": 4151251989,
+    "Email": ""
   },
   {
     "Community": "San Antonio de la Joya",
@@ -3113,7 +3259,10 @@
     "Notas 2": "",
     "Notas 3": "",
     "Notas 4": "",
-    "Notas 5": ""
+    "Notas 5": "",
+    "Contact": "Head Master, Miguel",
+    "Phone Number": 4151076436,
+    "Email": ""
   },
   {
     "Community": "San Antonio de Las Mujeres",
@@ -3212,7 +3361,10 @@
     "Notas 2": "",
     "Notas 3": "",
     "Notas 4": "",
-    "Notas 5": ""
+    "Notas 5": "",
+    "Contact": "",
+    "Phone Number": "",
+    "Email": ""
   },
   {
     "Community": "San Antonio de Lourdes",
@@ -3402,15 +3554,9 @@
     "Old Image Link": "",
     "Video Link": "",
     "Video Link Spanish": "",
-<<<<<<< HEAD
     "Images Folder": "",
     "Document": "",
     "Notes 1": "",
-=======
-    "Images Folder": "https://www.dropbox.com/sh/nmp1hho287tmigj/AABpbhPqPHUi4s8LIuxJ-XHja?dl=0",
-    "Document": "http://caminosdeagua.org/news/2016/9/30/blessing-new-cisterns-in-san-antonio-de-lourdes-a-reflection-by-chantal-kronenburg",
-    "Notes 1": "10 Cisterns built in community homes in July 2016.  Caminos de Agua led anoter week-long capacity training with numerous local organizations as well as other communities invited to participate. Engineers Without Borders - University College of  London provided the funding for this project as well as participated in the training and first cistern build.",
->>>>>>> origin/master
     "Notes 2": "",
     "Notes 3": "",
     "Notes 4": "",
@@ -3419,7 +3565,10 @@
     "Notas 2": "",
     "Notas 3": "",
     "Notas 4": "",
-    "Notas 5": ""
+    "Notas 5": "",
+    "Contact": "",
+    "Phone Number": "",
+    "Email": ""
   },
   {
     "Community": "San Cayetano",
@@ -3434,7 +3583,6 @@
     "Localización": "Centro Comunitario de San Cayetano",
     "Partner Organization": "Centro Comunitario de San Cayetano",
     "Coordinates": "",
-<<<<<<< HEAD
     "Start Date": "01-Jan-14",
     "End Date": "Present",
     "Community Population": "",
@@ -3448,19 +3596,6 @@
     "Biochar Treatment System (300L/day)": "",
     "Slow-Sand Biofilter": "",
     "Ferrocement RWH Systems (12,000L)": "",
-=======
-    "Start Date": "01-Feb-17",
-    "End Date": "30-Apr-17",
-    "Families Served": 4,
-    "Children Served": "",
-    "Total # of People Served": 20,
-    "Weeklong Capacity Training": "",
-    "Small Scale Capacity Training": "",
-    "# of Ceramic Filter Systems": 4,
-    "# of Ceramic Water Filters": "",
-    "Biochar Treatment System (300L/day)": "",
-    "Ferrocement RWH Systems (12,000L)": 4,
->>>>>>> origin/master
     "Rain Jar (2,000L)": "",
     "Rotoplas Cistern (2,500L)": "",
     "Rotoplas Cistern (10,000L)": "",
@@ -3471,13 +3606,8 @@
     "Video Link": "",
     "Video Link Spanish": "",
     "Images Folder": "",
-<<<<<<< HEAD
     "Document": "",
     "Notes 1": "",
-=======
-    "Document": "http://caminosdeagua.org/news/2016/5/19/the-new-york-times-covers-water-in-mexico",
-    "Notes 1": "Three aditional cisterns where built in February 2017.  Funding was provided through Caminos de Agua's Global Giving Campaign with 50% matching funds provided by the Gates Foundation.",
->>>>>>> origin/master
     "Notes 2": "",
     "Notes 3": "",
     "Notes 4": "",
@@ -3486,54 +3616,48 @@
     "Notas 2": "",
     "Notas 3": "",
     "Notas 4": "",
-    "Notas 5": ""
+    "Notas 5": "",
+    "Contact": "",
+    "Phone Number": "",
+    "Email": ""
   },
   {
     "Community": "San Cayetano",
     "Latitude": 21.42325,
     "Longitude": -100.65455,
-    "Project Name": "",
+    "Project Name": "GG Cistern Projects",
     "Nombre de proyecto": "",
-    "Project Type": "Ceramic Water Filter",
-    "Tipo de proyecto": "Filtros cerámicos",
+    "Project Type": "Rainwater Harvesting",
+    "Tipo de proyecto": "Cosecha de agua de lluvia",
     "Municipality": "San Luis de la Paz",
-    "Site Location": "San Cayetano Community Center",
-    "Localización": "Centro Comunitario de San Cayetano",
-    "Partner Organization": "Centro Comunitario de San Cayetano",
+    "Site Location": "Elementary School",
+    "Localización": "Escuela primaria",
+    "Partner Organization": "CUVA",
     "Coordinates": "",
-<<<<<<< HEAD
     "Start Date": "",
     "End Date": "01-May-16",
     "Community Population": "",
-=======
-    "Start Date": "01-Jan-14",
-    "End Date": "Present",
->>>>>>> origin/master
     "Families Served": "",
-    "Children Served": "",
-    "Total # of People Served": 750,
+    "Children Served": 25,
+    "Total # of People Served": 28,
     "Weeklong Capacity Training": "",
     "Small Scale Capacity Training": "",
-    "# of Ceramic Filter Systems": 150,
+    "# of Ceramic Filter Systems": 2,
     "# of Ceramic Water Filters": "",
     "Biochar Treatment System (300L/day)": "",
-<<<<<<< HEAD
     "Slow-Sand Biofilter": "",
     "Ferrocement RWH Systems (12,000L)": 1,
-=======
-    "Ferrocement RWH Systems (12,000L)": "",
->>>>>>> origin/master
     "Rain Jar (2,000L)": "",
     "Rotoplas Cistern (2,500L)": "",
     "Rotoplas Cistern (10,000L)": "",
     "Large Geomembrane (30,000L)": "",
     "Large Underground (80,000L+)": "",
-    "Image Link": "",
+    "Image Link": "https://lh3.googleusercontent.com/ig8hjkYdLfxtcFgUg3d5HPKmIro1ZcClGWeZ2XmPK58bIwyx_VRwkA",
     "Old Image Link": "",
     "Video Link": "",
     "Video Link Spanish": "",
-    "Images Folder": "",
-    "Document": "",
+    "Images Folder": "https://www.dropbox.com/sh/5rzce6s6gymv930/AACo7ASEP5IMNhDz-IbEVLa3a?dl=0",
+    "Document": "https://www.dropbox.com/sh/k6mbfmkuitu5wlk/AAB0SUo7Qsfv85LnLi1owJmla?dl=0",
     "Notes 1": "",
     "Notes 2": "",
     "Notes 3": "",
@@ -3543,10 +3667,12 @@
     "Notas 2": "",
     "Notas 3": "",
     "Notas 4": "",
-    "Notas 5": ""
+    "Notas 5": "",
+    "Contact": "",
+    "Phone Number": "",
+    "Email": ""
   },
   {
-<<<<<<< HEAD
     "Community": "San José del Carmen",
     "Latitude": 21.330833,
     "Longitude": -100.559722,
@@ -3572,42 +3698,17 @@
     "Biochar Treatment System (300L/day)": "",
     "Slow-Sand Biofilter": "",
     "Ferrocement RWH Systems (12,000L)": 5,
-=======
-    "Community": "San Cayetano",
-    "Latitude": 21.42325,
-    "Longitude": -100.65455,
-    "Project Name": "GG Cistern Projects",
-    "Nombre de proyecto": "",
-    "Project Type": "Rainwater Harvesting",
-    "Tipo de proyecto": "Cosecha de agua de lluvia",
-    "Municipality": "San Luis de la Paz",
-    "Site Location": "Elementary School",
-    "Localización": "Escuela primaria",
-    "Partner Organization": "CUVA",
-    "Coordinates": "",
-    "Start Date": "",
-    "End Date": "01-May-16",
-    "Families Served": "",
-    "Children Served": 25,
-    "Total # of People Served": 28,
-    "Weeklong Capacity Training": "",
-    "Small Scale Capacity Training": "",
-    "# of Ceramic Filter Systems": 2,
-    "# of Ceramic Water Filters": "",
-    "Biochar Treatment System (300L/day)": "",
-    "Ferrocement RWH Systems (12,000L)": 1,
->>>>>>> origin/master
     "Rain Jar (2,000L)": "",
     "Rotoplas Cistern (2,500L)": "",
     "Rotoplas Cistern (10,000L)": "",
     "Large Geomembrane (30,000L)": "",
     "Large Underground (80,000L+)": "",
-    "Image Link": "https://lh3.googleusercontent.com/ig8hjkYdLfxtcFgUg3d5HPKmIro1ZcClGWeZ2XmPK58bIwyx_VRwkA",
+    "Image Link": "",
     "Old Image Link": "",
     "Video Link": "",
     "Video Link Spanish": "",
-    "Images Folder": "https://www.dropbox.com/sh/5rzce6s6gymv930/AACo7ASEP5IMNhDz-IbEVLa3a?dl=0",
-    "Document": "https://www.dropbox.com/sh/k6mbfmkuitu5wlk/AAB0SUo7Qsfv85LnLi1owJmla?dl=0",
+    "Images Folder": "",
+    "Document": "",
     "Notes 1": "",
     "Notes 2": "",
     "Notes 3": "",
@@ -3617,7 +3718,10 @@
     "Notas 2": "",
     "Notas 3": "",
     "Notas 4": "",
-    "Notas 5": ""
+    "Notas 5": "",
+    "Contact": "",
+    "Phone Number": "",
+    "Email": ""
   },
   {
     "Community": "San José Xacxamayo, Puebla",
@@ -3665,7 +3769,10 @@
     "Notas 2": "",
     "Notas 3": "",
     "Notas 4": "",
-    "Notas 5": ""
+    "Notas 5": "",
+    "Contact": "",
+    "Phone Number": "",
+    "Email": ""
   },
   {
     "Community": "San Luis de la Paz",
@@ -3713,7 +3820,10 @@
     "Notas 2": "",
     "Notas 3": "",
     "Notas 4": "",
-    "Notas 5": ""
+    "Notas 5": "",
+    "Contact": "",
+    "Phone Number": "",
+    "Email": ""
   },
   {
     "Community": "San Miguel Viejo",
@@ -3761,7 +3871,10 @@
     "Notas 2": "",
     "Notas 3": "",
     "Notas 4": "",
-    "Notas 5": ""
+    "Notas 5": "",
+    "Contact": "Paty (headmaster)",
+    "Phone Number": 4151492440,
+    "Email": ""
   },
   {
     "Community": "San Miguel Viejo",
@@ -3809,7 +3922,10 @@
     "Notas 2": "",
     "Notas 3": "",
     "Notas 4": "",
-    "Notas 5": ""
+    "Notas 5": "",
+    "Contact": "",
+    "Phone Number": "",
+    "Email": ""
   },
   {
     "Community": "San Miguel Viejo",
@@ -3908,7 +4024,10 @@
     "Notas 2": "",
     "Notas 3": "",
     "Notas 4": "",
-    "Notas 5": ""
+    "Notas 5": "",
+    "Contact": "",
+    "Phone Number": "",
+    "Email": ""
   },
   {
     "Community": "Sierra Gorda (Tilaco)",
@@ -3956,7 +4075,10 @@
     "Notas 2": "",
     "Notas 3": "",
     "Notas 4": "",
-    "Notas 5": ""
+    "Notas 5": "",
+    "Contact": "",
+    "Phone Number": "",
+    "Email": ""
   },
   {
     "Community": "Soledad Nueva",
@@ -4004,7 +4126,10 @@
     "Notas 2": "",
     "Notas 3": "",
     "Notas 4": "",
-    "Notas 5": ""
+    "Notas 5": "",
+    "Contact": "",
+    "Phone Number": "",
+    "Email": ""
   },
   {
     "Community": "Sosnabar",
@@ -4052,7 +4177,10 @@
     "Notas 2": "",
     "Notas 3": "",
     "Notas 4": "",
-    "Notas 5": ""
+    "Notas 5": "",
+    "Contact": "",
+    "Phone Number": "",
+    "Email": ""
   },
   {
     "Community": "Guadalupe de Támbula",
@@ -4151,7 +4279,10 @@
     "Notas 2": "",
     "Notas 3": "",
     "Notas 4": "",
-    "Notas 5": ""
+    "Notas 5": "",
+    "Contact": "",
+    "Phone Number": "",
+    "Email": ""
   },
   {
     "Community": "Vergel de Guadalupe",
@@ -4250,7 +4381,10 @@
     "Notas 2": "",
     "Notas 3": "",
     "Notas 4": "",
-    "Notas 5": ""
+    "Notas 5": "",
+    "Contact": "",
+    "Phone Number": "",
+    "Email": ""
   },
   {
     "Community": "Villa Nueva",
@@ -4298,7 +4432,6 @@
     "Notas 2": "",
     "Notas 3": "",
     "Notas 4": "",
-<<<<<<< HEAD
     "Notas 5": "",
     "Contact": "",
     "Phone Number": "",
@@ -4354,8 +4487,5 @@
     "Contact": "",
     "Phone Number": "",
     "Email": ""
-=======
-    "Notas 5": ""
->>>>>>> origin/master
   }
 ]
