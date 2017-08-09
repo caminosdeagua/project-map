@@ -342,7 +342,7 @@ var PROJECT_MAP_DATA =
     "Video Link": "",
     "Video Link Spanish": "",
     "Images Folder": "",
-    "Document": "",
+    "Document": "https://www.flickr.com/photos/caminosdeagua/albums/72157684725853584",
     "Notes 1": "Engineers Without Borders - University College of London project, now overseen and maintained by Caminos de Agua.",
     "Notes 2": "",
     "Notes 3": "",
