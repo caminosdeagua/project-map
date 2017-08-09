@@ -1867,7 +1867,7 @@ var PROJECT_MAP_DATA =
     "Rotoplas Cistern (10,000L)": "",
     "Large Geomembrane (30,000L)": "",
     "Large Underground (80,000L+)": "",
-    "Image Link": "",
+    "Image Link": "https://caminosdeagua.github.io/project-map/media/photos/laguna-escondida.JPG",
     "Old Image Link": "",
     "Video Link": "",
     "Video Link Spanish": "",
