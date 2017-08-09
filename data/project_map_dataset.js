@@ -750,7 +750,7 @@ var PROJECT_MAP_DATA =
     "Video Link": "",
     "Video Link Spanish": "",
     "Images Folder": "",
-    "Document": "",
+    "Document": "https://www.flickr.com/photos/caminosdeagua/albums/72157684725853584",
     "Notes 1": "",
     "Notes 2": "",
     "Notes 3": "",
