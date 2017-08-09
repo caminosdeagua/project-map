@@ -192,7 +192,7 @@
 				document.getElementById("stats_projects_no").innerHTML = totalProjects();	// fill it!
 				document.getElementById("stats_people_no").innerHTML = totalPeople();
 				document.getElementById("stats_capacity_no").innerHTML = totalCapacity();
-				document.getElementById("stats_ceramic_no").innerHTML = totalCeramic();
+				document.getElementById("stats_ceramic_no").innerHTML = totalCartridgesAndSystems();
 			}
 			
 			
@@ -989,7 +989,7 @@
 				summary[EASTER_EGG_TXT.projects] = totalProjects();
 				summary[EASTER_EGG_TXT.other] = totalOther()[0];
 				summary[EASTER_EGG_TXT.otherNames] = totalOther()[1];
-				summary[EASTER_EGG_TXT.schools] = 6
+				summary[EASTER_EGG_TXT.schools] = totalSchools();
 				summary[EASTER_EGG_TXT.shortShops]= totalWorkshops()[0];
 				summary[EASTER_EGG_TXT.longShops] = totalWorkshops() [1];
 				summary[EASTER_EGG_TXT.laborHours] = totalHours();	
@@ -1001,13 +1001,15 @@
 			////						totalProjects 	FUNCTION						////
 			////						totalPeople		FUNCTION						////
 			////						totalCapacity	FUNCTION						////
-			////						totalCeramic	FUNCTION						////
+			////						totalCartridgesAndSystems	FUNCTION			////
 			////						totalCommunities	FUNCTION					////
 			////						totalOther		FUNCTION						////
 			////						totalRainSys	FUNCTION						////
 			////						totalCeramic	FUNCTION						////
 			////						totalPartners	FUNCTION						////
-			////						totalWorkshops	FUNCTION												////
+			////						totalWorkshops	FUNCTION						////
+			////						totalHours		FUNCTION						////
+			////						totalSchools	FUNCTION						////
 			////																		////
 			//// 	These functions agregate information from all of the duplicate 		////
 			////	projects over all of the sites. Can only be called once all the 	////
@@ -1042,7 +1044,7 @@
 				return total;
 			}
 			
-			function totalCeramic() {
+			function totalCartridgesAndSystems() {
 				var total = 0
 				for (var i=0; i<used_indices.length; i++) {
 					total = total + numberWithoutCommas(filtersDistributed(used_indices[i]));
@@ -1120,7 +1122,7 @@
 									var partners = AllData[index][DATA_NAMES.partner].split("; ");
 									for (var k=0; k<partners.length; k++) {
 										var re = new RegExp(partners[k], 'g');
-										if (names.match(re) == null || names.match(re) == 0 || names.match(re) == false) {
+										if (names.match(re) == null | names.match(re) == 0 | names.match(re) == false) {
 											names = names + "; " + partners[k];
 										}
 									}
@@ -1161,6 +1163,24 @@
 				}
 				return totalFerro * PPL_PER_CISTERN * DAYS_PER_CISTERN * HRS_PER_DAY;
 			}
+			
+			function totalSchools() {
+				var schools = 0;
+				for (var i=0; i<used_indices.length; i++) {
+					if (AllData[used_indices[i]].duplicates) {
+						for (var j=0; j<AllData[used_indices[i]].duplicates.length; j++) {	
+							index = AllData[used_indices[i]].duplicates[j];
+							var re = new RegExp("school", 'gi');
+							var sites = AllData[index][DATA_NAMES.site];
+							if (sites.match(re) != null && sites.match(re) != 0 && sites.match(re) != false) {
+								schools = schools + sites.match(re).length;
+							}
+						}
+					}
+				}
+				return schools;			
+			}
+			
 			////////////////////////////////////////////////////////////////////////////////
 			////						projectsCompleted 	FUNCTION					////
 			////						peopleImpacted 		FUNCTION					////
