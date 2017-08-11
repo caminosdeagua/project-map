@@ -674,19 +674,32 @@
 							dup = AllData[z].duplicates[j];
 							rawDate = String(AllData[dup][DATA_NAMES.start_date]).split("-", 3);
 							
-							date = MONTHS_LONG[ENGLISH_MONTHS.indexOf(rawDate[1])]+", 20"+rawDate[2];
+							date = MONTHS_LONG[AllData[dup][DATA_NAMES.start_month]]+", "+String(AllData[dup][DATA_NAMES.start_year]);
 							var nameToDisplay = AllData[dup][DATA_NAMES.proj_type];
 							var proj_name = AllData[dup][DATA_NAMES.proj_name]
 							if (nameToDisplay == OTHER_PROJ && proj_name != "" && proj_name != null) {
 								nameToDisplay = proj_name;
 							}
+							dateExists = !isEmpty(dup, "start_month") && !isEmpty(dup, "start_year");
 							if (j==0) {
-								els[i].innerHTML = "<p class='proj_box_even' onclick='openFromLobby("+String(dup)+");'>"+nameToDisplay+": "+date+"</p>";
+								if (dateExists) {
+									els[i].innerHTML = "<p class='proj_box_even' onclick='openFromLobby("+String(dup)+");'>"+nameToDisplay+": "+date+"</p>";
+								} else {
+									els[i].innerHTML = "<p class='proj_box_even' onclick='openFromLobby("+String(dup)+");'>"+nameToDisplay+"</p>";
+								}
 							} else {
 								if (j%2==0) {
-									els[i].innerHTML = els[i].innerHTML+"<p class='proj_box_even' onclick='openFromLobby("+String(dup)+");'>"+nameToDisplay+": "+date+"</p>";
+									if (dateExists) {
+										els[i].innerHTML = els[i].innerHTML+"<p class='proj_box_even' onclick='openFromLobby("+String(dup)+");'>"+nameToDisplay+": "+date+"</p>";
+									} else {
+										els[i].innerHTML = els[i].innerHTML+"<p class='proj_box_even' onclick='openFromLobby("+String(dup)+");'>"+nameToDisplay+"</p>";
+									}
 								} else {
-									els[i].innerHTML = els[i].innerHTML+"<p class='proj_box_odd' onclick='openFromLobby("+String(dup)+");'>"+nameToDisplay+": "+date+"</p>";
+									if (dateExists) {
+										els[i].innerHTML = els[i].innerHTML+"<p class='proj_box_odd' onclick='openFromLobby("+String(dup)+");'>"+nameToDisplay+": "+date+"</p>";
+									} else {
+										els[i].innerHTML = els[i].innerHTML+"<p class='proj_box_odd' onclick='openFromLobby("+String(dup)+");'>"+nameToDisplay+"</p>";
+									}
 								}
 							}
 						}	
