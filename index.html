@@ -11,7 +11,7 @@
 		
 		<!-- jquery -->			<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 		<!-- global vars -->	<script src="https://caminosdeagua.github.io/project-map/global.js" type="text/javascript" /></script>
-		<!-- dataset!!! -->		<script src="https://caminosdeagua.github.io/project-map/data/project_map_dataset.js" type="text/javascript" /></script>
+		<!-- dataset!!! -->		<script src="data/project_map_dataset.js" type="text/javascript" /></script><!--https://caminosdeagua.github.io/project-map/-->
 		
 		<!-- All language changes happen here!!!! -->
 		<!--------------------------------------------------------------------------------------------------->
@@ -264,22 +264,14 @@
 				
 				for (var i=0; i<data.length; i++) { // Loop through all the rows of the data
 					var bin;
-					if (data[i][DATA_NAMES.name] == null | data[i][DATA_NAMES.name] == "" |	// if there's no date or latLng info, 
-						data[i][DATA_NAMES.lat] == null | data[i][DATA_NAMES.lat] == "" |	//	ignore the point!
-						data[i][DATA_NAMES.lng] == null | data[i][DATA_NAMES.lng] == "" |
-						bin == -1) {
-					
-						
+					if (isEmpty(i, "name") | isEmpty(i, "lat") | isEmpty(i, "lng") | bin == -1) { 
 					} else {
-						
-						
-						
 						if (i==0 || data[i][DATA_NAMES.name] != data[i-1][DATA_NAMES.name]) {			// if not a duplicate point (special case for 0th point, cause 0-1 does not exist)
 							duplicateCounter = 0;
 							AllData[i].duplicates = [i]; 		// create a new array in AllData called duplicates to hold indices of duplicates of this point
 							bin = getBin(data, i);
 							AllData[i].bin = bin;
-							if (data[i][DATA_NAMES.photo] == null | data[i][DATA_NAMES.photo] == "") { // if there's no photo, do nothing
+							if (isEmpty(i, "photo")) { // if there's no photo, do nothing
 							} else { 							// if there's a photo, get it from the link and store it in the browser
 								photos[i] = new Image();
 								photos[i].src = data[i][DATA_NAMES.photo];
@@ -365,7 +357,7 @@
 								base.Markers[base.Markers.length-1].addTo(map);
 							}
 							AllData[i].bin = bin;	
-							if (data[i][DATA_NAMES.photo] == null | data[i][DATA_NAMES.photo] == "") { // if there's no photo, do nothing
+							if (isEmpty(i, "photo")) { // if there's no photo, do nothing
 							} else { 							// if there's a photo, get it from the link and store it in the browser
 								photos[i] = new Image();
 								photos[i].src = data[i][DATA_NAMES.photo];
@@ -463,7 +455,7 @@
 						toDisplay = true;
 						els[i].innerHTML = AllData[z][DATA_NAMES.name]+":<br><i>"
 						if (AllData[z][DATA_NAMES.proj_type] == OTHER_PROJ) {
-							if (AllData[z][DATA_NAMES.proj_name] != "" && AllData[z][DATA_NAMES.proj_name] != null) {
+							if (!isEmpty(z, "proj_name")) {
 								els[i].innerHTML = els[i].innerHTML + AllData[z][DATA_NAMES.proj_name]+"</i>";
 							}
 						} else {
@@ -473,16 +465,15 @@
 						els[i].innerHTML = BACK_BUTTON_TXT[0]+AllData[z][DATA_NAMES.name]+BACK_BUTTON_TXT[1];
 						if (AllData[z].isDuplicate) {toDisplay = true;}
 					} else if (id == "dates") {				// If there are dates, include them here:
-						if ((AllData[z][DATA_NAMES.start_date] == null | AllData[z][DATA_NAMES.start_date] == "") &&
-							(AllData[z][DATA_NAMES.end_date] == null | AllData[z][DATA_NAMES.end_date] == "")) {}
+						if (isEmpty(z, "start_year") && isEmpty(z, "end_year")) {}		// if there is no year (i.e. no date) do not display
 						else {
 							toDisplay = true;
-							var start_date = AllData[z][DATA_NAMES.start_date];
-							var end_date = AllData[z][DATA_NAMES.end_date];
+							var start_date = formatDate(AllData[z][DATA_NAMES.start_day], AllData[z][DATA_NAMES.start_month], AllData[z][DATA_NAMES.start_year])
+							var end_date = formatDate(AllData[z][DATA_NAMES.end_day], AllData[z][DATA_NAMES.end_month], AllData[z][DATA_NAMES.end_year])
 							var formattedDate;
-							if (start_date == null | start_date == "") {
+							if (start_date == NO_INFO) {
 								formattedDate = String(end_date);
-							} else if (end_date == null | end_date == "") {
+							} else if (end_date == NO_INFO) {
 								formattedDate = String(start_date);
 							} else {
 								if(end_date == start_date) {
@@ -494,7 +485,7 @@
 							els[i].innerHTML = "<b>"+LBL[id]+"</b>"+END_OF_HEADER+formattedDate;
 						}
 					} else if (id == "video")
-						if (AllData[z][DATA_NAMES[id]] == null | AllData[z][DATA_NAMES[id]] == "") {}
+						if (isEmpty(z, id)) {}
 						else {
 							toDisplay = true;
 							isVideo = true;
@@ -503,8 +494,7 @@
 					
 					
 					} else if (id == "photo") {			// If there's a photo, deal with it:
-						if ((AllData[z][DATA_NAMES[id]] == null | AllData[z][DATA_NAMES[id]] == "") &&				
-						(AllData[z][DATA_NAMES.photo_folder] == null | AllData[z][DATA_NAMES.photo_folder] == "" )) {	// if there's no photo don't display the photo box
+						if (isEmpty(z, id) && isEmpty(z, "photo_folder")) {	// if there's no photo don't display the photo box
 						} else if (isVideo) {	// if there's a video, don't display the photo!					
 						} else {
 							toDisplay = true;
@@ -518,13 +508,12 @@
 							}
 						}
 					} else if (id == "workshops") {		// If there were workshops, include them here:
-						if ((AllData[z][DATA_NAMES.big_train] == null | AllData[z][DATA_NAMES.big_train] == "") &&
-							(AllData[z][DATA_NAMES.small_train] == null | AllData[z][DATA_NAMES.small_train] == "")) {}
+						if (isEmpty(z, "big_train") && isEmpty(z, "small_train")) {}
 						else {
 							toDisplay = true;
-							if (AllData[z][DATA_NAMES.big_train] == null | AllData[z][DATA_NAMES.big_train] == "") {
+							if (isEmpty(z, "big_train")) {
 								els[i].innerHTML = "<b>"+LBL.small_train+"</b>"+END_OF_HEADER+AllData[z][DATA_NAMES.small_train];	
-							} else if (AllData[z][DATA_NAMES.small_train] == null | AllData[z][DATA_NAMES.small_train] == "") {
+							} else if (isEmpty(z, "small_train")) {
 								els[i].innerHTML = "<b>"+LBL.big_train+"</b>"+END_OF_HEADER+AllData[z][DATA_NAMES.big_train];
 							} else {
 								els[i].innerHTML = "<b>"+LBL[id]+"</b>"+":<br>"+
@@ -533,7 +522,7 @@
 							}
 						}
 					}else if (id == "docs") {			// If there's a link to a document, include it here:
-						if (AllData[z][DATA_NAMES[id]] == null | AllData[z][DATA_NAMES[id]] == "" ) {}
+						if (isEmpty(z, id)) {}
 						else {
 							toDisplay = true;
 							els[i].innerHTML = "<a href='"+AllData[z][DATA_NAMES[id]]+"' target='_blank'>"+SEE_MORE+"</a>";
@@ -541,31 +530,28 @@
 						}
 					} else if (id == "notes1"){
 						
-						if (AllData[z][DATA_NAMES[id]] == null | AllData[z][DATA_NAMES[id]] == "" ) {}
-						else if (AllData[z][DATA_NAMES.notes2] == null | AllData[z][DATA_NAMES.notes2] == "" ) {
+						if (isEmpty(z, id)) {
+						} else if (isEmpty(z, "notes2")) {
 							toDisplay = true;
 							els[i].innerHTML = "<b>"+LBL[id]+"</b>"+END_OF_HEADER+AllData[z][DATA_NAMES.notes1];
 							
-						} else if (AllData[z][DATA_NAMES.notes3] == null | AllData[z][DATA_NAMES.notes3] == "" ) {
+						} else if (isEmpty(z, "notes3")) {
 							toDisplay = true;
 							els[i].innerHTML = "<b>"+LBL[id]+"</b>"+END_OF_HEADER+AllData[z][DATA_NAMES.notes1]+"\xa0"+AllData[z][DATA_NAMES.notes2];
 						}
-						else if (AllData[z][DATA_NAMES.notes4] == null | AllData[z][DATA_NAMES.notes4] == "" ) {
+						else if (isEmpty(z, "notes4")) {
 							toDisplay = true;
 							els[i].innerHTML = "<b>"+LBL[id]+"</b>"+END_OF_HEADER+AllData[z][DATA_NAMES.notes1]+"\xa0"+AllData[z][DATA_NAMES.notes2]+"\xa0"+AllData[z][DATA_NAMES.notes3];
 						}
-						else if (AllData[z][DATA_NAMES.notes5] == null | AllData[z][DATA_NAMES.notes5] == "" ) {
+						else if (isEmpty(z, "notes5")) {
 							toDisplay = true;
 							els[i].innerHTML = "<b>"+LBL[id]+"</b>"+END_OF_HEADER+AllData[z][DATA_NAMES.notes1]+"\xa0"+AllData[z][DATA_NAMES.notes2]+"\xa0"+AllData[z][DATA_NAMES.notes3]+"\xa0"+AllData[z][DATA_NAMES.notes4];
 						} else {
 							toDisplay = true;
 							els[i].innerHTML = "<b>"+LBL[id]+"</b>"+END_OF_HEADER+AllData[z][DATA_NAMES.notes1]+"\xa0"+AllData[z][DATA_NAMES.notes2]+"\xa0"+AllData[z][DATA_NAMES.notes3]+"\xa0"+AllData[z][DATA_NAMES.notes4]+"\xa0"+AllData[z][DATA_NAMES.notes5];
 						}
-					
-					
-					
 					} else {							// The rest are just text that need to be displayed with a label:
-						if (AllData[z][DATA_NAMES[id]] == null | AllData[z][DATA_NAMES[id]] == "" ) {}
+						if (isEmpty(z, id)) {}
 						else {
 							toDisplay = true;
 							if (LBL[id] != "") {
@@ -643,7 +629,7 @@
 						for (var j = 0; j<AllData[z].duplicates.length; j++) {		// loop through duplicates
 							dup = AllData[z].duplicates[j];
 							if (photoCounter == 0) {								// grab and display 1st photo
-								if (AllData[dup][DATA_NAMES.photo] == null | AllData[dup][DATA_NAMES.photo] == "") {	
+								if (isEmpty(dup, "photo")) {	
 									document.getElementById("photo_l").style.display = 'none';	
 								} else {
 									photoCounter = 1;
@@ -659,7 +645,7 @@
 						for (var j = 0; j<AllData[z].duplicates.length; j++) {		// loop through duplicates
 							dup = AllData[z].duplicates[j];
 							if (videoCounter == 0) {	
-								if (AllData[dup][DATA_NAMES.video] == null | AllData[dup][DATA_NAMES.video] == "") {	
+								if (isEmpty(dup, "video")) {	
 									document.getElementById("video_l").style.display = 'none';
 								} else {
 									videoCounter = 1;
@@ -1114,15 +1100,26 @@
 					if (AllData[used_indices[i]].duplicates) {
 						for (var j=0; j<AllData[used_indices[i]].duplicates.length; j++) {	
 							index = AllData[used_indices[i]].duplicates[j];
-							if (AllData[index][DATA_NAMES.partner] != "" && AllData[index][DATA_NAMES.partner] != null) {
-								total = total + (AllData[index][DATA_NAMES.partner].match(/;/g) || []).length + 1;
-								if (names == "") {
-									names = AllData[index][DATA_NAMES.partner];
-								} else {
-									var partners = AllData[index][DATA_NAMES.partner].split("; ");
+							if (!isEmpty(index, "partner")) {
+								var partners = AllData[index][DATA_NAMES.partner].split("; ");
+								if (names == "") {					// if no orgs have been added yet	
+									names = partners[0];			//	add the first org
+									total = total + 1;				// 	and increase the total number of orgs counter
+									if (partners.length > 1) {		// if this entry has multiple partner orgs
+										for (var k=1; k<partners.length; k++) {	// loop through them, checking for repeates and adding and counting them
+										var re = new RegExp(partners[k], 'g');
+										if (names.match(re) == null | names.match(re) == 0 | names.match(re) == false) {
+											total = total + 1;
+											names = names + "; " + partners[k];
+											}
+										}
+									}
+								} else {							// if some orgs have already been added, loop through checking for repeate and adding and counting them
+									
 									for (var k=0; k<partners.length; k++) {
 										var re = new RegExp(partners[k], 'g');
 										if (names.match(re) == null | names.match(re) == 0 | names.match(re) == false) {
+											total = total + 1;
 											names = names + "; " + partners[k];
 										}
 									}
@@ -1232,6 +1229,39 @@
 				}
 				filters = numberWithCommas(filters);
 				return filters
+			}
+			////////////////////////////////////////////////////////////////
+			////			function formatDate							////
+			////														////
+			////	Takes in d (day, 1-31), m (month 1-12), and year 	////
+			////	(yyyy). and returns a string with the format		////
+			////	dd/mmm/yyyy where dd are numbers, mmm are text, and	////
+			////	yyyy is the numerical year.							////
+			////////////////////////////////////////////////////////////////
+			
+			function formatDate(d, m, y) {
+				if(d && m && d) {
+					return String(d)+"/"+MONTHS[m-1]+"/"+String(y)
+				} else {
+					return NO_INFO
+				}
+			}
+			
+			////////////////////////////////////////////////////////////////
+			////			function isEmpty							////
+			////														////
+			////	Checks the ith entry in the global AllData dataset	////
+			////	to see if there's anything entered into the "name"	////
+			////	column. If so, returns false (not empty). otherwise,////
+			////	returns true (empty). 								////
+			////////////////////////////////////////////////////////////////
+			
+			function isEmpty(i, name) {
+				empty = false;
+				if (AllData[i][DATA_NAMES[name]] == "" | AllData[i][DATA_NAMES[name]] == null) {
+					empty = true;
+				}
+				return empty;
 			}
 			
 		</script>
