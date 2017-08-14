@@ -33,6 +33,10 @@
 	</head>
 	
 	<body onload="init();"> 	<!-- what to do when the page loads -->
+		<div id="overlay" onclick="beginUserExperience();">
+			<div id="overlay_title"></div>
+			<div id="overlay_msg"></div>
+		</div>
 		<div id='WaterMap'> 	<!-- creates the div element that holds the map -->
 			<a href="http://www.caminosdeagua.org" target='_blank'> <!-- Link the caminos logo to the caminos website -->
 				<img class="caminos_logo" src="https://caminosdeagua.github.io/project-map/img/caminos_logo_circle.png"></img> <!-- creates the caminos de agua logo -->
@@ -145,6 +149,7 @@
 			</div>
 		</div>
 		
+		
 
 		<script>
 		
@@ -178,6 +183,8 @@
 				for (var i=0; i<els.length; i++) {
 					els[i].innerHTML = SUMMARY_HEADERS[i];				
 				}
+				document.getElementById("overlay_title").innerHTML = DISPLAY_TITLE;
+				document.getElementById("overlay_msg").innerHTML = DISPLAY_MSG;
 				
 				
 			}
@@ -411,7 +418,7 @@
 			
 			function closePanel(id) { 			// To close the panel:
 				var el = document.getElementById(id);
-				fadeOut(el)							// Just fade it out.
+				fadeOut(el, 0.09)							// Just fade it out.
 				
 				if (id=='info_panel') {
 					info_panel_open = false;			// Then reset the global to show it's hidden. 
@@ -767,10 +774,10 @@
 			////	does nothing. 															////
 			////////////////////////////////////////////////////////////////////////////////////
 			
-			function fadeOut(el){ 
+			function fadeOut(el, threshhold){ 
 				
 				(function fade() {
-					if ((el.style.opacity -= .09) < 0) {
+					if ((el.style.opacity -= threshhold) < 0) {
 						el.style.opacity = 0;
 					} else {
 						requestAnimationFrame(fade);
@@ -1275,6 +1282,19 @@
 					empty = true;
 				}
 				return empty;
+			}
+			
+			function beginUserExperience() {
+				$("#overlay").fadeOut(800, function() {});	// fade out the overlay
+				restartCounters();							//	and restart the counters 	
+			}
+			
+			function restartCounters() { // Resets the odometer counters to 0
+				document.getElementById("stats_projects_no").innerHTML = 0;	// fill it!
+				document.getElementById("stats_people_no").innerHTML = 0;
+				document.getElementById("stats_capacity_no").innerHTML = 0;
+				document.getElementById("stats_ceramic_no").innerHTML = 0;
+				fillCounters();
 			}
 			
 		</script>

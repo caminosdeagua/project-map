@@ -210,3 +210,33 @@ div.cartodb-legend {
 	align-items: center;
 }
 
+#overlay {
+	position: fixed;
+	width: 99%;
+	height: 98%;
+	background: rgba(0,0,0, 0.6);
+	opacity: 1;
+	border: 8px solid white;
+	border-radius: 20px;
+	z-index: 9999;
+	text-align: center;
+	font-family: "Tahoma", Geneva, sans-serif;
+	font-size: 96px;
+}
+
+#overlay_title {
+	margin-top: 20%;
+	font-size: 96px;
+	color: white;
+	vertical-align: middle;
+	position: relative;
+	padding: 20px;
+}
+
+#overlay_msg {
+	margin-top: 20px;
+	font-size: 36px;
+	color: white;
+	position: relative;
+	width: 100%;
+}
