@@ -224,8 +224,12 @@ div.cartodb-legend {
 	font-size: 96px;
 }
 
+#spacer {
+	width: 100%;
+	height: 40%;
+}
+
 #overlay_title {
-	margin-top: 20%;
 	font-size: 96px;
 	color: white;
 	vertical-align: middle;
