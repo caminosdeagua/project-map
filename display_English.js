@@ -149,4 +149,4 @@ var EASTER_EGG_TXT = {
 }
 
 var DISPLAY_TITLE = "<b>Project Map</b>";
-var DISPLAY_MSG = "Click to learn more about our work"
+var DISPLAY_MSG = "Click to learn more about our work";
