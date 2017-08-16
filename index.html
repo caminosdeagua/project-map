@@ -186,10 +186,11 @@
 				for (var i=0; i<els.length; i++) {
 					els[i].innerHTML = SUMMARY_HEADERS[i];				
 				}
+				// load text onto overlay
 				document.getElementById("overlay_title").innerHTML = DISPLAY_TITLE;
 				document.getElementById("overlay_msg").innerHTML = DISPLAY_MSG;
-				$("#overlay").corner("bite keep 20px cc:#fff")
-				$("#overlay").css("display", "inline-block");
+				$("#overlay").corner("bite keep 20px cc:#fff")	// update overlay corners to look nice
+				$("#overlay").css("display", "inline-block");	// display overlay once stuff loads!
 				
 				
 			}
