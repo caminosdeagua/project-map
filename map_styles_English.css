@@ -217,12 +217,12 @@ div.cartodb-legend {
 	bottom: 0;
 	left: 0;
 	right: 0;
-	background: rgba(0,0,0, 0.6);
+	background: rgba(255,255,255, 0.6);
 	z-index: 9999;
 	text-align: center;
 	font-family: "Tahoma", Geneva, sans-serif;
 	font-size: 96px;
-	border: 8px solid white;
+	border: 8px solid #444;
 }
 
 #spacer {
@@ -231,7 +231,7 @@ div.cartodb-legend {
 
 #overlay_title {
 	font-size: 96px;
-	color: white;
+	color: #444;
 	vertical-align: middle;
 	position: relative;
 	padding: 20px;
@@ -240,7 +240,7 @@ div.cartodb-legend {
 #overlay_msg {
 	margin-top: 20px;
 	font-size: 36px;
-	color: white;
+	color: #444;
 	position: relative;
 	width: 100%;
 }
