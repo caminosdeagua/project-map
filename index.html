@@ -900,7 +900,7 @@
 			////////////////////////////////////////////////////////////////////
 										
 			function numberWithCommas(x) {
-				return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+				return parseInt(x).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","); 	//The parseInt() removes any leading zeros that the value may have. 
 			}
 			
 			function numberWithoutCommas(x) {
@@ -1215,7 +1215,7 @@
 			////						storageInstalled	FUNCTION					////
 			////						filetersDistributed	FUNCTION					////
 			//// 	These functions agregate information from all of the duplicate 		////
-			////	projects for the site at 'point' display a summary to the user. 	////
+			////	projects for the site at 'point' and return  a str to the user. 	////
 			////////////////////////////////////////////////////////////////////////////////
 			
 			
