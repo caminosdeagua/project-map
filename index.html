@@ -685,9 +685,9 @@
 						
 						for (var j = 0; j<AllData[z].duplicates.length; j++) {		// loop through duplicates
 							dup = AllData[z].duplicates[j];
-							rawDate = String(AllData[dup][DATA_NAMES.start_date]).split("-", 3);
+							//rawDate = String(AllData[dup][DATA_NAMES.start_date]).split("-", 3);
 							
-							date = MONTHS_LONG[AllData[dup][DATA_NAMES.start_month]]+", "+String(AllData[dup][DATA_NAMES.start_year]);
+							date = MONTHS_LONG[AllData[dup][DATA_NAMES.start_month]-1]+", "+String(AllData[dup][DATA_NAMES.start_year]);
 							var nameToDisplay = AllData[dup][DATA_NAMES.proj_type];
 							var proj_name = AllData[dup][DATA_NAMES.proj_name]
 							if (nameToDisplay == OTHER_PROJ && proj_name != "" && proj_name != null) {
