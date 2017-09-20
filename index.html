@@ -11,7 +11,7 @@
 		
 		<!-- jquery -->			<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 		<!-- global vars -->	<script src="https://caminosdeagua.github.io/project-map/global.js" type="text/javascript" /></script>
-		<!-- dataset!!! -->		<script src="data/project_map_dataset.js" type="text/javascript" /></script><!--https://caminosdeagua.github.io/project-map/-->
+		<!-- dataset!!! -->		<script src="https://caminosdeagua.github.io/project-map/data/project_map_dataset.js" type="text/javascript" /></script><!--https://caminosdeagua.github.io/project-map/-->
 		
 		<!-- All language changes happen here!!!! -->
 		<!--------------------------------------------------------------------------------------------------->
@@ -254,9 +254,9 @@
 			
 			////////////////////////////////////////////////////////////////////////////////
 			////					 	loadAndPlotData FUNCTION 					  	////
-			//// 	This function grabs data from carto.com and stores it in a local 	////
+			//// 	This function grabs data from the JSON and stores it in a local 	////
 			//// 	variable array. It also stores a copy of the data in the global 	////
-			////	array data for other functions to access. After storing the 		////
+			////	array AllData for other functions to access. After storing the 		////
 			////	data, it calls functions to plot them. 								////
 			////////////////////////////////////////////////////////////////////////////////
 			
@@ -277,8 +277,8 @@
 				
 				for (var i=0; i<data.length; i++) { // Loop through all the rows of the data
 					var bin;
-					if (isEmpty(i, "name") | isEmpty(i, "lat") | isEmpty(i, "lng") | bin == -1) { 
-					} else {
+					if (isEmpty(i, "name") | isEmpty(i, "lat") | isEmpty(i, "lng") | bin == -1) { 		// if the row is missing a name, latitutde, or longitude, or doesn't fit a bin,
+					} else {																			//	ignore it. Otherwise:
 						if (i==0 || data[i][DATA_NAMES.name] != data[i-1][DATA_NAMES.name]) {			// if not a duplicate point (special case for 0th point, cause 0-1 does not exist)
 							duplicateCounter = 0;
 							AllData[i].duplicates = [i]; 		// create a new array in AllData called duplicates to hold indices of duplicates of this point
@@ -685,9 +685,9 @@
 						
 						for (var j = 0; j<AllData[z].duplicates.length; j++) {		// loop through duplicates
 							dup = AllData[z].duplicates[j];
-							rawDate = String(AllData[dup][DATA_NAMES.start_date]).split("-", 3);
+							//rawDate = String(AllData[dup][DATA_NAMES.start_date]).split("-", 3);
 							
-							date = MONTHS_LONG[AllData[dup][DATA_NAMES.start_month]-1]+", "+String(AllData[dup][DATA_NAMES.start_year]);
+							
 							var nameToDisplay = AllData[dup][DATA_NAMES.proj_type];
 							var proj_name = AllData[dup][DATA_NAMES.proj_name]
 							if (nameToDisplay == OTHER_PROJ && proj_name != "" && proj_name != null) {
@@ -695,7 +695,8 @@
 							}
 							dateExists = !isEmpty(dup, "start_month") && !isEmpty(dup, "start_year");
 							if (j==0) {
-								if (dateExists) {
+								if (dateExists) {		// if there's a date
+									date = MONTHS_LONG[AllData[dup][DATA_NAMES.start_month]-1]+", "+String(AllData[dup][DATA_NAMES.start_year]); 		// concatenate month name and year
 									els[i].innerHTML = "<p class='proj_box_even' onclick='openFromLobby("+String(dup)+");'>"+nameToDisplay+": "+date+"</p>";
 								} else {
 									els[i].innerHTML = "<p class='proj_box_even' onclick='openFromLobby("+String(dup)+");'>"+nameToDisplay+"</p>";
@@ -703,12 +704,14 @@
 							} else {
 								if (j%2==0) {
 									if (dateExists) {
+										date = MONTHS_LONG[AllData[dup][DATA_NAMES.start_month]-1]+", "+String(AllData[dup][DATA_NAMES.start_year]); 		// concatenate month name and year
 										els[i].innerHTML = els[i].innerHTML+"<p class='proj_box_even' onclick='openFromLobby("+String(dup)+");'>"+nameToDisplay+": "+date+"</p>";
 									} else {
 										els[i].innerHTML = els[i].innerHTML+"<p class='proj_box_even' onclick='openFromLobby("+String(dup)+");'>"+nameToDisplay+"</p>";
 									}
 								} else {
 									if (dateExists) {
+										date = MONTHS_LONG[AllData[dup][DATA_NAMES.start_month]-1]+", "+String(AllData[dup][DATA_NAMES.start_year]); 		// concatenate month name and year
 										els[i].innerHTML = els[i].innerHTML+"<p class='proj_box_odd' onclick='openFromLobby("+String(dup)+");'>"+nameToDisplay+": "+date+"</p>";
 									} else {
 										els[i].innerHTML = els[i].innerHTML+"<p class='proj_box_odd' onclick='openFromLobby("+String(dup)+");'>"+nameToDisplay+"</p>";
