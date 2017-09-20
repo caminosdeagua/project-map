@@ -52,10 +52,7 @@
     "Notas 2": "",
     "Notas 3": "",
     "Notas 4": "",
-    "Notas 5": "",
-    "Contact": "School - Parents committee leader, Adriana; Clinic",
-    "Phone Number": "4151082364; 5527212585",
-    "Email": ""
+    "Notas 5": ""
   },
   {
     "Community": "Apaseo Grande",
@@ -109,10 +106,7 @@
     "Notas 2": "",
     "Notas 3": "",
     "Notas 4": "",
-    "Notas 5": "",
-    "Contact": "",
-    "Phone Number": "",
-    "Email": ""
+    "Notas 5": ""
   },
   {
     "Community": "Arenal de Abajo",
@@ -166,10 +160,7 @@
     "Notas 2": "",
     "Notas 3": "",
     "Notas 4": "",
-    "Notas 5": "",
-    "Contact": "",
-    "Phone Number": "",
-    "Email": ""
+    "Notas 5": ""
   },
   {
     "Community": "Arenal de Abajo",
@@ -223,10 +214,7 @@
     "Notas 2": "",
     "Notas 3": "",
     "Notas 4": "",
-    "Notas 5": "",
-    "Contact": "",
-    "Phone Number": "",
-    "Email": ""
+    "Notas 5": ""
   },
   {
     "Community": "Arenal de Arriba",
@@ -280,10 +268,7 @@
     "Notas 2": "",
     "Notas 3": "",
     "Notas 4": "",
-    "Notas 5": "",
-    "Contact": "",
-    "Phone Number": "",
-    "Email": ""
+    "Notas 5": ""
   },
   {
     "Community": "Arenal de Arriba",
@@ -337,10 +322,7 @@
     "Notas 2": "",
     "Notas 3": "",
     "Notas 4": "",
-    "Notas 5": "",
-    "Contact": "",
-    "Phone Number": "",
-    "Email": ""
+    "Notas 5": ""
   },
   {
     "Community": "Atotonilco",
@@ -394,10 +376,7 @@
     "Notas 2": "",
     "Notas 3": "",
     "Notas 4": "",
-    "Notas 5": "",
-    "Contact": "Headmaster",
-    "Phone Number": 4151095066,
-    "Email": ""
+    "Notas 5": ""
   },
   {
     "Community": "Banda",
@@ -451,10 +430,7 @@
     "Notas 2": "",
     "Notas 3": "",
     "Notas 4": "",
-    "Notas 5": "",
-    "Contact": "",
-    "Phone Number": "",
-    "Email": ""
+    "Notas 5": ""
   },
   {
     "Community": "Boca de la Cañada",
@@ -508,10 +484,7 @@
     "Notas 2": "",
     "Notas 3": "",
     "Notas 4": "",
-    "Notas 5": "",
-    "Contact": "Head Master, Lucia",
-    "Phone Number": 4155664524,
-    "Email": ""
+    "Notas 5": ""
   },
   {
     "Community": "Cañajo",
@@ -565,10 +538,7 @@
     "Notas 2": "",
     "Notas 3": "",
     "Notas 4": "",
-    "Notas 5": "",
-    "Contact": "",
-    "Phone Number": "",
-    "Email": ""
+    "Notas 5": ""
   },
   {
     "Community": "Casa Hogar Guadalupe",
@@ -622,10 +592,7 @@
     "Notas 2": "",
     "Notas 3": "",
     "Notas 4": "",
-    "Notas 5": "",
-    "Contact": "",
-    "Phone Number": "",
-    "Email": ""
+    "Notas 5": ""
   },
   {
     "Community": "CBTis #60",
@@ -679,10 +646,7 @@
     "Notas 2": "",
     "Notas 3": "",
     "Notas 4": "",
-    "Notas 5": "",
-    "Contact": "",
-    "Phone Number": "",
-    "Email": ""
+    "Notas 5": ""
   },
   {
     "Community": "Centro de Caminos de Agua",
@@ -736,10 +700,7 @@
     "Notas 2": "",
     "Notas 3": "",
     "Notas 4": "",
-    "Notas 5": "",
-    "Contact": "",
-    "Phone Number": "",
-    "Email": ""
+    "Notas 5": ""
   },
   {
     "Community": "Centro de Caminos de Agua",
@@ -793,10 +754,7 @@
     "Notas 2": "",
     "Notas 3": "",
     "Notas 4": "",
-    "Notas 5": "",
-    "Contact": "",
-    "Phone Number": "",
-    "Email": ""
+    "Notas 5": ""
   },
   {
     "Community": "Centro de Caminos de Agua",
@@ -850,10 +808,7 @@
     "Notas 2": "",
     "Notas 3": "",
     "Notas 4": "",
-    "Notas 5": "",
-    "Contact": "",
-    "Phone Number": "",
-    "Email": ""
+    "Notas 5": ""
   },
   {
     "Community": "Cerritos",
@@ -907,10 +862,7 @@
     "Notas 2": "",
     "Notas 3": "",
     "Notas 4": "",
-    "Notas 5": "",
-    "Contact": "",
-    "Phone Number": "",
-    "Email": ""
+    "Notas 5": ""
   },
   {
     "Community": "Cerritos",
@@ -964,10 +916,7 @@
     "Notas 2": "",
     "Notas 3": "",
     "Notas 4": "",
-    "Notas 5": "",
-    "Contact": "",
-    "Phone Number": "",
-    "Email": ""
+    "Notas 5": ""
   },
   {
     "Community": "Chiapas, Mexico",
@@ -1021,10 +970,7 @@
     "Notas 2": "",
     "Notas 3": "",
     "Notas 4": "",
-    "Notas 5": "",
-    "Contact": "",
-    "Phone Number": "",
-    "Email": ""
+    "Notas 5": ""
   },
   {
     "Community": "Chiapas, Mexico",
@@ -1078,10 +1024,7 @@
     "Notas 2": "",
     "Notas 3": "",
     "Notas 4": "",
-    "Notas 5": "",
-    "Contact": "",
-    "Phone Number": "",
-    "Email": ""
+    "Notas 5": ""
   },
   {
     "Community": "Chiapas, Mexico",
@@ -1096,10 +1039,10 @@
     "Localización": "Chiapas, México",
     "Partner Organization": "CEDEMI",
     "Coordinates": "",
-    "Start Date": "08-Jul-05",
+    "Start Date": "08-Jul-16",
     "Start Day": 8,
     "Start Month": 7,
-    "Start Year": 2005,
+    "Start Year": 2016,
     "End Date": "",
     "End Day": "",
     "End Month": "",
@@ -1135,10 +1078,7 @@
     "Notas 2": "",
     "Notas 3": "",
     "Notas 4": "",
-    "Notas 5": "",
-    "Contact": "",
-    "Phone Number": "",
-    "Email": ""
+    "Notas 5": ""
   },
   {
     "Community": "Chiapas, Mexico",
@@ -1153,10 +1093,10 @@
     "Localización": "Chiapas, México",
     "Partner Organization": "Concern America",
     "Coordinates": "",
-    "Start Date": "08-Jul-05",
+    "Start Date": "08-Jul-16",
     "Start Day": 8,
     "Start Month": 7,
-    "Start Year": 2005,
+    "Start Year": 2016,
     "End Date": "",
     "End Day": "",
     "End Month": "",
@@ -1192,10 +1132,7 @@
     "Notas 2": "",
     "Notas 3": "",
     "Notas 4": "",
-    "Notas 5": "",
-    "Contact": "",
-    "Phone Number": "",
-    "Email": ""
+    "Notas 5": ""
   },
   {
     "Community": "CODECIN",
@@ -1249,10 +1186,7 @@
     "Notas 2": "",
     "Notas 3": "",
     "Notas 4": "",
-    "Notas 5": "",
-    "Contact": "",
-    "Phone Number": "",
-    "Email": ""
+    "Notas 5": ""
   },
   {
     "Community": "Cruz del Palmar",
@@ -1306,10 +1240,7 @@
     "Notas 2": "",
     "Notas 3": "",
     "Notas 4": "",
-    "Notas 5": "",
-    "Contact": "Edgar (headmaster)",
-    "Phone Number": 4737567966,
-    "Email": ""
+    "Notas 5": ""
   },
   {
     "Community": "Don Juan",
@@ -1363,10 +1294,7 @@
     "Notas 2": "",
     "Notas 3": "",
     "Notas 4": "",
-    "Notas 5": "",
-    "Contact": "Mother, Remedios",
-    "Phone Number": 4151022185,
-    "Email": ""
+    "Notas 5": ""
   },
   {
     "Community": "El Capaderillo",
@@ -1420,10 +1348,7 @@
     "Notas 2": "",
     "Notas 3": "",
     "Notas 4": "",
-    "Notas 5": "",
-    "Contact": "",
-    "Phone Number": "",
-    "Email": ""
+    "Notas 5": ""
   },
   {
     "Community": "El Salitre",
@@ -1477,10 +1402,7 @@
     "Notas 2": "",
     "Notas 3": "",
     "Notas 4": "",
-    "Notas 5": "",
-    "Contact": "Head Master, Anselmo",
-    "Phone Number": 1218487,
-    "Email": ""
+    "Notas 5": ""
   },
   {
     "Community": "Escuela de Educación Especial de San Miguel de Allende, A.C. & Casa de Voluntarios",
@@ -1534,10 +1456,7 @@
     "Notas 2": "",
     "Notas 3": "",
     "Notas 4": "",
-    "Notas 5": "",
-    "Contact": "",
-    "Phone Number": "",
-    "Email": ""
+    "Notas 5": ""
   },
   {
     "Community": "General Filter Sales",
@@ -1591,10 +1510,7 @@
     "Notas 2": "",
     "Notas 3": "",
     "Notas 4": "",
-    "Notas 5": "",
-    "Contact": "",
-    "Phone Number": "",
-    "Email": ""
+    "Notas 5": ""
   },
   {
     "Community": "Guadalupe de Támbula",
@@ -1648,10 +1564,7 @@
     "Notas 2": "",
     "Notas 3": "",
     "Notas 4": "",
-    "Notas 5": "",
-    "Contact": "",
-    "Phone Number": "",
-    "Email": ""
+    "Notas 5": ""
   },
   {
     "Community": "Haiti",
@@ -1705,10 +1618,7 @@
     "Notas 2": "",
     "Notas 3": "",
     "Notas 4": "",
-    "Notas 5": "",
-    "Contact": "",
-    "Phone Number": "",
-    "Email": ""
+    "Notas 5": ""
   },
   {
     "Community": "Isla Urbana",
@@ -1762,10 +1672,7 @@
     "Notas 2": "",
     "Notas 3": "",
     "Notas 4": "",
-    "Notas 5": "",
-    "Contact": "",
-    "Phone Number": "",
-    "Email": ""
+    "Notas 5": ""
   },
   {
     "Community": "Juan González",
@@ -1819,10 +1726,7 @@
     "Notas 2": "",
     "Notas 3": "",
     "Notas 4": "",
-    "Notas 5": "",
-    "Contact": "",
-    "Phone Number": "",
-    "Email": ""
+    "Notas 5": ""
   },
   {
     "Community": "La Aurora",
@@ -1876,10 +1780,7 @@
     "Notas 2": "",
     "Notas 3": "",
     "Notas 4": "",
-    "Notas 5": "",
-    "Contact": "Mother, Alejandra",
-    "Phone Number": 4151039173,
-    "Email": ""
+    "Notas 5": ""
   },
   {
     "Community": "La Cienega",
@@ -1933,10 +1834,7 @@
     "Notas 2": "",
     "Notas 3": "",
     "Notas 4": "",
-    "Notas 5": "",
-    "Contact": "",
-    "Phone Number": "",
-    "Email": ""
+    "Notas 5": ""
   },
   {
     "Community": "La Colorada",
@@ -1990,10 +1888,7 @@
     "Notas 2": "",
     "Notas 3": "",
     "Notas 4": "",
-    "Notas 5": "",
-    "Contact": "Aucencio Domenzain",
-    "Phone Number": "",
-    "Email": "aucencio@thelavenderproject.com"
+    "Notas 5": ""
   },
   {
     "Community": "La Escoba",
@@ -2047,10 +1942,7 @@
     "Notas 2": "",
     "Notas 3": "",
     "Notas 4": "",
-    "Notas 5": "",
-    "Contact": "",
-    "Phone Number": "",
-    "Email": ""
+    "Notas 5": ""
   },
   {
     "Community": "La Escoba",
@@ -2104,10 +1996,7 @@
     "Notas 2": "",
     "Notas 3": "",
     "Notas 4": "",
-    "Notas 5": "",
-    "Contact": "",
-    "Phone Number": "",
-    "Email": ""
+    "Notas 5": ""
   },
   {
     "Community": "La Laguna Escondida",
@@ -2161,10 +2050,7 @@
     "Notas 2": "",
     "Notas 3": "",
     "Notas 4": "",
-    "Notas 5": "",
-    "Contact": "",
-    "Phone Number": "",
-    "Email": ""
+    "Notas 5": ""
   },
   {
     "Community": "La Norita del Refugio",
@@ -2218,10 +2104,7 @@
     "Notas 2": "",
     "Notas 3": "",
     "Notas 4": "",
-    "Notas 5": "",
-    "Contact": "",
-    "Phone Number": "",
-    "Email": ""
+    "Notas 5": ""
   },
   {
     "Community": "La Onza",
@@ -2275,10 +2158,7 @@
     "Notas 2": "",
     "Notas 3": "",
     "Notas 4": "",
-    "Notas 5": "",
-    "Contact": "",
-    "Phone Number": "",
-    "Email": ""
+    "Notas 5": ""
   },
   {
     "Community": "La Onza",
@@ -2293,10 +2173,10 @@
     "Localización": "Escuela primaria",
     "Partner Organization": "EWB-UCL",
     "Coordinates": "",
-    "Start Date": "01-Jun-10",
+    "Start Date": "01-Jun-15",
     "Start Day": 1,
     "Start Month": 6,
-    "Start Year": 2010,
+    "Start Year": 2015,
     "End Date": "01-Jul-17",
     "End Day": 1,
     "End Month": 7,
@@ -2332,10 +2212,7 @@
     "Notas 2": "",
     "Notas 3": "",
     "Notas 4": "",
-    "Notas 5": "",
-    "Contact": "",
-    "Phone Number": "",
-    "Email": ""
+    "Notas 5": ""
   },
   {
     "Community": "Las Adjuntas de San José/Los Cuates",
@@ -2389,10 +2266,7 @@
     "Notas 2": "",
     "Notas 3": "",
     "Notas 4": "",
-    "Notas 5": "",
-    "Contact": "",
-    "Phone Number": "",
-    "Email": ""
+    "Notas 5": ""
   },
   {
     "Community": "Las Adjuntas del Monte",
@@ -2446,10 +2320,7 @@
     "Notas 2": "",
     "Notas 3": "",
     "Notas 4": "",
-    "Notas 5": "",
-    "Contact": "",
-    "Phone Number": "",
-    "Email": ""
+    "Notas 5": ""
   },
   {
     "Community": "Las Liebres",
@@ -2503,10 +2374,7 @@
     "Notas 2": "",
     "Notas 3": "",
     "Notas 4": "",
-    "Notas 5": "",
-    "Contact": "",
-    "Phone Number": "",
-    "Email": ""
+    "Notas 5": ""
   },
   {
     "Community": "Las Negritas",
@@ -2560,10 +2428,7 @@
     "Notas 2": "",
     "Notas 3": "",
     "Notas 4": "",
-    "Notas 5": "",
-    "Contact": "",
-    "Phone Number": "",
-    "Email": ""
+    "Notas 5": ""
   },
   {
     "Community": "Las Palomas",
@@ -2617,10 +2482,7 @@
     "Notas 2": "",
     "Notas 3": "",
     "Notas 4": "",
-    "Notas 5": "",
-    "Contact": "",
-    "Phone Number": "",
-    "Email": ""
+    "Notas 5": ""
   },
   {
     "Community": "Las Yerbas",
@@ -2674,10 +2536,7 @@
     "Notas 2": "",
     "Notas 3": "",
     "Notas 4": "",
-    "Notas 5": "",
-    "Contact": "",
-    "Phone Number": "",
-    "Email": ""
+    "Notas 5": ""
   },
   {
     "Community": "Llano Verde",
@@ -2731,10 +2590,7 @@
     "Notas 2": "",
     "Notas 3": "",
     "Notas 4": "",
-    "Notas 5": "",
-    "Contact": "",
-    "Phone Number": "",
-    "Email": ""
+    "Notas 5": ""
   },
   {
     "Community": "Llano Verde",
@@ -2788,10 +2644,7 @@
     "Notas 2": "",
     "Notas 3": "",
     "Notas 4": "",
-    "Notas 5": "",
-    "Contact": "",
-    "Phone Number": "",
-    "Email": ""
+    "Notas 5": ""
   },
   {
     "Community": "Los Lopez",
@@ -2845,10 +2698,7 @@
     "Notas 2": "",
     "Notas 3": "",
     "Notas 4": "",
-    "Notas 5": "",
-    "Contact": "",
-    "Phone Number": "",
-    "Email": ""
+    "Notas 5": ""
   },
   {
     "Community": "Los Platanos",
@@ -2902,10 +2752,7 @@
     "Notas 2": "",
     "Notas 3": "",
     "Notas 4": "",
-    "Notas 5": "",
-    "Contact": "",
-    "Phone Number": "",
-    "Email": ""
+    "Notas 5": ""
   },
   {
     "Community": "Los Platanos",
@@ -2959,10 +2806,7 @@
     "Notas 2": "",
     "Notas 3": "",
     "Notas 4": "",
-    "Notas 5": "",
-    "Contact": "",
-    "Phone Number": "",
-    "Email": ""
+    "Notas 5": ""
   },
   {
     "Community": "Misión de Chichimecas",
@@ -3016,10 +2860,7 @@
     "Notas 2": "",
     "Notas 3": "",
     "Notas 4": "",
-    "Notas 5": "",
-    "Contact": "",
-    "Phone Number": "",
-    "Email": ""
+    "Notas 5": ""
   },
   {
     "Community": "Montecillo de Nieto",
@@ -3073,10 +2914,7 @@
     "Notas 2": "",
     "Notas 3": "",
     "Notas 4": "",
-    "Notas 5": "",
-    "Contact": "Headmaster",
-    "Phone Number": 4181813375,
-    "Email": ""
+    "Notas 5": ""
   },
   {
     "Community": "Palomas, Chihuahua - Compañeros de la Frontera",
@@ -3130,10 +2968,7 @@
     "Notas 2": "",
     "Notas 3": "",
     "Notas 4": "",
-    "Notas 5": "",
-    "Contact": "",
-    "Phone Number": "",
-    "Email": ""
+    "Notas 5": ""
   },
   {
     "Community": "Pozo Ademado",
@@ -3187,10 +3022,7 @@
     "Notas 2": "",
     "Notas 3": "",
     "Notas 4": "",
-    "Notas 5": "",
-    "Contact": "",
-    "Phone Number": "",
-    "Email": ""
+    "Notas 5": ""
   },
   {
     "Community": "Pozo Ademado",
@@ -3244,10 +3076,7 @@
     "Notas 2": "",
     "Notas 3": "",
     "Notas 4": "",
-    "Notas 5": "",
-    "Contact": "",
-    "Phone Number": "",
-    "Email": ""
+    "Notas 5": ""
   },
   {
     "Community": "Pozo Ademado",
@@ -3301,10 +3130,7 @@
     "Notas 2": "",
     "Notas 3": "",
     "Notas 4": "",
-    "Notas 5": "",
-    "Contact": "",
-    "Phone Number": "",
-    "Email": ""
+    "Notas 5": ""
   },
   {
     "Community": "Pozo Hondo",
@@ -3358,10 +3184,7 @@
     "Notas 2": "",
     "Notas 3": "",
     "Notas 4": "",
-    "Notas 5": "",
-    "Contact": "",
-    "Phone Number": "",
-    "Email": ""
+    "Notas 5": ""
   },
   {
     "Community": "Rancho Mariposa",
@@ -3415,10 +3238,7 @@
     "Notas 2": "",
     "Notas 3": "",
     "Notas 4": "",
-    "Notas 5": "",
-    "Contact": "",
-    "Phone Number": "",
-    "Email": ""
+    "Notas 5": ""
   },
   {
     "Community": "Rancho Nuevo",
@@ -3472,10 +3292,7 @@
     "Notas 2": "",
     "Notas 3": "",
     "Notas 4": "",
-    "Notas 5": "",
-    "Contact": "",
-    "Phone Number": "",
-    "Email": ""
+    "Notas 5": ""
   },
   {
     "Community": "Rancho Nuevo",
@@ -3529,10 +3346,7 @@
     "Notas 2": "",
     "Notas 3": "",
     "Notas 4": "",
-    "Notas 5": "",
-    "Contact": "",
-    "Phone Number": "",
-    "Email": ""
+    "Notas 5": ""
   },
   {
     "Community": "Rancho Nuevo Villa Guadalupe",
@@ -3586,10 +3400,7 @@
     "Notas 2": "",
     "Notas 3": "",
     "Notas 4": "",
-    "Notas 5": "",
-    "Contact": "Head Master",
-    "Phone Number": 4151251989,
-    "Email": ""
+    "Notas 5": ""
   },
   {
     "Community": "San Antonio de la Joya",
@@ -3643,10 +3454,7 @@
     "Notas 2": "",
     "Notas 3": "",
     "Notas 4": "",
-    "Notas 5": "",
-    "Contact": "Head Master, Miguel",
-    "Phone Number": 4151076436,
-    "Email": ""
+    "Notas 5": ""
   },
   {
     "Community": "San Antonio de Las Mujeres",
@@ -3700,10 +3508,7 @@
     "Notas 2": "",
     "Notas 3": "",
     "Notas 4": "",
-    "Notas 5": "",
-    "Contact": "",
-    "Phone Number": "",
-    "Email": ""
+    "Notas 5": ""
   },
   {
     "Community": "San Antonio de Lourdes",
@@ -3757,10 +3562,7 @@
     "Notas 2": "",
     "Notas 3": "",
     "Notas 4": "",
-    "Notas 5": "",
-    "Contact": "",
-    "Phone Number": "",
-    "Email": ""
+    "Notas 5": ""
   },
   {
     "Community": "San Antonio de Lourdes",
@@ -3814,10 +3616,7 @@
     "Notas 2": "",
     "Notas 3": "",
     "Notas 4": "",
-    "Notas 5": "",
-    "Contact": "",
-    "Phone Number": "",
-    "Email": ""
+    "Notas 5": ""
   },
   {
     "Community": "San Antonio de Lourdes",
@@ -3871,10 +3670,7 @@
     "Notas 2": "",
     "Notas 3": "",
     "Notas 4": "",
-    "Notas 5": "",
-    "Contact": "",
-    "Phone Number": "",
-    "Email": ""
+    "Notas 5": ""
   },
   {
     "Community": "San Antonio de Lourdes",
@@ -3928,10 +3724,7 @@
     "Notas 2": "",
     "Notas 3": "",
     "Notas 4": "",
-    "Notas 5": "",
-    "Contact": "",
-    "Phone Number": "",
-    "Email": ""
+    "Notas 5": ""
   },
   {
     "Community": "San Antonio de Varal",
@@ -3985,10 +3778,7 @@
     "Notas 2": "",
     "Notas 3": "",
     "Notas 4": "",
-    "Notas 5": "",
-    "Contact": "",
-    "Phone Number": "",
-    "Email": ""
+    "Notas 5": ""
   },
   {
     "Community": "San Cayetano",
@@ -4042,10 +3832,7 @@
     "Notas 2": "",
     "Notas 3": "",
     "Notas 4": "",
-    "Notas 5": "",
-    "Contact": "",
-    "Phone Number": "",
-    "Email": ""
+    "Notas 5": ""
   },
   {
     "Community": "San Cayetano",
@@ -4099,10 +3886,7 @@
     "Notas 2": "",
     "Notas 3": "",
     "Notas 4": "",
-    "Notas 5": "",
-    "Contact": "",
-    "Phone Number": "",
-    "Email": ""
+    "Notas 5": ""
   },
   {
     "Community": "San José del Carmen",
@@ -4156,10 +3940,7 @@
     "Notas 2": "",
     "Notas 3": "",
     "Notas 4": "",
-    "Notas 5": "",
-    "Contact": "",
-    "Phone Number": "",
-    "Email": ""
+    "Notas 5": ""
   },
   {
     "Community": "San José Xacxamayo, Puebla",
@@ -4213,10 +3994,7 @@
     "Notas 2": "",
     "Notas 3": "",
     "Notas 4": "",
-    "Notas 5": "",
-    "Contact": "",
-    "Phone Number": "",
-    "Email": ""
+    "Notas 5": ""
   },
   {
     "Community": "San Luis de la Paz",
@@ -4270,10 +4048,7 @@
     "Notas 2": "",
     "Notas 3": "",
     "Notas 4": "",
-    "Notas 5": "",
-    "Contact": "",
-    "Phone Number": "",
-    "Email": ""
+    "Notas 5": ""
   },
   {
     "Community": "San Miguel Viejo",
@@ -4327,10 +4102,7 @@
     "Notas 2": "",
     "Notas 3": "",
     "Notas 4": "",
-    "Notas 5": "",
-    "Contact": "",
-    "Phone Number": "",
-    "Email": ""
+    "Notas 5": ""
   },
   {
     "Community": "San Miguel Viejo",
@@ -4384,10 +4156,7 @@
     "Notas 2": "",
     "Notas 3": "",
     "Notas 4": "",
-    "Notas 5": "",
-    "Contact": "",
-    "Phone Number": "",
-    "Email": ""
+    "Notas 5": ""
   },
   {
     "Community": "San Miguel Viejo",
@@ -4441,10 +4210,7 @@
     "Notas 2": "",
     "Notas 3": "",
     "Notas 4": "",
-    "Notas 5": "",
-    "Contact": "Paty (headmaster)",
-    "Phone Number": 4151492440,
-    "Email": ""
+    "Notas 5": ""
   },
   {
     "Community": "Santas Marías",
@@ -4498,10 +4264,7 @@
     "Notas 2": "",
     "Notas 3": "",
     "Notas 4": "",
-    "Notas 5": "",
-    "Contact": "",
-    "Phone Number": "",
-    "Email": ""
+    "Notas 5": ""
   },
   {
     "Community": "Sierra Gorda (Tilaco)",
@@ -4555,10 +4318,7 @@
     "Notas 2": "",
     "Notas 3": "",
     "Notas 4": "",
-    "Notas 5": "",
-    "Contact": "",
-    "Phone Number": "",
-    "Email": ""
+    "Notas 5": ""
   },
   {
     "Community": "Sierra Gorda (Tilaco)",
@@ -4612,10 +4372,7 @@
     "Notas 2": "",
     "Notas 3": "",
     "Notas 4": "",
-    "Notas 5": "",
-    "Contact": "",
-    "Phone Number": "",
-    "Email": ""
+    "Notas 5": ""
   },
   {
     "Community": "Soledad Nueva",
@@ -4669,10 +4426,7 @@
     "Notas 2": "",
     "Notas 3": "",
     "Notas 4": "",
-    "Notas 5": "",
-    "Contact": "",
-    "Phone Number": "",
-    "Email": ""
+    "Notas 5": ""
   },
   {
     "Community": "Sosnabar",
@@ -4726,10 +4480,7 @@
     "Notas 2": "",
     "Notas 3": "",
     "Notas 4": "",
-    "Notas 5": "",
-    "Contact": "",
-    "Phone Number": "",
-    "Email": ""
+    "Notas 5": ""
   },
   {
     "Community": "Vergel de Guadalupe",
@@ -4783,10 +4534,7 @@
     "Notas 2": "",
     "Notas 3": "",
     "Notas 4": "",
-    "Notas 5": "",
-    "Contact": "",
-    "Phone Number": "",
-    "Email": ""
+    "Notas 5": ""
   },
   {
     "Community": "Vergel de Guadalupe",
@@ -4840,10 +4588,7 @@
     "Notas 2": "",
     "Notas 3": "",
     "Notas 4": "",
-    "Notas 5": "",
-    "Contact": "",
-    "Phone Number": "",
-    "Email": ""
+    "Notas 5": ""
   },
   {
     "Community": "Via Organica",
@@ -4897,10 +4642,7 @@
     "Notas 2": "",
     "Notas 3": "",
     "Notas 4": "",
-    "Notas 5": "",
-    "Contact": "",
-    "Phone Number": "",
-    "Email": ""
+    "Notas 5": ""
   },
   {
     "Community": "Villa Nueva",
@@ -4954,10 +4696,7 @@
     "Notas 2": "",
     "Notas 3": "",
     "Notas 4": "",
-    "Notas 5": "",
-    "Contact": "",
-    "Phone Number": "",
-    "Email": ""
+    "Notas 5": ""
   },
   {
     "Community": "Villa Nueva",
@@ -5011,9 +4750,6 @@
     "Notas 2": "",
     "Notas 3": "",
     "Notas 4": "",
-    "Notas 5": "",
-    "Contact": "",
-    "Phone Number": "",
-    "Email": ""
+    "Notas 5": ""
   }
 ]
