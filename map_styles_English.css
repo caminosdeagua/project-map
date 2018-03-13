@@ -44,10 +44,9 @@ img.caminos_logo {
 	display: inline-block;
 	z-index: 3;
 	position: fixed;
-	left: 50px;
-	top: 5px;
+	left: 15px;
+	bottom: 15px;
 	width: 120px;
-	height: 144px;
 	opacity: 1;
 }
 
@@ -55,7 +54,7 @@ div.cartodb-legend {
 	width: 180px;	
 	position: absolute;
 	bottom: 15px;
-	left: 15px;
+	left: 150px;
 }
 
 .legend-title {
