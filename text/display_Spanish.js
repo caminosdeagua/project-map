@@ -30,7 +30,7 @@ var LEGEND4 = "\xa0\xa0\xa0Varios\xa0proyectos";
 var LEGEND_TEXT = [LEGEND0, LEGEND1, LEGEND2, LEGEND3, LEGEND4];
 
 var BACK_BUTTON_TXT = ["Atras hacía todos"," projects"];
-var LOBBY_MESSAGE = ["<b>Haz clic en un proyecto abajo para saber más información<br></b>"]
+var LOBBY_MESSAGE = ["<b>Haz clic en un proyecto abajo para saber más<br></b>"]
 var SUMMARY_TITLE = "<b>Perfiles comunitarios</b>";
 
 var NO_PROJECTS_HDR = "Proyectos";										// Headers for lobby summary chart
