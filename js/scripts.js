@@ -1,9 +1,181 @@
-//////////////////////////////////////////////////////////////////////////////
-////					 INITIALIZATION FUNCTION 						  ////
-////////////////////////////////////////////////////////////////////////////// 
+////////////////////////////////////////////////////////////////////////////////
+// 											scripts.js
+//
+// 	Holds any javascript functions necessary for basic opperation universal
+// 	to all pages of the Caminos de Agua project-map. 
+//
+//	General description: This map shows all the projects worked on by the NGO
+//		Caminos de Agua. Data is read in from a global var stored in a js file
+//		and plotted over stamen basemap tiles using leaflet's open source
+//		javascript library. When individual data points are selected, a window
+//		is opened to display various data about the selected project site.
+//		If the site has multiple projects, the opened data is called a "lobby"
+//		from which the user can navigate to a specific project. The specific project
+//		data, whether from an individual point or from a lobby, is displayed in
+//		the "info panel."
+//
+//	-- aaron krupp 22-apr-2018
+//
+////////////////////////////////////////////////////////////////////////////////
+//
+// 	TABLE OF CONTENTS:
+//
+// 	1. init():
+//			Calls other specific initialization functions.
+//
+// 	2. fillText():
+//			Fills in the text of the appropriate language.
+//
+// 	3. fillCounters():
+//			Fills the spinning project summary counters with the appropriate values
+//
+// 	4. initMap():
+//			Initializes the leaflet map object
+//
+// 	5. applyBaseMap():
+//			Applies the appropriate basemap tiles
+//	
+//	6. adjustXLocation(): 
+//			Adjusts the location of the closing-x-mark in the lobby/info panel to
+//			accomodate different scrollbar widths on different browsers
+//
+//	7. loadAndPlotData():
+//			Loads the data from the global dataset object and plots it appropriately
+//			using leaflet commands
+//
+//	8. getBin(data, i):
+//			figure out which color to make the point represented by the i-th row
+//			in the json dataset, data. 
+//
+//	9. openPanel(id) / closePanel(id):
+//			open or close the data panel for id = "info_panel" or "lobby"
+//
+//	10. showInfo(z):
+//			on the information panel, display the correct information for the z-th
+//			row of the dataset
+//
+//	11. showLobby(z):
+//			Displays the lobby (used when a single community has >1 project.) The
+//			lobby contains summary info about all of the communities projects. This
+//			function displays the lobby for the z-th data point. 
+//
+//	12. openFromLobby(z):
+//			When a project is clicked from the lobby, this opens the z-th info panel
+//			and displays the appropriate information
+//
+// 	13. getLabel(data, i):
+//			gets the appropriate label for the i-th point in dataset "data"
+//
+//	14. removePoint(i):
+//			removes the i-th point from the map
+//
+//	15. fadeIn(el) / fadeOut(el, threshhold): 
+//			fades in or out the element "el" using the appropriate opacity threshhold
+//
+//	16. onKeypress / goBack(key):
+//			checks to see if the keypress was "esc"
+//			and takes the user back one step in the lobby/info-panel chain
+//
+//	17. showSelectedMarker() / hideSelectedMarker():
+//			shows/hides a marker in the appropriate place to highlight which data
+//			point has been selected
+//			
+//	18. numberWithCommas(x) / numberWithoutCommas(x):
+//			Takes an int x and puts/removes commas ever 3rd digit
+//
+//	19. getScrollBarWidth():
+//			get the scrollbar width for the particular browser
+//
+//	20. openFullSummary(): 
+//			displays an easter-egg summary of all data to the console
+//
+//	21. map-wide summary functions: 
+//			totalProjects()
+//			totalPeople()
+//			totalCapacity()
+//			totalCartridgesAndSystems()
+//			totalCommunities()
+//			totalOther()
+//			totalRainSys()
+//			totalCeramic()
+//			totalPartners()
+//			totalWorkshops()
+//			totalHours()
+//			totalSchools()
+//				
+//			These functions generate totals by adding together the appropriate
+//			data from the appropriate rows of the dataset.
+//			
+//	22. individual point summary functions:
+//			projectsCompleted(point)
+//			peopleImpacted(point)
+//			storageInstalled(point)
+//			filtersDistributed(point)
+//
+//			These functions compute total data for a community with multiple
+//			projects by summing values from all of a community's projects.
+//
+//	23. formatDate(d, m, y):
+//			Takes in a day (d), month (m), and year (y) as ints and returns 
+//			a string in the form of dd-mmm-yyyy
+//
+//	24. isEmpty(i, name):
+//			returns t/f, checks to see if the ith row in the dataset has a name
+//
+//	25. beginUserExperience():
+//			removes the overlay and restarts the counters (makes map accessible 
+//			to clicks)
+//
+//	26. restartCounters():
+//			re-initializes the spinning counters. 
+//
+//	27. disableMapControls() / enableMapControls():
+//			disables and enables map controls for scrolling in lobby/info-panel
+//			and clicking on easter egg.
+//
+////////////////////////////////////////////////////////////////////////////////
+//
+//	UPDATE HISTORY:
+//		29/SEP/2017	aaron krupp		document first written
+//		4/OCT/2017	aaron krupp		added initAdminIndifferent, initAdmin, and 
+//									initNonAdmin.
+//									Added CORS functionality for cross-domain 
+//									get/post requests
+//		22/APR/2018	aaron krupp		comments/table of contents updated
+//									functional specifications added
+//
+////////////////////////////////////////////////////////////////////////////////
+
+
+// 	1. init():
+//
+// 	Description:		Initializes the site.	
+//
+//	Operation:			fills in the appropriate langauge text, inits the map,
+//						shows the basemap, plots the data on the map, and sets 
+//						The spinning counters. 
+//
+//	Dependencies:		None.		
+// 	Arguments:			None.
+//	Return values: 		None.
+//
+//	Global variables:	None.
+//
+//	Input:				None.
+//	Output:				None.
+//
+//	Error handling:		None.
+//
+// 	Algorithms:			None. 
+//	Data structures:	None.
+//
+//	Known bugs:			None.
+// 	Limitations:		None.
+//
+// 	Update history:		4/APR/2018	aaron krupp		functional specification writen 
 
 function init() {
-	fillText();``				// Fill in the text in the appropriate language
+	fillText();					// Fill in the text in the appropriate language
 	initMap(); 					// Initialize the map 
 	applyBaseMap(); 			// Display the map with the appropriate base tiles
 	adjustXLocation();
@@ -12,10 +184,40 @@ function init() {
 	fillCounters();				// Read the data for the counters
 }								
 
-////////////////////////////////////////////////////////////////////////////////
-////					  	fillText FUNCTION	 						  	////
-//// 			Fills out all text from appropriate language .js file.		////
-////////////////////////////////////////////////////////////////////////////////
+// 	2. fillText():
+//
+// 	Description:		Fills in text from the appropriate language file	
+//
+//	Operation:			Grabs the global variables (ALL IN CAPS) from the 
+//						loaded language file and displays them. This allows for
+//						easy addoption of multi-lingual sites.
+//
+//	Dependencies:		elements with the following:
+//							id = "legend_title"		
+//							name = "project_type"		
+//							class = "stats_left"		
+//							id = "overlay_title"		
+//							id = "overlay_msg"		
+//							class = "overlay"		
+// 	Arguments:			None.
+//	Return values: 		None.
+//
+//	Global variables:	LEGEND_TITLE, LEGEND_TEXT, SUMMARY_HEADERS, DISPLAY_TITLE,
+//						DISPLAY_MSG
+//
+//	Input:				None.
+//	Output:				Displays all text on map. 
+//
+//	Error handling:		None.
+//
+// 	Algorithms:			None. 
+//	Data structures:	None.
+//
+//	Known bugs:			None.
+// 	Limitations:		None.
+//
+// 	Update history:		4/APR/2018	aaron krupp		functional specification writen 						  	////
+
 
 function fillText() {
 	document.getElementById("legend_title").innerHTML = LEGEND_TITLE;
@@ -33,14 +235,38 @@ function fillText() {
 	document.getElementById("overlay_msg").innerHTML = DISPLAY_MSG;
 	$("#overlay").corner("keep 16px cc:#222");	// adjust inner border corners
 	$("#overlay").css("display", "inline-block");	// display overlay once stuff loads!
-	
-	
 }
 
-////////////////////////////////////////////////////////////////////////////////
-////					  	fillCounters FUNCTION	 					  	////
-//// 			Fills out all counters by trolling through the dataset		////
-////////////////////////////////////////////////////////////////////////////////
+// 	3. fillCounters():
+//
+// 	Description:		fills the counters with the appropirate values	
+//
+//	Operation:			Calls the appropriate map-wide summary function (21) and 
+//						sets the innerHTML of the appropriate spinner to that value
+//
+//	Dependencies:		Elements with the following ids:
+//							"stats_box"		
+//							"stats_projects_no"		
+//							"stats_people_no"		
+//							"stats_capacity_no"		
+//							"stats_ceramic_no"		
+// 	Arguments:			None.
+//	Return values: 		None.
+//
+//	Global variables:	None.
+//
+//	Input:				None.
+//	Output:				None.
+//
+//	Error handling:		None.
+//
+// 	Algorithms:			None. 
+//	Data structures:	None.
+//
+//	Known bugs:			None.
+// 	Limitations:		None.
+//
+// 	Update history:		4/APR/2018	aaron krupp		functional specification writen
 
 function fillCounters() {
 	document.getElementById("stats_box").style.display = "inline-block";		// show the stats menu
@@ -50,11 +276,30 @@ function fillCounters() {
 	document.getElementById("stats_ceramic_no").innerHTML = totalCartridgesAndSystems();
 }
 
-
-////////////////////////////////////////////////////////////////////////////////
-////					  	initMap FUNCTION	 						  	////
-//// 			This function initializes the global map object.			////
-////////////////////////////////////////////////////////////////////////////////
+// 	4. initMap():
+//
+// 	Description:		Initializes the global map object.	
+//
+//	Operation:			Initializes the map object using leaflet's L.map function
+//
+//	Dependencies:		Leaflet.js		
+// 	Arguments:			None.
+//	Return values: 		None.
+//
+//	Global variables:	map		--- the global map object
+//
+//	Input:				None.
+//	Output:				None.
+//
+//	Error handling:		None.
+//
+// 	Algorithms:			None. 
+//	Data structures:	None.
+//
+//	Known bugs:			None.
+// 	Limitations:		None.
+//
+// 	Update history:		4/APR/2018	aaron krupp		functional specification writen
 
 function initMap() {
 	map = new L.map('WaterMap', { //First, initialize the map
@@ -68,24 +313,65 @@ function initMap() {
 	map.attributionControl.setPrefix(ATTRIBUTION);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-////					  	applyBaseMap FUNCTION 						  	////
-//// 	This function grabs a set of Stamen or Mapzen base tiles and 		////
-//// 	applies them to the map. 											////
-////////////////////////////////////////////////////////////////////////////////
-
+// 	5. applyBaseMap():
+//
+// 	Description:		Applies the basemap tiles	
+//
+//	Operation:			grabs a set of Stamen or Mapzen base tiles and 		
+//	 					applies them to the map
+//
+//	Dependencies:		Leaflet.js	
+// 	Arguments:			None.
+//	Return values: 		None.
+//
+//	Global variables:	STAMEN_MAP_TYPE ---	A string specified on maps.stamen.com
+//
+//	Input:				None.
+//	Output:				None.
+//
+//	Error handling:		None.
+//
+// 	Algorithms:			None. 
+//	Data structures:	None.
+//
+//	Known bugs:			None.
+// 	Limitations:		None.
+//
+// 	Update history:		4/APR/2018	aaron krupp		functional specification writen
 
 function applyBaseMap() {
 	map.addLayer(new L.StamenTileLayer(STAMEN_MAP_TYPE), {});
 	
 }
 
-////////////////////////////////////////////////////////////////////////////////
-////					  adjustXLocation FUNCTION 						  	////
-//// 	This function adjusts the location of the x-button that closes the	////
-////	info panel, lobby, or other windows. It puts it a set pixel distance////
-////	to the left of the scrollbar. 										////
-////////////////////////////////////////////////////////////////////////////////
+// 	6. adjustXLocation();
+//
+// 	Description:		Adjusts location of x-button in info panel or lobby	
+//
+//	Operation:			Gets the width of the browser's scrollbar and offsets the
+//						x-button a corresponding set pizeldistance from the edge of  
+//						the window
+//
+//	Dependencies:		element with class = 'x-butt'
+// 	Arguments:			None.
+//	Return values: 		None.
+//
+//	Global variables:	X_OFFSET_FROM_SCROLLBAR ---	Dictates the x-button's offset 
+//							from the scrollbar
+//
+//	Input:				None.
+//	Output:				The x-button moves if it is displayed to the user. 
+//
+//	Error handling:		None.
+//
+// 	Algorithms:			None. 
+//	Data structures:	None.
+//
+//	Known bugs:			None.
+// 	Limitations:		None.
+//
+// 	Update history:		4/APR/2018	aaron krupp		functional specification writen
+
 
 function adjustXLocation() {
 	var xButtons = document.getElementsByClassName("x-butt");
@@ -94,15 +380,43 @@ function adjustXLocation() {
 	}
 }
 
-////////////////////////////////////////////////////////////////////////////////
-////					 	loadAndPlotData FUNCTION 					  	////
-//// 	This function grabs data from the JSON and stores it in a local 	////
-//// 	variable array. It also stores a copy of the data in the global 	////
-////	array AllData for other functions to access. After storing the 		////
-////	data, it calls functions to plot them. 								////
-////	MAKE SURE ALL DATA IS SORTED BY NAME, THEN START-YEAR, THEN START- 	////
-////	MONTH, OTHERWISE YOU'LL LOSE A LOT OF DATA!!!						////
-////////////////////////////////////////////////////////////////////////////////
+// 	7. LoadAndPlotData():
+//
+// 	Description:		Loads the appropriate dataset and plots it on the map.	
+//
+//	Operation:			Grabs the data from the gloabl dataset PROJECT_MAP_DATA.
+//						Stores it in a local variable data and a global AllData.
+//						(yes, i know this is wildly redundant, its to deal with 
+//						other methods of data entry). Then it calls specific functions
+//						to plot the data.
+//
+//						MAKE SURE ALL DATA IS SORTED BY NAME, THEN START-YEAR, 
+//						THEN START-MONTH, OTHERWISE YOU'LL LOSE A LOT OF POINTS!!!	
+//
+//	Dependencies:		leaflet.js
+// 	Arguments:			None.
+//	Return values: 		None.
+//
+//	Global variables:	base, PROJECT_MAP_DATA, SELECTED_URL, LARGE_ICON_SIZE, DATA_NAMES,
+//						ICON_URLS, SMALL_ICON_SIZE, BASE_Z_OFFSET, VARIOUS
+//						You can find descriptions for these variables in the global
+//						variable definition file. 
+//
+//	Input:				None.
+//	Output:				Data points appear on map. 
+//
+//	Error handling:		If a data entry doesn't have a name, lat, or lng, or is a
+//						duplicate, it isn't show. Duplicate indicies are noted in 
+//						a separate array 
+//
+// 	Algorithms:			None. 
+//	Data structures:	Data is treated as a json 
+//
+//	Known bugs:			None.
+// 	Limitations:		DATA MUST BE SORTED BY NAME (ALPHABETICAL) THEN START-YEAR
+//						THEN START-MONTH.
+//
+// 	Update history:		4/APR/2018	aaron krupp		functional specification writen
 
 function loadAndPlotData() {
 
@@ -224,14 +538,38 @@ function loadAndPlotData() {
 	};
 }
 
-////////////////////////////////////////////////////////////////////////////////
-////					 	getBin FUNCTION 					  			////
-//// 	Gets the correct bin of the point. Does so with the 				////
-////	following algorithm:												////
-////		Bin 0: RWH														////
-////		Bin 1: Ceramic water filter										////
-////		Bin 2: Biochar system											////
-////////////////////////////////////////////////////////////////////////////////
+// 	8. getBin(data, i):
+//
+// 	Description:		gets the bin of the point at row i of dataset "data"	
+//
+//	Operation:			The bin is how the point will be color-coded on the map
+//						based on project type:
+//							Bin RAINWATER: rainwater harvesting
+//							Bin CERAMIC: ceramic filtration
+//							Bin BIOCHAR: biochar water treatment
+//							Bin OTHER: other project types
+//							Bin -1: doesn't match a known project type
+//
+//	Dependencies:		None.
+// 	Arguments:			data	---	the data set
+//						i		---	index of data set for which to find bin
+//	Return values: 		bin ---	the project's bin as defined by the global vars
+//
+//	Global variables:	RAIN_PROJ, RAINWATER, CERAMIC_PROJ, CERAMIC, BIOCHAR_PROJ,
+//						BIOCHAR, OTHER_PROJ, OTHER
+//
+//	Input:				None.
+//	Output:				None.
+//
+//	Error handling:		If project doesn't match a known bin, -1 is returned
+//
+// 	Algorithms:			None. 
+//	Data structures:	None.
+//
+//	Known bugs:			None.
+// 	Limitations:		None.
+//
+// 	Update history:		4/APR/2018	aaron krupp		functional specification writen
 
 function getBin(data, i) {
 	var bin = -1;
@@ -247,9 +585,36 @@ function getBin(data, i) {
 	return bin
 }
 
-////////////////////////////////////////////////////////////////////////////////
-////			openInfoPanel & closeInfoPanel FUNCTIONs		  			////
-//// 	Opens and closes the info panel respectivel. Duh.					////
+// 	9. openPanel(id) / closePanel(id):
+//
+// 	Description:		Opens and closes the named element with the id "id"	
+//
+//	Operation:			Configures the element with the id "id"
+//						Then fades in or out that element.
+//						Saves the status of the panel in the boolean globals:
+//							info_panel_open and lobby_active
+//
+//	Dependencies:		None.
+// 	Arguments:			id	---	id of an HTML element to display or hide
+//	Return values: 		None.
+//
+//	Global variables:	info_panel_open ---	boolean that indicates true if panel open,
+//											false if not
+//						lobby_active	---	boolean that indicates true if lobby open,
+//											false if not
+//
+//	Input:				None.
+//	Output:				Displays/hides appropriate panel to/from user
+//
+//	Error handling:		None.
+//
+// 	Algorithms:			None. 
+//	Data structures:	None.
+//
+//	Known bugs:			None.
+// 	Limitations:		None.
+//
+// 	Update history:		4/APR/2018	aaron krupp		functional specification writen
 ////////////////////////////////////////////////////////////////////////////////
 
 function openPanel(id) {
@@ -284,11 +649,47 @@ function closePanel(id) { 			// To close the panel:
 }
 
 
-////////////////////////////////////////////////////////////////////////////////
-////						showInfo FUNCTION					  			////
-//// 	Gets the correct information from the global dataset, then pushes	////
-////	it into the correct places in the info panel. 						////
-////////////////////////////////////////////////////////////////////////////////
+// 	10. showInfo(z):
+//
+// 	Description:		This outrageously long function (that would be better 
+//						written in react) dynamically generates / hides the 
+//						appropriate elements in the info-panel for each given 
+//						date point.
+//
+//	Operation:			For each div element within the div id="info-panel", this
+//						function checks to see if the dataset has the corresponding
+//						information. If not, toDisplay is set to false. else, it is
+//						set to true. If toDisplay is set to true, the appropriate 
+//						data is loaded and displayed with the appropriate color
+//						and styling. If not, the div is hidden.
+//
+//	Dependencies:		Divs with the following ids: 
+//							back_button, proj_name, video, photo, docs, name, muni,
+//                          proj_type, site, dates, people, workshops, no_ceramic_systems,
+//                          no_ceramic_filters, no_biochar, no_ferro, no_roto_small, 
+//							no_roto_big, no_geomembrane, no_underground, no_rainjar,
+//                          partner, notes1
+//
+// 	Arguments:			z 	--- The index of the point from which to grab data in
+//								the global dataset
+//	Return values: 		None.
+//
+//	Global variables:	AllData 	---	global dataset
+//						DATA_NAMES, BACK_BUTTON_TXT, NO_INFO, LBL, END_OF_HEADER, 
+//
+//	Input:				None.
+//	Output:				Divs in info-panel are displayed or hidden. 
+//
+//	Error handling:		None.
+//
+// 	Algorithms:			None. 
+//	Data structures:	None.
+//
+//	Known bugs:			None.
+// 	Limitations:		None.
+//
+// 	Update history:		4/APR/2018	aaron krupp		functional specification writen
+
 
 function showInfo(z) {
 	hideSelectedMarker();
@@ -461,11 +862,35 @@ function showInfo(z) {
 	$("#info_panel").animate({scrollTop: 0}, SCROLL_TIME);	// First, scroll the info window back to the top.
 }
 
-////////////////////////////////////////////////////////////////////////////////
-////						showLobby FUNCTION					  			////
-//// 	Gets the correct information from the global dataset, then pushes	////
-////	it into the correct places in the lobby.	 						////
-////////////////////////////////////////////////////////////////////////////////
+// 	11. showLobby(z):
+//
+// 	Description:		Shows the lobby for the z-th element in the global dataset		
+//
+//	Operation:			Loops through all the divs in the lobby and popultates them
+//						appropriately. Follows a parallel structure to  function 
+//						#10, showInfo(z)
+//
+//	Dependencies:		Divs within the div with id = "lobby" with the following ids:
+//							proj_name_l, photo_l, video_l, summary, project_list
+// 	Arguments:			z 	--- the index in the global dataset to grab data from
+//	Return values: 		None.
+//
+//	Global variables:	AllData	---	global dataset
+//						DATA_NAMES, SUMMARY_HEADERS, SUMMARY_TITLE, MONTHS_LONG
+//
+//	Input:				None.
+//	Output:				Shows data to user within the lobby.
+//
+//	Error handling:		None.
+//
+// 	Algorithms:			None. 
+//	Data structures:	None.
+//
+//	Known bugs:			None.
+// 	Limitations:		None.
+//
+// 	Update history:		4/APR/2018	aaron krupp		functional specification writen
+
 
 function showLobby(z) {
 	hideSelectedMarker(); 
@@ -568,11 +993,33 @@ function showLobby(z) {
 	}	
 }
 
-////////////////////////////////////////////////////////////////////////////////
-////						openFromLobby FUNCTION					  		////
-//// 	When a project is clicked in the lobby, this function opens the 	////
-////	info panel with the appropriate data called.						////
-////////////////////////////////////////////////////////////////////////////////
+// 	12. openFromLobby(z):
+//
+// 	Description:		Opens a specific projects info-panel from the lobby.	
+//
+//	Operation:			populates the info panel with the correct info. Then
+//						opens the info panel on top of the lobby, the closes
+//						the lobby. 
+//
+//	Dependencies:		None.
+// 	Arguments:			z 	---	the index of the project to show in the 
+//								global dataset
+//	Return values: 		None.
+//
+//	Global variables:	None.
+//
+//	Input:				None.
+//	Output:				Closes lobby, opens info panel for selected project
+//
+//	Error handling:		None.
+//
+// 	Algorithms:			None. 
+//	Data structures:	None.
+//
+//	Known bugs:			None.
+// 	Limitations:		None.
+//
+// 	Update history:		4/APR/2018	aaron krupp		functional specification writen
 
 function openFromLobby(z) {
 	
@@ -581,13 +1028,30 @@ function openFromLobby(z) {
 	closePanel('lobby');
 }
 
-
-////////////////////////////////////////////////////////////////////////////////
-////					 	getLabel FUNCTION 							  	////
-//// 	Takes in the type of label to plot (string) and the index of the 	////
-////	marker's data in the global data array, data. Returns the string 	////
-////	that will be contained in the label. 								////
-////////////////////////////////////////////////////////////////////////////////
+// 	13. getLabel():
+//
+// 	Description:		Gets the appropriate label to display next to a data point	
+//
+//	Operation:			Generates a string based on the project name.
+//
+//	Dependencies:		None.
+// 	Arguments:			None.
+//	Return values: 		returns the new label as a string.
+//
+//	Global variables:	DATA_NAMES, MAX_LABEL_LINE_CHARS
+//
+//	Input:				None.
+//	Output:				None.
+//
+//	Error handling:		None.
+//
+// 	Algorithms:			None. 
+//	Data structures:	None.
+//
+//	Known bugs:			None.
+// 	Limitations:		None.
+//
+// 	Update history:		4/APR/2018	aaron krupp		functional specification writen
 
 function getLabel(data, i) {
 	str = String(data[i][DATA_NAMES.name]);
@@ -606,26 +1070,65 @@ function getLabel(data, i) {
 }
 
 
-////////////////////////////////////////////////////////////////////////////////
-////					 	removePoint FUNCTION 						  	////
-//// 			Removes the point stored at the index i.					////
-////////////////////////////////////////////////////////////////////////////////
+// 	14. removePoint():
+//
+// 	Description:		removes point from map	
+//
+//	Operation:			removes the point at index i from map with leaflet commands
+//
+//	Dependencies:		leaflet.js
+// 	Arguments:			i 	---	the index of the point to remove in base.Markers array
+//	Return values: 		None.
+//
+//	Global variables:	None.
+//
+//	Input:				None.
+//	Output:				Makes formerly visible point on map invisible. 
+//
+//	Error handling:		None.
+//
+// 	Algorithms:			None. 
+//	Data structures:	None.
+//
+//	Known bugs:			None.
+// 	Limitations:		None.
+//
+// 	Update history:		4/APR/2018	aaron krupp		functional specification writen
 
 function removePoint(i) {
 	map.removeLayer(base.Markers[i]); 
 }
 
+// 	15. fadeIn(el) / fadeOut(el, threshhold):
+//
+// 	Description:		fades in/out a passed html element	
+//
+//	Operation:			Fades in or out the passed element by adjusting the 
+//						the div element's opacity in steps. Many thanks to:		
+//						http://www.chrisbuttery.com/articles/fade-in-fade-out-with-javascript/ 	
+//						for this simple and lovely bit of js. Cheers! 							
+//						If the div is visible, fadeIn does nothing. If it's not, 
+//						fade out does nothing.
+//
+//	Dependencies:		None.
+// 	Arguments:			None.
+//	Return values: 		None.
+//
+//	Global variables:	None.
+//
+//	Input:				None.
+//	Output:				The passed html element appears or disappears slowly
+//
+//	Error handling:		None.
+//
+// 	Algorithms:			None. 
+//	Data structures:	None.
+//
+//	Known bugs:			None.
+// 	Limitations:		None.
+//
+// 	Update history:		4/APR/2018	aaron krupp		functional specification writen
 
-////////////////////////////////////////////////////////////////////
-////				functions fadeIn(el), fadeOut(el) 			////
-//// 															////
-////	Fades in or out the passed element by adjusting the 	////
-////	the div element's opacity in steps. Many thanks to:		////////////////////
-////	http://www.chrisbuttery.com/articles/fade-in-fade-out-with-javascript/ 	////	
-////	for this simple and lovely bit of js. Cheers! 							////
-////	If the div is visible, fadeIn does nothing. If it's not, fade out 		////	
-////	does nothing. 															////
-////////////////////////////////////////////////////////////////////////////////////
 
 function fadeOut(el, threshhold){ 
 	
@@ -655,10 +1158,35 @@ function fadeIn(el){
 	
 }
 
-////////////////////////////////////////////////////////////////////////////////
-////					 	onKeypress FUNCTION 						  	////
-//// 			Closes the info panel if the user presses "esc".			////
-////////////////////////////////////////////////////////////////////////////////
+// 	16. onKeypress / goBack(key):
+//
+// 	Description:		onKeypress triggers when any keys are pressed. If the key
+//						is 'esc,' calls the goBack(key) fn. 		
+//
+//	Operation:			If the key is 'x' close everything (info panel and lobby)
+//						Otherwise, the key pressed is 'esc' so go back one step.
+//						If the user is in an info panel w/o a lobby, close it.
+//						If an info panel with a lobby, go back to the lobby.
+//						If a lobby, close it.
+//
+//	Dependencies:		None.
+// 	Arguments:			None.
+//	Return values: 		None.
+//
+//	Global variables:	None.
+//
+//	Input:				Takes in keystroke from user.
+//	Output:				Closes info panel or lobby.
+//
+//	Error handling:		None.
+//
+// 	Algorithms:			None. 
+//	Data structures:	None.
+//
+//	Known bugs:			None.
+// 	Limitations:		None.
+//
+// 	Update history:		4/APR/2018	aaron krupp		functional specification writen
 
 $(document).bind('keypress', function (event) {
 	if(String(event.originalEvent.key) == "Escape") {
@@ -684,12 +1212,36 @@ function goBack(key) {
 	}			
 }
 
-
-////////////////////////////////////////////////////////////////////////////////
-////		showSelectedMarker / hideSelectedMarker FUNCTIONs 			  	////
-//// 	Shows or hides the icon that indicates that a certain marker		////
-////	has been selected.													////
-////////////////////////////////////////////////////////////////////////////////
+// 	17. showSelectedMarker() / hideSelectedMarker():
+//
+// 	Description:		Shows/hides the marker on the map that indicates for which
+//						point the data is being displayed.
+//
+//	Operation:			Finds the lat-lng of the active point by using the index
+//						stored in the global info_being_displayed. Places (or 
+//						or removes) the active-marker at that location.
+//
+//	Dependencies:		None.
+// 	Arguments:			None.
+//	Return values: 		None.
+//
+//	Global variables:	info_being_displayed 	---	the index of the global var AllData
+//													dataset for the active point.
+//						AllData	---	Global dataset
+//						active_marker_on	--- Boolena, true if active marker is on
+//
+//	Input:				None.
+//	Output:				Active marker is shown or hidden
+//
+//	Error handling:		None.
+//
+// 	Algorithms:			None. 
+//	Data structures:	None.
+//
+//	Known bugs:			None.
+// 	Limitations:		None.
+//
+// 	Update history:		4/APR/2018	aaron krupp		functional specification writen
 
 function showSelectedMarker() {
 	if (!active_marker_on) {
@@ -713,33 +1265,39 @@ function hideSelectedMarker() {
 	}
 }
 
-function formatDate(start, end) {
-	var e = String(end).split("/", 3);
-	var s = String(start).split("/", 3);
-	if (start == "") {
-		date = e[1]+"/"+MONTHS[Number(e[0])]+"/"+e[2];
-	}
-	if (end == "") {
-		date = s[1]+"/"+MONTHS[Number(s[0])]+"/"+s[2];
-	}
-	else {
-		date_end = e[1]+"/"+MONTHS[Number(e[0])]+"/"+e[2];
-		date_start = s[1]+"/"+MONTHS[Number(s[0])]+"/"+s[2];
-		date = date_start+" - "+date_end;	
-	}	
-	return date
-}
+// 	18. numberWithCommas(x) / numberWithoutCommas(x):
+//
+// 	Description:		Takes a number and adds/removes the formatting commas	
+//
+//	Operation:			The "With" fn: adds commas between every 3rd digit for the 
+//						standard US/Mexico numerical display format. Returns the 
+//						number as a string.				
+//							
+//						The "Without" fn: does the reverse (takes in a 		
+//						string that could have commas, removes them, and returns
+//						a numerical value, either a float or an int).		
+//
+//	Dependencies:		None.
+// 	Arguments:			x	--- "With": int to add commas to
+//								"Without": string to remove commas from
+//	Return values: 		"with": returns a string with commas
+//						"without": returns an int without commas
+//
+//	Global variables:	None.
+//
+//	Input:				None.
+//	Output:				None.
+//
+//	Error handling:		None.
+//
+// 	Algorithms:			None. 
+//	Data structures:	None.
+//
+//	Known bugs:			None.
+// 	Limitations:		None.
+//
+// 	Update history:		4/APR/2018	aaron krupp		functional specification writen
 
-////////////////////////////////////////////////////////////////////
-////			function numberWith(out)Commas		 			////
-//// 															////
-////	Adds commas between every 3rd digit for the standard 	////
-////	US/Mexico numerical display format. Returns the number  ////
-//// 	as a string.											////
-////	The Without function does the reverse (takes in a 		////
-////	string that could have commas, removes them, and returns////
-////	a numerical value, either a float or an int).			////
-////////////////////////////////////////////////////////////////////
 							
 function numberWithCommas(x) {
 	return parseInt(x).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","); 	//The parseInt() removes any leading zeros that the value may have. 
@@ -749,12 +1307,30 @@ function numberWithoutCommas(x) {
 	return Number(x.replace(/,/g, ''));
 }
 
-////////////////////////////////////////////////////////////////////
-////			function getScrollBarWidth		 				////
-//// 															////
-////	gets the width of a vertical scrollbar by making some	////
-////	invisible divs.											////
-////////////////////////////////////////////////////////////////////
+// 	19. getScrollBarWidth():
+//
+// 	Description:		Gets the width of the scrollbar		
+//
+//	Operation:			Creates some hidden divs and measures their relative widths.
+//
+//	Dependencies:		None.
+// 	Arguments:			None.
+//	Return values: 		The width of the scrollbar in pixels.
+//
+//	Global variables:	None.
+//
+//	Input:				None.
+//	Output:				None.
+//
+//	Error handling:		None.
+//
+// 	Algorithms:			None. 
+//	Data structures:	None.
+//
+//	Known bugs:			None.
+// 	Limitations:		None.
+//
+// 	Update history:		4/APR/2018	aaron krupp		functional specification writen
 
 function getScrollBarWidth () {
 	var inner = document.createElement('p');
@@ -782,57 +1358,48 @@ function getScrollBarWidth () {
 	return (w1 - w2);
 };
 
-////////////////////////////////////////////////////////////////////
-////			function enable/disableMapControls 				////
-//// 															////
-////	Disables and enables panning, zooming, and all keyboard	////
-////	map controls when the cursor is and isn't over the map.	////
-////////////////////////////////////////////////////////////////////
+// 	20. openFullSummary():
+//
+// 	Description:		Displays and easter egg to the console with:
+//							- Liters of rainwater capacity installed			
+//							- # rainwater systems installed							
+//							- # filter systems distributed						
+//							- # of filter cartridges distributed				
+//							- liters of ceramic filtration capability			
+//							- People impacted									
+//							- Total # of communities worked in					
+//							- List of partner organizations						
+//							- Total # of projects								
+//							- # of "Other" projects								
+//							- List of "Other" project names w/ community name	
+//							- # of projects in schools							
+//							- # of short workshops								
+//							- # of long workshops								
+//							- # of hours of community-volunteered labor			
+//
+//	Operation:			Calls the appropriate function to generate each of
+//						the above values. Stores values in an array called
+//						"summary". Prints summary to console. 
+//
+//	Dependencies:		None.
+// 	Arguments:			None.
+//	Return values: 		None.
+//
+//	Global variables:	None.
+//
+//	Input:				None.
+//	Output:				Prints Summary to console
+//
+//	Error handling:		None.
+//
+// 	Algorithms:			None. 
+//	Data structures:	None.
+//
+//	Known bugs:			None.
+// 	Limitations:		None.
+//
+// 	Update history:		4/APR/2018	aaron krupp		functional specification writen
 
-
-function disableMapControls() {
-	
-	map.dragging.disable();
-	map.touchZoom.disable();
-	map.doubleClickZoom.disable();
-	map.scrollWheelZoom.disable();
-	map.boxZoom.disable();
-	map.keyboard.disable();
-	if (map.tap) map.tap.disable();
-	document.getElementById('WaterMap').style.cursor='default';
-}
-
-function enableMapControls() {
-	map.dragging.enable();
-	map.touchZoom.enable();
-	map.doubleClickZoom.enable();
-	map.scrollWheelZoom.enable();
-	map.boxZoom.enable();
-	map.keyboard.enable();
-	if (map.tap) map.tap.enable();
-	document.getElementById('WaterMap').style.cursor='grab';
-}
-
-////////////////////////////////////////////////////////////////////
-////			function openFullSummary						////
-//// 															////
-////	Opens a new tab with the fulltext readout of:			////
-////		- Liters of rainwater capacity installed			////
-////		- # rainwater systems installed						////	
-////		- # filter systems distributed						////
-////		- # of filter cartridges distributed				////
-////		- liters of ceramic filtration capability			////
-////		- People impacted									////
-////		- Total # of communities worked in					////
-////		- List of partner organizations						////
-////		- Total # of projects								////
-////		- # of "Other" projects								////
-////		- List of "Other" project names w/ community name	////
-////		- # of projects in schools							////
-////		- # of short workshops								////
-////		- # of long workshops								////
-////		- # of hours of community-volunteered labor			////
-////////////////////////////////////////////////////////////////////
 
 function openFullSummary() {
 	var summary = {};
@@ -856,26 +1423,46 @@ function openFullSummary() {
 	console.log(summary)
 }		
 
-////////////////////////////////////////////////////////////////////////////////
-////						totalProjects 	FUNCTION						////
-////						totalPeople		FUNCTION						////
-////						totalCapacity	FUNCTION						////
-////						totalCartridgesAndSystems	FUNCTION			////
-////						totalCommunities	FUNCTION					////
-////						totalOther		FUNCTION						////
-////						totalRainSys	FUNCTION						////
-////						totalCeramic	FUNCTION						////
-////						totalPartners	FUNCTION						////
-////						totalWorkshops	FUNCTION						////
-////						totalHours		FUNCTION						////
-////						totalSchools	FUNCTION						////
-////																		////
-//// 	These functions agregate information from all of the duplicate 		////
-////	projects over all of the sites. Can only be called once all the 	////
-////	data has been loaded. Each one loops through all of the base points	////
-////	aggregating the grouped data from all of the base points.			////
-////	Returns: int														////
-////////////////////////////////////////////////////////////////////////////////
+// 	21. Map-wide summary functions():
+//
+// 	Description:		Each of these functions return a single int that 
+//						computes a summary value based on all the data on the map
+//						These functions are:	
+//							totalProjects 	
+//							totalPeople		
+//							totalCapacity	
+//							totalCartridgesAndSystems	
+//							totalCommunities	
+//							totalOther		
+//							totalRainSys	
+//							totalCeramic	
+//							totalPartners	
+//							totalWorkshops	
+//							totalHours		
+//							totalSchools	
+//
+//	Operation:			By looping through the base points array, each function
+//						aggregates a particular piece of information.
+//
+//	Dependencies:		None.
+// 	Arguments:			None.
+//	Return values: 		Int, function specific
+//
+//	Global variables:	None.
+//
+//	Input:				None.
+//	Output:				None.
+//
+//	Error handling:		None.
+//
+// 	Algorithms:			None. 
+//	Data structures:	None.
+//
+//	Known bugs:			None.
+// 	Limitations:		None.
+//
+// 	Update history:		4/APR/2018	aaron krupp		functional specification writen
+
 
 function totalProjects() {
 	var total = 0
@@ -1051,14 +1638,35 @@ function totalSchools() {
 	return schools;			
 }
 
-////////////////////////////////////////////////////////////////////////////////
-////						projectsCompleted 	FUNCTION					////
-////						peopleImpacted 		FUNCTION					////
-////						storageInstalled	FUNCTION					////
-////						filetersDistributed	FUNCTION					////
-//// 	These functions agregate information from all of the duplicate 		////
-////	projects for the site at 'point' and return  a str to the user. 	////
-////////////////////////////////////////////////////////////////////////////////
+// 	22. individual point summpary functions:
+//
+// 	Description:		These functions return summary values across multiple
+//						projects in a single community.		
+//
+//	Operation:			The functions take in the community as an index in the 
+//						global dataset and loop through all of the duplicate
+//						projects at the same site as stored in the 
+//						AllData[point].duplicates global array
+//
+//	Dependencies:		None.
+// 	Arguments:			Point 	---	the index of the AllData global.
+//	Return values: 		str	---	function dependent.
+//
+//	Global variables:	AllData ---	the full dataset.
+//
+//	Input:				None.
+//	Output:				None.
+//
+//	Error handling:		None.
+//
+// 	Algorithms:			None. 
+//	Data structures:	None.
+//
+//	Known bugs:			None.
+// 	Limitations:		None.
+//
+// 	Update history:		4/APR/2018	aaron krupp		functional specification writen
+
 
 
 function projectsCompleted(point) {
@@ -1103,14 +1711,36 @@ function filtersDistributed(point) {
 	filters = numberWithCommas(filters);
 	return filters
 }
-////////////////////////////////////////////////////////////////
-////			function formatDate							////
-////														////
-////	Takes in d (day, 1-31), m (month 1-12), and year 	////
-////	(yyyy). and returns a string with the format		////
-////	dd/mmm/yyyy where dd are numbers, mmm are text, and	////
-////	yyyy is the numerical year.							////
-////////////////////////////////////////////////////////////////
+
+// 	23. formatDate():
+//
+// 	Description:		Takes a day, month, and year and formats it into a string 
+//						with the structure dd/mmm/yyyy.		
+//
+//	Operation:			Takes in three ints d (1-31), m (1-12) and y (xxxx). Looks
+//						up the appropriate month in a lookup table and concatenates
+//						the other inputs together with '/'s. Returns a string
+//
+//	Dependencies:		None.
+// 	Arguments:			d 	---	day, an int 1-31
+//						m 	---	month, an int 1-12
+//						y	---	year, an 4 digit int, should be a valid year
+//	Return values: 		string dd/mmm/yyyy .
+//
+//	Global variables:	MONTHS, NO_INFO
+//
+//	Input:				None.
+//	Output:				None.
+//
+//	Error handling:		If inputs are not all present and valid, returns NO_INFO.
+//
+// 	Algorithms:			None. 
+//	Data structures:	None.
+//
+//	Known bugs:			None.
+// 	Limitations:		None.
+//
+// 	Update history:		4/APR/2018	aaron krupp		functional specification writen
 
 function formatDate(d, m, y) {
 	if(d && m && d) {
@@ -1120,14 +1750,33 @@ function formatDate(d, m, y) {
 	}
 }
 
-////////////////////////////////////////////////////////////////
-////			function isEmpty							////
-////														////
-////	Checks the ith entry in the global AllData dataset	////
-////	to see if there's anything entered into the "name"	////
-////	column. If so, returns false (not empty). otherwise,////
-////	returns true (empty). 								////
-////////////////////////////////////////////////////////////////
+// 	24. isEmpty(i, name):
+//
+// 	Description:		checks to see if a certain field in the global dataset is
+//						empty or not. 
+//
+//	Operation:			If the field has an empty or null value, returns true. 
+//
+//	Dependencies:		None.
+// 	Arguments:			i 	---	the index of the global dataset to check
+//						name---	the name of the field to check
+//	Return values: 		Boolean -- true if field is empty or null, false if not.
+//
+//	Global variables:	AllData 	--- the global dataset
+//						DATA_NAMES
+//
+//	Input:				None.
+//	Output:				None.
+//
+//	Error handling:		None.
+//
+// 	Algorithms:			None. 
+//	Data structures:	None.
+//
+//	Known bugs:			None.
+// 	Limitations:		None.
+//
+// 	Update history:		4/APR/2018	aaron krupp		functional specification writen
 
 function isEmpty(i, name) {
 	empty = false;
@@ -1137,10 +1786,64 @@ function isEmpty(i, name) {
 	return empty;
 }
 
+// 	25. beginUserExperience():
+//
+// 	Description:		Makes the map available to the user.		
+//
+//	Operation:			fades out the overlay and restarts the counter. 
+//
+//	Dependencies:		an element with class = "overlay".
+// 	Arguments:			None.
+//	Return values: 		None.
+//
+//	Global variables:	None.
+//
+//	Input:				None.
+//	Output:				The overlay fades out and the counters start to spinner
+//						again from 0
+//
+//	Error handling:		None.
+//
+// 	Algorithms:			None. 
+//	Data structures:	None.
+//
+//	Known bugs:			None.
+// 	Limitations:		None.
+//
+// 	Update history:		4/APR/2018	aaron krupp		functional specification writen
+
 function beginUserExperience() {
 	$("#overlay").fadeOut(800, function() {});	// fade out the overlay
 	restartCounters();							//	and restart the counters 	
 }
+
+// 	26. restartCounters():
+//
+// 	Description:		resets the counters from 0		
+//
+//	Operation:			for each counter, set the innerHTML to 0, then
+//						call fillCounters() to refill them. 
+//
+//	Dependencies:		The counter elements with the following ids:
+//							stats_projects_no, stats_people_no, stats_capacity_no,
+//							stats_ceramic_no
+// 	Arguments:			None.
+//	Return values: 		None.
+//
+//	Global variables:	None.
+//
+//	Input:				None.
+//	Output:				The counters reset to 0 and start spinning again
+//
+//	Error handling:		None.
+//
+// 	Algorithms:			None. 
+//	Data structures:	None.
+//
+//	Known bugs:			None.
+// 	Limitations:		None.
+//
+// 	Update history:		4/APR/2018	aaron krupp		functional specification writen
 
 function restartCounters() { // Resets the odometer counters to 0
 	document.getElementById("stats_projects_no").innerHTML = 0;	// fill it!
@@ -1148,4 +1851,54 @@ function restartCounters() { // Resets the odometer counters to 0
 	document.getElementById("stats_capacity_no").innerHTML = 0;
 	document.getElementById("stats_ceramic_no").innerHTML = 0;
 	fillCounters();
+}
+
+// 	27. disableMapControls() / enableMapControls():
+//
+// 	Description:		disables and enables zooming, panning scrolling, etc. on
+//						the map. 
+//
+//	Operation:			uses Leaflet commands to disable and enable specific
+//						map controls. 
+//
+//	Dependencies:		leaflet.js
+// 	Arguments:			None.
+//	Return values: 		None.
+//
+//	Global variables:	None.
+//
+//	Input:				None.
+//	Output:				Map becomes non/re-interactive for the user
+//
+//	Error handling:		None.
+//
+// 	Algorithms:			None. 
+//	Data structures:	None.
+//
+//	Known bugs:			None.
+// 	Limitations:		None.
+//
+// 	Update history:		4/APR/2018	aaron krupp		functional specification writen
+
+function disableMapControls() {
+	
+	map.dragging.disable();
+	map.touchZoom.disable();
+	map.doubleClickZoom.disable();
+	map.scrollWheelZoom.disable();
+	map.boxZoom.disable();
+	map.keyboard.disable();
+	if (map.tap) map.tap.disable();
+	document.getElementById('WaterMap').style.cursor='default';
+}
+
+function enableMapControls() {
+	map.dragging.enable();
+	map.touchZoom.enable();
+	map.doubleClickZoom.enable();
+	map.scrollWheelZoom.enable();
+	map.boxZoom.enable();
+	map.keyboard.enable();
+	if (map.tap) map.tap.enable();
+	document.getElementById('WaterMap').style.cursor='grab';
 }
