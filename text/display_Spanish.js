@@ -29,9 +29,9 @@ var LEGEND3 = "\xa0\xa0\xa0Otros\xa0proyectos"
 var LEGEND4 = "\xa0\xa0\xa0Varios\xa0proyectos";
 var LEGEND_TEXT = [LEGEND0, LEGEND1, LEGEND2, LEGEND3, LEGEND4];
 
-var BACK_BUTTON_TXT = ["Back to all "," projects"];
-var LOBBY_MESSAGE = ["<b>Click on a project below for more information<br></b>"]
-var SUMMARY_TITLE = "<b>Community profile</b>";
+var BACK_BUTTON_TXT = ["Atras hacía todos"," projects"];
+var LOBBY_MESSAGE = ["<b>Haz clic en un proyecto abajo para saber más información<br></b>"]
+var SUMMARY_TITLE = "<b>Perfiles comunitarios</b>";
 
 var NO_PROJECTS_HDR = "Proyectos";										// Headers for lobby summary chart
 var PPL_SERVED_HDR = "Personas afectadas";
@@ -147,4 +147,4 @@ var EASTER_EGG_TXT = {			// NEED TO TRANSLATE!!!
 }
 
 var DISPLAY_TITLE = "<b>Mapa de proyectos</b>";
-var DISPLAY_MSG = "Haz click para saber más de nuestro trabajo";
+var DISPLAY_MSG = "Haz clic para saber más de nuestro trabajo";
