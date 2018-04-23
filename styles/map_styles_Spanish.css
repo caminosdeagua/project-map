@@ -1,0 +1,246 @@
+/* adds style the html body and map div objects */
+html, body {width:100%; height:100%; padding: 0; margin: 0;}
+#WaterMap {
+	width: 100%; 
+	height:100%; 
+	background: teal;
+}
+
+/* CSS style formatting for the labels bound to each marker*/
+.ourLabel {
+	position: absolute;
+	display: inline-block;
+	font-size: 13px;
+	background-color: rgba(255,255,255,0.85);
+	padding-left: 2px;
+	padding-right: 2px;
+	box-shadow: 2px 2px 3px 0px rgba(0,0,0,0.3);
+	border: 0px solid;
+	border-radius: 3px;
+	text-indent: -4px;
+}
+
+/* CSS formatting for the popup box that appears when markers are clicked */
+.leaflet-popup-content-wrapper {
+	background-color: #F6F6F6;
+	text-align: left;
+	width: 203px;
+}
+
+/* CSS formatting for the tip of the popup box */
+.leaflet-popup-tip {
+	background: #F6F6F6;
+	box-shadow: 0 0 0 rgba(0,0,0,0.4);
+}
+
+.leaflet-popup-tip-container {
+	position: relative;
+	right: 43%;
+	bottom: 6px;
+}
+
+/* CSS formatting for the Caminos de Agua logo in the corner */
+img.caminos_logo {
+	display: inline-block;
+	z-index: 3;
+	position: fixed;
+	left: 15px;
+	bottom: 15px;
+	width: 120px;
+	opacity: 1;
+}
+
+div.cartodb-legend {
+	width: 200px;	
+	position: absolute;
+	bottom: 15px;
+	left: 150px;
+}
+
+.legend-title {
+	font-size: 18px;
+}
+
+.bullet {
+	font-size: 12px;
+}
+
+/* formatting for the info panel */
+.display_box {
+	position: absolute;
+	top: 0px;
+	right: 0px;
+	bottom: 0px;
+	width: 25%;
+	background-color: rgba(245, 245, 245, 1);
+	opacity: 0.8;
+	display: none;
+	overflow-y: scroll;
+	overflow-x: hidden;
+	height: auto;
+	z-index: 5000;
+}
+
+/* formatting for the x-button to close the info panel */
+.x-butt{
+	position: fixed;
+	top: 10px;
+	right: 10px;
+	height: 20px;
+	width: 20px;
+	cursor: pointer;
+}
+
+.info_text {
+	padding: 5px;
+	border: 0px solid #eeeeee;
+	font-family: "Tahoma", Geneva, sans-serif;
+	font-size: 14px;
+}
+
+.lobby_text {
+	padding: 5px;
+	border: 0px solid #eeeeee;
+	font-family: "Tahoma", Geneva, sans-serif;
+	font-size: 14px;
+}
+
+.photo_box {
+	width: 96%;
+	margin: 2%;
+	border: 0px solid black;
+	border-radius: 5px;
+}
+
+.proj_box_even {
+	padding: 10px;
+	background-color: #6366c1;
+	margin: 0;
+	color: white;
+	width: 80%;
+	border: 2px solid black;
+	border-radius: 10px;
+	
+}
+
+.proj_box_odd {
+	padding: 10px;
+	background-color: #6366c1;
+	color: white;
+	width: 80%;
+	border: 2px solid black;
+	border-radius: 10px;
+}
+
+.proj_box_even:hover, .proj_box_odd:hover {
+	background-color: #9192bc;
+	color: black;
+	cursor: pointer;
+}
+
+#back_button:hover {
+	cursor: pointer;
+}
+
+#summary_table {
+	width: 85%;
+	background-color: #666666;
+}
+
+.left_column {
+	background-color: rgba(166, 211, 218, 1);
+	width: 50%;
+	padding-top: 4px;
+	padding-bottom: 4px;
+}
+
+.right_column {
+	width: 50%;
+	background-color: rgba(211, 233, 237, 1);
+}
+
+#video, #video_l {
+	max-width: 640px;
+	max-height: 360px;
+	width: 100%;
+	height:100%;
+	position: relative;
+	height: 0px;
+	padding-bottom: 56.25%;
+}
+
+.vid_box {
+	width: 96%;
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	left: 0; top: 0;
+}
+
+#stats_box {
+	position: absolute;
+	z-index: 4;
+	top: 7px;
+	right: 12px;
+	width: 260px;
+	display: none;
+}
+
+.stats_tr {
+	background-color: rgba(0,0,0,0.7);
+	clear: left;
+	width: 100%;
+	display: flex;
+	align-items: center;
+	font-size: 16px;
+	*border-radius: 8px;
+	*border: 2px solid #ffffff;
+	margin-top: 5px;
+}
+
+.stats_left {
+	min-height: 4em;
+	float: left;
+	width: 50%;
+	margin: 0;
+	margin-left: 5px;
+	color: white;
+	display: flex;
+	align-items: center;
+}
+
+#overlay {
+	display: none;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	background: rgba(0,0,0, 0.6);
+	z-index: 9999;
+	text-align: center;
+	font-family: "Tahoma", Geneva, sans-serif;
+	font-size: 96px;
+	border: 6px solid #222;
+}
+
+#spacer {
+	height: 30%;
+}
+
+#overlay_title {
+	font-size: 96px;
+	color: white;
+	vertical-align: middle;
+	position: relative;
+	padding: 20px;
+}
+
+#overlay_msg {
+	margin-top: 20px;
+	font-size: 36px;
+	color: white;
+	position: relative;
+	width: 100%;
+}
+
