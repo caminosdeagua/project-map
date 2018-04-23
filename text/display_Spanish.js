@@ -29,7 +29,7 @@ var LEGEND3 = "\xa0\xa0\xa0Otros\xa0proyectos"
 var LEGEND4 = "\xa0\xa0\xa0Varios\xa0proyectos";
 var LEGEND_TEXT = [LEGEND0, LEGEND1, LEGEND2, LEGEND3, LEGEND4];
 
-var BACK_BUTTON_TXT = ["Todos los proyectos en ",""];
+var BACK_BUTTON_TXT = ["Atrás hacía todos los proyectos en ",""];
 var LOBBY_MESSAGE = ["<b>Haz clic en un proyecto abajo para encontrar más información<br></b>"]
 var SUMMARY_TITLE = "<b>Perfiles comunitarios</b>";
 
