@@ -1,13 +1,13 @@
-/////////////////////////////////////////////////////////////////////////////
-////					 INITIALIZATION FUNCTION 						  	////
-//////////////////////////////////////////////////////////////////////////////// 
+//////////////////////////////////////////////////////////////////////////////
+////					 INITIALIZATION FUNCTION 						  ////
+////////////////////////////////////////////////////////////////////////////// 
 
 function init() {
-	fillText();
-	initMap(); 					// Initialize and display the map object
-	applyBaseMap(); 			// Apply the base tiles to the map
+	fillText();``				// Fill in the text in the appropriate language
+	initMap(); 					// Initialize the map 
+	applyBaseMap(); 			// Display the map with the appropriate base tiles
 	adjustXLocation();
-	loadAndPlotData(); 			// Load the data for Fluoride (the default contaminant) 
+	loadAndPlotData(); 			// Load the data for the default contaminant 
 								// 	then plot the base markers on the map.	
 	fillCounters();				// Read the data for the counters
 }								
