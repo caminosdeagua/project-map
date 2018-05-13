@@ -17,10 +17,10 @@ However, if you *are* with Caminos de Agua and need to update the map, please fo
 1. Go to the Caminos dropbox: Mapping and Data Set -> 1. Online Dataset -> Project Maps Data 
 2. Open "Projects Database.xls
 3. Add your data to the spreadsheet
-4. **MAKE SURE THE SPREADSHEET IS SORTED BY:
+4. **MAKE SURE THE SPREADSHEET IS SORTED BY:**
     1. Name (a-z)
     1. Start year (ascending)
-    1. Start month (ascending)**
+    1. Start month (ascending)
 5. Run the Macro by pushing the button in the upper left, "Make website..."
 6. A new sheet/tab should be generated called "Projects Database Website." Navigate to this sheet.
 7. Save As .csv file (text delimitter: double-quote (""), entry separator: comma (,))
