@@ -18,9 +18,9 @@ However, if you *are* with Caminos de Agua and need to update the map, please fo
 2. Open "Projects Database.xls
 3. Add your data to the spreadsheet
 4. **MAKE SURE THE SPREADSHEET IS SORTED BY:
-  a. Name (a-z)
-  b. Start year (ascending)
-  c. Start month (ascending)**
+    1. Name (a-z)
+    1. Start year (ascending)
+    1. Start month (ascending)**
 5. Run the Macro by pushing the button in the upper left, "Make website..."
 6. A new sheet/tab should be generated called "Projects Database Website." Navigate to this sheet.
 7. Save As .csv file (text delimitter: double-quote (""), entry separator: comma (,))
@@ -34,7 +34,7 @@ However, if you *are* with Caminos de Agua and need to update the map, please fo
 14. Delete everything after the = sign. (all but the top line)
 15. Paste your validated JSON from step 11 after the equals sign.
 16. Save the file and commit and sync with github.
-17. CHECK https://caminosdeagua.github.io/project-map TO MAKE SURE YOUR CHANGES HAVE BEEN APPLIED!!! (can take up to 15 minutes).
+17. CHECK https://caminosdeagua.github.io/project-map to make sure that your changes have been applied (can take up to 15 minutes).
 18. Woohoo!!!
 
 ## License
