@@ -8,7 +8,9 @@ Since this project is exclusively a "front end" with no server-based code, it li
 
 To embed this page on a website, simply use an iframe with the following code, adjusting the width and height as appropriate:
 
-`<iframe width="100%" height="520" frameborder="0" src="https://caminosdeagua.github.io/project-map/" allowfullscreen webkitallowfullscreen mozallowfullscreen oallowfullscreen msallowfullscreen></iframe>`
+```html
+<iframe width="100%" height="520" frameborder="0" src="https://caminosdeagua.github.io/project-map/" allowfullscreen webkitallowfullscreen mozallowfullscreen oallowfullscreen msallowfullscreen></iframe>
+```
 
 ## How to update the map
 If you are not a member of the Caminos de Agua team and/or cannot commit to this repo, ignore the rest of this page and enjoy perusing or using the map!
