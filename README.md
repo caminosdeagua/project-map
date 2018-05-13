@@ -43,4 +43,4 @@ This work is shared under a Creative Commons 4.0 attribution, non-commercial lic
 To give propper attribution, please cite:
 
 Creative Commons License
-[Project Map | Caminos de Agua](caminosdeagua.github.io/project-map) by [Caminos de Agua](www.caminosdeagua.org) is distributed under a [4.0 International Atribution-NoCommercial Creative Commons License](https://creativecommons.org/share-your-work/licensing-types-examples/).
+[Project Map | Caminos de Agua](https://caminosdeagua.github.io/project-map) by [Caminos de Agua](https://www.caminosdeagua.org) is distributed under a [4.0 International Atribution-NoCommercial Creative Commons License](https://creativecommons.org/share-your-work/licensing-types-examples/).
