@@ -9,7 +9,7 @@ Since this project is exclusively a "front end" with no server-based code, it li
 To embed this page on a website, simply use an iframe with the following code, adjusting the width, height, and language as desired:
 
 ```html
-<iframe width="100%" height="520" frameborder="0" src="https://caminosdeagua.github.io/project-map/" allowfullscreen webkitallowfullscreen mozallowfullscreen oallowfullscreen msallowfullscreen></iframe>
+<iframe width="100%" height="520" frameborder="0" src="https://caminosdeagua.github.io/project-map#en" allowfullscreen webkitallowfullscreen mozallowfullscreen oallowfullscreen msallowfullscreen></iframe>
 ```
 
 To use the map in another language, just add a hash. So ...io/project-map#es will display in spanish while ...io/project-map#en will display in English. Default (no hash) displays in English. Modify the above code appropriately for spanish. Currently only available in English & Spanish.
