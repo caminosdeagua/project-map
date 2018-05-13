@@ -38,3 +38,9 @@ However, if you *are* with Caminos de Agua and need to update the map, please fo
 18. Woohoo!!!
 
 ## License
+This work is shared under a Creative Commons 4.0 attribution, non-commercial license. It is also covered under [The MIT License](https://opensource.org/licenses/MIT). 
+
+To give propper attribution, please cite:
+
+Creative Commons License
+[Project Map | Caminos de Agua](caminosdeagua.github.io/project-map) by [Caminos de Agua](www.caminosdeagua.org) is distributed under a [4.0 International Atribution-NoCommercial Creative Commons License](https://creativecommons.org/share-your-work/licensing-types-examples/).
