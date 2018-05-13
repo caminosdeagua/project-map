@@ -7,9 +7,9 @@ Since this project is exclusively a "front end" with no server-based code, it li
 
 To embed this page on a website, simply use an iframe with the following code, adjusting the width and height as appropriate:
 
-<iframe width="100%" height="520" frameborder="0" src="https://caminosdeagua.github.io/project-map/" allowfullscreen webkitallowfullscreen mozallowfullscreen oallowfullscreen msallowfullscreen></iframe>
+`<iframe width="100%" height="520" frameborder="0" src="https://caminosdeagua.github.io/project-map/" allowfullscreen webkitallowfullscreen mozallowfullscreen oallowfullscreen msallowfullscreen></iframe>`
 
-# How to update data
+## How to update data
 1. Go to the Caminos dropbox: Mapping and Data Set -> 1. Online Dataset -> Project Maps Data 
 2. Open "Projects Database.xls
 3. Add your data to the spreadsheet
