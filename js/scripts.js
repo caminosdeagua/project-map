@@ -220,7 +220,7 @@ function init() {
 
 
 function fillText() {
-	document.getElementsByTagName('Title').innerHTML = TITLE;
+	document.title = TITLE;
 	alert();
 	document.getElementById("legend_title").innerHTML = LEGEND_TITLE;
 	els = document.getElementsByName("project_type");
