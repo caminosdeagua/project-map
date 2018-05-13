@@ -8,15 +8,19 @@ Since this project is exclusively a "front end" with no server-based code, it li
 
 To embed this page on a website, simply use an iframe with the following code, adjusting the width and height as appropriate:
 
-```<iframe width="100%" height="520" frameborder="0" src="https://caminosdeagua.github.io/project-map/" allowfullscreen webkitallowfullscreen mozallowfullscreen oallowfullscreen msallowfullscreen></iframe>```
+`<iframe width="100%" height="520" frameborder="0" src="https://caminosdeagua.github.io/project-map/" allowfullscreen webkitallowfullscreen mozallowfullscreen oallowfullscreen msallowfullscreen></iframe>`
 
 ## How to update the map
 If you are not a member of the Caminos de Agua team and/or cannot commit to this repo, ignore the rest of this page and enjoy perusing or using the map!
 
-However if you are with Caminos de Agua and need to update the map, please follow the following steps.
+However, if you *are* with Caminos de Agua and need to update the map, please follow the following steps.
 1. Go to the Caminos dropbox: Mapping and Data Set -> 1. Online Dataset -> Project Maps Data 
 2. Open "Projects Database.xls
 3. Add your data to the spreadsheet
+4. **MAKE SURE THE SPREADSHEET IS SORTED BY:
+  a. Name (a-z)
+  b. Start year (ascending)
+  c. Start month (ascending)**
 5. Run the Macro by pushing the button in the upper left, "Make website..."
 6. A new sheet/tab should be generated called "Projects Database Website." Navigate to this sheet.
 7. Save As .csv file (text delimitter: double-quote (""), entry separator: comma (,))
