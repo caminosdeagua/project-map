@@ -12,6 +12,8 @@ To embed this page on a website, simply use an iframe with the following code, a
 <iframe width="100%" height="520" frameborder="0" src="https://caminosdeagua.github.io/project-map/" allowfullscreen webkitallowfullscreen mozallowfullscreen oallowfullscreen msallowfullscreen></iframe>
 ```
 
+To use the map in another language, just add a hash. So ...io/project-map#es will display in spanish while ...io/project-map#en will display in English. Default (no hash) displays in English. Modify the above code appropriately for spanish. Currently only available in English & Spanish.
+
 ## How to update the map
 If you are not a member of the Caminos de Agua team and/or cannot commit to this repo, ignore the rest of this page and enjoy perusing or using the map!
 
