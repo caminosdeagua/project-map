@@ -221,7 +221,6 @@ function init() {
 
 function fillText() {
 	document.title = TITLE;
-	alert();
 	document.getElementById("legend_title").innerHTML = LEGEND_TITLE;
 	els = document.getElementsByName("project_type");
 	for(var i=0; i<els.length; i++){
