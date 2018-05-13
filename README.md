@@ -3,7 +3,8 @@ This map shows points for each of Caminos de Agua's projects.
 Points are color-coded by project type and are clickable for more information.
 If a location has multiple projects, clicking on the location shows a summary of all projects from which individual projects can be selected. 
 
-Since this project is exclusively a "front end" with no server-based code, it lives here on github and is accessible for viewing in github pages. 
+## Use
+Since this project is exclusively a "front end" with no server-based code, it lives here on github and is accessible for viewing in github pages. You can view it at: https://caminosdeagua.github.io/project-map
 
 To embed this page on a website, simply use an iframe with the following code, adjusting the width and height as appropriate:
 
