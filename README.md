@@ -1,5 +1,7 @@
 # project-map
-Map of all Caminos de Agua projects
+This map shows points for each of Caminos de Agua's projects. 
+Points are color-coded by project type and are clickable for more information.
+If a location has multiple projects, clicking on the location shows a summary of all projects from which individual projects can be selected. 
 
 # How to update data
 1. Go to the Caminos dropbox: Mapping and Data Set -> 1. Online Dataset -> Project Maps Data 
