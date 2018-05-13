@@ -6,7 +6,7 @@ If a location has multiple projects, clicking on the location shows a summary of
 ## Use
 Since this project is exclusively a "front end" with no server-based code, it lives here on github and is accessible for viewing in github pages. You can view it at: https://caminosdeagua.github.io/project-map
 
-To embed this page on a website, simply use an iframe with the following code, adjusting the width and height as appropriate:
+To embed this page on a website, simply use an iframe with the following code, adjusting the width, height, and language as desired:
 
 ```html
 <iframe width="100%" height="520" frameborder="0" src="https://caminosdeagua.github.io/project-map/" allowfullscreen webkitallowfullscreen mozallowfullscreen oallowfullscreen msallowfullscreen></iframe>
