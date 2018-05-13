@@ -220,7 +220,9 @@ function init() {
 
 
 function fillText() {
-	document.title = TITLE;
+	var caminosLogoURL = document.getElementByClassName("caminos_logo")[0].src;
+	console.log(carminosLogoURL);
+	alert();
 	document.getElementById("legend_title").innerHTML = LEGEND_TITLE;
 	els = document.getElementsByName("project_type");
 	for(var i=0; i<els.length; i++){
