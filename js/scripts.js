@@ -222,8 +222,7 @@ function init() {
 function fillText() {
 	var caminosLogoURL = document.getElementsByClassName("caminos_logo")[0].src;
 	console.log(caminosLogoURL);
-	document.title = "<img src="+caminosLogoURL"> </img>"+TITLE;
-	alert();
+	document.title = TITLE;
 	document.getElementById("legend_title").innerHTML = LEGEND_TITLE;
 	els = document.getElementsByName("project_type");
 	for(var i=0; i<els.length; i++){
