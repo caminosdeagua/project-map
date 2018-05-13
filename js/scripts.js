@@ -221,7 +221,7 @@ function init() {
 
 function fillText() {
 	var caminosLogoURL = document.getElementsByClassName("caminos_logo")[0].src;
-	console.log(carminosLogoURL);
+	console.log(caminosLogoURL);
 	document.title = TITLE;
 	alert();
 	document.getElementById("legend_title").innerHTML = LEGEND_TITLE;
