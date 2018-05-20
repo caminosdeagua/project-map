@@ -437,13 +437,11 @@ function onQueryResponse(response) {
 }
 
 function googleDataTable2JSON(dataTable) {
-	//console.log(dataTable);
 	cols = dataTable.ng;								// define the sheet columns
 	rows = dataTable.og;								// define the sheet rows
 	numCols = cols.length;
 	numRows = rows.length;
-	//console.log(numCols+", "+numRows)
-	
+
 	var data = [];										// initialze data array to hold json
 	
 	for(var i=0; i<numRows; i++) {						// loop through rows
@@ -464,7 +462,6 @@ function googleDataTable2JSON(dataTable) {
 			data[i][key] = value;						// store the "key: value" pair
 		}
 	}
-	console.log(data);
 	return data											// after all looping is done, return the finalized json
 }
 	
