@@ -7,18 +7,18 @@
 var TITLE = "Mapa de Proyectos | Caminos de Agua";
 
 
-var MONTHS_LONG = {Ene: "Enero",
+var MONTHS_LONG = {Jan: "Enero",
 					Feb: "Febrero",
 					Mar: "Marzo",
-					Abr: "Abril", 
+					Apr: "Abril", 
 					May: "Mayo",
 					Jun: "Junio",
 					Jul: "Julio",
-					Ago: "Agosto", 
+					Aug: "Agosto", 
 					Sep: "Septiembre", 
 					Oct: "Octubre",
 					Nov: "Noviembre", 
-					Dic: "Diciembre"};
+					Dec: "Diciembre"};
 
 var DATE = "Fecha";
 
