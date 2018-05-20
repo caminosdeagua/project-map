@@ -5,15 +5,19 @@
 ////	translation. Enjoy =)												////
 ////////////////////////////////////////////////////////////////////////////////
 var TITLE = "Proejct Map | Caminos de Agua";
-var MONTHS = ["Jan", "Feb", "Mar", 		// Array of names of months for displaying
-			"Apr", "May", "Jun", 		//	the date in an accessible, clear format,
-			"Jul", "Aug", "Sep", 		// 	even for silly US people who choose to put 
-			"Oct", "Nov", "Dec"];		//	the month first. Ugh. 
 
-var MONTHS_LONG = ["January", "February", "March",
-				"April", "May", "June", "July",
-				"August", "September", "October",
-			"November", "December"];
+var MONTHS_LONG = {Jan: "January",
+					Feb: "February",
+					Mar: "March",
+					Apr: "April", 
+					May: "May",
+					Jun: "June",
+					Jul: "July",
+					Aug: "August", 
+					Sep: "September", 
+					Oct: "October",
+					Nov: "November", 
+					Dec: "December"};
 
 var DATE = "Date";
 
@@ -53,13 +57,7 @@ var DATA_NAMES = {
 	site: "Site Location",
 	partner: "Partner Organization",
 	start_date: "Start Date",
-	start_day: "Start Day",
-	start_month: "Start Month",
-	start_year: "Start Year",
 	end_date: "End Date",
-	end_day: "End Day",
-	end_month: "End Month",
-	end_year: "End Year",
 	people: "Total # of People Served",
 	big_train: "Weeklong Capacity Training",
 	small_train: "Small Scale Capacity Training",
@@ -76,11 +74,7 @@ var DATA_NAMES = {
 	phone: "Phone Number",
 	email: "Email",
 	docs: "Document",
-	notes1: "Notes 1",
-	notes2: "Notes 2",
-	notes3: "Notes 3",
-	notes4: "Notes 4",
-	notes5: "Notes 5",
+	notes: "Notes",
 	photo: "Image Link",
 	video: "Video Link",
 	photo_folder: "Images Folder"
@@ -116,10 +110,10 @@ var LBL = {
 	primary_contact: "Primary contact(s)",
 	contact_info: "Contact info",
 	docs: "More information",
-	notes1: "Notes"
+	notes: "Notes"
 };
 
-var BETWEEN_DATES = " - ";
+var BETWEEN_DATES = " --- ";
 
 var END_OF_HEADER = ":<br>\xa0\xa0\xa0";
 

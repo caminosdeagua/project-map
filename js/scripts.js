@@ -39,9 +39,11 @@
 //			Adjusts the location of the closing-x-mark in the lobby/info panel to
 //			accomodate different scrollbar widths on different browsers
 //
-//	7. loadAndPlotData():
-//			Loads the data from the global dataset object and plots it appropriately
-//			using leaflet commands
+//	7. loadData():
+//			Loads the data from googleSheets and formats it as a JSON.
+//
+//	8. plotData(data);
+//			Plots the passed data, formatted as a JSON. 
 //
 //	8. getBin(data, i):
 //			figure out which color to make the point represented by the i-th row
@@ -115,21 +117,17 @@
 //			These functions compute total data for a community with multiple
 //			projects by summing values from all of a community's projects.
 //
-//	23. formatDate(d, m, y):
-//			Takes in a day (d), month (m), and year (y) as ints and returns 
-//			a string in the form of dd-mmm-yyyy
-//
-//	24. isEmpty(i, name):
+//	23. isEmpty(i, name):
 //			returns t/f, checks to see if the ith row in the dataset has a name
 //
-//	25. beginUserExperience():
+//	24. beginUserExperience():
 //			removes the overlay and restarts the counters (makes map accessible 
 //			to clicks)
 //
-//	26. restartCounters():
+//	25. restartCounters():
 //			re-initializes the spinning counters. 
 //
-//	27. disableMapControls() / enableMapControls():
+//	26. disableMapControls() / enableMapControls():
 //			disables and enables map controls for scrolling in lobby/info-panel
 //			and clicking on easter egg.
 //
@@ -179,7 +177,7 @@ function init() {
 	initMap(); 					// Initialize the map 
 	applyBaseMap(); 			// Display the map with the appropriate base tiles
 	adjustXLocation();
-	loadAndPlotData(); 			// Load the data for the default contaminant 
+	loadData(); 				// Load the data for the default contaminant 
 								// 	then plot the base markers on the map.	
 	fillCounters();				// Read the data for the counters
 }								
@@ -381,9 +379,9 @@ function adjustXLocation() {
 	}
 }
 
-// 	7. LoadAndPlotData():
+// 	7. LoadData():
 //
-// 	Description:		Loads the appropriate dataset and plots it on the map.	
+// 	Description:		Loads the appropriate dataset calls the plotting function.	
 //
 //	Operation:			Grabs the data from the gloabl dataset PROJECT_MAP_DATA.
 //						Stores it in a local variable data and a global AllData.
@@ -419,8 +417,60 @@ function adjustXLocation() {
 //
 // 	Update history:		4/APR/2018	aaron krupp		functional specification writen
 
-function loadAndPlotData() {
+function loadData() {
 
+	var url = "https://docs.google.com/spreadsheets/d/1P6Obxu21IhjQFcIBh2N4Cv6fJaMmAyfELEs2tfFWLGI/edit?usp=sharing";
+	var options = {sendMethod: 'auto'};
+	var query = new google.visualization.Query(url, options);
+	query.setQuery('select * ORDER BY A,B');				// Relies on A being community name and B being start-date
+	query.send(onQueryResponse);
+							
+}
+
+function onQueryResponse(response) {
+	if(response.isError()) {
+		throw new Error("data could not be retieved from Google sheets")
+	} else {
+		var data = googleDataTable2JSON(response.getDataTable());	// convert data to json
+		plotData(data);												// feed into plotting function
+	}
+}
+
+function googleDataTable2JSON(dataTable) {
+	//console.log(dataTable);
+	cols = dataTable.ng;								// define the sheet columns
+	rows = dataTable.og;								// define the sheet rows
+	numCols = cols.length;
+	numRows = rows.length;
+	//console.log(numCols+", "+numRows)
+	
+	var data = [];										// initialze data array to hold json
+	
+	for(var i=0; i<numRows; i++) {						// loop through rows
+		data.push({});									// on each row creating a new dictionary
+		for(var j=0; j<numCols; j++) {					// and loop through each column of that row
+			var key = cols[j].label;					// get the name of the column
+			//console.log(key);
+			var value;									// initialize a variable to hold the cell's value
+			if (rows[i].c[j] != null) {					// if a value exists in the cell
+				if( typeof(rows[i].c[j].v)=="object") {	// and if it is an object, 
+					value = String(rows[i].c[j].f);		// grab the string version
+				} else {								// otherwise,
+					value = rows[i].c[j].v;		// grab the default value with the "v" type formatting
+				}
+			} else {									// if there's no value in the cell
+				value = "";								// set the value to an empty string as per JSON protocol
+			}
+			data[i][key] = value;						// store the "key: value" pair
+		}
+	}
+	console.log(data);
+	return data											// after all looping is done, return the finalized json
+}
+	
+	
+function plotData(data) {
+	
 	base.Markers = [];
 	base.Popups = [];
 	selectedIcon = L.icon({
@@ -428,11 +478,9 @@ function loadAndPlotData() {
 		iconSize: LARGE_ICON_SIZE
 	});
 	var duplicateCounter = 0;
-	var data = PROJECT_MAP_DATA;	// This grabs the JSON data file. 
+	
 	AllData = data; 				// store data as global for later access.
 	photos = Array.apply(null, Array(data.length)).map(Boolean.prototype.valueOf,false); 	// init an array full of "false"'s to later populate with images
-	// (Un)comment the next line to (see) hide the full dataset (in) from the console, super useful for debugging!
-	//console.log("Data acquired! "+JSON.stringify(data)); 	// log the data in the console for debugging...
 	
 	for (var i=0; i<data.length; i++) { // Loop through all the rows of the data
 		var bin;
@@ -537,6 +585,9 @@ function loadAndPlotData() {
 			}	
 		};
 	};
+
+
+	
 }
 
 // 	8. getBin(data, i):
@@ -724,24 +775,25 @@ function showInfo(z) {
 			els[i].innerHTML = BACK_BUTTON_TXT[0]+AllData[z][DATA_NAMES.name]+BACK_BUTTON_TXT[1];
 			if (AllData[z].isDuplicate) {toDisplay = true;}
 		} else if (id == "dates") {				// If there are dates, include them here:
-			if (isEmpty(z, "start_year") && isEmpty(z, "end_year")) {}		// if there is no year (i.e. no date) do not display
-			else {
-				toDisplay = true;
-				var start_date = formatDate(AllData[z][DATA_NAMES.start_day], AllData[z][DATA_NAMES.start_month], AllData[z][DATA_NAMES.start_year])
-				var end_date = formatDate(AllData[z][DATA_NAMES.end_day], AllData[z][DATA_NAMES.end_month], AllData[z][DATA_NAMES.end_year])
-				var formattedDate;
-				if (start_date == NO_INFO) {
-					formattedDate = String(end_date);
-				} else if (end_date == NO_INFO) {
-					formattedDate = String(start_date);
-				} else {
-					if(end_date == start_date) {
+			if (!isEmpty(z, "start_date") || !isEmpty(z, "end_date")) {		// if there is no year (i.e. no date) do not display
+				if(DATE_REGEX.test(AllData[z][DATA_NAMES.start_date]) || DATE_REGEX.test(AllData[z][DATA_NAMES.end_date])) {
+					toDisplay = true;
+					var start_date = AllData[z][DATA_NAMES.start_date];
+					var end_date = AllData[z][DATA_NAMES.end_date];
+					var formattedDate;
+					if (!DATE_REGEX.test(end_date)) {
 						formattedDate = String(start_date);
+					} else if (!DATE_REGEX.test(start_date)){
+						formattedDate = String(end_date);
 					} else {
-						formattedDate = String(start_date+BETWEEN_DATES+end_date);
+						if(end_date == start_date) {
+							formattedDate = String(start_date);
+						} else {
+							formattedDate = String(start_date+BETWEEN_DATES+end_date);
+						}
 					}
-				}
-				els[i].innerHTML = "<b>"+LBL[id]+"</b>"+END_OF_HEADER+formattedDate;
+					els[i].innerHTML = "<b>"+LBL[id]+"</b>"+END_OF_HEADER+formattedDate;
+				} 
 			}
 		} else if (id == "video")
 			if (isEmpty(z, id)) {}
@@ -786,28 +838,6 @@ function showInfo(z) {
 				toDisplay = true;
 				els[i].innerHTML = "<a href='"+AllData[z][DATA_NAMES[id]]+"' target='_blank'>"+SEE_MORE+"</a>";
 				els[i].style.textAlign = "center";
-			}
-		} else if (id == "notes1"){
-			
-			if (isEmpty(z, id)) {
-			} else if (isEmpty(z, "notes2")) {
-				toDisplay = true;
-				els[i].innerHTML = "<b>"+LBL[id]+"</b>"+END_OF_HEADER+AllData[z][DATA_NAMES.notes1];
-				
-			} else if (isEmpty(z, "notes3")) {
-				toDisplay = true;
-				els[i].innerHTML = "<b>"+LBL[id]+"</b>"+END_OF_HEADER+AllData[z][DATA_NAMES.notes1]+"\xa0"+AllData[z][DATA_NAMES.notes2];
-			}
-			else if (isEmpty(z, "notes4")) {
-				toDisplay = true;
-				els[i].innerHTML = "<b>"+LBL[id]+"</b>"+END_OF_HEADER+AllData[z][DATA_NAMES.notes1]+"\xa0"+AllData[z][DATA_NAMES.notes2]+"\xa0"+AllData[z][DATA_NAMES.notes3];
-			}
-			else if (isEmpty(z, "notes5")) {
-				toDisplay = true;
-				els[i].innerHTML = "<b>"+LBL[id]+"</b>"+END_OF_HEADER+AllData[z][DATA_NAMES.notes1]+"\xa0"+AllData[z][DATA_NAMES.notes2]+"\xa0"+AllData[z][DATA_NAMES.notes3]+"\xa0"+AllData[z][DATA_NAMES.notes4];
-			} else {
-				toDisplay = true;
-				els[i].innerHTML = "<b>"+LBL[id]+"</b>"+END_OF_HEADER+AllData[z][DATA_NAMES.notes1]+"\xa0"+AllData[z][DATA_NAMES.notes2]+"\xa0"+AllData[z][DATA_NAMES.notes3]+"\xa0"+AllData[z][DATA_NAMES.notes4]+"\xa0"+AllData[z][DATA_NAMES.notes5];
 			}
 		} else {							// The rest are just text that need to be displayed with a label:
 			if (isEmpty(z, id)) {}
@@ -963,29 +993,19 @@ function showLobby(z) {
 				if (nameToDisplay == OTHER_PROJ && proj_name != "" && proj_name != null) {
 					nameToDisplay = proj_name;
 				}
-				dateExists = !isEmpty(dup, "start_month") && !isEmpty(dup, "start_year");
-				if (j==0) {
-					if (dateExists) {		// if there's a date
-						date = MONTHS_LONG[AllData[dup][DATA_NAMES.start_month]-1]+", "+String(AllData[dup][DATA_NAMES.start_year]); 		// concatenate month name and year
-						els[i].innerHTML = "<p class='proj_box_even' onclick='openFromLobby("+String(dup)+");'>"+nameToDisplay+": "+date+"</p>";
-					} else {
-						els[i].innerHTML = "<p class='proj_box_even' onclick='openFromLobby("+String(dup)+");'>"+nameToDisplay+"</p>";
-					}
+				dateExists = !isEmpty(dup, "start_date");
+				if (dateExists) {		// if there's a date
+					var date = ": "+MONTHS_LONG[AllData[dup][DATA_NAMES.start_date].split("-")[1]]+", "+String(AllData[dup][DATA_NAMES.start_date].split("-")[2]); 		// concatenate month name and year
 				} else {
-					if (j%2==0) {
-						if (dateExists) {
-							date = MONTHS_LONG[AllData[dup][DATA_NAMES.start_month]-1]+", "+String(AllData[dup][DATA_NAMES.start_year]); 		// concatenate month name and year
-							els[i].innerHTML = els[i].innerHTML+"<p class='proj_box_even' onclick='openFromLobby("+String(dup)+");'>"+nameToDisplay+": "+date+"</p>";
-						} else {
-							els[i].innerHTML = els[i].innerHTML+"<p class='proj_box_even' onclick='openFromLobby("+String(dup)+");'>"+nameToDisplay+"</p>";
-						}
-					} else {
-						if (dateExists) {
-							date = MONTHS_LONG[AllData[dup][DATA_NAMES.start_month]-1]+", "+String(AllData[dup][DATA_NAMES.start_year]); 		// concatenate month name and year
-							els[i].innerHTML = els[i].innerHTML+"<p class='proj_box_odd' onclick='openFromLobby("+String(dup)+");'>"+nameToDisplay+": "+date+"</p>";
-						} else {
-							els[i].innerHTML = els[i].innerHTML+"<p class='proj_box_odd' onclick='openFromLobby("+String(dup)+");'>"+nameToDisplay+"</p>";
-						}
+					var date = "";			// if there,s no date, set the date var to an empty string
+				}
+				if (j==0) {					// for the first project in the lobby
+					els[i].innerHTML = "<p class='proj_box_even' onclick='openFromLobby("+String(dup)+");'>"+nameToDisplay+date+"</p>";
+				} else {
+					if (j%2==0) {		// for all subsequent even projects (indices 2, 4, 6, etc.)
+						els[i].innerHTML = els[i].innerHTML+"<p class='proj_box_even' onclick='openFromLobby("+String(dup)+");'>"+nameToDisplay+date+"</p>";
+					} else {			// for all subsequent odd projects (indices 1, 3, 5, etc.)
+						els[i].innerHTML = els[i].innerHTML+"<p class='proj_box_odd' onclick='openFromLobby("+String(dup)+");'>"+nameToDisplay+date+"</p>";
 					}
 				}
 			}	
@@ -1713,45 +1733,8 @@ function filtersDistributed(point) {
 	return filters
 }
 
-// 	23. formatDate():
-//
-// 	Description:		Takes a day, month, and year and formats it into a string 
-//						with the structure dd/mmm/yyyy.		
-//
-//	Operation:			Takes in three ints d (1-31), m (1-12) and y (xxxx). Looks
-//						up the appropriate month in a lookup table and concatenates
-//						the other inputs together with '/'s. Returns a string
-//
-//	Dependencies:		None.
-// 	Arguments:			d 	---	day, an int 1-31
-//						m 	---	month, an int 1-12
-//						y	---	year, an 4 digit int, should be a valid year
-//	Return values: 		string dd/mmm/yyyy .
-//
-//	Global variables:	MONTHS, NO_INFO
-//
-//	Input:				None.
-//	Output:				None.
-//
-//	Error handling:		If inputs are not all present and valid, returns NO_INFO.
-//
-// 	Algorithms:			None. 
-//	Data structures:	None.
-//
-//	Known bugs:			None.
-// 	Limitations:		None.
-//
-// 	Update history:		4/APR/2018	aaron krupp		functional specification writen
 
-function formatDate(d, m, y) {
-	if(d && m && d) {
-		return String(d)+"/"+MONTHS[m-1]+"/"+String(y)
-	} else {
-		return NO_INFO
-	}
-}
-
-// 	24. isEmpty(i, name):
+// 	23. isEmpty(i, name):
 //
 // 	Description:		checks to see if a certain field in the global dataset is
 //						empty or not. 
@@ -1787,7 +1770,7 @@ function isEmpty(i, name) {
 	return empty;
 }
 
-// 	25. beginUserExperience():
+// 	24. beginUserExperience():
 //
 // 	Description:		Makes the map available to the user.		
 //
@@ -1818,7 +1801,7 @@ function beginUserExperience() {
 	restartCounters();							//	and restart the counters 	
 }
 
-// 	26. restartCounters():
+// 	25. restartCounters():
 //
 // 	Description:		resets the counters from 0		
 //
@@ -1854,7 +1837,7 @@ function restartCounters() { // Resets the odometer counters to 0
 	fillCounters();
 }
 
-// 	27. disableMapControls() / enableMapControls():
+// 	26. disableMapControls() / enableMapControls():
 //
 // 	Description:		disables and enables zooming, panning scrolling, etc. on
 //						the map. 
@@ -1902,4 +1885,38 @@ function enableMapControls() {
 	map.keyboard.enable();
 	if (map.tap) map.tap.enable();
 	document.getElementById('WaterMap').style.cursor='grab';
+}
+
+// 	27. invert():
+//
+// 	Description:		Inverts the key: value pairs in a lookup table 
+//
+//	Operation:			Taken from the folks at underscorejs.org 
+//
+//	Dependencies:		None.
+// 	Arguments:			None.
+//	Return values: 		None.
+//
+//	Global variables:	None.
+//
+//	Input:				None.
+//	Output:				Map becomes non/re-interactive for the user
+//
+//	Error handling:		None.
+//
+// 	Algorithms:			None. 
+//	Data structures:	None.
+//
+//	Known bugs:			None.
+// 	Limitations:		None.
+//
+// 	Update history:		4/APR/2018	aaron krupp		functional specification writen
+
+function invert(obj) {
+    var result = {};
+    var keys = _.keys(obj);
+    for (var i = 0, length = keys.length; i < length; i++) {
+      result[obj[keys[i]]] = keys[i];
+    }
+    return result
 }

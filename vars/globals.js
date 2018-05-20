@@ -1,5 +1,10 @@
 var map;								// initialize the variable to hold the map
 
+var DATE_REGEX = /^(([0-9])|([0-2][0-9])|([3][0-1]))\-(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec|Ene|Feb|Mar|Abr|May|Jun|Jul|Ago|Sep|Oct|Nov|Dic)\-\d{4}$/;
+										// Regular expression to validate all dates.
+										// Must be of the format dd-MMM-yyyy with the 3-letter
+										// 	month code capitalized.
+										
 var EPS = 0.0001; 						// This epsilon is the acceptable difference in lat or lng 										
 										//	between 2 points to classify them as occupying the same location.	
 

@@ -29,6 +29,9 @@
 		
 		<!--jquery.corner.js-->	<script type="text/javascript" src="https://caminosdeagua.github.io/project-map/external/corners/jquery.corner.js"></script>
 		
+		<!-- google charts -->	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+		<!-- google viz API -->	<script type="text/javascript">google.charts.load('current', {packages: ['corechart']});	</script>
+	
 	</head>
 	
 	<body onload="init();"> 	<!-- what to do when the page loads -->
@@ -109,7 +112,7 @@
 				<div class="info_text" id="no_underground"></div>
 				<div class="info_text" id="no_rainjar"></div>
 				<div class="info_text" id="partner"></div>
-				<div class="info_text" id="notes1"></div>
+				<div class="info_text" id="notes"></div>
 				
 			</div>
 			<div id='lobby', class='display_box' onmouseenter="disableMapControls();" onmouseleave="enableMapControls();" >
