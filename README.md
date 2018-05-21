@@ -40,34 +40,6 @@ A few notes:
     2. If the new column is to be private, add it after the last column
     3. adjust the range in A1 of the public sheet if you're adding a publically-available column
     4. adjust the files index.html, scripts.js, and the language files appropriately to include a new column. If you cannot figure out how to do this, contact Aaron: askrupp at gmail. 
-    
-
-
-
-
-However, if you *are* with Caminos de Agua and need to update the map, please follow the following steps.
-1. Go to the Caminos dropbox: Mapping and Data Set -> 1. Online Dataset -> Project Maps Data 
-2. Open "Projects Database.xls
-3. Add your data to the spreadsheet
-4. **MAKE SURE THE SPREADSHEET IS SORTED BY:**
-    1. Name (a-z)
-    1. Start year (ascending)
-    1. Start month (ascending)
-5. Run the Macro by pushing the button in the upper left, "Make website..."
-6. A new sheet/tab should be generated called "Projects Database Website." Navigate to this sheet.
-7. Save As .csv file (text delimitter: double-quote (""), entry separator: comma (,))
-7. Open the .csv file in a text editor like TextEdit, Notepad, or Notepad++
-8. Copy/paste the entire .csv file into http://www.csvjson.com/csv2json and push ">Convert" (or any other csv -> json converter)
-9. Copy/paste the .json output into http://jsonlint.com/ and push "Validate JSON"
-10. If an error is displayed, fix it! 
-11. If "Valid JSON" is displayed, copy the input.
-12. Go to the github repo: caminosdeagua -> project-map -> data
-13. Open the file "project_map_dataset.js"
-14. Delete everything after the = sign. (all but the top line)
-15. Paste your validated JSON from step 11 after the equals sign.
-16. Save the file and commit and sync with github.
-17. CHECK https://caminosdeagua.github.io/project-map to make sure that your changes have been applied (can take up to 15 minutes).
-18. Woohoo!!!
 
 ## License
 This work is shared under a Creative Commons 4.0 attribution, non-commercial license. It is also covered under [The MIT License](https://opensource.org/licenses/MIT). 
