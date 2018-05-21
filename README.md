@@ -36,10 +36,10 @@ A few notes:
 4. To add a new project or update an existing project, just edit the private google sheet appropriately. Your changes should be visible on the project map within seconds. 
 
 5. To add a new column to the project map:
-    a. if the new column is to be publically visible, add it before the "Contact" column
-    b. If the new column is to be private, add it after the last column
-    c. adjust the range in A1 of the public sheet if you're adding a publically-available column
-    d. adjust the files index.html, scripts.js, and the language files appropriately to include a new column. If you cannot figure out how to do this, contact Aaron: askrupp at gmail. 
+    1. if the new column is to be publically visible, add it before the "Contact" column
+    2. If the new column is to be private, add it after the last column
+    3. adjust the range in A1 of the public sheet if you're adding a publically-available column
+    4. adjust the files index.html, scripts.js, and the language files appropriately to include a new column. If you cannot figure out how to do this, contact Aaron: askrupp at gmail. 
     
 
 
