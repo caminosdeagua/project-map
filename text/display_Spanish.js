@@ -6,6 +6,18 @@
 ////////////////////////////////////////////////////////////////////////////////
 var TITLE = "Mapa de Proyectos | Caminos de Agua";
 
+var MONTHS_SHORT = {Jan: "Ene",
+					Feb: "Feb",
+					Mar: "Mar",
+					Apr: "Abr", 
+					May: "May",
+					Jun: "Jun",
+					Jul: "Jul",
+					Aug: "Ago", 
+					Sep: "Sep", 
+					Oct: "Oct",
+					Nov: "Nov", 
+					Dec: "Dic"};
 
 var MONTHS_LONG = {Jan: "Enero",
 					Feb: "Febrero",
@@ -19,6 +31,11 @@ var MONTHS_LONG = {Jan: "Enero",
 					Oct: "Octubre",
 					Nov: "Noviembre", 
 					Dec: "Diciembre"};
+					
+var MONTH_CODES = ["Ene", "Feb", "Mar",
+					"Abr", "May", "Jun",
+					"Jul", "Ago", "Sep",
+					"Oct", "Nov", "Dic"];
 
 var DATE = "Fecha";
 
@@ -143,3 +160,4 @@ var EASTER_EGG_TXT = {			// NEED TO TRANSLATE!!!
 
 var DISPLAY_TITLE = "<b>Mapa de proyectos</b>";
 var DISPLAY_MSG = "Haz clic para saber más de nuestro trabajo";
+var ONGOING_PROJECT = "Presente";

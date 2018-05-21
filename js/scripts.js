@@ -131,6 +131,13 @@
 //			disables and enables map controls for scrolling in lobby/info-panel
 //			and clicking on easter egg.
 //
+//	27. invert(obj):
+//			Takes lookup table and inverts the key-value pairs. Returns obj.
+//
+//	28. formatDate(date): 
+//			Takes in a date formatted dd-MMM-yyyy in english and returns it as
+//			dd/MMM/yyyy with MMM in the correct language. 
+//
 ////////////////////////////////////////////////////////////////////////////////
 //
 //	UPDATE HISTORY:
@@ -441,6 +448,8 @@ function googleDataTable2JSON(dataTable) {
 	rows = dataTable.og;								// define the sheet rows
 	numCols = cols.length;
 	numRows = rows.length;
+	
+	console.log(dataTable);
 
 	var data = [];										// initialze data array to hold json
 	
@@ -451,10 +460,14 @@ function googleDataTable2JSON(dataTable) {
 			//console.log(key);
 			var value;									// initialize a variable to hold the cell's value
 			if (rows[i].c[j] != null) {					// if a value exists in the cell
-				if( typeof(rows[i].c[j].v)=="object") {	// and if it is an object, 
-					value = String(rows[i].c[j].f);		// grab the string version
-				} else {								// otherwise,
-					value = rows[i].c[j].v;		// grab the default value with the "v" type formatting
+				if (rows[i].c[j].v != null) {			// and that value is not null
+					if( typeof(rows[i].c[j].v)=="object") {	// and if it is an object, 
+						value = String(rows[i].c[j].f);		// grab the string version
+					} else {								// otherwise,
+						value = rows[i].c[j].v;		// grab the default value with the "v" type formatting
+					}
+				} else {
+					value = "";
 				}
 			} else {									// if there's no value in the cell
 				value = "";								// set the value to an empty string as per JSON protocol
@@ -775,18 +788,23 @@ function showInfo(z) {
 			if (!isEmpty(z, "start_date") || !isEmpty(z, "end_date")) {		// if there is no year (i.e. no date) do not display
 				if(DATE_REGEX.test(AllData[z][DATA_NAMES.start_date]) || DATE_REGEX.test(AllData[z][DATA_NAMES.end_date])) {
 					toDisplay = true;
-					var start_date = AllData[z][DATA_NAMES.start_date];
+					var start_date = AllData[z][DATA_NAMES.start_date];			// grab start and end dates
 					var end_date = AllData[z][DATA_NAMES.end_date];
-					var formattedDate;
-					if (!DATE_REGEX.test(end_date)) {
-						formattedDate = String(start_date);
-					} else if (!DATE_REGEX.test(start_date)){
-						formattedDate = String(end_date);
-					} else {
-						if(end_date == start_date) {
-							formattedDate = String(start_date);
-						} else {
-							formattedDate = String(start_date+BETWEEN_DATES+end_date);
+					var formattedDate;											// initialize formattedDate for various start-end combos
+					var start_date_formatted = formatDate(start_date);			// get both dates formatted
+					var end_date_formatted = formatDate(end_date);
+					if (end_date_formatted == formatDate("today")) {			// if the end date is today (project is ongoing)
+						end_date_formatted = ONGOING_PROJECT; 					// set the end date to say "ongoing" in the correct language
+					}
+					if (!DATE_REGEX.test(end_date)) {							// if there's no valid end date,
+						formattedDate = start_date_formatted;					//	display the start date alone
+					} else if (!DATE_REGEX.test(start_date)){					// if there's no valid start date,
+						formattedDate = end_date_formatted;						//	display the end date alone.
+					} else {													// otherwise, there are valid start and end dates and therefore
+						if(end_date == start_date) {							// 	if they're the same, 
+							formattedDate = start_date_formatted;				// 	just display the start date		
+						} else {												// otherwise, display both, separted by the BETWEEN_DATES str. 
+							formattedDate = start_date_formatted+BETWEEN_DATES+end_date_formatted;
 						}
 					}
 					els[i].innerHTML = "<b>"+LBL[id]+"</b>"+END_OF_HEADER+formattedDate;
@@ -1916,4 +1934,46 @@ function invert(obj) {
       result[obj[keys[i]]] = keys[i];
     }
     return result
+}
+
+// 	28. formatDate(date):
+//
+// 	Description:		formats the date in the appropriate language 
+//
+//	Operation:			If the passed string is "today", returns dd/MMM/yyyy for today
+//						with the MMM in the appropriate language. 
+//						Otherwise, assumes that the passed str argument is a date in the 
+//						format dd-MMM-yyyy with MMM in English. Returns the same date as 
+//						dd/MMM/yyyy with the MMM in the appropriate language.
+//
+//	Dependencies:		None.
+// 	Arguments:			date	---	string of the date in the format dd-MMM-yyyy or "today"
+//	Return values: 		string of the date with format dd/MMM/yyyy with MMM in the appropriate language
+//
+//	Global variables:	None.
+//
+//	Input:				None.
+//	Output:				None.
+//
+//	Error handling:		None.
+//
+// 	Algorithms:			None. 
+//	Data structures:	None.
+//
+//	Known bugs:			None.
+// 	Limitations:		None.
+//
+// 	Update history:		20/MAY/2018	aaron krupp		functional specification & fn writen
+
+function formatDate(str) {
+	if (str != "today") {
+		var splitDate = str.split("-");
+		return splitDate[0]+"/"+MONTHS_SHORT[splitDate[1]]+"/"+splitDate[2];
+	} else {
+		var today = new Date();
+		var dd = today.getDate();
+		var MMM = MONTH_CODES[today.getMonth()];
+		var yyyy = today.getFullYear();
+		return dd+"/"+MMM+"/"+yyyy;
+	}
 }

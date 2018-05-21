@@ -11,10 +11,10 @@ var post_hash = location.href.split("#")[1];
 js.type = "text/javascript";
 
 if (post_hash == "es") {
-	js.src = "https://caminosdeagua.github.io/project-map/text/display_Spanish.js";
+	js.src = "text/display_Spanish.js";
 	$('head').append('<link rel="stylesheet" type="text/css" href="https://caminosdeagua.github.io/project-map/styles/map_styles_Spanish.css">');
 } else {
-	js.src = "https://caminosdeagua.github.io/project-map/text/display_English.js";
+	js.src = "text/display_English.js";
 	$('head').append('<link rel="stylesheet" type="text/css" href="https://caminosdeagua.github.io/project-map/styles/map_styles_English.css">');	
 }
 
