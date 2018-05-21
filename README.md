@@ -12,10 +12,39 @@ To embed this page on a website, simply use an iframe with the following code, a
 <iframe width="100%" height="520" frameborder="0" src="https://caminosdeagua.github.io/project-map#en" allowfullscreen webkitallowfullscreen mozallowfullscreen oallowfullscreen msallowfullscreen></iframe>
 ```
 
-To use the map in another language, just add a hash. So ...io/project-map#es will display in spanish while ...io/project-map#en will display in English. Default (no hash) displays in English. Modify the above code appropriately for spanish. Currently only available in English & Spanish.
+To use the map in another language, just add a hash. So ...io/project-map#es will display in spanish while ...io/project-map#en will display in English. Default (no hash) displays in English. Currently only available in English & Spanish.
 
-## How to update the map
-If you are not a member of the Caminos de Agua team and/or cannot commit to this repo, ignore the rest of this page and enjoy perusing or using the map!
+## How it works | how to update
+If you are not a member of the Caminos de Agua team and/or cannot commit to this repo, ignore the rest of this page and enjoy perusing or using the map! To use, please see the license information below. 
+
+The data for this project was originally stored in a JSON in this repository. THAT IS NOW OUTDATED. If you have any instructions for updating the map that involve a JSON, javascript, or an excel file, please ignore them. These are the most up-to-date instructions (as of 20-May-2018).
+
+All data is stored on two different Google sheets. One is private (and has personal contact information that would be inappropriate to leave publically available on the internet). The other is public and contains only the data that is visualized on the map. They are both stored in Caminos de Agua's Google Drive. They are:
+
+1. (Private) "Projects TO EDIT" (accessible through the Caminos de Agua Google Drive). 
+2. (Public) "Projects PUBLIC" https://docs.google.com/spreadsheets/d/1P6Obxu21IhjQFcIBh2N4Cv6fJaMmAyfELEs2tfFWLGI/edit?usp=sharing
+**Do not change the names of either of these sheets!!!**
+
+The public sheet is a simple IMPORTRANGE() function that grabs all the non-sensitive data from the private sheet. You only need to touch this if you're adding new columns to the map. 
+
+A few notes:
+1. As stated above, do not change the name of either spreadsheet.
+
+2. Dates need to be in dd-MMM-yyyy format with MMM in English (the default date format on the private sheet)
+
+3. To indicate that a project is ongoing, use the TODAY() function in Google Sheets. The cell should turn blue automatically to make it easy to check if your ongoing projects need to be changed to completed
+
+4. To add a new project or update an existing project, just edit the private google sheet appropriately. Your changes should be visible on the project map within seconds. 
+
+5. To add a new column to the project map:
+    a. if the new column is to be publically visible, add it before the "Contact" column
+    b. If the new column is to be private, add it after the last column
+    c. adjust the range in A1 of the public sheet if you're adding a publically-available column
+    d. adjust the files index.html, scripts.js, and the language files appropriately to include a new column. If you cannot figure out how to do this, contact Aaron: askrupp at gmail. 
+    
+
+
+
 
 However, if you *are* with Caminos de Agua and need to update the map, please follow the following steps.
 1. Go to the Caminos dropbox: Mapping and Data Set -> 1. Online Dataset -> Project Maps Data 
