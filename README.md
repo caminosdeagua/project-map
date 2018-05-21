@@ -17,7 +17,7 @@ To use the map in another language, just add a hash. So ...io/project-map#es wil
 ## How it works | how to update
 If you are not a member of the Caminos de Agua team and/or cannot commit to this repo, ignore the rest of this page and enjoy perusing or using the map! To use, please see the license information below. 
 
-The data for this project was originally stored in a JSON in this repository. THAT IS NOW OUTDATED. If you have any instructions for updating the map that involve a JSON, javascript, or an excel file, please ignore them. These are the most up-to-date instructions (as of 20-May-2018).
+*The data for this project was originally stored in a JSON in this repository. THAT IS NOW OUTDATED. If you have any instructions for updating the map that involve a JSON, javascript, or an excel file, please ignore them. These are the most up-to-date instructions (as of 20-May-2018).*
 
 All data is stored on two different Google sheets. One is private (and has personal contact information that would be inappropriate to leave publically available on the internet). The other is public and contains only the data that is visualized on the map. They are both stored in Caminos de Agua's Google Drive. They are:
 
