@@ -449,7 +449,7 @@ function googleDataTable2JSON(dataTable) {
 	numCols = cols.length;
 	numRows = rows.length;
 	
-	console.log(dataTable);
+	//console.log(dataTable);
 
 	var data = [];										// initialze data array to hold json
 	
@@ -1714,8 +1714,8 @@ function peopleImpacted(point) {
 	var dup;
 	for (var i=0; i<AllData[point].duplicates.length; i++) {
 		dup = AllData[point].duplicates[i];
-		ppl = ppl + AllData[dup][DATA_NAMES.people];
-	}
+		ppl = ppl + Number(AllData[dup][DATA_NAMES.people]);		// casting as a Number ensures that a non number (represented by an empty string, "")
+	}																//	gets converted to a 0. Otherwise all the numbers concatenate as strings
 	ppl = numberWithCommas(ppl);
 	if (ppl == '0') {
 		ppl = "unknown";
