@@ -5,7 +5,8 @@
 // 	to all pages of the Caminos de Agua project-map. 
 //
 //	General description: This map shows all the projects worked on by the NGO
-//		Caminos de Agua. Data is read in from a global var stored in a js file
+//		Caminos de Agua. Data is read in from a public 
+//		Google Sheet (using the Google Visualization API)
 //		and plotted over stamen basemap tiles using leaflet's open source
 //		javascript library. When individual data points are selected, a window
 //		is opened to display various data about the selected project site.
