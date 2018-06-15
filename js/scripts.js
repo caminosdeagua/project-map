@@ -187,7 +187,7 @@ function init() {
 	adjustXLocation();
 	loadData(); 				// Load the data for the default contaminant 
 								// 	then plot the base markers on the map.	
-	fillCounters();				// Read the data for the counters
+	
 }								
 
 // 	2. fillText():
@@ -441,6 +441,7 @@ function onQueryResponse(response) {
 	} else {
 		var data = googleDataTable2JSON(response.getDataTable());	// convert data to json
 		plotData(data);												// feed into plotting function
+		fillCounters();												// Read the data for the counters
 	}
 }
 
