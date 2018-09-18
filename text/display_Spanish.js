@@ -69,7 +69,7 @@ var DATA_NAMES = {
 	name: "Community",	
 	lat: "Latitude",
 	lng: "Longitude",
-	proj_name: "Nombre de proyecto",
+	proj_name: "Nombre del proyecto",
 	proj_type: "Tipo de proyecto",
 	muni: "Municipality",
 	site: "Localización",
