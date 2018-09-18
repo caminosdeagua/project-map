@@ -21,7 +21,7 @@ If you are not a member of the Caminos de Agua team and/or cannot commit to this
 
 All data is stored on two different Google sheets. One is private (and has personal contact information that would be inappropriate to leave publically available on the internet). The other is public and contains only the data that is visualized on the map. They are both stored in Caminos de Agua's Google Drive. They are:
 
-1. (Private) "Projects TO EDIT" (accessible through the Caminos de Agua Google Drive). <-- This is where the edits happen!
+1. (Private) "Projects PRIVATE" (accessible through the Caminos de Agua Google Drive). <-- This is where the edits happen!
 2. (Public) "Projects PUBLIC" https://docs.google.com/spreadsheets/d/1P6Obxu21IhjQFcIBh2N4Cv6fJaMmAyfELEs2tfFWLGI/edit?usp=sharing <-- don't touch this except to adjust the range
 
 The public sheet is a simple IMPORTRANGE() function that grabs all the non-sensitive data from the private sheet. You only need to touch this if you're adding new columns to the map. 
