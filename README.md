@@ -42,12 +42,7 @@ A few notes:
 
 6. To add a new column to the project map:
     1. Add your column wherever you want in the PRIVATE sheet
-    2. Add this code to whatever column you want (not A or B, see point #2 above) in the PUBLIC sheet, changing [COLUMN HEADER] appropriately so it matches the header that you've added in the PRIVATE sheet:
-    
-```googleAppScript
-QUERY(IMPORTRANGE("https://docs.google.com/spreadsheets/d/1hBGGjgXYfEUDwnmCKSuLcpIdQXj0Ea5TyH_aV_MCqCU/edit#gid=0", "DATA!A:FF"),"SELECT Col"&MATCH("[COLUMN HEADER]", IMPORTRANGE("https://docs.google.com/spreadsheets/d/1hBGGjgXYfEUDwnmCKSuLcpIdQXj0Ea5TyH_aV_MCqCU/edit#gid=0", "DATA!A1:FF1"), 0))
-```
-
+    2. Add this code to whatever column you want (not A or B, see point #2 above) in the PUBLIC sheet, changing [COLUMN HEADER] appropriately so it matches the header that you've added in the PRIVATE sheet: ```QUERY(IMPORTRANGE("https://docs.google.com/spreadsheets/d/1hBGGjgXYfEUDwnmCKSuLcpIdQXj0Ea5TyH_aV_MCqCU/edit#gid=0", "DATA!A:FF"),"SELECT Col"&MATCH("[COLUMN HEADER]", IMPORTRANGE("https://docs.google.com/spreadsheets/d/1hBGGjgXYfEUDwnmCKSuLcpIdQXj0Ea5TyH_aV_MCqCU/edit#gid=0", "DATA!A1:FF1"), 0))```
     3. adjust the files index.html, scripts.js, and the language files appropriately to include a new column. If you cannot figure out how to do this, contact Aaron: askrupp at gmail. 
 
 ## License
