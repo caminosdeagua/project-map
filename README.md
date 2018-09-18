@@ -24,22 +24,31 @@ All data is stored on two different Google sheets. One is private (and has perso
 1. (Private) "Projects PRIVATE" (accessible through the Caminos de Agua Google Drive). <-- This is where the edits happen!
 2. (Public) "Projects PUBLIC" https://docs.google.com/spreadsheets/d/1P6Obxu21IhjQFcIBh2N4Cv6fJaMmAyfELEs2tfFWLGI/edit?usp=sharing <-- don't touch this except to adjust the range
 
-The public sheet is a simple IMPORTRANGE() function that grabs all the non-sensitive data from the private sheet. You only need to touch this if you're adding new columns to the map. 
+Each column in the public sheet uses a QUERY() and a few IMPORTRANGE() functions that grabs all the non-sensitive data from the private sheet based on the column headers in the first row of the private sheet. You only need to touch this if you're adding new columns to the map. The code in each cell is:
+
+
+Where [COLUMN HEADER] needs to match the string in row 1 of the public data sheet that you want to retrieve. To add a new column, just copy/paste this code into a new column in the private sheet and update [COLUMN HEADER] appropriately.
 
 A few notes:
 1. As stated above, do not change the name of either spreadsheet.
 
-2. Dates need to be in dd-MMM-yyyy format with MMM in English (the default date format on the private sheet)
+2. Column A in the public sheet must be "Community" and column B must be "Start Date." No other order matters.
 
-3. To indicate that a project is ongoing, use the TODAY() function in Google Sheets. The cell should turn blue automatically to make it easy to check if your ongoing projects need to be changed to completed
+3. Dates need to be in dd-MMM-yyyy format with MMM in English (the default date format on the private sheet)
 
-4. To add a new project or update an existing project, just edit the private google sheet appropriately. Your changes should be visible on the project map within seconds. 
+4. To indicate that a project is ongoing, use the TODAY() function in Google Sheets. The cell should turn blue automatically to make it easy to check if your ongoing projects need to be changed to completed
 
-5. To add a new column to the project map:
-    1. if the new column is to be publically visible, add it before the "Contact" column
-    2. If the new column is to be private, add it after the last column
-    3. adjust the range in A1 of the public sheet if you're adding a publically-available column
-    4. adjust the files index.html, scripts.js, and the language files appropriately to include a new column. If you cannot figure out how to do this, contact Aaron: askrupp at gmail. 
+5. To add a new project or update an existing project, just edit the private google sheet appropriately. Your changes should be visible on the project map within seconds. 
+
+6. To add a new column to the project map:
+    1. Add your column wherever you want in the PRIVATE sheet
+    2. Add this code to whatever column you want (not A or B, see point #2 above) in the PUBLIC sheet, changing [COLUMN HEADER] appropriately so it matches the header that you've added in the PRIVATE sheet:
+    
+```googleAppScript
+QUERY(IMPORTRANGE("https://docs.google.com/spreadsheets/d/1hBGGjgXYfEUDwnmCKSuLcpIdQXj0Ea5TyH_aV_MCqCU/edit#gid=0", "DATA!A:FF"),"SELECT Col"&MATCH("[COLUMN HEADER]", IMPORTRANGE("https://docs.google.com/spreadsheets/d/1hBGGjgXYfEUDwnmCKSuLcpIdQXj0Ea5TyH_aV_MCqCU/edit#gid=0", "DATA!A1:FF1"), 0))
+```
+
+    3. adjust the files index.html, scripts.js, and the language files appropriately to include a new column. If you cannot figure out how to do this, contact Aaron: askrupp at gmail. 
 
 ## License
 This work is shared under a Creative Commons 4.0 attribution, non-commercial license. It is also covered under [The MIT License](https://opensource.org/licenses/MIT). 
