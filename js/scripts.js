@@ -446,8 +446,9 @@ function onQueryResponse(response) {
 }
 
 function googleDataTable2JSON(dataTable) {
-	cols = dataTable.ng;								// define the sheet columns
-	rows = dataTable.og;								// define the sheet rows
+	console.log(dataTable);
+	cols = dataTable.wg;								// define the sheet columns
+	rows = dataTable.xg;								// define the sheet rows
 	numCols = cols.length;
 	numRows = rows.length;
 	
