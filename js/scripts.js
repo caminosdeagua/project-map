@@ -787,10 +787,14 @@ function showInfo(z) {
 			els[i].innerHTML = BACK_BUTTON_TXT[0]+AllData[z][DATA_NAMES.name]+BACK_BUTTON_TXT[1];
 			if (AllData[z].isDuplicate) {toDisplay = true;}
 		} else if (id == "dates") {												// If there are dates, include them here:
+			alert();
 			if (!isEmpty(z, "start_date")) {									// if there IS at least a start date
+				alert()
 				toDisplay = true;
 				var start_date = formatDate(AllData[z][DATA_NAMES.start_date]);	// grab start and end dates
 				var end_date = formatDate(AllData[z][DATA_NAMES.end_date]);
+				console.log(start_date);
+				console.log(end_date);
 				var formattedDate;												// initialize formattedDate for various start-end combos
 				if (end_date == "") {											// if there's no end date
 					formattedDate = start_date;									//	just include the start date
@@ -2038,6 +2042,8 @@ function sendErrorMsg() {
 // 	Update history:		12/OCT/2018	aaron krupp		functional specification & fn writen
 
 window.addEventListener('error', function(event) {
-	sendErrorMsg();
+	if (event.timestamp<5000) {
+		sendErrorMsg();
+	}
 })
 
