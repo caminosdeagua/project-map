@@ -6,31 +6,11 @@
 ////////////////////////////////////////////////////////////////////////////////
 var TITLE = "Mapa de Proyectos | Caminos de Agua";
 
-var MONTHS_SHORT = {Jan: "Ene",
-					Feb: "Feb",
-					Mar: "Mar",
-					Apr: "Abr", 
-					May: "May",
-					Jun: "Jun",
-					Jul: "Jul",
-					Aug: "Ago", 
-					Sep: "Sep", 
-					Oct: "Oct",
-					Nov: "Nov", 
-					Dec: "Dic"};
 
-var MONTHS_LONG = {Jan: "Enero",
-					Feb: "Febrero",
-					Mar: "Marzo",
-					Apr: "Abril", 
-					May: "Mayo",
-					Jun: "Junio",
-					Jul: "Julio",
-					Aug: "Agosto", 
-					Sep: "Septiembre", 
-					Oct: "Octubre",
-					Nov: "Noviembre", 
-					Dec: "Diciembre"};
+var MONTHS_LONG = ["Enero", "Febrero", "Marzo",
+				 "Abril", "Mayo", "Junio",
+				"Julio", "Agosto", "Septiembre", 
+				"Octubre", "Noviembre", "Diciembre"];
 					
 var MONTH_CODES = ["Ene", "Feb", "Mar",
 					"Abr", "May", "Jun",

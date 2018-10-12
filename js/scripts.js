@@ -460,9 +460,7 @@ function googleDataTable2JSON(dataTable) {
 			var value = dataTable.getValue(i,j);		// get cell's value
 			if (!value) {								// if a value exists in the cell
 				value = "";
-			} else if (value instanceof Date) {			// if the value is a Date object
-				value = String(value.getDate() + "-" + MONTH_CODES[value.getMonth()] + "-" + value.getFullYear());
-			}
+			} 
 			data[i][lbl] = value;						// store the "key: value" pair
 		}
 	}
@@ -781,31 +779,26 @@ function showInfo(z) {
 		} else if (id == 'back_button') {
 			els[i].innerHTML = BACK_BUTTON_TXT[0]+AllData[z][DATA_NAMES.name]+BACK_BUTTON_TXT[1];
 			if (AllData[z].isDuplicate) {toDisplay = true;}
-		} else if (id == "dates") {				// If there are dates, include them here:
-			if (!isEmpty(z, "start_date") || !isEmpty(z, "end_date")) {		// if there is no year (i.e. no date) do not display
-				if(DATE_REGEX.test(AllData[z][DATA_NAMES.start_date]) || DATE_REGEX.test(AllData[z][DATA_NAMES.end_date])) {
-					toDisplay = true;
-					var start_date = AllData[z][DATA_NAMES.start_date];			// grab start and end dates
-					var end_date = AllData[z][DATA_NAMES.end_date];
-					var formattedDate;											// initialize formattedDate for various start-end combos
-					var start_date_formatted = formatDate(start_date);			// get both dates formatted
-					var end_date_formatted = formatDate(end_date);
-					if (end_date_formatted == formatDate("today")) {			// if the end date is today (project is ongoing)
-						end_date_formatted = ONGOING_PROJECT; 					// set the end date to say "ongoing" in the correct language
-					}
-					if (!DATE_REGEX.test(end_date)) {							// if there's no valid end date,
-						formattedDate = start_date_formatted;					//	display the start date alone
-					} else if (!DATE_REGEX.test(start_date)){					// if there's no valid start date,
-						formattedDate = end_date_formatted;						//	display the end date alone.
+		} else if (id == "dates") {												// If there are dates, include them here:
+			if (!isEmpty(z, "start_date")) {									// if there IS at least a start date
+				toDisplay = true;
+				var start_date = formatDate(AllData[z][DATA_NAMES.start_date]);	// grab start and end dates
+				var end_date = formatDate(AllData[z][DATA_NAMES.end_date]);
+				var formattedDate;												// initialize formattedDate for various start-end combos
+				if (end_date == "") {											// if there's no end date
+					formattedDate = start_date;									//	just include the start date
+				} else {															// if there IS an end date as well
+					if (end_date == formatDate("today")) {						// if the end date is TODAY (project is ongoing)
+						end_date = ONGOING_PROJECT; 							// 	set the end date to say "ongoing" in the correct language
 					} else {													// otherwise, there are valid start and end dates and therefore
 						if(end_date == start_date) {							// 	if they're the same, 
-							formattedDate = start_date_formatted;				// 	just display the start date		
+							formattedDate = start_date;							// 	just display the start date		
 						} else {												// otherwise, display both, separted by the BETWEEN_DATES str. 
-							formattedDate = start_date_formatted+BETWEEN_DATES+end_date_formatted;
+							formattedDate = start_date+BETWEEN_DATES+end_date;
 						}
 					}
-					els[i].innerHTML = "<b>"+LBL[id]+"</b>"+END_OF_HEADER+formattedDate;
-				} 
+				}
+				els[i].innerHTML = "<b>"+LBL[id]+"</b>"+END_OF_HEADER+formattedDate;
 			}
 		} else if (id == "video")
 			if (isEmpty(z, id)) {}
@@ -1007,7 +1000,9 @@ function showLobby(z) {
 				}
 				dateExists = !isEmpty(dup, "start_date");
 				if (dateExists) {		// if there's a date
-					var date = ": "+MONTHS_LONG[AllData[dup][DATA_NAMES.start_date].split("-")[1]]+", "+String(AllData[dup][DATA_NAMES.start_date].split("-")[2]); 		// concatenate month name and year
+					var mm = AllData[dup][DATA_NAMES.start_date].getMonth();							// get month as number
+					var yyyy = String(AllData[dup][DATA_NAMES.start_date].getFullYear());				// get year as string
+					var date = ": "+MONTHS_LONG[mm]+", "+yyyy; 											// concatenate month name and year
 				} else {
 					var date = "";			// if there,s no date, set the date var to an empty string
 				}
@@ -1937,11 +1932,7 @@ function invert(obj) {
 //
 // 	Description:		formats the date in the appropriate language 
 //
-//	Operation:			If the passed string is "today", returns dd/MMM/yyyy for today
-//						with the MMM in the appropriate language. 
-//						Otherwise, assumes that the passed str argument is a date in the 
-//						format dd-MMM-yyyy with MMM in English. Returns the same date as 
-//						dd/MMM/yyyy with the MMM in the appropriate language.
+//	Operation:			Accepts eithre the 
 //
 //	Dependencies:		None.
 // 	Arguments:			date	---	string of the date in the format dd-MMM-yyyy or "today"
@@ -1962,24 +1953,27 @@ function invert(obj) {
 //
 // 	Update history:		20/MAY/2018	aaron krupp		functional specification & fn writen
 
-function formatDate(str) {
-	if (str != "today") {
-		var splitDate = str.split("-");
-		return splitDate[0]+"/"+MONTHS_SHORT[splitDate[1]]+"/"+splitDate[2];
-	} else {
-		var today = new Date();
-		var dd = today.getDate();
-		var MMM = MONTH_CODES[today.getMonth()];
-		var yyyy = today.getFullYear();
+function formatDate(d) {
+	if (d instanceof Date | d == "today") {
+		if (d == "today") {
+			d = new Date();
+		}
+		var dd = d.getDate();
+		var MMM = MONTH_CODES[d.getMonth()];
+		var yyyy = d.getFullYear();
 		return dd+"/"+MMM+"/"+yyyy;
+	} else if (d == "") {
+		return ""
+	} else {
+		throw new Error("An invalid date was used as an argument in the formatDate() function.")
 	}
 }
 
-function sendErrorMsg() {
-	document.location.href = ERROR_MSG_WEBHOOK_URL;
-}
-
-window.addEventListener('error', function(event) {
-	sendErrorMsg();
-})
+//function sendErrorMsg() {
+//	document.location.href = ERROR_MSG_WEBHOOK_URL;
+//}
+//
+//window.addEventListener('error', function(event) {
+//	sendErrorMsg();
+//})
 

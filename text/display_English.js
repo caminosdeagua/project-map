@@ -6,31 +6,10 @@
 ////////////////////////////////////////////////////////////////////////////////
 var TITLE = "Proejct Map | Caminos de Agua";
 
-var MONTHS_SHORT = {Jan: "Jan",
-					Feb: "Feb",
-					Mar: "Mar",
-					Apr: "Apr", 
-					May: "May",
-					Jun: "Jun",
-					Jul: "Jul",
-					Aug: "Aug", 
-					Sep: "Sep", 
-					Oct: "Oct",
-					Nov: "Nov", 
-					Dec: "Dec"};
-					
-var MONTHS_LONG = {Jan: "January",
-					Feb: "February",
-					Mar: "March",
-					Apr: "April", 
-					May: "May",
-					Jun: "June",
-					Jul: "July",
-					Aug: "August", 
-					Sep: "September", 
-					Oct: "October",
-					Nov: "November", 
-					Dec: "December"};
+var MONTHS_LONG = ["January", "February", "March",
+					"April", "May", "June",
+					"July", "August", "September", 
+					"October", "November", "December"];
 					
 var MONTH_CODES = ["Jan", "Feb", "Mar",
 					"Apr", "May", "Jun",
