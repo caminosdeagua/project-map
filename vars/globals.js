@@ -68,3 +68,5 @@ var DAYS_YEAR = 365.25;
 var HRS_PER_DAY = 8;					// Assumptions on constructing a 12,000 L ferro cement cistern
 var DAYS_PER_CISTERN = 5;
 var PPL_PER_CISTERN = 5;
+
+var ERROR_MSG_WEBHOOK_URL = 'https://hooks.zapier.com/hooks/catch/2853893/lg9a8s?toEmail=true';

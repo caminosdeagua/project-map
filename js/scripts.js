@@ -446,41 +446,29 @@ function onQueryResponse(response) {
 }
 
 function googleDataTable2JSON(dataTable) {
-	console.log(dataTable);
-	cols = dataTable.wg;								// define the sheet columns
-	rows = dataTable.xg;								// define the sheet rows
-	numCols = cols.length;
-	numRows = rows.length;
-	
-	//console.log(dataTable);
+
+	numCols = dataTable.getNumberOfColumns();
+	numRows = dataTable.getNumberOfRows();
 
 	var data = [];										// initialze data array to hold json
 	
 	for(var i=0; i<numRows; i++) {						// loop through rows
 		data.push({});									// on each row creating a new dictionary
 		for(var j=0; j<numCols; j++) {					// and loop through each column of that row
-			var key = cols[j].label;					// get the name of the column
-			//console.log(key);
-			var value;									// initialize a variable to hold the cell's value
-			if (rows[i].c[j] != null) {					// if a value exists in the cell
-				if (rows[i].c[j].v != null) {			// and that value is not null
-					if( typeof(rows[i].c[j].v)=="object") {	// and if it is an object, 
-						value = String(rows[i].c[j].f);		// grab the string version
-					} else {								// otherwise,
-						value = rows[i].c[j].v;		// grab the default value with the "v" type formatting
-					}
-				} else {
-					value = "";
-				}
-			} else {									// if there's no value in the cell
-				value = "";								// set the value to an empty string as per JSON protocol
+			
+			var lbl = dataTable.getColumnLabel(j);		// get the name of the column
+			var value = dataTable.getValue(i,j);		// get cell's value
+			if (!value) {								// if a value exists in the cell
+				value = "";
+			} else if (value instanceof Date) {			// if the value is a Date object
+				value = String(value.getDate() + "-" + MONTH_CODES[value.getMonth()] + "-" + value.getFullYear());
 			}
-			data[i][key] = value;						// store the "key: value" pair
+			data[i][lbl] = value;						// store the "key: value" pair
 		}
 	}
 	return data											// after all looping is done, return the finalized json
 }
-	
+
 	
 function plotData(data) {
 	
@@ -493,6 +481,12 @@ function plotData(data) {
 	var duplicateCounter = 0;
 	
 	AllData = data; 				// store data as global for later access.
+	if (!AllData | AllData.length == 0) {
+		sendErrorMsg();
+	}
+	
+	
+	
 	photos = Array.apply(null, Array(data.length)).map(Boolean.prototype.valueOf,false); 	// init an array full of "false"'s to later populate with images
 	
 	for (var i=0; i<data.length; i++) { // Loop through all the rows of the data
@@ -1980,3 +1974,12 @@ function formatDate(str) {
 		return dd+"/"+MMM+"/"+yyyy;
 	}
 }
+
+function sendErrorMsg() {
+	document.location.href = ERROR_MSG_WEBHOOK_URL;
+}
+
+window.addEventListener('error', function(event) {
+	sendErrorMsg();
+})
+
