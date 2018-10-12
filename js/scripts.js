@@ -139,6 +139,13 @@
 //			Takes in a date formatted dd-MMM-yyyy in english and returns it as
 //			dd/MMM/yyyy with MMM in the correct language. 
 //
+//	29. sendErrorMsg():
+//			Sends a GET request to a URL provided by Zapier to activate a webhook
+//
+//	30. Error listener, function (event):
+//			Listens for thrown errors. When errors are thrown, calls
+//			sendErrorMsg();
+//
 ////////////////////////////////////////////////////////////////////////////////
 //
 //	UPDATE HISTORY:
@@ -1928,15 +1935,21 @@ function invert(obj) {
     return result
 }
 
-// 	28. formatDate(date):
+// 	28. formatDate(d):
 //
 // 	Description:		formats the date in the appropriate language 
 //
-//	Operation:			Accepts eithre the 
+//	Operation:			Accepts strings "", "today", or Date objects
+//						If given an empty string, returns an empty string.
+//						Otherwise, returns the date as a string formatted
+//						as dd/MMM/yyyy (if "today" is passed as the arg,
+//						returns today's date, formatted as described above. Duh.).
+//						If the passed value is invalid, throws an error.
 //
 //	Dependencies:		None.
-// 	Arguments:			date	---	string of the date in the format dd-MMM-yyyy or "today"
+// 	Arguments:			d	---	"", "today", or object type Date
 //	Return values: 		string of the date with format dd/MMM/yyyy with MMM in the appropriate language
+//						or "" if arg is "".
 //
 //	Global variables:	None.
 //
@@ -1952,6 +1965,7 @@ function invert(obj) {
 // 	Limitations:		None.
 //
 // 	Update history:		20/MAY/2018	aaron krupp		functional specification & fn writen
+//						12/OCT/2018	aaron krupp		function and functional spec modified to accomodate Date objects and ""
 
 function formatDate(d) {
 	if (d instanceof Date | d == "today") {
@@ -1969,11 +1983,61 @@ function formatDate(d) {
 	}
 }
 
-//function sendErrorMsg() {
-//	document.location.href = ERROR_MSG_WEBHOOK_URL;
-//}
+// 	29. sendErrorMsg():
 //
-//window.addEventListener('error', function(event) {
-//	sendErrorMsg();
-//})
+// 	Description:		Sends a GET request to a Zapier-generated webhook URL
+//
+//	Operation:			Sends get by changing the document.location to globally set URL. 
+//
+//	Dependencies:		None.
+// 	Arguments:			None.
+//	Return values: 		None.
+//
+//	Global variables:	ERROR_MSG_WEBHOOK_URL --- url to which to send the GET request
+//
+//	Input:				None.
+//	Output:				Changes the document's location to that of the webhook. 
+//
+//	Error handling:		None.
+//
+// 	Algorithms:			None. 
+//	Data structures:	None.
+//
+//	Known bugs:			None.
+// 	Limitations:		None.
+//
+// 	Update history:		12/OCT/2018	aaron krupp		functional specification & fn writen
+
+function sendErrorMsg() {
+	document.location.href = ERROR_MSG_WEBHOOK_URL;
+}
+
+// 	30. error listener, function(event)
+//
+// 	Description:		Listens for errors. When errors are generated, fires. 
+//
+//	Operation:			Calls sendErrorMsg() function.
+//
+//	Dependencies:		None.
+// 	Arguments:			None.
+//	Return values: 		None.
+//
+//	Global variables:	None.
+//
+//	Input:				None.
+//	Output:				None.
+//
+//	Error handling:		None.
+//
+// 	Algorithms:			None. 
+//	Data structures:	None.
+//
+//	Known bugs:			None.
+// 	Limitations:		None.
+//
+// 	Update history:		12/OCT/2018	aaron krupp		functional specification & fn writen
+
+window.addEventListener('error', function(event) {
+	sendErrorMsg();
+})
 
