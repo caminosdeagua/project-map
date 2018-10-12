@@ -787,26 +787,21 @@ function showInfo(z) {
 			els[i].innerHTML = BACK_BUTTON_TXT[0]+AllData[z][DATA_NAMES.name]+BACK_BUTTON_TXT[1];
 			if (AllData[z].isDuplicate) {toDisplay = true;}
 		} else if (id == "dates") {												// If there are dates, include them here:
-			alert();
 			if (!isEmpty(z, "start_date")) {									// if there IS at least a start date
-				alert()
 				toDisplay = true;
 				var start_date = formatDate(AllData[z][DATA_NAMES.start_date]);	// grab start and end dates
 				var end_date = formatDate(AllData[z][DATA_NAMES.end_date]);
-				console.log(start_date);
-				console.log(end_date);
 				var formattedDate;												// initialize formattedDate for various start-end combos
 				if (end_date == "") {											// if there's no end date
 					formattedDate = start_date;									//	just include the start date
-				} else {															// if there IS an end date as well
+				} else {														// if there IS an end date as well
 					if (end_date == formatDate("today")) {						// if the end date is TODAY (project is ongoing)
 						end_date = ONGOING_PROJECT; 							// 	set the end date to say "ongoing" in the correct language
-					} else {													// otherwise, there are valid start and end dates and therefore
-						if(end_date == start_date) {							// 	if they're the same, 
-							formattedDate = start_date;							// 	just display the start date		
-						} else {												// otherwise, display both, separted by the BETWEEN_DATES str. 
-							formattedDate = start_date+BETWEEN_DATES+end_date;
-						}
+					} 													
+					if(end_date == start_date) {								// 	if they're the same, 
+						formattedDate = start_date;								// 	just display the start date		
+					} else {													// otherwise, display both, separted by the BETWEEN_DATES str. 
+						formattedDate = start_date+BETWEEN_DATES+end_date;
 					}
 				}
 				els[i].innerHTML = "<b>"+LBL[id]+"</b>"+END_OF_HEADER+formattedDate;
