@@ -353,9 +353,8 @@ function initMap() {
 //
 // 	Update history:		4/APR/2018	aaron krupp		functional specification writen
 
-function applyBaseMap() {
+function applyBaseMap(id) {
 	map.addLayer(new L.StamenTileLayer(STAMEN_MAP_TYPE), {});
-	
 }
 
 // 	6. adjustXLocation();
@@ -434,7 +433,7 @@ function adjustXLocation() {
 
 function loadData() {
 
-	var url = "https://docs.google.com/spreadsheets/d/1P6Obxu21IhjQFcIBh2N4Cv6fJaMmAyfELEs2tfFWLGI/edit?usp=sharing";
+	var url = DATA_URL;
 	var options = {sendMethod: 'auto'};
 	var query = new google.visualization.Query(url, options);
 	query.setQuery('select * ORDER BY A,B');				// Relies on A being community name and B being start-date
@@ -1878,26 +1877,29 @@ function restartCounters() { // Resets the odometer counters to 0
 // 	Update history:		4/APR/2018	aaron krupp		functional specification writen
 
 function disableMapControls() {
-	
-	map.dragging.disable();
-	map.touchZoom.disable();
-	map.doubleClickZoom.disable();
-	map.scrollWheelZoom.disable();
-	map.boxZoom.disable();
-	map.keyboard.disable();
-	if (map.tap) map.tap.disable();
-	document.getElementById('WaterMap').style.cursor='default';
+	if(map) {
+		map.dragging.disable();
+		map.touchZoom.disable();
+		map.doubleClickZoom.disable();
+		map.scrollWheelZoom.disable();
+		map.boxZoom.disable();
+		map.keyboard.disable();
+		if (map.tap) map.tap.disable();
+		document.getElementById('WaterMap').style.cursor='default';
+	}
 }
 
 function enableMapControls() {
-	map.dragging.enable();
-	map.touchZoom.enable();
-	map.doubleClickZoom.enable();
-	map.scrollWheelZoom.enable();
-	map.boxZoom.enable();
-	map.keyboard.enable();
-	if (map.tap) map.tap.enable();
-	document.getElementById('WaterMap').style.cursor='grab';
+	if (map) {
+		map.dragging.enable();
+		map.touchZoom.enable();
+		map.doubleClickZoom.enable();
+		map.scrollWheelZoom.enable();
+		map.boxZoom.enable();
+		map.keyboard.enable();
+		if (map.tap) map.tap.enable();
+		document.getElementById('WaterMap').style.cursor='grab';
+	}
 }
 
 // 	27. invert():
@@ -2037,8 +2039,6 @@ function sendErrorMsg() {
 // 	Update history:		12/OCT/2018	aaron krupp		functional specification & fn writen
 
 window.addEventListener('error', function(event) {
-	if (event.timestamp<5000) {
-		sendErrorMsg();
-	}
+	sendErrorMsg();
 })
 

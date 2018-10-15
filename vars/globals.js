@@ -64,4 +64,5 @@ var HRS_PER_DAY = 8;					// Assumptions on constructing a 12,000 L ferro cement 
 var DAYS_PER_CISTERN = 5;
 var PPL_PER_CISTERN = 5;
 
+var DATA_URL = "https://docs.google.com/spreadsheets/d/1P6Obxu21IhjQFcIBh2N4Cv6fJaMmAyfELEs2tfFWLGI/edit?usp=sharin";
 var ERROR_MSG_WEBHOOK_URL = 'https://hooks.zapier.com/hooks/catch/2853893/lg9a8s?toEmail=true';
