@@ -432,7 +432,6 @@ function adjustXLocation() {
 // 	Update history:		4/APR/2018	aaron krupp		functional specification writen
 
 function loadData() {
-
 	var url = DATA_URL;
 	var options = {sendMethod: 'auto'};
 	var query = new google.visualization.Query(url, options);
