@@ -494,7 +494,6 @@ function plotData(data) {
 		if (isEmpty(i, "name") | isEmpty(i, "lat") | isEmpty(i, "lng") | bin == -1) { 		// if the row is missing a name, latitutde, or longitude, or doesn't fit a bin,
 		} else {																			//	ignore it. Otherwise:
 			if (i==0 || data[i][DATA_NAMES.name] != data[i-1][DATA_NAMES.name]) {			// if not a duplicate point (special case for 0th point, cause 0-1 does not exist)
-				console.log(data[i][DATA_NAMES.name]);
 				duplicateCounter = 0;
 				AllData[i].duplicates = [i]; 		// create a new array in AllData called duplicates to hold indices of duplicates of this point
 				AllData[i].bin = bin;
