@@ -490,13 +490,13 @@ function plotData(data) {
 	photos = Array.apply(null, Array(data.length)).map(Boolean.prototype.valueOf,false); 	// init an array full of "false"'s to later populate with images
 	
 	for (var i=0; i<data.length; i++) { // Loop through all the rows of the data
-		var bin;
+		var bin = getBin(data, i);
 		if (isEmpty(i, "name") | isEmpty(i, "lat") | isEmpty(i, "lng") | bin == -1) { 		// if the row is missing a name, latitutde, or longitude, or doesn't fit a bin,
 		} else {																			//	ignore it. Otherwise:
 			if (i==0 || data[i][DATA_NAMES.name] != data[i-1][DATA_NAMES.name]) {			// if not a duplicate point (special case for 0th point, cause 0-1 does not exist)
+				console.log(data[i][DATA_NAMES.name]);
 				duplicateCounter = 0;
 				AllData[i].duplicates = [i]; 		// create a new array in AllData called duplicates to hold indices of duplicates of this point
-				bin = getBin(data, i);
 				AllData[i].bin = bin;
 				if (isEmpty(i, "photo")) { // if there's no photo, do nothing
 				} else { 							// if there's a photo, get it from the link and store it in the browser
@@ -563,7 +563,6 @@ function plotData(data) {
 					className: "ourLabel"								//	that activate during mouseover
 				});
 				base.Markers[base.Markers.length-1].addTo(map); 		// And finally, actually add the markers to the map!
-		
 		
 		
 			} else {													// if i is a duplicate
