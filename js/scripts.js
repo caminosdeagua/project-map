@@ -142,9 +142,6 @@
 //	29. sendErrorMsg():
 //			Sends a GET request to a URL provided by Zapier to activate a webhook
 //
-//	30. Error listener, function (event):
-//			Listens for thrown errors. When errors are thrown, calls
-//			sendErrorMsg();
 //
 ////////////////////////////////////////////////////////////////////////////////
 //
@@ -485,7 +482,7 @@ function plotData(data) {
 	
 	AllData = data; 				// store data as global for later access.
 	if (!AllData | AllData.length == 0) {
-		sendErrorMsg();
+		// Add something here to do in case the data isn't loaded...
 	}
 	
 	
@@ -2011,33 +2008,3 @@ function formatDate(d) {
 function sendErrorMsg() {
 	document.location.href = ERROR_MSG_WEBHOOK_URL;
 }
-
-// 	30. error listener, function(event)
-//
-// 	Description:		Listens for errors. When errors are generated, fires. 
-//
-//	Operation:			Calls sendErrorMsg() function.
-//
-//	Dependencies:		None.
-// 	Arguments:			None.
-//	Return values: 		None.
-//
-//	Global variables:	None.
-//
-//	Input:				None.
-//	Output:				None.
-//
-//	Error handling:		None.
-//
-// 	Algorithms:			None. 
-//	Data structures:	None.
-//
-//	Known bugs:			None.
-// 	Limitations:		None.
-//
-// 	Update history:		12/OCT/2018	aaron krupp		functional specification & fn writen
-
-window.addEventListener('error', function(event) {
-	sendErrorMsg();
-})
-
