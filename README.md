@@ -26,6 +26,7 @@ All data is stored on two different Google sheets. One is private (and has perso
 
 Each column in the public sheet uses a QUERY() and a few IMPORTRANGE() functions that grabs all the non-sensitive data from the private sheet based on the column headers in the first row of the private sheet. You only need to touch this if you're adding new columns to the map. The code in each cell is:
 
+=QUERY(IMPORTRANGE("https://docs.google.com/spreadsheets/d/1hBGGjgXYfEUDwnmCKSuLcpIdQXj0Ea5TyH_aV_MCqCU/edit#gid=0", "DATA!A:FF"),"SELECT Col"&COINCIDIR("[COLUMN HEADER]", IMPORTRANGE("https://docs.google.com/spreadsheets/d/1hBGGjgXYfEUDwnmCKSuLcpIdQXj0Ea5TyH_aV_MCqCU/edit#gid=0", "DATA!A1:FF1"), 0))
 
 Where [COLUMN HEADER] needs to match the string in row 1 of the public data sheet that you want to retrieve. To add a new column, just copy/paste this code into a new column in the private sheet and update [COLUMN HEADER] appropriately.
 
