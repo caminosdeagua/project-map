@@ -113,7 +113,7 @@
 				<div class="info_text" id="notes"></div>
 				
 			</div>
-			<div id='lobby', class='display_box' onmouseenter="disableMapControls();" onmouseleave="enableMapControls();" >
+			<div id='lobby', class='display_box' ontouchstart="disableMapControls();" onmouseenter="disableMapControls();" ontouchend="enableMapControls();" onmouseleave="enableMapControls();">
 				<img id="x-butt-l" class='x-butt' onclick="goBack('x');" src="https://caminosdeagua.github.io/project-map/img/greyX.png"></img>
 				<div class="lobby_text" id="proj_name_l" style="text-align: center;"></div>
 				<div class="lobby_text" id="photo_l" style="text-align: center;">
