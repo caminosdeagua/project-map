@@ -2084,5 +2084,4 @@ function detectMobile() {
 function adjustDisplayForMobile() {
 	document.getElementById("overlay_title").style.fontSize = "36px";
 	document.getElementById("overlay_msg").style.fontSize = "22px";
-	document.getElementById("stats_box").style.display = "none";
 }
