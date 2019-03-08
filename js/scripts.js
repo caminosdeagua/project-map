@@ -2052,20 +2052,18 @@ function detectMobile() {
 
 // 	31. adjustDisplayForMobile():
 //
-// 	Description:		adjust
+// 	Description:		Adjusts font and element sizing for nice mobile/table experience
 //
-//	Operation:			Thanks to Michael Zaporozhets for this function:
-//						http://stackoverflow.com/questions/11381673/detecting-a-mobile-browser 
-//						Basically just checks all known mobile/table browsers. 
+//	Operation:			Adjusts relevant elements by getId.style 
 //
 //	Dependencies:		None.
 // 	Arguments:			None.
-//	Return values: 		Binary 	---	True for mobile/tablet, false otherwise.
+//	Return values: 		None.
 //
 //	Global variables:	None.
 //
 //	Input:				None.
-//	Output:				None.
+//	Output:				Font and element sizes change for viewer.
 //
 //	Error handling:		None.
 //
@@ -2073,12 +2071,12 @@ function detectMobile() {
 //	Data structures:	None.
 //
 //	Known bugs:			None.
-// 	Limitations:		Relies on known browsers/platforms as of writing, needs to be 
-//						regularly updated. Ugh. 
+// 	Limitations:		None. 
 //
 // 	Update history:		07/MAR/2019	aaron krupp		functional specification & fn added
 
 function adjustDisplayForMobile() {
 	document.getElementById("overlay_title").style.fontSize = "36px";
 	document.getElementById("overlay_msg").style.fontSize = "22px";
+	document.getElementById("stats_box").style.display = "none";
 }
