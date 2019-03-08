@@ -701,6 +701,7 @@ function openPanel(id) {
 }
 
 function closePanel(id) { 			// To close the panel:
+	enableMapControls();
 	var el = document.getElementById(id);
 	fadeOut(el, 0.09)							// Just fade it out.
 	
