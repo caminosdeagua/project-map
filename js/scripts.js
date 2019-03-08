@@ -288,11 +288,13 @@ function fillText() {
 // 	Update history:		4/APR/2018	aaron krupp		functional specification writen
 
 function fillCounters() {
-	document.getElementById("stats_box").style.display = "inline-block";		// show the stats menu
-	document.getElementById("stats_projects_no").innerHTML = totalProjects();	// fill it!
-	document.getElementById("stats_people_no").innerHTML = totalPeople();
-	document.getElementById("stats_capacity_no").innerHTML = totalCapacity();
-	document.getElementById("stats_ceramic_no").innerHTML = totalCartridgesAndSystems();
+	if(!detectMobile()) {	// only fill counters if not on a mobile/tablet
+		document.getElementById("stats_box").style.display = "inline-block";		// show the stats menu
+		document.getElementById("stats_projects_no").innerHTML = totalProjects();	// fill it!
+		document.getElementById("stats_people_no").innerHTML = totalPeople();
+		document.getElementById("stats_capacity_no").innerHTML = totalCapacity();
+		document.getElementById("stats_ceramic_no").innerHTML = totalCartridgesAndSystems();
+	}
 }
 
 // 	4. initMap():
@@ -451,7 +453,9 @@ function onQueryResponse(response) {
 	} else {
 		var data = googleDataTable2JSON(response.getDataTable());	// convert data to json
 		plotData(data);												// feed into plotting function
-		fillCounters();												// Read the data for the counters
+		
+		fillCounters();											// Read the data for the counters
+		
 	}
 }
 
@@ -1843,12 +1847,14 @@ function beginUserExperience() {
 //
 // 	Update history:		4/APR/2018	aaron krupp		functional specification writen
 
-function restartCounters() { // Resets the odometer counters to 0
-	document.getElementById("stats_projects_no").innerHTML = 0;	// fill it!
-	document.getElementById("stats_people_no").innerHTML = 0;
-	document.getElementById("stats_capacity_no").innerHTML = 0;
-	document.getElementById("stats_ceramic_no").innerHTML = 0;
-	fillCounters();
+function restartCounters() { 	// Resets the odometer counters to 0
+	if (!detectMobile()){		// only restart the counters if we're not on a mobile/tablet
+		document.getElementById("stats_projects_no").innerHTML = 0;	// fill it!
+		document.getElementById("stats_people_no").innerHTML = 0;
+		document.getElementById("stats_capacity_no").innerHTML = 0;
+		document.getElementById("stats_ceramic_no").innerHTML = 0;
+		fillCounters();
+	}
 }
 
 // 	26. disableMapControls() / enableMapControls():
