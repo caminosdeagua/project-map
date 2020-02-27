@@ -442,7 +442,7 @@ function loadData() {
 	var url = DATA_URL;
 	var options = {sendMethod: 'auto'};
 	var query = new google.visualization.Query(url, options);
-	query.setQuery('select * ORDER BY A,B');				// Relies on A being community name and B being start-date
+	query.setQuery('select * ORDER BY B,C');				// Relies on B being community name and C being start-date
 	query.send(onQueryResponse);
 							
 }
