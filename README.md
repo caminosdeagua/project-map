@@ -59,7 +59,7 @@ If the column that you want to add is simple (only involves displaying the numbe
 
 5. Repeat (4) for the display_Spanish.js file. 
 
-6. Adjust any calculations that the new category ought to be included in in scripts.js.  
+6. Adjust any calculations that the new category ought to be included in in scripts.js (sorry for all the numbers!!! =P).  
 
 
 ## License
