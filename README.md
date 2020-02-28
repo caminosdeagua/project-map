@@ -33,7 +33,7 @@ Where [COLUMN HEADER] needs to match the string in row 1 of the public data shee
 A few notes:
 1. As stated above, do not change the name of either spreadsheet.
 
-2. Column A in the public sheet must be "Community" and column B must be "Start Date." No other order matters.
+2. Column A in the public sheet must be "ProjectID", column B must be "Community". Column C must be "Start Date". No other order matters.
 
 3. Dates need to be in dd-MMM-yyyy format with MMM in English (the default date format on the private sheet)
 
@@ -41,18 +41,13 @@ A few notes:
 
 5. To add a new project or update an existing project, just edit the private google sheet appropriately. Your changes should be visible on the project map within seconds. 
 
-6. To add a new column to the project map:
-    1. Add your column wherever you want in the PRIVATE sheet
-    2. Add this code to whatever column you want (not A or B, see point #2 above) in the PUBLIC sheet, changing [COLUMN HEADER] appropriately so it matches the header that you've added in the PRIVATE sheet: ```QUERY(IMPORTRANGE("https://docs.google.com/spreadsheets/d/1hBGGjgXYfEUDwnmCKSuLcpIdQXj0Ea5TyH_aV_MCqCU/edit#gid=0", "DATA!A:FF"),"SELECT Col"&MATCH("[COLUMN HEADER]", IMPORTRANGE("https://docs.google.com/spreadsheets/d/1hBGGjgXYfEUDwnmCKSuLcpIdQXj0Ea5TyH_aV_MCqCU/edit#gid=0", "DATA!A1:FF1"), 0))```
-    3. adjust the files index.html, scripts.js, and the language files appropriately to include a new column. If you cannot figure out how to do this, contact Aaron: askrupp at gmail. 
-
 ## How to add a new column
 
 If the column that you want to add is simple (only involves displaying the number in the spreadsheet under a string header), follow these instructions. For any more complex behavior, see the 'Contact' section below.
 
-1. Add column to Projects-PRIVATE
+1. Add column to Projects-PRIVATE, whever you want. 
 
-2. Add column to Projects-PUBLIC, substituting the appropriate column name from step (1). 
+2. Add this code to whatever column you want (not A, B, or C, see point #2 above) in the PUBLIC sheet, changing [COLUMN HEADER] appropriately so it matches the header that you've added in the PRIVATE sheet: ```QUERY(IMPORTRANGE("https://docs.google.com/spreadsheets/d/1hBGGjgXYfEUDwnmCKSuLcpIdQXj0Ea5TyH_aV_MCqCU/edit#gid=0", "DATA!A:FF"),"SELECT Col"&MATCH("[COLUMN HEADER]", IMPORTRANGE("https://docs.google.com/spreadsheets/d/1hBGGjgXYfEUDwnmCKSuLcpIdQXj0Ea5TyH_aV_MCqCU/edit#gid=0", "DATA!A1:FF1"), 0))```
 
 3. Add a div element with class="info-text" to index.html, setting the id to whatever you want
 
