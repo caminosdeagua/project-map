@@ -478,6 +478,7 @@ function googleDataTable2JSON(dataTable) {
 			data[i][lbl] = value;						// store the "key: value" pair
 		}
 	}
+	console.log(data);
 	return data											// after all looping is done, return the finalized json
 }
 
@@ -770,8 +771,10 @@ function showInfo(z) {
 	var els = document.getElementsByClassName("info_text");
 	var i=0;
 	for(i; i<els.length; i++) { 		// Loop through all the elements to fill
+	
 		var toDisplay = false;				// Initialize each element to not display in case there's no content. 
 		var id = els[i].id;					// Grab the id of the current element
+		alert(id);
 		els[i].style.margin = "5px";		// Reset the margin property to the default values									
 		// A few ids have special cases: 
 		//	photo, 
@@ -1733,7 +1736,7 @@ function storageInstalled(point) {
 	var dup;
 	for (var i=0; i<AllData[point].duplicates.length; i++) {
 		dup = AllData[point].duplicates[i];
-		storage = storage + 12000*AllData[dup][DATA_NAMES.no_ferro] + 2500*AllData[dup][DATA_NAMES.no_roto_small] + 10000*AllData[dup][DATA_NAMES.no_roto_big] + 30000*AllData[dup][DATA_NAMES.no_geomembrane] + 80000*AllData[dup][DATA_NAMES.no_underground] + 2000*AllData[dup][DATA_NAMES.no_rainjar];
+		storage = storage + 12000*AllData[dup][DATA_NAMES.no_ferro] + 2500*AllData[dup][DATA_NAMES.no_roto_small] + 5000*AllData[dup][DATA_NAMES.no_roto_medium] + 10000*AllData[dup][DATA_NAMES.no_roto_big] + 30000*AllData[dup][DATA_NAMES.no_geomembrane] + 80000*AllData[dup][DATA_NAMES.no_underground] + 2000*AllData[dup][DATA_NAMES.no_rainjar];
 	}
 	storage = numberWithCommas(storage);
 	
