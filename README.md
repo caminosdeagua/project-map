@@ -46,6 +46,25 @@ A few notes:
     2. Add this code to whatever column you want (not A or B, see point #2 above) in the PUBLIC sheet, changing [COLUMN HEADER] appropriately so it matches the header that you've added in the PRIVATE sheet: ```QUERY(IMPORTRANGE("https://docs.google.com/spreadsheets/d/1hBGGjgXYfEUDwnmCKSuLcpIdQXj0Ea5TyH_aV_MCqCU/edit#gid=0", "DATA!A:FF"),"SELECT Col"&MATCH("[COLUMN HEADER]", IMPORTRANGE("https://docs.google.com/spreadsheets/d/1hBGGjgXYfEUDwnmCKSuLcpIdQXj0Ea5TyH_aV_MCqCU/edit#gid=0", "DATA!A1:FF1"), 0))```
     3. adjust the files index.html, scripts.js, and the language files appropriately to include a new column. If you cannot figure out how to do this, contact Aaron: askrupp at gmail. 
 
+## How to add a new column
+
+If the column that you want to add is simple (only involves displaying the number in the spreadsheet under a string header), follow these instructions. For any more complex behavior, see the 'Contact' section below.
+
+1. Add column to Projects-PRIVATE
+
+2. Add column to Projects-PUBLIC, substituting the appropriate column name from step (1). 
+
+3. Add a div element with class="info-text" to index.html, setting the id to whatever you want
+
+4. Add appropriate rows to the following vars in the display_English.js file:
+	- var DATA_NAMES (key matches id from (3), value matches column header from (1))
+	- var LBL (key matches id from (3), value is whatever label you want displayed in the info box in English
+
+5. Repeat (4) for the display_Spanish.js file. 
+
+6. Adjust any calculations that the new category ought to be included in in scripts.js.  
+
+
 ## License
 This work is shared under a Creative Commons 4.0 attribution, non-commercial license. It is also covered under [The MIT License](https://opensource.org/licenses/MIT). 
 
