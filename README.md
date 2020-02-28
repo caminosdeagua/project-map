@@ -55,7 +55,7 @@ If the column that you want to add is simple (only involves displaying the numbe
 
 4. Add appropriate rows to the following vars in the display_English.js file:
 	- var DATA_NAMES (key matches id from (3), value matches column header from (1))
-	- var LBL (key matches id from (3), value is whatever label you want displayed in the info box in English
+	- var LBL (key matches id from (3), value is whatever label you want displayed in the info box in English)
 
 5. Repeat (4) for the display_Spanish.js file. 
 
