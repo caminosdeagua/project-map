@@ -47,7 +47,7 @@ If the column that you want to add is simple (only involves displaying the numbe
 
 1. Add column to Projects-PRIVATE, whever you want. 
 
-2. Add this code to whatever column you want (not A, B, or C, see point #2 above) in the PUBLIC sheet, changing [COLUMN HEADER] appropriately so it matches the header that you've added in the PRIVATE sheet: ```QUERY(IMPORTRANGE("https://docs.google.com/spreadsheets/d/1hBGGjgXYfEUDwnmCKSuLcpIdQXj0Ea5TyH_aV_MCqCU/edit#gid=0", "DATA!A:FF"),"SELECT Col"&MATCH("[COLUMN HEADER]", IMPORTRANGE("https://docs.google.com/spreadsheets/d/1hBGGjgXYfEUDwnmCKSuLcpIdQXj0Ea5TyH_aV_MCqCU/edit#gid=0", "DATA!A1:FF1"), 0))```
+2. Add this code to whatever column you want (not A, B, or C, see point #2 above) in the PUBLIC sheet, changing [COLUMN HEADER] appropriately so it matches the header that you've added in the PRIVATE sheet in step (1): ```QUERY(IMPORTRANGE("https://docs.google.com/spreadsheets/d/1hBGGjgXYfEUDwnmCKSuLcpIdQXj0Ea5TyH_aV_MCqCU/edit#gid=0", "DATA!A:FF"),"SELECT Col"&MATCH("[COLUMN HEADER]", IMPORTRANGE("https://docs.google.com/spreadsheets/d/1hBGGjgXYfEUDwnmCKSuLcpIdQXj0Ea5TyH_aV_MCqCU/edit#gid=0", "DATA!A1:FF1"), 0))```
 
 3. Add a div element with class="info-text" to index.html, setting the id to whatever you want
 
