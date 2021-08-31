@@ -504,7 +504,15 @@ function plotData(data) {
 	for (var i=0; i<data.length; i++) { // Loop through all the rows of the data
 		var bin = getBin(data, i);
 		if (isEmpty(i, "name") | isEmpty(i, "lat") | isEmpty(i, "lng") | bin == -1) { 		// if the row is missing a name, latitutde, or longitude, or doesn't fit a bin,
-		} else {																			//	ignore it. Otherwise:
+			data.splice(i,1);                                                               // Removes it from data (which also removed it from allData)	
+			i=i-1;                                                                          // Otherwise, it could trigger the "is duplicate", without AllData[i].duplicates having been created
+		} else {																			// Otherwise:
+		
+			//Note: This if statement determines whic rows of data will be grouped together within one marker on the map (with the query in loadData())
+			// At the moment, rows with same "community" (.name) value, but different coordinates will be plotted under one marker
+			// To fix that, we would have to have the coordinates included in the "ORDER BY" statement of the query (ORDER BY B,E,F,C), and add conditions on the coordinates to
+			// the "If" statement below (probably in a dedicated function)
+			// Not sure we want the map to behave that way, so leave it as an idea for now
 			if (i==0 || data[i][DATA_NAMES.name] != data[i-1][DATA_NAMES.name]) {			// if not a duplicate point (special case for 0th point, cause 0-1 does not exist)
 				duplicateCounter = 0;
 				AllData[i].duplicates = [i]; 		// create a new array in AllData called duplicates to hold indices of duplicates of this point
@@ -532,10 +540,18 @@ function plotData(data) {
 					})
 					.on('click', function(event) {
 						
-						click_lat = event.latlng.lat; 			// Grab the latLng of the cliked point 
+						click_lat = event.latlng.lat; 			// Grab the latLng of the cliked point
+						click_lng = event.latlng.lng;						
 																// 	(returns value of marker's center, regardless of where is clicked...)
-						var j = base.Markers.map(function(a) {return a._latlng.lat}).indexOf(click_lat);
-																// this confusing line gets the index in base.Markers
+					
+						//This loops below gets the index of the point with the same latitude and longitude as the clicked points
+						//we'll use that index to access the marker, popup, and label soon. 
+						for (var index =0;index<base.Markers.length;index++){
+							if(base.Markers[index]._latlng.lat == click_lat && base.Markers[index]._latlng.lng == click_lng){
+								j = index;
+								index = base.Markers.length;
+							}
+						}
 																//	of the point with the same latitude as the clicked point
 																// 	we'll use that index to access the marker, label, and data.
 						var z = used_indices[j];				// Then get the index of the point in AllData.
