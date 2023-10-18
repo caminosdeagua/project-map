@@ -9,9 +9,9 @@ var TITLE = "Mapa de Proyectos | Caminos de Agua";
 
 var MONTHS_LONG = ["Enero", "Febrero", "Marzo",
 				 "Abril", "Mayo", "Junio",
-				"Julio", "Agosto", "Septiembre", 
+				"Julio", "Agosto", "Septiembre",
 				"Octubre", "Noviembre", "Diciembre"];
-					
+
 var MONTH_CODES = ["Ene", "Feb", "Mar",
 					"Abr", "May", "Jun",
 					"Jul", "Ago", "Sep",
@@ -19,7 +19,7 @@ var MONTH_CODES = ["Ene", "Feb", "Mar",
 
 var DATE = "Fecha";
 
-var ATTRIBUTION = 'Data hosting on <a href="http://www.dropbox.com">Dropbox</a> legends by <a href="http://www.carto.com">Carto</a>';
+var ATTRIBUTION = 'Almacenamiento de datos con <a href="http://drive.google.com">Google Sheets</a> | <a href="https://caminosdeagua.org/en/donate">Donar</a>';
 
 var SEE_MORE = "Más información";
 
@@ -45,8 +45,8 @@ var SUMMARY_HEADERS = [NO_PROJECTS_HDR, PPL_SERVED_HDR, RWH_HDR, CERAMIC_HDR];
 //// 	matches those in var LBL below, and the RHS matches
 ////	the column headers in the dataset.
 
-var DATA_NAMES = {						
-	name: "Community",	
+var DATA_NAMES = {
+	name: "Community",
 	lat: "Latitude",
 	lng: "Longitude",
 	proj_name: "Nombre del proyecto",
@@ -79,8 +79,8 @@ var DATA_NAMES = {
 	photo_folder: "Images Folder"
 };
 
-//// The labels for the info windows. 
-//// Make sure the handles match the ids for 
+//// The labels for the info windows.
+//// Make sure the handles match the ids for
 ////	their divs in index.html!!!! <<--- Super important!!!
 var LBL = {
 	proj_name: "",

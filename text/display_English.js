@@ -8,9 +8,9 @@ var TITLE = "Proejct Map | Caminos de Agua";
 
 var MONTHS_LONG = ["January", "February", "March",
 					"April", "May", "June",
-					"July", "August", "September", 
+					"July", "August", "September",
 					"October", "November", "December"];
-					
+
 var MONTH_CODES = ["Jan", "Feb", "Mar",
 					"Apr", "May", "Jun",
 					"Jul", "Aug", "Sep",
@@ -18,7 +18,7 @@ var MONTH_CODES = ["Jan", "Feb", "Mar",
 
 var DATE = "Date";
 
-var ATTRIBUTION = 'Data hosting on <a href="http://www.dropbox.com">Dropbox</a> legends by <a href="http://www.carto.com">Carto</a>';
+var ATTRIBUTION = 'Data hosting on <a href="http://drive.google.com">Google Sheets</a> | <a href="https://caminosdeagua.org/en/donate">Donate</a>';
 
 var SEE_MORE = "More info";
 
@@ -44,8 +44,8 @@ var SUMMARY_HEADERS = [NO_PROJECTS_HDR, PPL_SERVED_HDR, RWH_HDR, CERAMIC_HDR];
 //// 	matches those in var LBL below, and the RHS matches
 ////	the column headers in the dataset.
 
-var DATA_NAMES = {						
-	name: "Community",	
+var DATA_NAMES = {
+	name: "Community",
 	lat: "Latitude",
 	lng: "Longitude",
 	proj_name: "Project Name",
@@ -78,8 +78,8 @@ var DATA_NAMES = {
 	photo_folder: "Images Folder"
 };
 
-//// The labels for the info windows. 
-//// Make sure the handles match the ids for 
+//// The labels for the info windows.
+//// Make sure the handles match the ids for
 ////	their divs in index.html!!!! <<--- Super important!!!
 var LBL = {
 	proj_name: "",
