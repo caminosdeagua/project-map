@@ -24,12 +24,13 @@ var ATTRIBUTION = 'Almacenamiento de datos con <a href="http://drive.google.com"
 var SEE_MORE = "Más información";
 
 var LEGEND_TITLE = "Tipos de proyecto";
-var LEGEND0 = "\xa0\xa0\xa0Sistemas\xa0de\xa0Captación\xa0de\xa0Lluvia";
-var LEGEND1 = "\xa0\xa0\xa0Filtros\xa0Cerámicos";
-var LEGEND2 = "\xa0\xa0\xa0Tratamiento\xa0con\xa0Bio\xa0Carbón";
-var LEGEND3 = "\xa0\xa0\xa0Otros\xa0proyectos"
-var LEGEND4 = "\xa0\xa0\xa0Varios\xa0proyectos";
-var LEGEND_TEXT = [LEGEND0, LEGEND1, LEGEND2, LEGEND3, LEGEND4];
+var LEGEND0 = "\xa0\xa0\xa0Sistemas\xa0de\xa0captación\xa0de\xa0lluvia";
+var LEGEND1 = "\xa0\xa0\xa0Filtros\xa0cerámicos";
+var LEGEND2 = "\xa0\xa0\xa0Sistema\xa0de\xa0tratamiento\xa0de\xa0aguas\xa0subterráneas";
+var LEGEND3 = "\xa0\xa0\xa0Sanitarios\xa0secos"
+var LEGEND4 = "\xa0\xa0\xa0Otros\xa0proyectos"
+var LEGEND5 = "\xa0\xa0\xa0Varios\xa0proyectos";
+var LEGEND_TEXT = [LEGEND0, LEGEND1, LEGEND2, LEGEND3, LEGEND4,LEGEND5];
 
 var BACK_BUTTON_TXT = ["Atrás hacía todos los proyectos en ",""];
 var LOBBY_MESSAGE = ["<b>Haz clic en un proyecto abajo para encontrar más información<br></b>"]
@@ -61,7 +62,7 @@ var DATA_NAMES = {
 	small_train: "Small Scale Capacity Training",
 	no_ceramic_systems: "# of Ceramic Filter Systems",
 	no_ceramic_filters: "# of Ceramic Water Filters",
-	no_biochar: "Biochar Treatment System (300L/day)",
+	no_biochar: "Biochar Treatment System",
 	no_ferro: "Ferrocement RWH Systems (12,000L)",
 	no_roto_small: "Rotoplas Cistern (2,500L)",
 	no_roto_medium: "Rotoplas Cistern (5,000L)",
@@ -120,6 +121,9 @@ var END_OF_HEADER = ":<br>\xa0\xa0\xa0";
 RAIN_PROJ = "Cosecha de agua de lluvia";
 CERAMIC_PROJ = "Filtros cerámicos";
 BIOCHAR_PROJ = "Sistema de tratamiento con biocarbón";
+GTS_PROJ = "Sistema de Tratamiento de Agua Subterráneas";
+DRY_TOILET_PROJ = "Sanitarios secos";
+BORDO_PROJ = "Bordo";
 OTHER_PROJ = "Otro";
 
 var EASTER_EGG_TXT = {			// NEED TO TRANSLATE!!!
@@ -131,6 +135,7 @@ var EASTER_EGG_TXT = {			// NEED TO TRANSLATE!!!
 	ppl: "Total number of people impacted",
 	communities: "Total number of communities impacted",
 	partners: "List of partner organizations",
+	partnerNames: "All partners",
 	projects: "Total number of projects completed",
 	other: "Total number of 'Other' types of projects",
 	otherNames: "Names of 'Other' projects",

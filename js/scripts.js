@@ -2,10 +2,10 @@
 // 											scripts.js
 //
 // 	Holds any javascript functions necessary for basic opperation universal
-// 	to all pages of the Caminos de Agua project-map. 
+// 	to all pages of the Caminos de Agua project-map.
 //
 //	General description: This map shows all the projects worked on by the NGO
-//		Caminos de Agua. Data is read in from a public 
+//		Caminos de Agua. Data is read in from a public
 //		Google Sheet (using the Google Visualization API)
 //		and plotted over stamen basemap tiles using leaflet's open source
 //		javascript library. When individual data points are selected, a window
@@ -35,8 +35,8 @@
 //
 // 	5. applyBaseMap():
 //			Applies the appropriate basemap tiles
-//	
-//	6. adjustXLocation(): 
+//
+//	6. adjustXLocation():
 //			Adjusts the location of the closing-x-mark in the lobby/info panel to
 //			accomodate different scrollbar widths on different browsers
 //
@@ -44,11 +44,11 @@
 //			Loads the data from googleSheets and formats it as a JSON.
 //
 //	8. plotData(data);
-//			Plots the passed data, formatted as a JSON. 
+//			Plots the passed data, formatted as a JSON.
 //
 //	8. getBin(data, i):
 //			figure out which color to make the point represented by the i-th row
-//			in the json dataset, data. 
+//			in the json dataset, data.
 //
 //	9. openPanel(id) / closePanel(id):
 //			open or close the data panel for id = "info_panel" or "lobby"
@@ -60,7 +60,7 @@
 //	11. showLobby(z):
 //			Displays the lobby (used when a single community has >1 project.) The
 //			lobby contains summary info about all of the communities projects. This
-//			function displays the lobby for the z-th data point. 
+//			function displays the lobby for the z-th data point.
 //
 //	12. openFromLobby(z):
 //			When a project is clicked from the lobby, this opens the z-th info panel
@@ -72,7 +72,7 @@
 //	14. removePoint(i):
 //			removes the i-th point from the map
 //
-//	15. fadeIn(el) / fadeOut(el, threshhold): 
+//	15. fadeIn(el) / fadeOut(el, threshhold):
 //			fades in or out the element "el" using the appropriate opacity threshhold
 //
 //	16. onKeypress / goBack(key):
@@ -82,17 +82,17 @@
 //	17. showSelectedMarker() / hideSelectedMarker():
 //			shows/hides a marker in the appropriate place to highlight which data
 //			point has been selected
-//			
+//
 //	18. numberWithCommas(x) / numberWithoutCommas(x):
 //			Takes an int x and puts/removes commas ever 3rd digit
 //
 //	19. getScrollBarWidth():
 //			get the scrollbar width for the particular browser
 //
-//	20. openFullSummary(): 
+//	20. openFullSummary():
 //			displays an easter-egg summary of all data to the console
 //
-//	21. map-wide summary functions: 
+//	21. map-wide summary functions:
 //			totalProjects()
 //			totalPeople()
 //			totalCapacity()
@@ -105,10 +105,10 @@
 //			totalWorkshops()
 //			totalHours()
 //			totalSchools()
-//				
+//
 //			These functions generate totals by adding together the appropriate
 //			data from the appropriate rows of the dataset.
-//			
+//
 //	22. individual point summary functions:
 //			projectsCompleted(point)
 //			peopleImpacted(point)
@@ -122,11 +122,11 @@
 //			returns t/f, checks to see if the ith row in the dataset has a name
 //
 //	24. beginUserExperience():
-//			removes the overlay and restarts the counters (makes map accessible 
+//			removes the overlay and restarts the counters (makes map accessible
 //			to clicks)
 //
 //	25. restartCounters():
-//			re-initializes the spinning counters. 
+//			re-initializes the spinning counters.
 //
 //	26. disableMapControls() / enableMapControls():
 //			disables and enables map controls for scrolling in lobby/info-panel
@@ -135,9 +135,9 @@
 //	27. invert(obj):
 //			Takes lookup table and inverts the key-value pairs. Returns obj.
 //
-//	28. formatDate(date): 
+//	28. formatDate(date):
 //			Takes in a date formatted dd-MMM-yyyy in english and returns it as
-//			dd/MMM/yyyy with MMM in the correct language. 
+//			dd/MMM/yyyy with MMM in the correct language.
 //
 //	29. sendErrorMsg():
 //			Sends a GET request to a URL provided by Zapier to activate a webhook.
@@ -153,9 +153,9 @@
 //
 //	UPDATE HISTORY:
 //		29/SEP/2017	aaron krupp		document first written
-//		4/OCT/2017	aaron krupp		added initAdminIndifferent, initAdmin, and 
+//		4/OCT/2017	aaron krupp		added initAdminIndifferent, initAdmin, and
 //									initNonAdmin.
-//									Added CORS functionality for cross-domain 
+//									Added CORS functionality for cross-domain
 //									get/post requests
 //		22/APR/2018	aaron krupp		comments/table of contents updated
 //									functional specifications added
@@ -165,13 +165,13 @@
 
 // 	1. init():
 //
-// 	Description:		Initializes the site.	
+// 	Description:		Initializes the site.
 //
 //	Operation:			fills in the appropriate langauge text, inits the map,
-//						shows the basemap, plots the data on the map, and sets 
-//						The spinning counters. 
+//						shows the basemap, plots the data on the map, and sets
+//						The spinning counters.
 //
-//	Dependencies:		None.		
+//	Dependencies:		None.
 // 	Arguments:			None.
 //	Return values: 		None.
 //
@@ -182,41 +182,41 @@
 //
 //	Error handling:		None.
 //
-// 	Algorithms:			None. 
+// 	Algorithms:			None.
 //	Data structures:	None.
 //
 //	Known bugs:			None.
 // 	Limitations:		None.
 //
-// 	Update history:		4/APR/2018	aaron krupp		functional specification writen 
+// 	Update history:		4/APR/2018	aaron krupp		functional specification writen
 
 function init() {
-	if(detectMobile()) {adjustDisplayForMobile()} 
-								// check for mobile and adjust text size appropriately
+	if(detectMobile()) {adjustDisplayForMobile()}
+	// check for mobile and adjust text size appropriately
 	fillText();					// Fill in the text in the appropriate language
-	initMap(); 					// Initialize the map 
+	initMap(); 					// Initialize the map
 	applyBaseMap(); 			// Display the map with the appropriate base tiles
 	adjustXLocation();
-	loadData(); 				// Load the data for the default contaminant 
-								// 	then plot the base markers on the map.	
-	
-}								
+	loadData(); 				// Load the data for the default contaminant
+	// 	then plot the base markers on the map.
+
+}
 
 // 	2. fillText():
 //
-// 	Description:		Fills in text from the appropriate language file	
+// 	Description:		Fills in text from the appropriate language file
 //
-//	Operation:			Grabs the global variables (ALL IN CAPS) from the 
+//	Operation:			Grabs the global variables (ALL IN CAPS) from the
 //						loaded language file and displays them. This allows for
 //						easy addoption of multi-lingual sites.
 //
 //	Dependencies:		elements with the following:
-//							id = "legend_title"		
-//							name = "project_type"		
-//							class = "stats_left"		
-//							id = "overlay_title"		
-//							id = "overlay_msg"		
-//							class = "overlay"		
+//							id = "legend_title"
+//							name = "project_type"
+//							class = "stats_left"
+//							id = "overlay_title"
+//							id = "overlay_msg"
+//							class = "overlay"
 // 	Arguments:			None.
 //	Return values: 		None.
 //
@@ -224,11 +224,11 @@ function init() {
 //						DISPLAY_MSG
 //
 //	Input:				None.
-//	Output:				Displays all text on map. 
+//	Output:				Displays all text on map.
 //
 //	Error handling:		None.
 //
-// 	Algorithms:			None. 
+// 	Algorithms:			None.
 //	Data structures:	None.
 //
 //	Known bugs:			None.
@@ -244,10 +244,10 @@ function fillText() {
 	for(var i=0; i<els.length; i++){
 		els[i].innerHTML = LEGEND_TEXT[i];
 	}
-	
+
 	els = document.getElementsByClassName("stats_left");
 	for (var i=0; i<els.length; i++) {
-		els[i].innerHTML = SUMMARY_HEADERS[i];				
+		els[i].innerHTML = SUMMARY_HEADERS[i];
 	}
 	// load text onto overlay
 	document.getElementById("overlay_title").innerHTML = DISPLAY_TITLE;
@@ -258,17 +258,17 @@ function fillText() {
 
 // 	3. fillCounters():
 //
-// 	Description:		fills the counters with the appropirate values	
+// 	Description:		fills the counters with the appropirate values
 //
-//	Operation:			Calls the appropriate map-wide summary function (21) and 
+//	Operation:			Calls the appropriate map-wide summary function (21) and
 //						sets the innerHTML of the appropriate spinner to that value
 //
 //	Dependencies:		Elements with the following ids:
-//							"stats_box"		
-//							"stats_projects_no"		
-//							"stats_people_no"		
-//							"stats_capacity_no"		
-//							"stats_ceramic_no"		
+//							"stats_box"
+//							"stats_projects_no"
+//							"stats_people_no"
+//							"stats_capacity_no"
+//							"stats_ceramic_no"
 // 	Arguments:			None.
 //	Return values: 		None.
 //
@@ -279,7 +279,7 @@ function fillText() {
 //
 //	Error handling:		None.
 //
-// 	Algorithms:			None. 
+// 	Algorithms:			None.
 //	Data structures:	None.
 //
 //	Known bugs:			None.
@@ -299,11 +299,11 @@ function fillCounters() {
 
 // 	4. initMap():
 //
-// 	Description:		Initializes the global map object.	
+// 	Description:		Initializes the global map object.
 //
 //	Operation:			Initializes the map object using leaflet's L.map function
 //
-//	Dependencies:		Leaflet.js		
+//	Dependencies:		Leaflet.js
 // 	Arguments:			None.
 //	Return values: 		None.
 //
@@ -314,7 +314,7 @@ function fillCounters() {
 //
 //	Error handling:		None.
 //
-// 	Algorithms:			None. 
+// 	Algorithms:			None.
 //	Data structures:	None.
 //
 //	Known bugs:			None.
@@ -330,18 +330,18 @@ function initMap() {
 		maxZoom: MAP_MAX_ZOOM,
 		attributionControl: true,
 		fullscreenControl: true
-	});	
+	});
 	map.attributionControl.setPrefix(ATTRIBUTION);
 }
 
 // 	5. applyBaseMap():
 //
-// 	Description:		Applies the basemap tiles	
+// 	Description:		Applies the basemap tiles
 //
-//	Operation:			grabs a set of Stamen or Mapzen base tiles and 		
+//	Operation:			grabs a set of Stamen or Mapzen base tiles and
 //	 					applies them to the map
 //
-//	Dependencies:		Leaflet.js	
+//	Dependencies:		Leaflet.js
 // 	Arguments:			None.
 //	Return values: 		None.
 //
@@ -352,7 +352,7 @@ function initMap() {
 //
 //	Error handling:		None.
 //
-// 	Algorithms:			None. 
+// 	Algorithms:			None.
 //	Data structures:	None.
 //
 //	Known bugs:			None.
@@ -366,25 +366,25 @@ function applyBaseMap(id) {
 
 // 	6. adjustXLocation();
 //
-// 	Description:		Adjusts location of x-button in info panel or lobby	
+// 	Description:		Adjusts location of x-button in info panel or lobby
 //
 //	Operation:			Gets the width of the browser's scrollbar and offsets the
-//						x-button a corresponding set pizeldistance from the edge of  
+//						x-button a corresponding set pizeldistance from the edge of
 //						the window
 //
 //	Dependencies:		element with class = 'x-butt'
 // 	Arguments:			None.
 //	Return values: 		None.
 //
-//	Global variables:	X_OFFSET_FROM_SCROLLBAR ---	Dictates the x-button's offset 
+//	Global variables:	X_OFFSET_FROM_SCROLLBAR ---	Dictates the x-button's offset
 //							from the scrollbar
 //
 //	Input:				None.
-//	Output:				The x-button moves if it is displayed to the user. 
+//	Output:				The x-button moves if it is displayed to the user.
 //
 //	Error handling:		None.
 //
-// 	Algorithms:			None. 
+// 	Algorithms:			None.
 //	Data structures:	None.
 //
 //	Known bugs:			None.
@@ -402,16 +402,16 @@ function adjustXLocation() {
 
 // 	7. LoadData():
 //
-// 	Description:		Loads the appropriate dataset calls the plotting function.	
+// 	Description:		Loads the appropriate dataset calls the plotting function.
 //
 //	Operation:			Grabs the data from the gloabl dataset PROJECT_MAP_DATA.
 //						Stores it in a local variable data and a global AllData.
-//						(yes, i know this is wildly redundant, its to deal with 
+//						(yes, i know this is wildly redundant, its to deal with
 //						other methods of data entry). Then it calls specific functions
 //						to plot the data.
 //
-//						MAKE SURE ALL DATA IS SORTED BY NAME, THEN START-YEAR, 
-//						THEN START-MONTH, OTHERWISE YOU'LL LOSE A LOT OF POINTS!!!	
+//						MAKE SURE ALL DATA IS SORTED BY NAME, THEN START-YEAR,
+//						THEN START-MONTH, OTHERWISE YOU'LL LOSE A LOT OF POINTS!!!
 //
 //	Dependencies:		leaflet.js
 // 	Arguments:			None.
@@ -420,17 +420,17 @@ function adjustXLocation() {
 //	Global variables:	base, PROJECT_MAP_DATA, SELECTED_URL, LARGE_ICON_SIZE, DATA_NAMES,
 //						ICON_URLS, SMALL_ICON_SIZE, BASE_Z_OFFSET, VARIOUS
 //						You can find descriptions for these variables in the global
-//						variable definition file. 
+//						variable definition file.
 //
 //	Input:				None.
-//	Output:				Data points appear on map. 
+//	Output:				Data points appear on map.
 //
 //	Error handling:		If a data entry doesn't have a name, lat, or lng, or is a
-//						duplicate, it isn't show. Duplicate indicies are noted in 
-//						a separate array 
+//						duplicate, it isn't show. Duplicate indicies are noted in
+//						a separate array
 //
-// 	Algorithms:			None. 
-//	Data structures:	Data is treated as a json 
+// 	Algorithms:			None.
+//	Data structures:	Data is treated as a json
 //
 //	Known bugs:			None.
 // 	Limitations:		DATA MUST BE SORTED BY NAME (ALPHABETICAL) THEN START-YEAR
@@ -444,7 +444,7 @@ function loadData() {
 	var query = new google.visualization.Query(url, options);
 	query.setQuery('select * ORDER BY B,C');				// Relies on B being community name and C being start-date
 	query.send(onQueryResponse);
-							
+
 }
 
 function onQueryResponse(response) {
@@ -453,9 +453,9 @@ function onQueryResponse(response) {
 	} else {
 		var data = googleDataTable2JSON(response.getDataTable());	// convert data to json
 		plotData(data);												// feed into plotting function
-		
+
 		fillCounters();											// Read the data for the counters
-		
+
 	}
 }
 
@@ -465,25 +465,25 @@ function googleDataTable2JSON(dataTable) {
 	numRows = dataTable.getNumberOfRows();
 
 	var data = [];										// initialze data array to hold json
-	
+
 	for(var i=0; i<numRows; i++) {						// loop through rows
 		data.push({});									// on each row creating a new dictionary
 		for(var j=0; j<numCols; j++) {					// and loop through each column of that row
-			
+
 			var lbl = dataTable.getColumnLabel(j);		// get the name of the column
 			var value = dataTable.getValue(i,j);		// get cell's value
 			if (!value) {								// if a value exists in the cell
 				value = "";
-			} 
+			}
 			data[i][lbl] = value;						// store the "key: value" pair
 		}
 	}
 	return data											// after all looping is done, return the finalized json
 }
 
-	
+
 function plotData(data) {
-	
+
 	base.Markers = [];
 	base.Popups = [];
 	selectedIcon = L.icon({
@@ -491,23 +491,23 @@ function plotData(data) {
 		iconSize: LARGE_ICON_SIZE
 	});
 	var duplicateCounter = 0;
-	
+
 	AllData = data; 				// store data as global for later access.
 	if (!AllData | AllData.length == 0) {
 		// Add something here to do in case the data isn't loaded...
 	}
-	
-	
-	
+
+
+
 	photos = Array.apply(null, Array(data.length)).map(Boolean.prototype.valueOf,false); 	// init an array full of "false"'s to later populate with images
-	
+
 	for (var i=0; i<data.length; i++) { // Loop through all the rows of the data
 		var bin = getBin(data, i);
 		if (isEmpty(i, "name") | isEmpty(i, "lat") | isEmpty(i, "lng") | bin == -1) { 		// if the row is missing a name, latitutde, or longitude, or doesn't fit a bin,
-			data.splice(i,1);                                                               // Removes it from data (which also removed it from allData)	
+			data.splice(i,1);                                                               // Removes it from data (which also removed it from allData)
 			i=i-1;                                                                          // Otherwise, it could trigger the "is duplicate", without AllData[i].duplicates having been created
 		} else {																			// Otherwise:
-		
+
 			//Note: This if statement determines whic rows of data will be grouped together within one marker on the map (with the query in loadData())
 			// At the moment, rows with same "community" (.name) value, but different coordinates will be plotted under one marker
 			// To fix that, we would have to have the coordinates included in the "ORDER BY" statement of the query (ORDER BY B,E,F,C), and add conditions on the coordinates to
@@ -522,15 +522,15 @@ function plotData(data) {
 					photos[i] = new Image();
 					photos[i].src = data[i][DATA_NAMES.photo];
 				}
-				
-				
-				
-				
+
+
+
+
 				var icon = L.icon({ 							// 	to be used when displaying the base markers
 					iconUrl: ICON_URLS[bin],
 					iconSize: SMALL_ICON_SIZE
 				})
-				var latLng = L.latLng([data[i][DATA_NAMES.lat], data[i][DATA_NAMES.lng]]); // Grab the latLng of the point			
+				var latLng = L.latLng([data[i][DATA_NAMES.lat], data[i][DATA_NAMES.lng]]); // Grab the latLng of the point
 				used_indices.push(i);
 				base.Markers.push( 								// Save the appropriate marker
 					L.marker(latLng, {
@@ -539,39 +539,39 @@ function plotData(data) {
 						zIndexOffset: BASE_Z_OFFSET
 					})
 					.on('click', function(event) {
-						
+
 						click_lat = event.latlng.lat; 			// Grab the latLng of the cliked point
-						click_lng = event.latlng.lng;						
-																// 	(returns value of marker's center, regardless of where is clicked...)
-					
+						click_lng = event.latlng.lng;
+						// 	(returns value of marker's center, regardless of where is clicked...)
+
 						//This loops below gets the index of the point with the same latitude and longitude as the clicked points
-						//we'll use that index to access the marker, popup, and label soon. 
+						//we'll use that index to access the marker, popup, and label soon.
 						for (var index =0;index<base.Markers.length;index++){
 							if(base.Markers[index]._latlng.lat == click_lat && base.Markers[index]._latlng.lng == click_lng){
 								j = index;
 								index = base.Markers.length;
 							}
 						}
-																//	of the point with the same latitude as the clicked point
-																// 	we'll use that index to access the marker, label, and data.
+						//	of the point with the same latitude as the clicked point
+						// 	we'll use that index to access the marker, label, and data.
 						var z = used_indices[j];				// Then get the index of the point in AllData.
-						
+
 						if (AllData[z].duplicates.length > 1) { // if the current point HAS duplicates:
 							if(!info_panel_open && !lobby_active) {		// and the info panel and lobby are both closed
 								info_being_displayed = z;		// set the info to display as this point
 								showLobby(z);					// show the lobby for this point, since it has multiple projects
-						
+
 								openPanel('lobby');				// open the info panel
 							} else if ((info_panel_open || lobby_active) && info_being_displayed != z ) {	// if the info panel or lobby are open and not displaying this point
 								info_being_displayed = z;		// change the info being displayed to this point
 								closePanel('info_panel');
 								showLobby(z);					// show the lobby since this point has multiple projects
 								openPanel('lobby');
-							}	 
+							}
 						} else {								// If the selected point DOESN'T have duplicates
 							if (!info_panel_open) {				// and the info panel is closed
 								info_being_displayed = z;		// set the info being displayed to this point
-																// push the info for this community/project to the info panel
+								// push the info for this community/project to the info panel
 								if (lobby_active) {
 									closePanel('lobby');			// close the lobby in case it's open
 								}
@@ -579,19 +579,19 @@ function plotData(data) {
 								openPanel('info_panel');				// open the info panel
 							} else if (info_panel_open && info_being_displayed != z) {	// if the info panel is open, but showing a different point
 								info_being_displayed = z;		// change the info being displayed to this point
-								showInfo(z);					// push the current info to the info panel. 
+								showInfo(z);					// push the current info to the info panel.
 							}
 						}
-						
+
 					})
 				);
 				base.Markers[base.Markers.length-1].bindLabel(getLabel(data, i), {
-					noHide: false,										// attach labels to all the base points 
+					noHide: false,										// attach labels to all the base points
 					className: "ourLabel"								//	that activate during mouseover
 				});
 				base.Markers[base.Markers.length-1].addTo(map); 		// And finally, actually add the markers to the map!
-		
-		
+
+
 			} else {													// if i is a duplicate
 				duplicateCounter = duplicateCounter + 1;				// increment the duplicate counter
 				AllData[i-duplicateCounter].duplicates.push(i);
@@ -604,28 +604,28 @@ function plotData(data) {
 				} else if (bin != AllData[i-1].bin) {
 					bin = VARIOUS;
 					AllData[i-1].bin = VARIOUS;
-					
+
 					map.removeLayer(base.Markers[base.Markers.length-1]);
 					base.Markers[base.Markers.length-1].options.icon.options.iconUrl = ICON_URLS[VARIOUS];
 					base.Markers[base.Markers.length-1].addTo(map);
 				}
-				AllData[i].bin = bin;	
+				AllData[i].bin = bin;
 				if (isEmpty(i, "photo")) { // if there's no photo, do nothing
 				} else { 							// if there's a photo, get it from the link and store it in the browser
 					photos[i] = new Image();
 					photos[i].src = data[i][DATA_NAMES.photo];
-				}	
-			}	
+				}
+			}
 		};
 	};
 
 
-	
+
 }
 
 // 	8. getBin(data, i):
 //
-// 	Description:		gets the bin of the point at row i of dataset "data"	
+// 	Description:		gets the bin of the point at row i of dataset "data"
 //
 //	Operation:			The bin is how the point will be color-coded on the map
 //						based on project type:
@@ -648,7 +648,7 @@ function plotData(data) {
 //
 //	Error handling:		If project doesn't match a known bin, -1 is returned
 //
-// 	Algorithms:			None. 
+// 	Algorithms:			None.
 //	Data structures:	None.
 //
 //	Known bugs:			None.
@@ -658,21 +658,38 @@ function plotData(data) {
 
 function getBin(data, i) {
 	var bin = -1;
-	if (data[i][DATA_NAMES.proj_type] == RAIN_PROJ) {
+	switch (data[i][DATA_NAMES.proj_type]) {
+		case RAIN_PROJ:
 		bin = RAINWATER;
-	} else if (data[i][DATA_NAMES.proj_type] == CERAMIC_PROJ) {
+		break;
+
+		case CERAMIC_PROJ:
 		bin = CERAMIC;
-	} else if (data[i][DATA_NAMES.proj_type] == BIOCHAR_PROJ) {
-		bin = BIOCHAR;
-	} else if (data[i][DATA_NAMES.proj_type] == OTHER_PROJ) {
+		break;
+
+		case OTHER_PROJ:
+		case BORDO_PROJ:
+		case BIOCHAR_PROJ:
 		bin = OTHER;
+		break
+
+		case GTS_PROJ:
+		bin = GTS;
+		break;
+
+		case DRY_TOILET_PROJ:
+		bin = DRY_TOILET;
+		break;
+
+		default:
 	}
+
 	return bin
 }
 
 // 	9. openPanel(id) / closePanel(id):
 //
-// 	Description:		Opens and closes the named element with the id "id"	
+// 	Description:		Opens and closes the named element with the id "id"
 //
 //	Operation:			Configures the element with the id "id"
 //						Then fades in or out that element.
@@ -693,7 +710,7 @@ function getBin(data, i) {
 //
 //	Error handling:		None.
 //
-// 	Algorithms:			None. 
+// 	Algorithms:			None.
 //	Data structures:	None.
 //
 //	Known bugs:			None.
@@ -705,10 +722,10 @@ function getBin(data, i) {
 function openPanel(id) {
 	var el = document.getElementById(id);
 	el.style.opacity = 0; 				// Since the info panel isn't open, make sure opacity is 0
-	el.style.display = "block";			//	but the panel isn't hidden, so it can be scrolled. 
+	el.style.display = "block";			//	but the panel isn't hidden, so it can be scrolled.
 	$("#"+id).scrollTop(0);		// Since we're opening a new point, scroll to top of info window
 	fadeIn(el)							// Once it's scrolled, fade the info window in.
-	
+
 	if (id == 'info_panel') {
 		info_panel_open = true;				// And set the global to show that it's being displayed.
 	} else if (id == 'lobby') {
@@ -720,39 +737,39 @@ function closePanel(id) { 			// To close the panel:
 	enableMapControls();
 	var el = document.getElementById(id);
 	fadeOut(el, 0.09)							// Just fade it out.
-	
+
 	if (id=='info_panel') {
-		info_panel_open = false;			// Then reset the global to show it's hidden. 
+		info_panel_open = false;			// Then reset the global to show it's hidden.
 	} else if (id == 'lobby') {
 		lobby_active = false;
 	}
-	
-											// This following chunk of code
+
+	// This following chunk of code
 	$('.vid_box').each(function(){		//	resets the video's source
 		var el_src = $(this).attr("src");	//	which effectively resets the video,
-		$(this).attr("src",el_src);			//	pausing or stopping it. 
+		$(this).attr("src",el_src);			//	pausing or stopping it.
 	});
 }
 
 
 // 	10. showInfo(z):
 //
-// 	Description:		This outrageously long function (that would be better 
-//						written in react) dynamically generates / hides the 
-//						appropriate elements in the info-panel for each given 
+// 	Description:		This outrageously long function (that would be better
+//						written in react) dynamically generates / hides the
+//						appropriate elements in the info-panel for each given
 //						date point.
 //
 //	Operation:			For each div element within the div id="info-panel", this
 //						function checks to see if the dataset has the corresponding
 //						information. If not, toDisplay is set to false. else, it is
-//						set to true. If toDisplay is set to true, the appropriate 
+//						set to true. If toDisplay is set to true, the appropriate
 //						data is loaded and displayed with the appropriate color
 //						and styling. If not, the div is hidden.
 //
-//	Dependencies:		Divs with the following ids: 
+//	Dependencies:		Divs with the following ids:
 //							back_button, proj_name, video, photo, docs, name, muni,
 //                          proj_type, site, dates, people, workshops, no_ceramic_systems,
-//                          no_ceramic_filters, no_biochar, no_ferro, no_roto_small, 
+//                          no_ceramic_filters, no_biochar, no_ferro, no_roto_small,
 //							no_roto_big, no_geomembrane, no_underground, no_rainjar,
 //                          partner, notes1
 //
@@ -761,14 +778,14 @@ function closePanel(id) { 			// To close the panel:
 //	Return values: 		None.
 //
 //	Global variables:	AllData 	---	global dataset
-//						DATA_NAMES, BACK_BUTTON_TXT, NO_INFO, LBL, END_OF_HEADER, 
+//						DATA_NAMES, BACK_BUTTON_TXT, NO_INFO, LBL, END_OF_HEADER,
 //
 //	Input:				None.
-//	Output:				Divs in info-panel are displayed or hidden. 
+//	Output:				Divs in info-panel are displayed or hidden.
 //
 //	Error handling:		None.
 //
-// 	Algorithms:			None. 
+// 	Algorithms:			None.
 //	Data structures:	None.
 //
 //	Known bugs:			None.
@@ -786,14 +803,14 @@ function showInfo(z) {
 	var els = document.getElementsByClassName("info_text");
 	var i=0;
 	for(i; i<els.length; i++) { 		// Loop through all the elements to fill
-	
-		var toDisplay = false;				// Initialize each element to not display in case there's no content. 
+
+		var toDisplay = false;				// Initialize each element to not display in case there's no content.
 		var id = els[i].id;					// Grab the id of the current element
-		els[i].style.margin = "5px";		// Reset the margin property to the default values									
-		// A few ids have special cases: 
-		//	photo, 
-		//	dates, 
-		//	workshops, 
+		els[i].style.margin = "5px";		// Reset the margin property to the default values
+		// A few ids have special cases:
+		//	photo,
+		//	dates,
+		//	workshops,
 		// 	contact_info
 		//	and docs.
 		if (id == "proj_name") {
@@ -820,27 +837,27 @@ function showInfo(z) {
 				} else {														// if there IS an end date as well
 					if (end_date == formatDate("today")) {						// if the end date is TODAY (project is ongoing)
 						end_date = ONGOING_PROJECT; 							// 	set the end date to say "ongoing" in the correct language
-					} 													
-					if(end_date == start_date) {								// 	if they're the same, 
-						formattedDate = start_date;								// 	just display the start date		
-					} else {													// otherwise, display both, separted by the BETWEEN_DATES str. 
+					}
+					if(end_date == start_date) {								// 	if they're the same,
+						formattedDate = start_date;								// 	just display the start date
+					} else {													// otherwise, display both, separted by the BETWEEN_DATES str.
 						formattedDate = start_date+BETWEEN_DATES+end_date;
 					}
 				}
 				els[i].innerHTML = "<b>"+LBL[id]+"</b>"+END_OF_HEADER+formattedDate;
 			}
 		} else if (id == "video")
-			if (isEmpty(z, id)) {}
-			else {
-				toDisplay = true;
-				isVideo = true;
-				var video_element = document.getElementById("video_box");
-				video_element.src = AllData[z][DATA_NAMES[id]];
-		
-		
+		if (isEmpty(z, id)) {}
+		else {
+			toDisplay = true;
+			isVideo = true;
+			var video_element = document.getElementById("video_box");
+			video_element.src = AllData[z][DATA_NAMES[id]];
+
+
 		} else if (id == "photo") {			// If there's a photo, deal with it:
 			if (isEmpty(z, id) && isEmpty(z, "photo_folder")) {	// if there's no photo don't display the photo box
-			} else if (isVideo) {	// if there's a video, don't display the photo!					
+			} else if (isVideo) {	// if there's a video, don't display the photo!
 			} else {
 				toDisplay = true;
 				var photoEl = document.getElementById("photo_box");
@@ -849,7 +866,7 @@ function showInfo(z) {
 				} else {																							// if there's a photo and a link
 					photoEl.src = photos[z].src;
 					photoEl.style.display = "block";
-				
+
 				}
 			}
 		} else if (id == "workshops") {		// If there were workshops, include them here:
@@ -857,7 +874,7 @@ function showInfo(z) {
 			else {
 				toDisplay = true;
 				if (isEmpty(z, "big_train")) {
-					els[i].innerHTML = "<b>"+LBL.small_train+"</b>"+END_OF_HEADER+AllData[z][DATA_NAMES.small_train];	
+					els[i].innerHTML = "<b>"+LBL.small_train+"</b>"+END_OF_HEADER+AllData[z][DATA_NAMES.small_train];
 				} else if (isEmpty(z, "small_train")) {
 					els[i].innerHTML = "<b>"+LBL.big_train+"</b>"+END_OF_HEADER+AllData[z][DATA_NAMES.big_train];
 				} else {
@@ -878,7 +895,7 @@ function showInfo(z) {
 			else {
 				toDisplay = true;
 				if (LBL[id] != "") {
-					els[i].innerHTML = "<b>"+LBL[id]+"</b>"+END_OF_HEADER+AllData[z][DATA_NAMES[id]];	
+					els[i].innerHTML = "<b>"+LBL[id]+"</b>"+END_OF_HEADER+AllData[z][DATA_NAMES[id]];
 				} else {
 					els[i].innerHTML = "<big><b>"+AllData[z][DATA_NAMES[id]]+"</big></b>";
 				}
@@ -886,7 +903,7 @@ function showInfo(z) {
 		}
 		if (toDisplay) {
 			currentElement = i;
-			
+
 			if (els[i].id == 'back_button') {								// display for back button
 				els[i].style.backgroundColor = "rgba(235, 235, 235, 0)";
 				els[i].style.marginRight = "100px";
@@ -897,7 +914,7 @@ function showInfo(z) {
 				els[i].onmouseleave = function(event) {
 					event.target.style.color = 'black';
 				}
-				
+
 			} else if (els[i].id == "photo") {								// display for photo frame
 				els[i].style.backgroundColor = "rgba(235, 235, 235, 0)";
 			} else if (els[i].id == "video") {								// display for video frame
@@ -907,11 +924,11 @@ function showInfo(z) {
 				els[i].style.backgroundColor = "rgba(235, 235, 235, 0)";
 				els[i].style.marginRight = "40px";
 				els[i].style.fontWeight = "600";
-				
+
 			} else if (els[i].id=="docs") {									// display for links to more information/documentation
 				els[i].style.backgroundColor = "rgba(235, 235, 235, 0)";
 				els[i].style.fontSize = "18px";
-			
+
 			} else if(elementsBeingDisplayed%2) {							// display for every even element
 				els[i].style.backgroundColor = "rgba(211, 233, 237, 1)";
 			} else {														// display for every odd element
@@ -921,18 +938,18 @@ function showInfo(z) {
 			elementsBeingDisplayed++;
 		} else {
 			els[i].style.display = "none";
-		}				
+		}
 	}
-	els[currentElement].style.marginBottom = "25px";				// adjust the margin on the last element for clearance				
+	els[currentElement].style.marginBottom = "25px";				// adjust the margin on the last element for clearance
 	$("#info_panel").animate({scrollTop: 0}, SCROLL_TIME);	// First, scroll the info window back to the top.
 }
 
 // 	11. showLobby(z):
 //
-// 	Description:		Shows the lobby for the z-th element in the global dataset		
+// 	Description:		Shows the lobby for the z-th element in the global dataset
 //
 //	Operation:			Loops through all the divs in the lobby and popultates them
-//						appropriately. Follows a parallel structure to  function 
+//						appropriately. Follows a parallel structure to  function
 //						#10, showInfo(z)
 //
 //	Dependencies:		Divs within the div with id = "lobby" with the following ids:
@@ -948,7 +965,7 @@ function showInfo(z) {
 //
 //	Error handling:		None.
 //
-// 	Algorithms:			None. 
+// 	Algorithms:			None.
 //	Data structures:	None.
 //
 //	Known bugs:			None.
@@ -958,11 +975,11 @@ function showInfo(z) {
 
 
 function showLobby(z) {
-	hideSelectedMarker(); 
+	hideSelectedMarker();
 	showSelectedMarker();
 	document.getElementById('message_l').innerHTML = LOBBY_MESSAGE[0];
 	var els = document.getElementsByClassName("lobby_text");
-	
+
 	for (var i = 0; i<els.length; i++) {
 		var id = els[i].id;					// Grab the id of the current element
 		if (id == 'proj_name_l') {
@@ -970,29 +987,29 @@ function showLobby(z) {
 			els[i].style.fontSize = "32px";
 			els[i].style.backgroundColor = "rgba(235, 235, 235, 0)";
 			els[i].style.fontWeight = "600";
-		} 
+		}
 		else if (id == 'photo_l') {
 			var photoCounter = 0;
 			for (var j = 0; j<AllData[z].duplicates.length; j++) {		// loop through duplicates
 				dup = AllData[z].duplicates[j];
 				if (photoCounter == 0) {								// grab and display 1st photo
-					if (isEmpty(dup, "photo")) {	
-						document.getElementById("photo_l").style.display = 'none';	
+					if (isEmpty(dup, "photo")) {
+						document.getElementById("photo_l").style.display = 'none';
 					} else {
 						photoCounter = 1;
 						document.getElementById("photo_l").style.display = 'inline-block';
-						document.getElementById("photo_box_l").src = photos[dup].src;	
+						document.getElementById("photo_box_l").src = photos[dup].src;
 						document.getElementById("photo_box_l").style.display = 'block';
-					}	
+					}
 				}
-			}	
+			}
 		}
 		else if (id == "video_l") {
 			var videoCounter = 0;
 			for (var j = 0; j<AllData[z].duplicates.length; j++) {		// loop through duplicates
 				dup = AllData[z].duplicates[j];
-				if (videoCounter == 0) {	
-					if (isEmpty(dup, "video")) {	
+				if (videoCounter == 0) {
+					if (isEmpty(dup, "video")) {
 						document.getElementById("video_l").style.display = 'none';
 					} else {
 						videoCounter = 1;
@@ -1013,15 +1030,15 @@ function showLobby(z) {
 			document.getElementById('ppl_served_value').innerHTML = peopleImpacted(z);
 			document.getElementById('liters_value').innerHTML = storageInstalled(z);
 			document.getElementById('ceramic_value').innerHTML = filtersDistributed(z);
-			
+
 		}
 		else if (id == "project_list") {
-			
+
 			for (var j = 0; j<AllData[z].duplicates.length; j++) {		// loop through duplicates
 				dup = AllData[z].duplicates[j];
 				//rawDate = String(AllData[dup][DATA_NAMES.start_date]).split("-", 3);
-				
-				
+
+
 				var nameToDisplay = AllData[dup][DATA_NAMES.proj_type];
 				var proj_name = AllData[dup][DATA_NAMES.proj_name]
 				if (nameToDisplay == OTHER_PROJ && proj_name != "" && proj_name != null) {
@@ -1044,22 +1061,22 @@ function showLobby(z) {
 						els[i].innerHTML = els[i].innerHTML+"<p class='proj_box_odd' onclick='openFromLobby("+String(dup)+");'>"+nameToDisplay+date+"</p>";
 					}
 				}
-			}	
+			}
 		}
-		
-	}	
+
+	}
 }
 
 // 	12. openFromLobby(z):
 //
-// 	Description:		Opens a specific projects info-panel from the lobby.	
+// 	Description:		Opens a specific projects info-panel from the lobby.
 //
 //	Operation:			populates the info panel with the correct info. Then
 //						opens the info panel on top of the lobby, the closes
-//						the lobby. 
+//						the lobby.
 //
 //	Dependencies:		None.
-// 	Arguments:			z 	---	the index of the project to show in the 
+// 	Arguments:			z 	---	the index of the project to show in the
 //								global dataset
 //	Return values: 		None.
 //
@@ -1070,7 +1087,7 @@ function showLobby(z) {
 //
 //	Error handling:		None.
 //
-// 	Algorithms:			None. 
+// 	Algorithms:			None.
 //	Data structures:	None.
 //
 //	Known bugs:			None.
@@ -1079,7 +1096,7 @@ function showLobby(z) {
 // 	Update history:		4/APR/2018	aaron krupp		functional specification writen
 
 function openFromLobby(z) {
-	
+
 	showInfo(z);
 	openPanel('info_panel');
 	closePanel('lobby');
@@ -1087,7 +1104,7 @@ function openFromLobby(z) {
 
 // 	13. getLabel():
 //
-// 	Description:		Gets the appropriate label to display next to a data point	
+// 	Description:		Gets the appropriate label to display next to a data point
 //
 //	Operation:			Generates a string based on the project name.
 //
@@ -1102,7 +1119,7 @@ function openFromLobby(z) {
 //
 //	Error handling:		None.
 //
-// 	Algorithms:			None. 
+// 	Algorithms:			None.
 //	Data structures:	None.
 //
 //	Known bugs:			None.
@@ -1117,19 +1134,19 @@ function getLabel(data, i) {
 	var lineCount = 1;
 	for (var i=0; i<str.length; i++) {
 		tempNewStr = newStr+"\xa0"+str[i]
-		if(tempNewStr.length>MAX_LABEL_LINE_CHARS*lineCount & i!=0) {	
+		if(tempNewStr.length>MAX_LABEL_LINE_CHARS*lineCount & i!=0) {
 			newStr = newStr+"\xa0\n\xa0"+str[i];
 		} else {
-		newStr = tempNewStr;
+			newStr = tempNewStr;
 		}
 	};
-	return "\xa0"+newStr+"\xa0";	
+	return "\xa0"+newStr+"\xa0";
 }
 
 
 // 	14. removePoint():
 //
-// 	Description:		removes point from map	
+// 	Description:		removes point from map
 //
 //	Operation:			removes the point at index i from map with leaflet commands
 //
@@ -1140,11 +1157,11 @@ function getLabel(data, i) {
 //	Global variables:	None.
 //
 //	Input:				None.
-//	Output:				Makes formerly visible point on map invisible. 
+//	Output:				Makes formerly visible point on map invisible.
 //
 //	Error handling:		None.
 //
-// 	Algorithms:			None. 
+// 	Algorithms:			None.
 //	Data structures:	None.
 //
 //	Known bugs:			None.
@@ -1153,18 +1170,18 @@ function getLabel(data, i) {
 // 	Update history:		4/APR/2018	aaron krupp		functional specification writen
 
 function removePoint(i) {
-	map.removeLayer(base.Markers[i]); 
+	map.removeLayer(base.Markers[i]);
 }
 
 // 	15. fadeIn(el) / fadeOut(el, threshhold):
 //
-// 	Description:		fades in/out a passed html element	
+// 	Description:		fades in/out a passed html element
 //
-//	Operation:			Fades in or out the passed element by adjusting the 
-//						the div element's opacity in steps. Many thanks to:		
-//						http://www.chrisbuttery.com/articles/fade-in-fade-out-with-javascript/ 	
-//						for this simple and lovely bit of js. Cheers! 							
-//						If the div is visible, fadeIn does nothing. If it's not, 
+//	Operation:			Fades in or out the passed element by adjusting the
+//						the div element's opacity in steps. Many thanks to:
+//						http://www.chrisbuttery.com/articles/fade-in-fade-out-with-javascript/
+//						for this simple and lovely bit of js. Cheers!
+//						If the div is visible, fadeIn does nothing. If it's not,
 //						fade out does nothing.
 //
 //	Dependencies:		None.
@@ -1178,7 +1195,7 @@ function removePoint(i) {
 //
 //	Error handling:		None.
 //
-// 	Algorithms:			None. 
+// 	Algorithms:			None.
 //	Data structures:	None.
 //
 //	Known bugs:			None.
@@ -1187,8 +1204,8 @@ function removePoint(i) {
 // 	Update history:		4/APR/2018	aaron krupp		functional specification writen
 
 
-function fadeOut(el, threshhold){ 
-	
+function fadeOut(el, threshhold){
+
 	(function fade() {
 		if ((el.style.opacity -= threshhold) < 0) {
 			el.style.opacity = 0;
@@ -1196,29 +1213,29 @@ function fadeOut(el, threshhold){
 			requestAnimationFrame(fade);
 		}
 	})();
-	
+
 	el.style.display = 'none';
 }
 
 function fadeIn(el){
 
 	el.style.opacity = 0;
-	el.style.display = 'block'; 
-	
+	el.style.display = 'block';
+
 	(function fade() {
 		var val = parseFloat(el.style.opacity);
 		if (!((val += .075) > 1)) {
-		el.style.opacity = val;
-		requestAnimationFrame(fade);
+			el.style.opacity = val;
+			requestAnimationFrame(fade);
 		}
 	})();
-	
+
 }
 
 // 	16. onKeypress / goBack(key):
 //
 // 	Description:		onKeypress triggers when any keys are pressed. If the key
-//						is 'esc,' calls the goBack(key) fn. 		
+//						is 'esc,' calls the goBack(key) fn.
 //
 //	Operation:			If the key is 'x' close everything (info panel and lobby)
 //						Otherwise, the key pressed is 'esc' so go back one step.
@@ -1237,7 +1254,7 @@ function fadeIn(el){
 //
 //	Error handling:		None.
 //
-// 	Algorithms:			None. 
+// 	Algorithms:			None.
 //	Data structures:	None.
 //
 //	Known bugs:			None.
@@ -1247,7 +1264,7 @@ function fadeIn(el){
 
 $(document).bind('keypress', function (event) {
 	if(String(event.originalEvent.key) == "Escape") {
-		goBack('esc');		
+		goBack('esc');
 	}
 })
 
@@ -1266,7 +1283,7 @@ function goBack(key) {
 		showLobby(info_being_displayed);
 		openPanel('lobby')
 		closePanel('info_panel');
-	}			
+	}
 }
 
 // 	17. showSelectedMarker() / hideSelectedMarker():
@@ -1275,7 +1292,7 @@ function goBack(key) {
 //						point the data is being displayed.
 //
 //	Operation:			Finds the lat-lng of the active point by using the index
-//						stored in the global info_being_displayed. Places (or 
+//						stored in the global info_being_displayed. Places (or
 //						or removes) the active-marker at that location.
 //
 //	Dependencies:		None.
@@ -1292,7 +1309,7 @@ function goBack(key) {
 //
 //	Error handling:		None.
 //
-// 	Algorithms:			None. 
+// 	Algorithms:			None.
 //	Data structures:	None.
 //
 //	Known bugs:			None.
@@ -1304,10 +1321,10 @@ function showSelectedMarker() {
 	if (!active_marker_on) {
 		var latLng = L.latLng([AllData[info_being_displayed][DATA_NAMES.lat], AllData[info_being_displayed][DATA_NAMES.lng]]); // Grab the latLng of the point
 		activeMarker = L.marker(latLng, {
-							icon: selectedIcon,
-							riseOnHover: true,
-							zIndexOffset: BASE_Z_OFFSET
-						})
+			icon: selectedIcon,
+			riseOnHover: true,
+			zIndexOffset: BASE_Z_OFFSET
+		})
 		activeMarker.addTo(map);
 		active_marker_on = true;
 	}
@@ -1324,15 +1341,15 @@ function hideSelectedMarker() {
 
 // 	18. numberWithCommas(x) / numberWithoutCommas(x):
 //
-// 	Description:		Takes a number and adds/removes the formatting commas	
+// 	Description:		Takes a number and adds/removes the formatting commas
 //
-//	Operation:			The "With" fn: adds commas between every 3rd digit for the 
-//						standard US/Mexico numerical display format. Returns the 
-//						number as a string.				
-//							
-//						The "Without" fn: does the reverse (takes in a 		
+//	Operation:			The "With" fn: adds commas between every 3rd digit for the
+//						standard US/Mexico numerical display format. Returns the
+//						number as a string.
+//
+//						The "Without" fn: does the reverse (takes in a
 //						string that could have commas, removes them, and returns
-//						a numerical value, either a float or an int).		
+//						a numerical value, either a float or an int).
 //
 //	Dependencies:		None.
 // 	Arguments:			x	--- "With": int to add commas to
@@ -1347,7 +1364,7 @@ function hideSelectedMarker() {
 //
 //	Error handling:		None.
 //
-// 	Algorithms:			None. 
+// 	Algorithms:			None.
 //	Data structures:	None.
 //
 //	Known bugs:			None.
@@ -1355,9 +1372,9 @@ function hideSelectedMarker() {
 //
 // 	Update history:		4/APR/2018	aaron krupp		functional specification writen
 
-							
+
 function numberWithCommas(x) {
-	return parseInt(x).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","); 	//The parseInt() removes any leading zeros that the value may have. 
+	return parseInt(x).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","); 	//The parseInt() removes any leading zeros that the value may have.
 }
 
 function numberWithoutCommas(x) {
@@ -1366,7 +1383,7 @@ function numberWithoutCommas(x) {
 
 // 	19. getScrollBarWidth():
 //
-// 	Description:		Gets the width of the scrollbar		
+// 	Description:		Gets the width of the scrollbar
 //
 //	Operation:			Creates some hidden divs and measures their relative widths.
 //
@@ -1381,7 +1398,7 @@ function numberWithoutCommas(x) {
 //
 //	Error handling:		None.
 //
-// 	Algorithms:			None. 
+// 	Algorithms:			None.
 //	Data structures:	None.
 //
 //	Known bugs:			None.
@@ -1393,7 +1410,7 @@ function getScrollBarWidth () {
 	var inner = document.createElement('p');
 	inner.style.width = "100%";
 	inner.style.height = "200px";
-	
+
 	var outer = document.createElement('div');
 	outer.style.position = "absolute";
 	outer.style.top = "0px";
@@ -1403,40 +1420,40 @@ function getScrollBarWidth () {
 	outer.style.height = "150px";
 	outer.style.overflow = "hidden";
 	outer.appendChild (inner);
-	
+
 	document.body.appendChild (outer);
 	var w1 = inner.offsetWidth;
 	outer.style.overflow = 'scroll';
 	var w2 = inner.offsetWidth;
 	if (w1 == w2) w2 = outer.clientWidth;
-	
+
 	document.body.removeChild (outer);
-	
+
 	return (w1 - w2);
 };
 
 // 	20. openFullSummary():
 //
 // 	Description:		Displays and easter egg to the console with:
-//							- Liters of rainwater capacity installed			
-//							- # rainwater systems installed							
-//							- # filter systems distributed						
-//							- # of filter cartridges distributed				
-//							- liters of ceramic filtration capability			
-//							- People impacted									
-//							- Total # of communities worked in					
-//							- List of partner organizations						
-//							- Total # of projects								
-//							- # of "Other" projects								
-//							- List of "Other" project names w/ community name	
-//							- # of projects in schools							
-//							- # of short workshops								
-//							- # of long workshops								
-//							- # of hours of community-volunteered labor			
+//							- Liters of rainwater capacity installed
+//							- # rainwater systems installed
+//							- # filter systems distributed
+//							- # of filter cartridges distributed
+//							- liters of ceramic filtration capability
+//							- People impacted
+//							- Total # of communities worked in
+//							- List of partner organizations
+//							- Total # of projects
+//							- # of "Other" projects
+//							- List of "Other" project names w/ community name
+//							- # of projects in schools
+//							- # of short workshops
+//							- # of long workshops
+//							- # of hours of community-volunteered labor
 //
 //	Operation:			Calls the appropriate function to generate each of
 //						the above values. Stores values in an array called
-//						"summary". Prints summary to console. 
+//						"summary". Prints summary to console.
 //
 //	Dependencies:		None.
 // 	Arguments:			None.
@@ -1449,7 +1466,7 @@ function getScrollBarWidth () {
 //
 //	Error handling:		None.
 //
-// 	Algorithms:			None. 
+// 	Algorithms:			None.
 //	Data structures:	None.
 //
 //	Known bugs:			None.
@@ -1466,7 +1483,7 @@ function openFullSummary() {
 	summary[EASTER_EGG_TXT.filterCar] = totalCeramic()[0]
 	summary[EASTER_EGG_TXT.filterL] = totalCeramic()[2];
 	summary[EASTER_EGG_TXT.ppl] = totalPeople();
-	summary[EASTER_EGG_TXT.communities] = totalCommunities(); 
+	summary[EASTER_EGG_TXT.communities] = totalCommunities();
 	summary[EASTER_EGG_TXT.partners] = totalPartners()[0];
 	summary[EASTER_EGG_TXT.partnerNames] = totalPartners()[1]
 	summary[EASTER_EGG_TXT.projects] = totalProjects();
@@ -1475,28 +1492,28 @@ function openFullSummary() {
 	summary[EASTER_EGG_TXT.schools] = totalSchools();
 	summary[EASTER_EGG_TXT.shortShops]= totalWorkshops()[0];
 	summary[EASTER_EGG_TXT.longShops] = totalWorkshops() [1];
-	summary[EASTER_EGG_TXT.laborHours] = totalHours();	
+	summary[EASTER_EGG_TXT.laborHours] = totalHours();
 
 	console.log(summary)
-}		
+}
 
 // 	21. Map-wide summary functions():
 //
-// 	Description:		Each of these functions return a single int that 
+// 	Description:		Each of these functions return a single int that
 //						computes a summary value based on all the data on the map
-//						These functions are:	
-//							totalProjects 	
-//							totalPeople		
-//							totalCapacity	
-//							totalCartridgesAndSystems	
-//							totalCommunities	
-//							totalOther		
-//							totalRainSys	
-//							totalCeramic	
-//							totalPartners	
-//							totalWorkshops	
-//							totalHours		
-//							totalSchools	
+//						These functions are:
+//							totalProjects
+//							totalPeople
+//							totalCapacity
+//							totalCartridgesAndSystems
+//							totalCommunities
+//							totalOther
+//							totalRainSys
+//							totalCeramic
+//							totalPartners
+//							totalWorkshops
+//							totalHours
+//							totalSchools
 //
 //	Operation:			By looping through the base points array, each function
 //						aggregates a particular piece of information.
@@ -1512,7 +1529,7 @@ function openFullSummary() {
 //
 //	Error handling:		None.
 //
-// 	Algorithms:			None. 
+// 	Algorithms:			None.
 //	Data structures:	None.
 //
 //	Known bugs:			None.
@@ -1533,10 +1550,10 @@ function totalPeople() {
 	var total = 0
 	for (var i=0; i<used_indices.length; i++) {				// loop through all base points
 		if (peopleImpacted(used_indices[i]) != 'unknown') {	// if the number of people impacted is known (for it and all duplicates)
-			total = total + numberWithoutCommas(peopleImpacted(used_indices[i]));	// add them up, making sure to 
+			total = total + numberWithoutCommas(peopleImpacted(used_indices[i]));	// add them up, making sure to
 		}													//	remove the commas from all numbers...
 	}
-	return total;			
+	return total;
 }
 
 function totalCapacity() {
@@ -1564,7 +1581,7 @@ function totalOther() {				// returns an array: [# of Other projects, [array of 
 	var names = "";
 	for (var i=0; i<used_indices.length; i++) {
 		if (AllData[used_indices[i]].duplicates) {
-			for (var j=0; j<AllData[used_indices[i]].duplicates.length; j++) {	
+			for (var j=0; j<AllData[used_indices[i]].duplicates.length; j++) {
 				index = AllData[used_indices[i]].duplicates[j];
 				if (AllData[index][DATA_NAMES.proj_type] == OTHER_PROJ) {
 					total++;	// counts the number of "Other" projects
@@ -1580,13 +1597,13 @@ function totalOther() {				// returns an array: [# of Other projects, [array of 
 	return [total, names];
 }
 
-function totalRainSys() {						
+function totalRainSys() {
 	var total = 0;
 	for (var i=0; i<used_indices.length; i++) {					// loop through all projects and duplicates
 		if (AllData[used_indices[i]].duplicates) {
-			for (var j=0; j<AllData[used_indices[i]].duplicates.length; j++) {	
+			for (var j=0; j<AllData[used_indices[i]].duplicates.length; j++) {
 				index = AllData[used_indices[i]].duplicates[j];
-				total = total + Number(AllData[index][DATA_NAMES.no_ferro]) + Number(AllData[index][DATA_NAMES.no_roto_small]) + Number(AllData[index][DATA_NAMES.no_roto_big]) + Number(AllData[index][DATA_NAMES.no_geomembrane]) + Number(AllData[index][DATA_NAMES.no_underground]) + Number(AllData[index][DATA_NAMES.no_rainjar]);
+				total = total + Number(AllData[index][DATA_NAMES.no_ferro]) + Number(AllData[index][DATA_NAMES.no_roto_small]) + Number(AllData[index][DATA_NAMES.no_roto_medium]) + Number(AllData[index][DATA_NAMES.no_roto_big]) + Number(AllData[index][DATA_NAMES.no_geomembrane]) + Number(AllData[index][DATA_NAMES.no_underground]) + Number(AllData[index][DATA_NAMES.no_rainjar]);
 			}
 		}
 	}
@@ -1598,7 +1615,7 @@ function totalCeramic() { 		// returns an array: [#cartridges, #systems, potenti
 	var sys = 0;
 	for (var i=0; i<used_indices.length; i++) {					// loop through all projects and duplicates
 		if (AllData[used_indices[i]].duplicates) {
-			for (var j=0; j<AllData[used_indices[i]].duplicates.length; j++) {	
+			for (var j=0; j<AllData[used_indices[i]].duplicates.length; j++) {
 				index = AllData[used_indices[i]].duplicates[j];
 				car = car + Number(AllData[index][DATA_NAMES.no_ceramic_filters]);
 				sys = sys + Number(AllData[index][DATA_NAMES.no_ceramic_systems]);
@@ -1615,24 +1632,24 @@ function totalPartners() {					// returns number of partners and list of partner
 	var names = "";
 	for (var i=0; i<used_indices.length; i++) {
 		if (AllData[used_indices[i]].duplicates) {
-			for (var j=0; j<AllData[used_indices[i]].duplicates.length; j++) {	
+			for (var j=0; j<AllData[used_indices[i]].duplicates.length; j++) {
 				index = AllData[used_indices[i]].duplicates[j];
 				if (!isEmpty(index, "partner")) {
 					var partners = AllData[index][DATA_NAMES.partner].split("; ");
-					if (names == "") {					// if no orgs have been added yet	
+					if (names == "") {					// if no orgs have been added yet
 						names = partners[0];			//	add the first org
 						total = total + 1;				// 	and increase the total number of orgs counter
 						if (partners.length > 1) {		// if this entry has multiple partner orgs
 							for (var k=1; k<partners.length; k++) {	// loop through them, checking for repeates and adding and counting them
-							var re = new RegExp(partners[k], 'g');
-							if (names.match(re) == null | names.match(re) == 0 | names.match(re) == false) {
-								total = total + 1;
-								names = names + "; " + partners[k];
+								var re = new RegExp(partners[k], 'g');
+								if (names.match(re) == null | names.match(re) == 0 | names.match(re) == false) {
+									total = total + 1;
+									names = names + "; " + partners[k];
 								}
 							}
 						}
 					} else {							// if some orgs have already been added, loop through checking for repeate and adding and counting them
-						
+
 						for (var k=0; k<partners.length; k++) {
 							var re = new RegExp(partners[k], 'g');
 							if (names.match(re) == null | names.match(re) == 0 | names.match(re) == false) {
@@ -1641,8 +1658,8 @@ function totalPartners() {					// returns number of partners and list of partner
 							}
 						}
 					}
-				
-				
+
+
 				}
 			}
 		}
@@ -1655,7 +1672,7 @@ function totalWorkshops() {
 	var longShops = 0;
 	for (var i=0; i<used_indices.length; i++) {
 		if (AllData[used_indices[i]].duplicates) {
-			for (var j=0; j<AllData[used_indices[i]].duplicates.length; j++) {	
+			for (var j=0; j<AllData[used_indices[i]].duplicates.length; j++) {
 				index = AllData[used_indices[i]].duplicates[j];
 				shortShops = shortShops + Number(AllData[index][DATA_NAMES.small_train]);
 				longShops = longShops + Number(AllData[index][DATA_NAMES.big_train]);
@@ -1669,7 +1686,7 @@ function totalHours() {		// total hours of volunteer labor put into cisterns
 	var totalFerro = 0;
 	for (var i=0; i<used_indices.length; i++) {
 		if (AllData[used_indices[i]].duplicates) {
-			for (var j=0; j<AllData[used_indices[i]].duplicates.length; j++) {	
+			for (var j=0; j<AllData[used_indices[i]].duplicates.length; j++) {
 				index = AllData[used_indices[i]].duplicates[j];
 				totalFerro = totalFerro + Number(AllData[index][DATA_NAMES.no_ferro]);
 			}
@@ -1682,7 +1699,7 @@ function totalSchools() {
 	var schools = 0;
 	for (var i=0; i<used_indices.length; i++) {
 		if (AllData[used_indices[i]].duplicates) {
-			for (var j=0; j<AllData[used_indices[i]].duplicates.length; j++) {	
+			for (var j=0; j<AllData[used_indices[i]].duplicates.length; j++) {
 				index = AllData[used_indices[i]].duplicates[j];
 				var re = new RegExp("school", 'gi');
 				var sites = AllData[index][DATA_NAMES.site];
@@ -1692,17 +1709,17 @@ function totalSchools() {
 			}
 		}
 	}
-	return schools;			
+	return schools;
 }
 
 // 	22. individual point summpary functions:
 //
 // 	Description:		These functions return summary values across multiple
-//						projects in a single community.		
+//						projects in a single community.
 //
-//	Operation:			The functions take in the community as an index in the 
+//	Operation:			The functions take in the community as an index in the
 //						global dataset and loop through all of the duplicate
-//						projects at the same site as stored in the 
+//						projects at the same site as stored in the
 //						AllData[point].duplicates global array
 //
 //	Dependencies:		None.
@@ -1716,7 +1733,7 @@ function totalSchools() {
 //
 //	Error handling:		None.
 //
-// 	Algorithms:			None. 
+// 	Algorithms:			None.
 //	Data structures:	None.
 //
 //	Known bugs:			None.
@@ -1741,7 +1758,7 @@ function peopleImpacted(point) {
 	if (ppl == '0') {
 		ppl = "unknown";
 	}
-	
+
 	return ppl
 }
 
@@ -1753,9 +1770,9 @@ function storageInstalled(point) {
 		storage = storage + 12000*AllData[dup][DATA_NAMES.no_ferro] + 2500*AllData[dup][DATA_NAMES.no_roto_small] + 5000*AllData[dup][DATA_NAMES.no_roto_medium] + 10000*AllData[dup][DATA_NAMES.no_roto_big] + 30000*AllData[dup][DATA_NAMES.no_geomembrane] + 80000*AllData[dup][DATA_NAMES.no_underground] + 2000*AllData[dup][DATA_NAMES.no_rainjar];
 	}
 	storage = numberWithCommas(storage);
-	
+
 	return storage
-	
+
 }
 
 function filtersDistributed(point) {
@@ -1773,9 +1790,9 @@ function filtersDistributed(point) {
 // 	23. isEmpty(i, name):
 //
 // 	Description:		checks to see if a certain field in the global dataset is
-//						empty or not. 
+//						empty or not.
 //
-//	Operation:			If the field has an empty or null value, returns true. 
+//	Operation:			If the field has an empty or null value, returns true.
 //
 //	Dependencies:		None.
 // 	Arguments:			i 	---	the index of the global dataset to check
@@ -1790,7 +1807,7 @@ function filtersDistributed(point) {
 //
 //	Error handling:		None.
 //
-// 	Algorithms:			None. 
+// 	Algorithms:			None.
 //	Data structures:	None.
 //
 //	Known bugs:			None.
@@ -1808,9 +1825,9 @@ function isEmpty(i, name) {
 
 // 	24. beginUserExperience():
 //
-// 	Description:		Makes the map available to the user.		
+// 	Description:		Makes the map available to the user.
 //
-//	Operation:			fades out the overlay and restarts the counter. 
+//	Operation:			fades out the overlay and restarts the counter.
 //
 //	Dependencies:		an element with class = "overlay".
 // 	Arguments:			None.
@@ -1824,7 +1841,7 @@ function isEmpty(i, name) {
 //
 //	Error handling:		None.
 //
-// 	Algorithms:			None. 
+// 	Algorithms:			None.
 //	Data structures:	None.
 //
 //	Known bugs:			None.
@@ -1834,15 +1851,15 @@ function isEmpty(i, name) {
 
 function beginUserExperience() {
 	$("#overlay").fadeOut(800, function() {});	// fade out the overlay
-	restartCounters();							//	and restart the counters 	
+	restartCounters();							//	and restart the counters
 }
 
 // 	25. restartCounters():
 //
-// 	Description:		resets the counters from 0		
+// 	Description:		resets the counters from 0
 //
 //	Operation:			for each counter, set the innerHTML to 0, then
-//						call fillCounters() to refill them. 
+//						call fillCounters() to refill them.
 //
 //	Dependencies:		The counter elements with the following ids:
 //							stats_projects_no, stats_people_no, stats_capacity_no,
@@ -1857,7 +1874,7 @@ function beginUserExperience() {
 //
 //	Error handling:		None.
 //
-// 	Algorithms:			None. 
+// 	Algorithms:			None.
 //	Data structures:	None.
 //
 //	Known bugs:			None.
@@ -1878,10 +1895,10 @@ function restartCounters() { 	// Resets the odometer counters to 0
 // 	26. disableMapControls() / enableMapControls():
 //
 // 	Description:		disables and enables zooming, panning scrolling, etc. on
-//						the map. 
+//						the map.
 //
 //	Operation:			uses Leaflet commands to disable and enable specific
-//						map controls. 
+//						map controls.
 //
 //	Dependencies:		leaflet.js
 // 	Arguments:			None.
@@ -1894,7 +1911,7 @@ function restartCounters() { 	// Resets the odometer counters to 0
 //
 //	Error handling:		None.
 //
-// 	Algorithms:			None. 
+// 	Algorithms:			None.
 //	Data structures:	None.
 //
 //	Known bugs:			None.
@@ -1930,9 +1947,9 @@ function enableMapControls() {
 
 // 	27. invert():
 //
-// 	Description:		Inverts the key: value pairs in a lookup table 
+// 	Description:		Inverts the key: value pairs in a lookup table
 //
-//	Operation:			Taken from the folks at underscorejs.org 
+//	Operation:			Taken from the folks at underscorejs.org
 //
 //	Dependencies:		None.
 // 	Arguments:			None.
@@ -1945,7 +1962,7 @@ function enableMapControls() {
 //
 //	Error handling:		None.
 //
-// 	Algorithms:			None. 
+// 	Algorithms:			None.
 //	Data structures:	None.
 //
 //	Known bugs:			None.
@@ -1954,17 +1971,17 @@ function enableMapControls() {
 // 	Update history:		4/APR/2018	aaron krupp		functional specification writen
 
 function invert(obj) {
-    var result = {};
-    var keys = _.keys(obj);
-    for (var i = 0, length = keys.length; i < length; i++) {
-      result[obj[keys[i]]] = keys[i];
-    }
-    return result
+	var result = {};
+	var keys = _.keys(obj);
+	for (var i = 0, length = keys.length; i < length; i++) {
+		result[obj[keys[i]]] = keys[i];
+	}
+	return result
 }
 
 // 	28. formatDate(d):
 //
-// 	Description:		formats the date in the appropriate language 
+// 	Description:		formats the date in the appropriate language
 //
 //	Operation:			Accepts strings "", "today", or Date objects
 //						If given an empty string, returns an empty string.
@@ -1985,7 +2002,7 @@ function invert(obj) {
 //
 //	Error handling:		None.
 //
-// 	Algorithms:			None. 
+// 	Algorithms:			None.
 //	Data structures:	None.
 //
 //	Known bugs:			None.
@@ -2014,7 +2031,7 @@ function formatDate(d) {
 //
 // 	Description:		Sends a GET request to a Zapier-generated webhook URL
 //
-//	Operation:			Sends get by changing the document.location to globally set URL. 
+//	Operation:			Sends get by changing the document.location to globally set URL.
 //
 //	Dependencies:		None.
 // 	Arguments:			None.
@@ -2023,11 +2040,11 @@ function formatDate(d) {
 //	Global variables:	ERROR_MSG_WEBHOOK_URL --- url to which to send the GET request
 //
 //	Input:				None.
-//	Output:				Changes the document's location to that of the webhook. 
+//	Output:				Changes the document's location to that of the webhook.
 //
 //	Error handling:		None.
 //
-// 	Algorithms:			None. 
+// 	Algorithms:			None.
 //	Data structures:	None.
 //
 //	Known bugs:			None.
@@ -2045,8 +2062,8 @@ function sendErrorMsg() {
 // 	Description:		Checks to see if the user is on a mobile browser.
 //
 //	Operation:			Thanks to Michael Zaporozhets for this function:
-//						http://stackoverflow.com/questions/11381673/detecting-a-mobile-browser 
-//						Basically just checks all known mobile/table browsers. 
+//						http://stackoverflow.com/questions/11381673/detecting-a-mobile-browser
+//						Basically just checks all known mobile/table browsers.
 //
 //	Dependencies:		None.
 // 	Arguments:			None.
@@ -2059,16 +2076,16 @@ function sendErrorMsg() {
 //
 //	Error handling:		None.
 //
-// 	Algorithms:			None. 
+// 	Algorithms:			None.
 //	Data structures:	None.
 //
 //	Known bugs:			None.
-// 	Limitations:		Relies on known browsers/platforms as of writing, needs to be 
-//						regularly updated. Ugh. 
+// 	Limitations:		Relies on known browsers/platforms as of writing, needs to be
+//						regularly updated. Ugh.
 //
 // 	Update history:		07/MAR/2019	aaron krupp		functional specification & fn added
 
-function detectMobile() {	
+function detectMobile() {
 	var check = false;
 	(function(a){if(/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|iris|kindle|lge |maemo|midp|mmp|mobile.+firefox|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows ce|xda|xiino/i.test(a)||/1207|6310|6590|3gso|4thp|50[1-6]i|770s|802s|a wa|abac|ac(er|oo|s\-)|ai(ko|rn)|al(av|ca|co)|amoi|an(ex|ny|yw)|aptu|ar(ch|go)|as(te|us)|attw|au(di|\-m|r |s )|avan|be(ck|ll|nq)|bi(lb|rd)|bl(ac|az)|br(e|v)w|bumb|bw\-(n|u)|c55\/|capi|ccwa|cdm\-|cell|chtm|cldc|cmd\-|co(mp|nd)|craw|da(it|ll|ng)|dbte|dc\-s|devi|dica|dmob|do(c|p)o|ds(12|\-d)|el(49|ai)|em(l2|ul)|er(ic|k0)|esl8|ez([4-7]0|os|wa|ze)|fetc|fly(\-|_)|g1 u|g560|gene|gf\-5|g\-mo|go(\.w|od)|gr(ad|un)|haie|hcit|hd\-(m|p|t)|hei\-|hi(pt|ta)|hp( i|ip)|hs\-c|ht(c(\-| |_|a|g|p|s|t)|tp)|hu(aw|tc)|i\-(20|go|ma)|i230|iac( |\-|\/)|ibro|idea|ig01|ikom|im1k|inno|ipaq|iris|ja(t|v)a|jbro|jemu|jigs|kddi|keji|kgt( |\/)|klon|kpt |kwc\-|kyo(c|k)|le(no|xi)|lg( g|\/(k|l|u)|50|54|\-[a-w])|libw|lynx|m1\-w|m3ga|m50\/|ma(te|ui|xo)|mc(01|21|ca)|m\-cr|me(rc|ri)|mi(o8|oa|ts)|mmef|mo(01|02|bi|de|do|t(\-| |o|v)|zz)|mt(50|p1|v )|mwbp|mywa|n10[0-2]|n20[2-3]|n30(0|2)|n50(0|2|5)|n7(0(0|1)|10)|ne((c|m)\-|on|tf|wf|wg|wt)|nok(6|i)|nzph|o2im|op(ti|wv)|oran|owg1|p800|pan(a|d|t)|pdxg|pg(13|\-([1-8]|c))|phil|pire|pl(ay|uc)|pn\-2|po(ck|rt|se)|prox|psio|pt\-g|qa\-a|qc(07|12|21|32|60|\-[2-7]|i\-)|qtek|r380|r600|raks|rim9|ro(ve|zo)|s55\/|sa(ge|ma|mm|ms|ny|va)|sc(01|h\-|oo|p\-)|sdk\/|se(c(\-|0|1)|47|mc|nd|ri)|sgh\-|shar|sie(\-|m)|sk\-0|sl(45|id)|sm(al|ar|b3|it|t5)|so(ft|ny)|sp(01|h\-|v\-|v )|sy(01|mb)|t2(18|50)|t6(00|10|18)|ta(gt|lk)|tcl\-|tdg\-|tel(i|m)|tim\-|t\-mo|to(pl|sh)|ts(70|m\-|m3|m5)|tx\-9|up(\.b|g1|si)|utst|v400|v750|veri|vi(rg|te)|vk(40|5[0-3]|\-v)|vm40|voda|vulc|vx(52|53|60|61|70|80|81|83|85|98)|w3c(\-| )|webc|whit|wi(g |nc|nw)|wmlb|wonu|x700|yas\-|your|zeto|zte\-/i.test(a.substr(0,4))) check = true;})(navigator.userAgent||navigator.vendor||window.opera);
 	return check;
@@ -2078,7 +2095,7 @@ function detectMobile() {
 //
 // 	Description:		Adjusts font and element sizing for nice mobile/table experience
 //
-//	Operation:			Adjusts relevant elements by getId.style 
+//	Operation:			Adjusts relevant elements by getId.style
 //
 //	Dependencies:		None.
 // 	Arguments:			None.
@@ -2091,11 +2108,11 @@ function detectMobile() {
 //
 //	Error handling:		None.
 //
-// 	Algorithms:			None. 
+// 	Algorithms:			None.
 //	Data structures:	None.
 //
 //	Known bugs:			None.
-// 	Limitations:		None. 
+// 	Limitations:		None.
 //
 // 	Update history:		07/MAR/2019	aaron krupp		functional specification & fn added
 
@@ -2104,7 +2121,7 @@ function adjustDisplayForMobile() {
 	document.getElementById("overlay_msg").style.fontSize = "22px";
 	var displays = document.getElementsByClassName("display_box");
 	for(var i=0; i<displays.length; i++) {
-		displays[i].style.width = DISPLAY_BOX_WIDTH_MOBILE;			
+		displays[i].style.width = DISPLAY_BOX_WIDTH_MOBILE;
 	}
-	
+
 }

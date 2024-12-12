@@ -6,45 +6,45 @@
 		<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
 		<meta name="author" content="aaron krupp | Caminos de Agua">
 		<link rel="shortcut icon" href="https://caminosdeagua.github.io/project-map/img/caminos_drop.png"/>
-		
+
 		<!-- cartodb css -->	<link rel="stylesheet" href="https://cartodb-libs.global.ssl.fastly.net/cartodb.js/v3/3.15/themes/css/cartodb.css"></link>
 		<!-- cartodb js -->		<script src="https://cartodb-libs.global.ssl.fastly.net/cartodb.js/v3/3.15/cartodb.js"></script>
-		<!-- leaflet label -->	<script src="https://leaflet.github.io/Leaflet.label/leaflet.label.js"></script> 
-		
+		<!-- leaflet label -->	<script src="https://leaflet.github.io/Leaflet.label/leaflet.label.js"></script>
+
 		<!-- jquery -->			<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 		<!-- global vars -->	<script src="vars/globals.js" type="text/javascript" /></script>
 		<!-- javascript -->		<script src="js/scripts.js" type="text/javascript" /></script>
-		
+
 		<!-- set language -->	<script src="js/setLanguage.js" type="text/javascript"></script>
-		
-		
-		
-		
-		
-		
-		<!-- stamenTiles -->		<script type="text/javascript" src="js/stamen/stamen.js"></script>	
+
+
+
+
+
+
+		<!-- stamenTiles -->		<script type="text/javascript" src="js/stamen/stamen.js"></script>
 		<!-- this is a modfied version of the code hosted at https://stamen-maps.a.ssl.fastly.net/js/tile.stamen.js"> -->
-		
+
 		<!-- stamen tiles ->	<script type="text/javascript" src="https://stamen-maps.a.ssl.fastly.net/js/tile.stamen.js"></script><!--Include Stamen JavaScript to get basemap tiles-->
-		
-		
-		
-		
-		
-		
+
+
+
+
+
+
 		<!-- mapbox fullscrn-->	<script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/Leaflet.fullscreen.min.js'></script>
 		<!-- mapbox fullscrn-->	<link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/leaflet.fullscreen.css' rel='stylesheet' />
-		
+
 		<!--odometer css	-->	<link rel="stylesheet" href="https://caminosdeagua.github.io/project-map/external/counter/odometer-theme-default.css" />
 		<!--odometer js		-->	<script type="text/javascript" src="https://caminosdeagua.github.io/project-map/external/counter/odometer.js"></script>
-		
+
 		<!--jquery.corner.js-->	<script type="text/javascript" src="https://caminosdeagua.github.io/project-map/external/corners/jquery.corner.js"></script>
-		
+
 		<!-- google charts -->	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 		<!-- google viz API -->	<script type="text/javascript">google.charts.load('current', {packages: ['corechart']});	</script>
-	
+
 	</head>
-	
+
 	<body onload="init();"> 	<!-- what to do when the page loads -->
 		<div id="overlay" onclick="beginUserExperience();">
 			<div id="spacer"></div>
@@ -56,28 +56,31 @@
 				<img class="caminos_logo" src="https://caminosdeagua.github.io/project-map/img/caminos_logo_circle.png"></img> <!-- creates the caminos de agua logo -->
 			</a>
 			<!-- This next div is the legend -->
-			<div class='cartodb-legend custom' id='legend' style="display: block; background-color: #dddddd;" onmouseenter="disableMapControls();" onmouseleave="enableMapControls();">	
+			<div class='cartodb-legend custom' id='legend' style="display: block; background-color: #dddddd;" onmouseenter="disableMapControls();" onmouseleave="enableMapControls();">
 				<div class="legend-title", id="legend_title" style="font-size:14px;"></div>
 				<ul>
 					<li>
-						<div class="bullet" style="background:#24de17; text-transform:none" name="project_type"></div> 
+						<div class="bullet" style="background:#03BEFF; text-transform:none" name="project_type"></div>
 					</li>
 					<li>
-						<div class="bullet" style="background:#2eb7ff; text-transform:none" name="project_type"></div>
+						<div class="bullet" style="background:#FFFF12; text-transform:none" name="project_type"></div>
 					</li>
 					<li>
-						<div class="bullet" style="background:#b700ff; text-transform:none" name="project_type"></div>
+						<div class="bullet" style="background:#FC8E22; text-transform:none" name="project_type"></div>
 					</li>
 					<li>
-						<div class="bullet" style="background:#df3099; text-transform:none" name="project_type"></div>
+						<div class="bullet" style="background:#440809; text-transform:none" name="project_type"></div>
 					</li>
 					<li>
-						<div class="bullet" style="background:#ffffff; text-transform:none" name="project_type" onclick="openFullSummary();"></div>
+						<div class="bullet" style="background:#24DD17; text-transform:none" name="project_type"></div>
+					</li>
+					<li>
+						<div class="bullet" style="background:#FFFFFF; text-transform:none" name="project_type"></div>
 					</li>
 				</ul>
 			</div>
-			
-			
+
+
 			<div id="stats_box">
 				<div class = "stats_tr">
 					<p class="stats_left"></p>
@@ -96,7 +99,7 @@
 					<p class="odometer" id="stats_ceramic_no"></p>
 				</div>
 			</div>
-			
+
 			<div id='info_panel' class='display_box' ontouchstart="disableMapControls();" onmouseenter="disableMapControls();" ontouchend="enableMapControls();" onmouseleave="enableMapControls();">
 				<img id="x-butt" class='x-butt' onclick="goBack('x');" src="https://caminosdeagua.github.io/project-map/img/greyX.png"></img>
 				<div class="info_text" id="back_button" onclick="goBack()"></div>
@@ -125,7 +128,7 @@
 				<div class="info_text" id="no_rainjar"></div>
 				<div class="info_text" id="partner"></div>
 				<div class="info_text" id="notes"></div>
-				
+
 			</div>
 			<div id='lobby', class='display_box' ontouchstart="disableMapControls();" onmouseenter="disableMapControls();" ontouchend="enableMapControls();" onmouseleave="enableMapControls();">
 				<img id="x-butt-l" class='x-butt' onclick="goBack('x');" src="https://caminosdeagua.github.io/project-map/img/greyX.png"></img>
@@ -138,7 +141,7 @@
 				</div>
 				<div class="lobby_text" id="summary" align="center">
 					<p id="summary_header"></p>
-					<table id="summary_table"> 
+					<table id="summary_table">
 						<tr align="center">
 							<td class="left_column" id="no_projects_title"></td>
 							<td class="right_column" id="no_projects_value"></td>
@@ -154,15 +157,14 @@
 						<tr align="center">
 							<td class="left_column" id="ceramic_title"></td>
 							<td class="right_column" id="ceramic_value"></td>
-						</tr>	
-					</table>					
+						</tr>
+					</table>
 				</div>
 				<br>
 				<div class="lobby_text" id="message_l" style="text-align: center;"></div>
 				<div class="lobby_text" id="project_list" align="center"></div>
-				
+
 			</div>
 		</div>
 	</body>
 </html>
-			

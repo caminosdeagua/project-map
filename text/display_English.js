@@ -4,7 +4,7 @@
 ////	any point on the map. It's stored in simple strings for ease of 	////
 ////	translation. Enjoy =)												////
 ////////////////////////////////////////////////////////////////////////////////
-var TITLE = "Proejct Map | Caminos de Agua";
+var TITLE = "Project Map | Caminos de Agua";
 
 var MONTHS_LONG = ["January", "February", "March",
 					"April", "May", "June",
@@ -25,10 +25,12 @@ var SEE_MORE = "More info";
 var LEGEND_TITLE = "Project types"
 var LEGEND0 = "\xa0\xa0\xa0Rainwater\xa0harvesting\xa0systems";
 var LEGEND1 = "\xa0\xa0\xa0Ceramic\xa0water\xa0filters";
-var LEGEND2 = "\xa0\xa0\xa0Biochar\xa0water\xa0treatment";
-var LEGEND3 = "\xa0\xa0\xa0Other\xa0projects"
-var LEGEND4 = "\xa0\xa0\xa0Multiple\xa0projects";
-var LEGEND_TEXT = [LEGEND0, LEGEND1, LEGEND2, LEGEND3, LEGEND4];
+var LEGEND2 = "\xa0\xa0\xa0Groundwater\xa0treatment\xa0system";
+var LEGEND3 = "\xa0\xa0\xa0Dry\xa0toilets";
+var LEGEND4 = "\xa0\xa0\xa0Other\xa0projects"
+var LEGEND5 = "\xa0\xa0\xa0Multiple\xa0projects";
+
+var LEGEND_TEXT = [LEGEND0, LEGEND1, LEGEND2, LEGEND3, LEGEND4, LEGEND5];
 
 var BACK_BUTTON_TXT = ["Back to all "," projects"];
 var LOBBY_MESSAGE = ["<b>Click on a project below for more information<br></b>"]
@@ -60,7 +62,7 @@ var DATA_NAMES = {
 	small_train: "Small Scale Capacity Training",
 	no_ceramic_systems: "# of Ceramic Filter Systems",
 	no_ceramic_filters: "# of Ceramic Water Filters",
-	no_biochar: "Biochar Treatment System (300L/day)",
+	no_biochar: "Biochar Treatment System",
 	no_ferro: "Ferrocement RWH Systems (12,000L)",
 	no_roto_small: "Rotoplas Cistern (2,500L)",
 	no_roto_medium: "Rotoplas Cistern (5,000L)",
@@ -119,7 +121,10 @@ var END_OF_HEADER = ":<br>\xa0\xa0\xa0";
 // These need to match the project types in the database perfectly!
 RAIN_PROJ = "Rainwater Harvesting";
 CERAMIC_PROJ = "Ceramic Water Filter";
-BIOCHAR_PROJ = "Biochar Treatment Systems (330L/d)";
+BIOCHAR_PROJ = "Biochar Treatment System";
+GTS_PROJ = "Groundwater Treatment System";
+DRY_TOILET_PROJ = "Dry toilets";
+BORDO_PROJ = "Community pond";
 OTHER_PROJ = "Other";
 
 var EASTER_EGG_TXT = {
