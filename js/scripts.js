@@ -671,7 +671,7 @@ function getBin(data, i) {
 		case BORDO_PROJ:
 		case BIOCHAR_PROJ:
 		bin = OTHER;
-		break
+		break;
 
 		case GTS_PROJ:
 		bin = GTS;
